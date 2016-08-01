@@ -50,6 +50,7 @@ public class AddressCheckFragment extends Fragment {
         //되나22
         //커밋
         //그냥커밋
+
     }
 
 
