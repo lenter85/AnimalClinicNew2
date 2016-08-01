@@ -1,0 +1,159 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.myapplication.diary.MyDiaryFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 예약 내역"
+                        android:id="@+id/textView8"
+                        android:textSize="22dp"
+                        android:layout_marginTop="23dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignLeft="@+id/reservationList"
+                        android:layout_alignStart="@+id/reservationList" />
+
+                    <ImageView
+                        android:layout_width="170dp"
+                        android:layout_height="175dp"
+                        android:id="@+id/reservationList"
+                        android:onClick="onClickReservationList"
+                        android:layout_below="@+id/textView8"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/reservation" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 예방접종"
+                        android:id="@+id/textView9"
+                        android:layout_alignTop="@+id/textView8"
+                        android:layout_alignLeft="@+id/vaccination"
+                        android:layout_alignStart="@+id/vaccination"
+                        android:textSize="22dp"
+                        android:layout_marginTop="23dp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="175dp"
+                        android:id="@+id/vaccination"
+                        android:onClick="onClickVaccination"
+
+                        android:layout_alignTop="@+id/reservationList"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/vacci"
+                        android:layout_marginTop="15dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  앨범"
+                        android:id="@+id/textView10"
+                        android:textSize="22dp"
+                        android:layout_above="@+id/album"
+                        android:layout_alignLeft="@+id/album"
+                        android:layout_alignStart="@+id/album"
+                        android:layout_marginBottom="15dp"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/album"
+                        android:onClick="onClickAlbum"
+                        android:src="@drawable/albumimg"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignLeft="@+id/reservationList"
+                        android:layout_alignStart="@+id/reservationList"
+                        android:layout_marginBottom="36dp"
+                        android:scaleType="fitXY"
+                        android:layout_marginRight="1dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  몸무게"
+                        android:id="@+id/textView11"
+                        android:textSize="22dp"
+                        android:layout_alignTop="@+id/textView10"
+                        android:layout_alignLeft="@+id/weight"
+                        android:layout_alignStart="@+id/weight" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/weight"
+                        android:onClick="onClickWeight"
+                        android:layout_alignTop="@+id/album"
+                        android:layout_alignLeft="@+id/vaccination"
+                        android:layout_alignStart="@+id/vaccination"
+                        android:src="@drawable/weightimg"
+                        android:scaleType="fitXY"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginBottom="35dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+</FrameLayout>

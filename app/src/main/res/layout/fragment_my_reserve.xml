@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".reservation.fragment.MyReserveFragment"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="2016.07.05"
+            android:id="@+id/textView40"
+            android:textSize="20dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이전"
+            android:id="@+id/button9"
+            android:layout_marginRight="34dp"
+            android:layout_marginEnd="34dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/textView40"
+            android:layout_toStartOf="@+id/textView40" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="다음"
+            android:id="@+id/button10"
+            android:layout_alignTop="@+id/button9"
+            android:layout_toRightOf="@+id/textView40"
+            android:layout_toEndOf="@+id/textView40"
+            android:layout_marginLeft="36dp"
+            android:layout_marginStart="36dp" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="4"
+            android:orientation="vertical">
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/myReserveListView"
+                android:layout_gravity="center_horizontal|top"
+                android:choiceMode="none" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+</LinearLayout>

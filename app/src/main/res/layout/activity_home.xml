@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.myapplication.HomeActivity"
+    android:background="@drawable/welcome">
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageView2"
+            android:src="@drawable/btn_clinic_text"
+            android:onClick="onClickClinicBtn"
+            android:padding="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/imageView27"
+            android:layout_alignStart="@+id/imageView27" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageView4"
+            android:src="@drawable/btn_diary_text"
+            android:onClick="onClickNoteBtn"
+            android:padding="10dp"
+            android:layout_alignTop="@+id/imageView2"
+            android:layout_toLeftOf="@+id/imageView3"
+            android:layout_toStartOf="@+id/imageView3" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageView3"
+            android:src="@drawable/btn_sns_text"
+            android:padding="10dp"
+            android:onClick="onClickCommunityBtn"
+            android:layout_alignTop="@+id/imageView4"
+            android:layout_alignRight="@+id/imageView27"
+            android:layout_alignEnd="@+id/imageView27" />
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageView8"
+            android:src="@drawable/petopia_light_outline"
+            android:layout_marginTop="51dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/imageView27"
+            android:layout_alignStart="@+id/imageView27" />
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:id="@+id/imageView27"
+            android:src="@drawable/add_your_pet"
+            android:layout_below="@+id/imageView8"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="20dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

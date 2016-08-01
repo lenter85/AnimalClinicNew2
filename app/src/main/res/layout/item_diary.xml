@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/notedesign"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="35dp">
+
+        <ImageView
+            android:layout_width="107dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imgDimage"
+            android:layout_margin="10dp"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:padding="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="나비"
+                android:id="@+id/txtDname"
+                android:textSize="30dp"
+                android:layout_marginBottom="18dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginLeft="2dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="나이 : "
+                    android:id="@+id/textView18"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:layout_width="34dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtDage"
+                    android:textSize="16dp"
+                    android:text="2살" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="성별 : "
+                    android:id="@+id/textView45"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:layout_width="32dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtDgender"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
