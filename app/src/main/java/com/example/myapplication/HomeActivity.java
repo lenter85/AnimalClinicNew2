@@ -16,7 +16,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 
-
+        //잘 받아지냐??
 
 
        /* mImageView = (ImageView) findViewById(R.id.imageView);
