@@ -16,6 +16,9 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 
+
+
+
        /* mImageView = (ImageView) findViewById(R.id.imageView);
         mImageView.setImageBitmap(rotateImage(
                 BitmapFactory.decodeResource(getResources(),
