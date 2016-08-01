@@ -42,7 +42,8 @@ public class AddressCheckFragment extends Fragment {
 
     public AddressCheckFragment() {
         // Required empty public constructor
-        //왜
+        //커밋 테스트
+
     }
 
 
