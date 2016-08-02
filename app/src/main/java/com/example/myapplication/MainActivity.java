@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity
 //mainmain
     //메인 받아짐??
     //준식커밋
+    //영진이 컴퓨터
 
 
 
