@@ -16,6 +16,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.clinic.dto.ClinicInformation;
 import com.example.myapplication.clinic.dto.ClinicRegister;
 import com.example.myapplication.clinic.dto.RegisterLocation;
+import com.example.myapplication.clinic.fragment.RegisterClinicFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -353,6 +354,8 @@ public class ClinicNetwork {
                 }
 
                 RegisterLocation registerLocation = MainActivity.list.get(0);
+                RegisterClinicFragment.latitude = Double.parseDouble(registerLocation.getLatitude());
+                RegisterClinicFragment.longitude = Double.parseDouble(registerLocation.getLongitude());
 
                 showCurrentLocation(Double.parseDouble(registerLocation.getLatitude()),Double.parseDouble(registerLocation.getLongitude()));
 
@@ -454,6 +457,7 @@ public class ClinicNetwork {
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setValue("clatitude", String.valueOf(clinicRegister.getClatitude())));
                     postDataBuilder.append(delimiter);
+                    Log.i("mylog", "전송직전 위도 : " + String.valueOf(clinicRegister.getClatitude()));
                     postDataBuilder.append(setValue("clongitude", String.valueOf(clinicRegister.getClongitude())));
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setValue("clunchstart", clinicRegister.getClunchstart()));
