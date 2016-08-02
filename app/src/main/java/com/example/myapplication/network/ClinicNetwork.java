@@ -16,6 +16,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.clinic.dto.ClinicInformation;
 import com.example.myapplication.clinic.dto.ClinicRegister;
 import com.example.myapplication.clinic.dto.RegisterLocation;
+import com.example.myapplication.clinic.fragment.RegisterClinicFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -353,6 +354,8 @@ public class ClinicNetwork {
                 }
 
                 RegisterLocation registerLocation = MainActivity.list.get(0);
+                RegisterClinicFragment.latitude = Double.parseDouble(registerLocation.getLatitude());
+                RegisterClinicFragment.longitude = Double.parseDouble(registerLocation.getLongitude());
 
                 showCurrentLocation(Double.parseDouble(registerLocation.getLatitude()),Double.parseDouble(registerLocation.getLongitude()));
 

@@ -81,8 +81,8 @@ public class RegisterClinicFragment extends Fragment {
     private Boolean beauty;
     private int workingDay=1;
 
-    public static long latitude;
-    public static long longitude;
+    public static Double latitude;
+    public static Double longitude;
 
 
     public RegisterClinicFragment() {
@@ -257,12 +257,12 @@ public class RegisterClinicFragment extends Fragment {
         imageViewSmall4.setOnClickListener(imageClickListener);
 
         checkBox.setOnClickListener(checkBoxClickListener);
-        radioGroup.setOnClickListener(new View.OnClickListener() {
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if(v == radioButton1) {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(radioButton1.isChecked()) {
                     workingDay = 1;
-                } else if (v == radioButton2) {
+                } else if (radioButton2.isChecked()) {
                     workingDay = 2;
                 } else {
                     workingDay = 3;
@@ -317,6 +317,7 @@ public class RegisterClinicFragment extends Fragment {
             Log.i("mylog", "spinenr3 : " + spinner3.getSelectedItem().toString());
             Log.i("mylog", "spinenr4 : " + spinner4.getSelectedItem().toString());
             Log.i("mylog", "객체를 한번에 String으로 바꾸면? : " + clinicRegister.toString());
+            Log.i("mylog", "위도 경도 받나? : " + latitude);
 
             ClinicNetwork clinicNetwork = new ClinicNetwork();
             clinicNetwork.clinicRegister(clinicRegister, bitmap1, bitmap2, bitmap3, bitmap4);
