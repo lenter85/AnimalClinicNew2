@@ -151,6 +151,7 @@ public class DiaryNetwork {
                     postDataBuilder.append(setFile("dimage", diary.getDimage()));
                     out.writeUTF(postDataBuilder.toString());
 
+
                     //파일 데이터 전송
                     FileInputStream fis = new FileInputStream(filePath);
                     byte[] byteArray = new byte[1024];
@@ -159,6 +160,7 @@ public class DiaryNetwork {
                         out.write(byteArray, 0, readByteNum);
                     }
                     fis.close();
+
 
                     //종료 구분자 넣기
                     //out.writeUTF(delimiter);
