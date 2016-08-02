@@ -134,7 +134,6 @@ public class DiaryNetwork {
 
                     //출력 스트림 얻기
                     DataOutputStream out = new DataOutputStream(new BufferedOutputStream(conn.getOutputStream()));
-                    Log.i("mylog", filePath);
                     File file = new File(filePath);
                     diary.setDimage(file.getName());
                     //문자열 데이터 전송
@@ -148,7 +147,7 @@ public class DiaryNetwork {
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setValue("mid", "test"));
                     postDataBuilder.append(delimiter);
-                    postDataBuilder.append(setFile("dimage", diary.getDimage()));
+                    postDataBuilder.append(setFile("ddimage", diary.getDimage()));
                     out.writeUTF(postDataBuilder.toString());
 
 

@@ -38,12 +38,12 @@ public class AlbumFragment extends Fragment {
 
         list = new ArrayList<>();
 
-        Album album1 = new Album();
+        /*Album album1 = new Album();
         album1.setPicture(R.drawable.dog04_small);
         Album album2 = new Album();
         album2.setPicture(R.drawable.dog05);
         list.add(album1);
-        list.add(album2);
+        list.add(album2);*/
 
 
 
