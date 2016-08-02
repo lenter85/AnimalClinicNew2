@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity
 
     public static RegisterClinicFragment registerClinicFragment;
 //mainmain
+    //메인 받아짐??
 
 
     @Override
