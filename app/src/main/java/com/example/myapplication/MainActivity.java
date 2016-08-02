@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity
     //메인 받아짐??
     //준식커밋
     //영진이 컴퓨터
+    //민규 컴퓨터
 
 
 
