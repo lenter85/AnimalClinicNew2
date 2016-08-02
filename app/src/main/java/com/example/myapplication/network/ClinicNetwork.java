@@ -457,6 +457,7 @@ public class ClinicNetwork {
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setValue("clatitude", String.valueOf(clinicRegister.getClatitude())));
                     postDataBuilder.append(delimiter);
+                    Log.i("mylog", "전송직전 위도 : " + String.valueOf(clinicRegister.getClatitude()));
                     postDataBuilder.append(setValue("clongitude", String.valueOf(clinicRegister.getClongitude())));
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setValue("clunchstart", clinicRegister.getClunchstart()));
