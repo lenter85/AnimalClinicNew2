@@ -30,8 +30,7 @@ public class MainActivity extends AppCompatActivity
     public static String clinicLocation = null;
 
     public static RegisterClinicFragment registerClinicFragment;
-
-
+//mainmain
 
 
     @Override
