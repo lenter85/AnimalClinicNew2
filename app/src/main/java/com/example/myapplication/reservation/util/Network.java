@@ -35,10 +35,8 @@ public class Network {
         //첫번째 매개변수는 doInBackground()로, 두번째 매개변수는 onProgressUpdate()로, 세번째 매개변수는 반환값을 의미한다.
         AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
 
-            //doInBackground의 리턴값 String은 onPostExecute의 매개변수로 들어간다.
             @Override
             protected String doInBackground(String... params) {
-
                 Log.i("myLog","asyncTask 시작 중");
 
                 String json = "";
@@ -62,7 +60,7 @@ public class Network {
                     conn.connect();
 
 
-                    /* 응답 */
+                    //* 응답 *//*
 
                     //요청을 처리하고 응답이 온다.
                     if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) { //200은 정상 응답을 의미한다. ( 잘못 요청: 404, 서버 에러: 500 )
@@ -99,9 +97,15 @@ public class Network {
                 //doInBackground가 종료하면 onPostExecute(String json)을 호출한다.
             }
 
+
             //doInBackground메소드가 다 수행되면 onPostExecute 메소드가 자동으로 호출된다. 매개값은 doInBackground 메소드의 리턴값이다.
             @Override
             protected void onPostExecute(String json) {
+
+                //int currentTime   = Integer.parseInt(new java.text.SimpleDateFormat("HHmm").format(new java.util.Date()));
+                int currentTime   = 1638;
+
+                Log.i("myLog","현재시간: "+currentTime);
 
                 Log.i("myLog","asyncTask 시작 종료");
 
@@ -126,9 +130,17 @@ public class Network {
                     }
 
 
-
-
                     for(int i = 0; i< nonReservedTimeList.size(); i++){
+
+                        int localTime = Integer.parseInt(nonReservedTimeList.get(i).replace(":",""));
+
+                        //현재 시간보다 이전 시간은 지운다.
+                        if(currentTime > localTime){
+                            Log.i("myLog",nonReservedTimeList.get(i)+" 제거");
+                            nonReservedTimeList.remove(i);
+                            i--;
+                            continue;
+                        }
 
                         String registerTime = nonReservedTimeList.get(i);
                         //Log.i("myList", "registerTime"+registerTime);

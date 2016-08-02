@@ -89,9 +89,12 @@ public class ReserveSearchResultFragment extends Fragment {
 
         fullDate = rdate;
 
-        if(fullDate.contains("(오늘)")){
-            fullDate = rdate.replace("(오늘)","");
+
+        if (fullDate.contains("(오늘)")) {
+            fullDate = rdate.replace("(오늘)", "");
         }
+
+        Log.i("myLog", "fullDate" + fullDate);
 
         int firstIndex = fullDate.indexOf("년");
         year = Integer.parseInt(fullDate.substring(0, firstIndex));
@@ -100,7 +103,7 @@ public class ReserveSearchResultFragment extends Fragment {
         month = Integer.parseInt(fullDate.substring(firstIndex + 1, secondIndex));
 
         int thirdIndex = fullDate.indexOf("일");
-        day = Integer.parseInt(fullDate.substring(secondIndex+1, thirdIndex));
+        day = Integer.parseInt(fullDate.substring(secondIndex + 1, thirdIndex));
 
     }
 
@@ -146,11 +149,16 @@ public class ReserveSearchResultFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //예약 날짜는 2주를 넘지 않게 한다.
+
+                //이전 버튼을 눌렀을 경우에 현재 날짜보다 이전날짜는 선택할 수 없게 한다.
 
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy년MM월dd일");
                 Date date = null;
+
+                String today = sdf.format(cal.getTime());
+
+
                 try {
                     date = sdf.parse(fullDate);
                 } catch (ParseException e) {
@@ -158,20 +166,37 @@ public class ReserveSearchResultFragment extends Fragment {
                 }
 
                 cal.setTime(date);
-                cal.add(Calendar.DATE, -1);  //일 3증가
+                cal.add(Calendar.DATE, -1);
 
-                Log.i("myLog", year+"-1은 ");
 
-                String strDate = sdf.format(cal.getTime());
-                Log.i("myLog", strDate);
+                String previousDate = sdf.format(cal.getTime());
+
+                Log.i("myLog","오늘 날짜:"+today);
+                Log.i("myLog", "선택된 이전 날짜:"+previousDate);
+
+                try {
+                SimpleDateFormat transFormat = new SimpleDateFormat("yyyy년MM월dd일");
+                Date day1 = transFormat.parse(today);
+                Date day2 = transFormat.parse(previousDate);
+
+                int compare = day1.compareTo( day2 );
+                if ( compare > 0 )
+                {
+                    Log.i("myLog","오늘보다 이전날짜를 선택할 수 없습니다.");
+                    return;
+                }
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
                 //변경된 날짜 표시
-                txtRdate.setText(strDate);
+                txtRdate.setText(previousDate);
                 //변경된 요일 표시
-                txtDow.setText(getDateDay(strDate));
+                txtDow.setText(getDateDay(previousDate));
 
-                fullDate = strDate;
-                ReserveSearchFragment.rdate = strDate;
+                fullDate = previousDate;
+                ReserveSearchFragment.rdate = previousDate;
 
 
                 //네트워크에서 해당 날짜에 있는 예약 가능한 시간을 불러온다.
@@ -195,7 +220,7 @@ public class ReserveSearchResultFragment extends Fragment {
                 cal.setTime(date);
                 cal.add(Calendar.DATE, +1);
 
-                Log.i("myLog", year+"+1은 ");
+                Log.i("myLog", year + "+1은 ");
 
                 String strDate = sdf.format(cal.getTime());
                 Log.i("myLog", strDate);
@@ -223,6 +248,18 @@ public class ReserveSearchResultFragment extends Fragment {
             }
         });
 
+    }
+
+    private boolean compareToDate(String today, String previousDate) {
+
+        int firstIndex = today.indexOf("년");
+        int secondIndex = today.indexOf("월");
+        month = Integer.parseInt(today.substring(firstIndex + 1, secondIndex));
+
+        int thirdIndex = fullDate.indexOf("일");
+        day = Integer.parseInt(fullDate.substring(secondIndex + 1, thirdIndex));
+
+        return true;
     }
 
     /**
@@ -282,21 +319,20 @@ public class ReserveSearchResultFragment extends Fragment {
 
         String clinicid = "test";
 
-        Log.i("myLog", "setItemSetting() 메소드 호출"+ ReserveSearchFragment.rdate);
+        Log.i("myLog", "setItemSetting() 메소드 호출" + ReserveSearchFragment.rdate);
         String date = Util.getSimpleDate(ReserveSearchFragment.rdate);
 
 
         Map<String, String> map = new HashMap<>();
         map.put("clinicid", clinicid);
-        map.put("date",date);
+        map.put("date", date);
 
-        Log.i("myLog","서버에 병원 아이디:"+clinicid+"의 "+date+"날짜의 예약시간 정보를 요청합니다.");
+        Log.i("myLog", "서버에 병원 아이디:" + clinicid + "의 " + date + "날짜의 예약시간 정보를 요청합니다.");
 
         //리스트뷰에 예약 가능한 시간만 보여줍니다.
         Network.setReserveList(timeViewAdapter, Util.getClinicTimeList(), map);
 
     }
-
 
 
     private void setBeautyTimeSetting() {
