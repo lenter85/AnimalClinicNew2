@@ -48,7 +48,7 @@ public class DiaryFragment extends Fragment {
 
 
         imgAddDiary = (ImageView) view.findViewById(R.id.imgAddDiary);
-        /*imgAddDiary.setOnClickListener(new View.OnClickListener() {
+        imgAddDiary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity()
@@ -58,7 +58,7 @@ public class DiaryFragment extends Fragment {
                         .addToBackStack(null)
                         .commit();
             }
-        });*/
+        });
 
         return view;
     }

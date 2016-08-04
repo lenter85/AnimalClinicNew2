@@ -17,8 +17,8 @@ public class ClinicRegister {
     int cweekend;
     String copentime;
     String cclosetime;
-    long clatitude;
-    long clongitude;
+    Double clatitude;
+    Double clongitude;
     String clunchstart;
     String clunchend;
 
@@ -126,19 +126,19 @@ public class ClinicRegister {
         this.cclosetime = cclosetime;
     }
 
-    public long getClatitude() {
+    public Double getClatitude() {
         return clatitude;
     }
 
-    public void setClatitude(long clatitude) {
+    public void setClatitude(Double clatitude) {
         this.clatitude = clatitude;
     }
 
-    public long getClongitude() {
+    public Double getClongitude() {
         return clongitude;
     }
 
-    public void setClongitude(long clongitude) {
+    public void setClongitude(Double clongitude) {
         this.clongitude = clongitude;
     }
 

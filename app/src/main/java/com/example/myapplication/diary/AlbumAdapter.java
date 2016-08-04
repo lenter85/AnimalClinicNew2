@@ -9,7 +9,9 @@ import android.widget.ImageView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.diary.dto.Album;
+import com.example.myapplication.network.AlbumNetwork;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +20,7 @@ import java.util.List;
 public class AlbumAdapter extends BaseAdapter {
     private ImageView imgViewPhoto;
     private Context context;
-    private List<Album> list;
+    private List<Album> list = new ArrayList<>();
 
     public void setContext(Context context) {
         this.context = context;
@@ -54,11 +56,16 @@ public class AlbumAdapter extends BaseAdapter {
         imgViewPhoto = (ImageView) convertView.findViewById(R.id.imgViewPhoto);
 
 
-        //Album album = list.get(position);
-
+        Album album = list.get(position);
+        AlbumNetwork.getAlbumImage(album.getAimage(), imgViewPhoto);
         ///이미지 받아오는 거 바꿔야 한다
         //imgViewPhoto.setImageResource(R.drawable.smile);
 
         return convertView;
+    }
+
+    public void addItem(Album album) {
+        list.add(album);
+        this.notifyDataSetChanged();
     }
 }

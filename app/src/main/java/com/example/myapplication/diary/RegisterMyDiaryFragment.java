@@ -59,34 +59,25 @@ public class RegisterMyDiaryFragment extends Fragment {
         txtRdbirth = (EditText) view.findViewById(R.id.txtRdbirth);
         txtRdage = (EditText) view.findViewById(R.id.txtRdage);
         rGroup = (RadioGroup) view.findViewById(R.id.rgroup);
-
+        maleButton = (RadioButton) view.findViewById(R.id.maleButton);
+        femaleButton = (RadioButton) view.findViewById(R.id.femaleButton);
 
         btnAddDiary = (Button) view.findViewById(R.id.btnAddDiary);
 
 
 
 
-        /*rGroup.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.i("mylog", "라디오버튼 클릭");
+        rGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(maleButton.isChecked()) {
+                    diary.setDgender("m");
                 }
-            });*/
-
-
-            rGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    Log.i("mylog", "라디오버튼 클릭");
-                    int n = group.getCheckedRadioButtonId();
-                    if(n==2131558743) {
-                        diary.setDgender("남");
-                    }
-                    if(n==2131558744) {
-                        diary.setDgender("여");
-                    }
+                if(femaleButton.isChecked()) {
+                    diary.setDgender("f");
                 }
-            });
+            }
+        });
 
 
         btnAddDiary.setOnClickListener(new View.OnClickListener() {
