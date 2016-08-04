@@ -82,6 +82,14 @@ public class ReserveSearchResultFragment extends Fragment {
         setListener();
         getDateInfo(ReserveSearchFragment.rdate);
 
+        try {
+
+            Network.getReserveNumber("test", "2016년7월22일");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return view;
     }
 
@@ -309,7 +317,6 @@ public class ReserveSearchResultFragment extends Fragment {
             case 7:
                 day = "토요일";
                 break;
-
         }
 
         return day;

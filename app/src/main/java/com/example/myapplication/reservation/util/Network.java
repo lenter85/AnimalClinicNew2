@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 //네트워크 관련 코드는 한 클래스에서 담당하는 것이 나중에 유지보수 할 떄를 위해서도 좋다.
 
@@ -87,6 +88,7 @@ public class Network {
                     }
 
                     conn.disconnect();
+
                 }catch(Exception e){
                     e.printStackTrace();
                 }
@@ -251,6 +253,7 @@ public class Network {
                     }
 
                     conn.disconnect();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -317,9 +320,8 @@ public class Network {
                         Log.i("myLog", "응답 OK를 받지 못했습니다");
                     }
 
-                    Log.i("myLog", "받은 json"+json);
 
-
+                    conn.disconnect();
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -425,5 +427,83 @@ public class Network {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static int getReserveNumber(String clinicid, String date) throws ExecutionException, InterruptedException {
+
+        Log.i("myLog", "getReserveNumber메소드를 호출했습니다.");
+
+        AsyncTask<String, Void, Integer> asyncTask = new AsyncTask<String, Void, Integer>() {
+
+            //doInBackground의 리턴값 String은 onPostExecute의 매개변수로 들어간다.
+            @Override
+            protected Integer doInBackground(String... params) {
+
+                String json = "";
+
+                Log.i("myLog", "getReserveNumber 메소드가 doInBackground()를 실행합니다");
+
+                try {
+                    //먼저 URL 객체를 만든다.
+                    URL url = new URL(params[0]);
+                    Log.i("myLog", params[0]);
+
+                    //연결 객체를 만든다.
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoInput(true);
+                    conn.setDoOutput(true);
+                    conn.setUseCaches(false);
+                    conn.setRequestMethod("GET");
+                    conn.setRequestProperty("Connection", "Keep-Alive");
+                    conn.setRequestProperty("Content-Type", "application/json");
+                    //실제 연결
+                    conn.connect();
+
+
+                    /* 응답 */
+
+                    //요청을 처리하고 응답이 온다.
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) { //200은 정상 응답을 의미한다. ( 잘못 요청: 404, 서버 에러: 500 )
+                        //Log.i("myLog", "응답 OK를 받았음");
+                        //응답코드가 200번일 경우에 본문 내용을 읽고싶다.
+
+                        InputStream is = conn.getInputStream(); //응답의 결과를 읽는다.
+                        Reader reader = new InputStreamReader(is); //문자일 경우 Reader로 읽는 것이 더 낫다.
+                        BufferedReader br = new BufferedReader(reader); //한 라인 단위로 읽으려면 BufferedReader로 읽는 것이 낫다. 보조 스트림을 다는 것.
+
+
+                        while (true) {
+                            String line = br.readLine(); //한 줄씩 읽는다.
+                            if (line == null) break; //행을 다 읽었을 경우 null이 나온다. while문을 빠져나온다.
+                            json += line; //body += line;
+                        }
+
+                        br.close();
+                        reader.close();
+                        is.close();
+
+                        Log.i("myLog", "응답 OK를 받음: 받은 json: "+json);
+
+                    } else {
+                        Log.i("myLog", "응답 OK를 받지못하였음");
+                    }
+
+                    conn.disconnect();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                int reserveNo = Integer.parseInt(json);
+
+                return reserveNo;
+            }
+        };
+
+        Log.i("myLog", site+"/reserve/getReserveNo?clinicid="+clinicid+"&date="+ Util.getSimpleDate(date));
+        int reserveNo = asyncTask.execute(site+"/reserve/getReserveNo?clinicid="+clinicid+"&date="+ Util.getSimpleDate(date)).get(); //doInBackground()의 매개값으로 들어간다.
+        Log.i("myLog", "getReserveNo를 asyncTask를 수행을 끝냈습니다. 조회된 예약 결과:"+reserveNo);
+
+        return reserveNo;
     }
 }
