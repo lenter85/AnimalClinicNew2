@@ -38,14 +38,14 @@ public class ReserveListViewAdapter extends BaseAdapter {
         }
 
         TextView txtName = (TextView) convertView.findViewById(R.id.txtName);
-        TextView txtBirth = (TextView) convertView.findViewById(R.id.txtBirth);
+        TextView txtPname = (TextView) convertView.findViewById(R.id.txtPname);
         TextView txtPhone = (TextView) convertView.findViewById(R.id.txtPhone);
         TextView txtTime = (TextView) convertView.findViewById(R.id.txtTime);
 
         ReserveListItem item = (ReserveListItem)getItem(position);
 
         txtName.setText(item.getrName());
-        txtBirth.setText(item.getrBirth());
+        txtPname.setText(item.getrPetName());
         txtPhone.setText(item.getrPhone());
         txtTime.setText(item.getrTime());
 

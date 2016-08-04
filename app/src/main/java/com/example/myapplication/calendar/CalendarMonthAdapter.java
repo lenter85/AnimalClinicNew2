@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 
-import com.example.myapplication.reservation.util.Network;
-
 import java.util.Calendar;
 
 /**
@@ -184,7 +182,7 @@ public class CalendarMonthAdapter extends BaseAdapter {
 		// create a params
 		GridView.LayoutParams params = new GridView.LayoutParams(
 				GridView.LayoutParams.MATCH_PARENT,
-				350);
+				300);
 		
 		// calculate row and column
 		int rowIndex = position / countColumn;
@@ -227,7 +225,7 @@ public class CalendarMonthAdapter extends BaseAdapter {
 
 
 
-        	itemView.setBackgroundColor(Color.BLUE);
+        	itemView.setBackgroundColor(Color.WHITE);
         }
 
 		return itemView;

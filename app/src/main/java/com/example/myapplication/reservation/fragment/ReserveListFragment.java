@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.reservation.dto.ReserveListItem;
+import com.example.myapplication.reservation.util.Network;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,14 +35,10 @@ public class ReserveListFragment extends Fragment {
 
         reserveListView.setAdapter(reserveListViewAdapter);
 
+        //예약자 명단 리스트를 DB에서 받아와 리스트뷰에 보여준다.
 
-        ReserveListItem item = new ReserveListItem();
-        item.setrName("장준식");
-        item.setrBirth("2016년08월03");
-        item.setrPhone("010-7735-0407");
-        item.setrTime("09:00 ~ 09:30");
-
-        reserveListViewAdapter.addItem(item);
+        //1.네트워크 요청이 있어야함.
+        Network.getSubscriberList(reserveListViewAdapter, "test", "2016-7-22");
 
         return view;
     }
