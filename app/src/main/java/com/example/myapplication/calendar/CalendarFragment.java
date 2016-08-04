@@ -13,9 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.reservation.fragment.ReserveEditFragment;
-import com.example.myapplication.reservation.fragment.ReserveSearchFragment;
-import com.example.myapplication.reservation.fragment.ReserveSearchResultFragment;
+import com.example.myapplication.reservation.fragment.ReserveListFragment;
 
 import java.util.Calendar;
 
@@ -74,8 +72,14 @@ public class CalendarFragment extends Fragment {
 
                 Log.i("myLog", "선택된 날짜는 "+curYear+"년"+(curMonth+1)+"월"+day+"일 입니다");
 
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, new ReserveListFragment())
+                        .addToBackStack(null)
+                        .commit();
 
-                ReserveSearchFragment.rdate = getDatetoKorean(curYear, curMonth, day);
+               /* ReserveSearchFragment.rdate = getDatetoKorean(curYear, curMonth, day);
 
 
                 if(previousPage.equals("SEARCH")){
@@ -98,7 +102,7 @@ public class CalendarFragment extends Fragment {
                             .beginTransaction()
                             .replace(R.id.fragmentContainer, new ReserveEditFragment())
                             .commit();
-                }
+                }*/
 
             }
         });
