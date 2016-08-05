@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:weightSum="1"
     android:orientation="vertical"
-    android:background="#ffffff">
+    android:background="@drawable/dog2">
 
     <LinearLayout
         android:orientation="vertical"
@@ -62,14 +62,16 @@
             android:layout_gravity="center_horizontal" />
 
         <ImageButton
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:id="@+id/btnCalendar"
             android:src="@drawable/calendaricon"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"
+            android:layout_alignBottom="@+id/txtDow"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:scaleType="fitXY"
-            android:layout_alignParentBottom="true" />
+            android:layout_marginRight="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -115,14 +117,13 @@
 
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/timeListView"
             android:choiceMode="none" />
 
         <Button
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:text="새로고침"
             android:id="@+id/btnRefresh"
             android:layout_gravity="bottom|right"
             android:background="@drawable/refresh" />
