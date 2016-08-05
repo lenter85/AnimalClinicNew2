@@ -21,6 +21,7 @@ public class AlbumAdapter extends BaseAdapter {
     private ImageView imgViewPhoto;
     private Context context;
     private List<Album> list = new ArrayList<>();
+    //private Album selectedAlbum;
 
     public void setContext(Context context) {
         this.context = context;
@@ -68,4 +69,9 @@ public class AlbumAdapter extends BaseAdapter {
         list.add(album);
         this.notifyDataSetChanged();
     }
+
+    /*public void selectedItem(Album album) {
+        selectedAlbum = album;
+    }
+*/
 }

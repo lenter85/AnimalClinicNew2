@@ -11,11 +11,22 @@ public class Album {
     private String mid;
     private String adate;
     private String aname;
-    //String acontent;
+
+
+
+    private String acontent;
     String alocation;
 
     public String getAimagelarge() {
         return aimagelarge;
+    }
+
+    public String getAcontent() {
+        return acontent;
+    }
+
+    public void setAcontent(String acontent) {
+        this.acontent = acontent;
     }
 
     public void setAimagelarge(String aimagelarge) {

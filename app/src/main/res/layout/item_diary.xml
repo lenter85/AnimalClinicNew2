@@ -7,44 +7,53 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@drawable/notedesign"
         android:layout_margin="10dp"
-        android:layout_marginBottom="35dp">
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/round_angle_ye">
 
         <ImageView
-            android:layout_width="107dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:id="@+id/imgDimage"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:padding="6dp">
+            android:padding="6dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="나비"
                 android:id="@+id/txtDname"
-                android:textSize="30dp"
+                android:textSize="25dp"
                 android:layout_marginBottom="18dp"
-                android:layout_marginTop="21dp"
-                android:layout_marginLeft="2dp" />
+                android:layout_marginTop="15dp" />
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="나이 : "
+                    android:text="생일 : "
                     android:id="@+id/textView18"
                     android:textSize="16dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Text"
+                    android:id="@+id/txtDbirth"
+                    android:layout_marginRight="5dp" />
 
                 <TextView
                     android:layout_width="34dp"
@@ -53,18 +62,28 @@
                     android:textSize="16dp"
                     android:text="2살" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="26dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="성별 : "
                     android:id="@+id/textView45"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:layout_marginTop="5dp" />
 
                 <TextView
-                    android:layout_width="32dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtDgender"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:text="m"
+                    android:layout_marginTop="5dp" />
             </LinearLayout>
 
         </LinearLayout>

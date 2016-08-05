@@ -1,6 +1,11 @@
 package com.example.myapplication.diary;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Path;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -48,6 +53,11 @@ public class MyDiaryFragment extends Fragment {
             }
         });
 
+        Bitmap albumbitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.albumimg);
+        albumbitmap = getCircleBitmap(albumbitmap, 300);
+        album.setImageBitmap(albumbitmap);
+
+
         reservationList = (ImageView) view.findViewById(R.id.reservationList);
         reservationList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +70,9 @@ public class MyDiaryFragment extends Fragment {
             }
         });
 
+        Bitmap rbitmap = BitmapFactory.decodeResource(getResources(), R.drawable.reservation);
+        rbitmap = getCircleBitmap(rbitmap, 300);
+        reservationList.setImageBitmap(rbitmap);
 
         vaccination = (ImageView) view.findViewById(R.id.vaccination);
         vaccination.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +86,11 @@ public class MyDiaryFragment extends Fragment {
             }
         });
 
+        Bitmap vbitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.vacci);
+        vbitmap = getCircleBitmap(vbitmap, 300);
+        vaccination.setImageBitmap(vbitmap);
+
+
         weight = (ImageView) view.findViewById(R.id.weight);
         weight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +103,39 @@ public class MyDiaryFragment extends Fragment {
             }
         });
 
+        Bitmap wbitmap = BitmapFactory.decodeResource(getResources(), R.drawable.weightimg);
+        wbitmap = getCircleBitmap(wbitmap, 300);
+        weight.setImageBitmap(wbitmap);
+
         return view;
+    }
+
+
+    private Bitmap getCircleBitmap(Bitmap scaleBitmapImage, int radiusDp) {
+        int width = 0;
+        int height = 0;
+        int radius = (int)(radiusDp * getResources().getDisplayMetrics().density);
+        if(scaleBitmapImage.getWidth()<scaleBitmapImage.getHeight()) {
+            width = radius * 2;
+            height =radius * 2 * scaleBitmapImage.getHeight()/scaleBitmapImage.getWidth();
+        } else {
+            width =radius * 2 * scaleBitmapImage.getWidth()/scaleBitmapImage.getHeight();
+            height = radius * 2;
+        }
+        Bitmap targetBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(targetBitmap);
+        Path path = new Path();
+        path.addCircle(width/2, height/2, radius, Path.Direction.CCW);
+        canvas.clipPath(path);
+
+        canvas.drawBitmap(
+                scaleBitmapImage,
+                new Rect(0, 0, scaleBitmapImage.getWidth(), scaleBitmapImage.getHeight()),
+                new Rect(0, 0, width, height),
+                null
+        );
+
+        return targetBitmap;
     }
 
 }

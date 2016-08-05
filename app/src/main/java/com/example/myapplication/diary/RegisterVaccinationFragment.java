@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.calendar.CalendarFragment;
 import com.example.myapplication.diary.dto.Vaccination;
 import com.example.myapplication.network.VaccinationNetwork;
 
@@ -23,6 +25,8 @@ public class RegisterVaccinationFragment extends Fragment {
     EditText txtVdate;
     EditText txtVndate;
     private Vaccination vaccination = new Vaccination();
+    private ImageView imgCalendar1;
+    private ImageView imgCalendar2;
 
     public RegisterVaccinationFragment() {
         // Required empty public constructor
@@ -40,6 +44,22 @@ public class RegisterVaccinationFragment extends Fragment {
         txtVname = (EditText) view.findViewById(R.id.txtVname);
         txtVdate = (EditText) view.findViewById(R.id.txtVdate);
         txtVndate = (EditText) view.findViewById(R.id.txtVndate);
+        imgCalendar1 = (ImageView) view.findViewById(R.id.imgCalendar1);
+        imgCalendar2 = (ImageView) view.findViewById(R.id.imgCalendar2);
+
+
+        imgCalendar1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.fragmentContainer, new CalendarFragment())
+                        .commit();
+            }
+        });
+
 
 
 
@@ -54,12 +74,18 @@ public class RegisterVaccinationFragment extends Fragment {
                 vaccination.setMid("test");
                 ////////////////
                 VaccinationNetwork.sendVaccination(vaccination);
-                getActivity().
-                        getSupportFragmentManager().
+                getChildFragmentManager().
                         beginTransaction().
-                        replace(R.id.fragmentContainer, new VaccinationFragment())
+                        replace(R.id.fragmentContainer, new VaccinationFragment1())
                         .addToBackStack(null)
                         .commit();
+
+                /*getActivity().
+                        getSupportFragmentManager().
+                        beginTransaction().
+                        replace(R.id.fragmentContainer, new VaccinationFragment1())
+                        .addToBackStack(null)
+                        .commit();*/
             }
         });
 
@@ -68,6 +94,7 @@ public class RegisterVaccinationFragment extends Fragment {
         btnCancelVac.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 getActivity().
                         getSupportFragmentManager().
                         beginTransaction().
