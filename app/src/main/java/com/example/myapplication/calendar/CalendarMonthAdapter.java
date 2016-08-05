@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 
+import com.example.myapplication.reservation.util.Network;
+
 import java.util.Calendar;
 
 /**
@@ -206,27 +208,31 @@ public class CalendarMonthAdapter extends BaseAdapter {
 		}
 		
 		// 배경 설정하는 부분
-		if (position == getSelectedPosition()) {
-        	itemView.setBackgroundColor(Color.YELLOW);
-        } else {
+			if (position == getSelectedPosition()) {
 
-			int month = getCurMonth()+1;
-			int day = items[position].getDay();
+				itemView.setBackgroundColor(Color.BLUE);
 
-			Log.i("test", month+"월"+day+"일");
+			} else {
 
-			//해당일에 예약이 되있으면 파란색
-
-			//예약이 되지 않았으면 하얀색으로 표시한다.
-
-			//예약이 됐는지 안됐는지의 여부는 해당일에 예약된 예약테이블에 행이 1개 이상이면 예약된 것 아니면 예약되지 않은 것이다.
-
-			//int로 리턴받는다. 1이상이면 예약된 것 0이면 예약안된 것.
+				int month = getCurMonth()+1;
+				int day = items[position].getDay();
 
 
+				StringBuilder reserveDate = new StringBuilder();
+				reserveDate.append(getCurYear()).append("-").append(month).append("-").append(day);
 
-        	itemView.setBackgroundColor(Color.WHITE);
-        }
+				Log.i("test", "예약 조회일: "+reserveDate.toString());
+
+				//해당일에 예약이 되있으면 파란색
+
+				//예약이 되지 않았으면 하얀색으로 표시한다.
+
+				//예약이 됐는지 안됐는지의 여부는 해당일에 예약된 예약테이블에 행이 1개 이상이면 예약된 것 아니면 예약되지 않은 것이다.
+
+				//int로 리턴받는다. 1이상이면 예약된 것 0이면 예약안된 것.
+
+				Network.isReserved(itemView, "test", reserveDate.toString());
+			}
 
 		return itemView;
 	}
@@ -280,12 +286,6 @@ public class CalendarMonthAdapter extends BaseAdapter {
       			}
  	   	}
  	}
-
-
-
-
-
-
 
 
 	/**

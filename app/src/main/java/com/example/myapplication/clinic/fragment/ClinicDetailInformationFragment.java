@@ -63,7 +63,6 @@ public class ClinicDetailInformationFragment extends Fragment {
 
 
 
-
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
 
