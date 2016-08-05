@@ -26,6 +26,4 @@ public class MonthItem {
 		this.dayValue = day;
 	}
 	
-	
-	
 }

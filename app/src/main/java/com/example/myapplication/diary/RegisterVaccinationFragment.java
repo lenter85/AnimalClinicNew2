@@ -40,6 +40,8 @@ public class RegisterVaccinationFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_register_vaccination, container, false);
 
+        CalendarFragment.previousPage = "VACCINE"; //이전 화면 등록
+
         btnRegisterVac = (Button) view.findViewById(R.id.btnRegisterVac);
         txtVname = (EditText) view.findViewById(R.id.txtVname);
         txtVdate = (EditText) view.findViewById(R.id.txtVdate);
@@ -59,8 +61,6 @@ public class RegisterVaccinationFragment extends Fragment {
                         .commit();
             }
         });
-
-
 
 
         btnRegisterVac.setOnClickListener(new View.OnClickListener() {

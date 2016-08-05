@@ -16,8 +16,8 @@ import com.example.myapplication.R;
 import com.example.myapplication.reservation.fragment.ReserveEditFragment;
 import com.example.myapplication.reservation.fragment.ReserveSearchFragment;
 import com.example.myapplication.reservation.fragment.ReserveSearchResultFragment;
-
 import java.util.Calendar;
+
 
 public class CalendarFragment extends Fragment {
 
@@ -52,7 +52,6 @@ public class CalendarFragment extends Fragment {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,15 +67,21 @@ public class CalendarFragment extends Fragment {
         monthView.setOnDataSelectionListener(new OnDataSelectionListener() {
             @SuppressLint("LongLogTag")
             public void onDataSelected(AdapterView parent, View v, int position, long id) {
+
                 // 현재 선택한 일자 정보 표시
                 MonthItem curItem = (MonthItem) monthViewAdapter.getItem(position);
                 int day = curItem.getDay();
 
                 Log.i("myLog", "선택된 날짜는 "+curYear+"년"+(curMonth+1)+"월"+day+"일 입니다");
 
+               /* getActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, new ReserveListFragment())
+                    .addToBackStack(null)
+                    .commit();*/
 
                 ReserveSearchFragment.rdate = getDatetoKorean(curYear, curMonth, day);
-
 
                 if(previousPage.equals("SEARCH")){
 
@@ -97,6 +102,12 @@ public class CalendarFragment extends Fragment {
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.fragmentContainer, new ReserveEditFragment())
+                            .commit();
+                }else if(previousPage.equals("VACCINE")){
+
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragmentContainer, new ReserveSearchFragment())
                             .commit();
                 }
 

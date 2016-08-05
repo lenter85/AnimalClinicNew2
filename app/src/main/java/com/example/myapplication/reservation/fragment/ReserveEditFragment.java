@@ -107,7 +107,7 @@ public class ReserveEditFragment extends Fragment {
         //예약 가능한 시간 받아오기
         Log.i("myLog",  "network의 getReserveList메소드 호출하기 전 "+ ReserveSearchFragment.rclinicid+", "+ ReserveSearchFragment.rdate);
 
-        List<String> list =  Network.getReserveList(Util.getClinicTimeList(), ReserveSearchFragment.rclinicid, ReserveSearchFragment.rdate);
+        List<String> list =  Network.getReserveTimeList(Util.getClinicTimeList(), ReserveSearchFragment.rclinicid, ReserveSearchFragment.rdate);
 
         for(String time : list){
             adapter.add(time);
