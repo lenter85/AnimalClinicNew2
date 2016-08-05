@@ -85,6 +85,12 @@
                     android:text="봄빛 동물병원"
                     android:layout_weight="7"
                     android:gravity="center_vertical|center_horizontal" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner"
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <android.support.design.widget.TabLayout

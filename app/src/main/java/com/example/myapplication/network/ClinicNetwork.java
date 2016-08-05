@@ -101,13 +101,10 @@ public class ClinicNetwork {
                         clinicInformation.setCid(jsonObject.getString("cid"));
                         clinicInformation.setCname(jsonObject.getString("cname"));
                         clinicInformation.setClocation(jsonObject.getString("clocation"));
-                        clinicInformation.setCdlocation(jsonObject.getString("cdlocation"));
+                        clinicInformation.setCphone(jsonObject.getString("cphone"));
                         clinicInformation.setCopentime(jsonObject.getString("csopentime"));
                         clinicInformation.setCclosetime(jsonObject.getString("cclosetime"));
                         clinicInformation.setCintroduction(jsonObject.getString("cintroduction"));
-
-
-
 
 
                     }
@@ -131,7 +128,7 @@ public class ClinicNetwork {
     }
 
 
-    public void getClinicInformationTab(final View view) {
+    public void getClinicInformationTab(final View view, GoogleMap googleMap) {
         new AsyncTask<String, Integer, ClinicInformation>() {
             ClinicInformation clinicInformation = new ClinicInformation();
 
@@ -174,12 +171,12 @@ public class ClinicNetwork {
                         clinicInformation.setCid(jsonObject.getString("cid"));
                         clinicInformation.setCname(jsonObject.getString("cname"));
                         clinicInformation.setClocation(jsonObject.getString("clocation"));
-                        clinicInformation.setCdlocation(jsonObject.getString("cdlocation"));
+                        clinicInformation.setCphone(jsonObject.getString("cphone"));
                         clinicInformation.setCopentime(jsonObject.getString("copentime"));
                         clinicInformation.setCclosetime(jsonObject.getString("cclosetime"));
                         clinicInformation.setCintroduction(jsonObject.getString("cintroduction"));
-
-
+                        clinicInformation.setClongitude(jsonObject.getString("clongitude"));
+                        clinicInformation.setClatitude(jsonObject.getString("clatitude"));
 
 
                     }
@@ -198,19 +195,21 @@ public class ClinicNetwork {
             protected void onPostExecute(ClinicInformation clinicInformation) {
                 TextView textViewName = (TextView) view.findViewById(R.id.textViewName);
                 TextView textViewLocation = (TextView) view.findViewById(R.id.textViewLocation);
-                TextView textViewDLocation = (TextView) view.findViewById(R.id.textViewDLocation);
+                TextView textViewDLocation = (TextView) view.findViewById(R.id.textViewPhone);
                 TextView textViewOpenTime = (TextView) view.findViewById(R.id.textViewOpenTime);
                 TextView textViewCloseTime = (TextView) view.findViewById(R.id.textViewCloseTime);
                 TextView textViewIntroduction = (TextView) view.findViewById(R.id.textViewIntroduction);
 
                 textViewName.setText(clinicInformation.getCname());
                 textViewLocation.setText(clinicInformation.getClocation());
-                textViewDLocation.setText(clinicInformation.getCdlocation());
+                textViewDLocation.setText(clinicInformation.getCphone());
                 textViewOpenTime.setText(clinicInformation.getCopentime());
                 textViewCloseTime.setText(clinicInformation.getCclosetime());
                 textViewIntroduction.setText(clinicInformation.getCintroduction());
+
+
             }
-        }.execute(url + "clinicinformation");
+        }.execute(url + "clinicinformation?cid=" + MainActivity.loginId);
     }
 
 
@@ -278,7 +277,7 @@ public class ClinicNetwork {
             protected void onPostExecute(ClinicInformation clinicInformation) {
                 imageView.setImageBitmap(bm);
             }
-        }.execute("http://192.168.0.38:8080/Petopia/" + "clinicfacility1?cid=test");
+        }.execute("http://192.168.0.38:8080/Petopia/" + "clinicfacility1?cid=" + MainActivity.loginId);
     }
 
 

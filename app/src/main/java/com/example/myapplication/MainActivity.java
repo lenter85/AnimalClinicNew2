@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity
 
     public static List<RegisterLocation> list = new ArrayList<>();
     public static String clinicLocation = null;
+    public static String loginId = "test";
 
     public static RegisterClinicFragment registerClinicFragment;
 //mainmain

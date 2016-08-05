@@ -38,7 +38,7 @@
         android:id="@+id/textView23"
         android:textSize="20dp"
         android:layout_marginTop="28dp"
-        android:layout_below="@+id/textViewDLocation"
+        android:layout_below="@+id/textViewPhone"
         android:layout_toRightOf="@+id/imageView10"
         android:layout_toEndOf="@+id/imageView10" />
 
@@ -141,7 +141,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="특이사항 입력"
-        android:id="@+id/textViewDLocation"
+        android:id="@+id/textViewPhone"
         android:textSize="15dp"
         android:layout_alignBottom="@+id/imageView10"
         android:layout_alignLeft="@+id/textView44"
