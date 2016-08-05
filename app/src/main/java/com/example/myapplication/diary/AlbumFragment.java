@@ -10,8 +10,8 @@ import android.widget.GridView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.diary.dto.Album;
+import com.example.myapplication.network.AlbumNetwork;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,20 +36,11 @@ public class AlbumFragment extends Fragment {
         gridViewAlbum = (GridView) view.findViewById(R.id.gridViewAlbum);
         gridViewAlbum.setNumColumns(3);
 
-        list = new ArrayList<>();
-
-        /*Album album1 = new Album();
-        album1.setPicture(R.drawable.dog04_small);
-        Album album2 = new Album();
-        album2.setPicture(R.drawable.dog05);
-        list.add(album1);
-        list.add(album2);*/
-
-
+        //list = new ArrayList<>();
 
         albumAdapter = new AlbumAdapter();
         albumAdapter.setContext(getActivity());
-        albumAdapter.setList(list);
+        AlbumNetwork.getAlbumData(1, albumAdapter);
         gridViewAlbum.setAdapter(albumAdapter);
 
         return view;

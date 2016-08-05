@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.myapplication.R;
+import com.example.myapplication.calendar.CalendarFragment;
 import com.example.myapplication.diary.dto.Vaccination;
 import com.example.myapplication.network.VaccinationNetwork;
 
@@ -36,12 +37,12 @@ public class RegisterVaccinationFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_register_vaccination, container, false);
 
+        CalendarFragment.previousPage = "VACCINE"; //이전 화면 등록
+
         btnRegisterVac = (Button) view.findViewById(R.id.btnRegisterVac);
         txtVname = (EditText) view.findViewById(R.id.txtVname);
         txtVdate = (EditText) view.findViewById(R.id.txtVdate);
         txtVndate = (EditText) view.findViewById(R.id.txtVndate);
-
-
 
         btnRegisterVac.setOnClickListener(new View.OnClickListener() {
             @Override

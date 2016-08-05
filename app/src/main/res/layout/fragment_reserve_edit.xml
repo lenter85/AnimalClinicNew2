@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#ffffff">
+    android:background="@drawable/cat2">
 
     <LinearLayout
         android:orientation="vertical"
@@ -32,7 +32,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="우리동네 동물병원"
             android:id="@+id/textView31"
-            android:background="@drawable/round_angle_table"
+            android:background="@drawable/round_angle_left"
             android:padding="10dp"
             android:textSize="20dp"
             android:allowUndo="false"
@@ -66,7 +66,7 @@
             android:text="우디"
             android:id="@+id/textView32"
             android:textSize="20dp"
-            android:background="@drawable/round_angle_table"
+            android:background="@drawable/round_angle_left"
             android:padding="5dp"
             android:textColor="#6f6d6d"
             android:textStyle="bold" />
@@ -150,7 +150,7 @@
             android:text="미용 예약"
             android:id="@+id/textView42"
             android:textSize="20dp"
-            android:background="@drawable/round_angle_table"
+            android:background="@drawable/round_angle_left"
             android:padding="5dp"
             android:textColor="#6f6d6d"
             android:textStyle="bold" />

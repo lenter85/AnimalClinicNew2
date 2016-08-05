@@ -121,6 +121,7 @@ public class ReserveResultFragment extends Fragment {
                         return;
                     }
                 });
+
         AlertDialog alert = alert_confirm.create();
         alert.show();
     }
