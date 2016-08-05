@@ -7,7 +7,7 @@ public class ReserveListItem {
 
     private String rId;
     private String rName;
-    private String rBirth;
+    private String rPetName;
     private String rPhone;
     private String rTime;
 
@@ -27,14 +27,6 @@ public class ReserveListItem {
         this.rName = rName;
     }
 
-    public String getrBirth() {
-        return rBirth;
-    }
-
-    public void setrBirth(String rBirth) {
-        this.rBirth = rBirth;
-    }
-
     public String getrPhone() {
         return rPhone;
     }
@@ -49,5 +41,13 @@ public class ReserveListItem {
 
     public void setrTime(String rTime) {
         this.rTime = rTime;
+    }
+
+    public String getrPetName() {
+        return rPetName;
+    }
+
+    public void setrPetName(String rPetName) {
+        this.rPetName = rPetName;
     }
 }

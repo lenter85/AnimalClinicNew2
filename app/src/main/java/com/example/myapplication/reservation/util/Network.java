@@ -1,10 +1,14 @@
 package com.example.myapplication.reservation.util;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.myapplication.calendar.MonthItemView;
 import com.example.myapplication.reservation.dto.Reserve;
+import com.example.myapplication.reservation.dto.ReserveListItem;
 import com.example.myapplication.reservation.fragment.MyReserveViewAdapter;
+import com.example.myapplication.reservation.fragment.ReserveListViewAdapter;
 import com.example.myapplication.reservation.fragment.TimeViewAdapter;
 
 import org.json.JSONArray;
@@ -20,7 +24,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 //네트워크 관련 코드는 한 클래스에서 담당하는 것이 나중에 유지보수 할 떄를 위해서도 좋다.
 
@@ -187,7 +190,7 @@ public class Network {
     }
 
 
-    public static List<String> getReserveList(List<String> local_timeList, String clinicid, String date) {
+    public static List<String> getReserveTimeList(List<String> local_timeList, String clinicid, String date) {
 
         final List<String> nonReservedTimeList = local_timeList;
         final List<String> dbReservedTimeList = new ArrayList<>();
@@ -429,24 +432,25 @@ public class Network {
         }
     }
 
-    public static int getReserveNumber(String clinicid, String date) throws ExecutionException, InterruptedException {
+    public static void isReserved(final MonthItemView itemView, String clinicid, String date){
 
-        Log.i("myLog", "getReserveNumber메소드를 호출했습니다.");
+        Log.i("test", "isReserved메소드를 호출했습니다.");
 
-        AsyncTask<String, Void, Integer> asyncTask = new AsyncTask<String, Void, Integer>() {
+        AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
 
             //doInBackground의 리턴값 String은 onPostExecute의 매개변수로 들어간다.
             @Override
-            protected Integer doInBackground(String... params) {
+            protected String doInBackground(String... params) {
+                Log.i("test", "doInBackground() 시작");
 
                 String json = "";
 
-                Log.i("myLog", "getReserveNumber 메소드가 doInBackground()를 실행합니다");
+                Log.i("test", "getReserveNumber 메소드가 doInBackground()를 실행합니다");
 
                 try {
                     //먼저 URL 객체를 만든다.
                     URL url = new URL(params[0]);
-                    Log.i("myLog", params[0]);
+                    Log.i("test", params[0]);
 
                     //연결 객체를 만든다.
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -482,10 +486,10 @@ public class Network {
                         reader.close();
                         is.close();
 
-                        Log.i("myLog", "응답 OK를 받음: 받은 json: "+json);
+                        Log.i("test", "응답 OK를 받음: 받은 json: "+json);
 
                     } else {
-                        Log.i("myLog", "응답 OK를 받지못하였음");
+                        Log.i("test", "응답 OK를 받지못하였음");
                     }
 
                     conn.disconnect();
@@ -494,16 +498,132 @@ public class Network {
                     e.printStackTrace();
                 }
 
-                int reserveNo = Integer.parseInt(json);
+                return json;
+            }
 
-                return reserveNo;
+            @Override
+            protected void onPostExecute(String json) {
+
+                Log.i("test","받은 json 데이터는 :"+ json);
+
+                int num = Integer.parseInt(json);
+
+                Log.i("test","예약 조회결과 :"+ num);
+                if(num <= 0) {
+                    Log.i("test", "예약 0건 배경 하얀색");
+                    itemView.setBackgroundColor(Color.WHITE);
+                }
+                else {
+                    Log.i("test", "예약 1건 이상 배경 노란색");
+                    itemView.setBackgroundColor(Color.YELLOW);
+                }
             }
         };
 
-        Log.i("myLog", site+"/reserve/getReserveNo?clinicid="+clinicid+"&date="+ Util.getSimpleDate(date));
-        int reserveNo = asyncTask.execute(site+"/reserve/getReserveNo?clinicid="+clinicid+"&date="+ Util.getSimpleDate(date)).get(); //doInBackground()의 매개값으로 들어간다.
-        Log.i("myLog", "getReserveNo를 asyncTask를 수행을 끝냈습니다. 조회된 예약 결과:"+reserveNo);
+        Log.i("test", site+"/reserve/getReserveNo?clinicid="+clinicid+"&date="+ Util.getSimpleDate(date));
+        asyncTask.execute(site+"/reserve/getReserveNo?clinicid="+clinicid+"&date="+ Util.getSimpleDate(date)); //doInBackground()의 매개값으로 들어간다.
+    }
 
-        return reserveNo;
+
+    public static void getSubscriberList(final ReserveListViewAdapter viewAdapter, String clinicId, String date) {
+
+        //첫번째 매개변수는 doInBackground()로, 두번째 매개변수는 onProgressUpdate()로, 세번째 매개변수는 반환값을 의미한다.
+        AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
+
+            //doInBackground의 리턴값 String은 onPostExecute의 매개변수로 들어간다.
+            @Override
+            protected String doInBackground(String... params) {
+
+                Log.i("myLog", "getSubscriberList메소드의 asyncTask doInBackground 수행");
+
+                String json = "";
+
+                try {
+                    //먼저 URL 객체를 만든다.
+                    URL url = new URL(params[0]);
+                    Log.i("myLog", params[0]);
+
+                    //연결 객체를 만든다.
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoInput(true);
+                    conn.setDoOutput(true);
+                    conn.setUseCaches(false);
+                    conn.setRequestMethod("GET");
+                    conn.setRequestProperty("Connection", "Keep-Alive");
+                    conn.setRequestProperty("Content-Type", "application/json");
+                    //실제 연결
+                    conn.connect();
+
+                    /* 응답 */
+
+                    //요청을 처리하고 응답이 온다.
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) { //200은 정상 응답을 의미한다. ( 잘못 요청: 404, 서버 에러: 500 )
+                        Log.i("myLog", "응답 OK를 받았음");
+                        //응답코드가 200번일 경우에 본문 내용을 읽고싶다.
+
+                        InputStream is = conn.getInputStream(); //응답의 결과를 읽는다.
+                        Reader reader = new InputStreamReader(is); //문자일 경우 Reader로 읽는 것이 더 낫다.
+                        BufferedReader br = new BufferedReader(reader); //한 라인 단위로 읽으려면 BufferedReader로 읽는 것이 낫다. 보조 스트림을 다는 것.
+
+                        while (true) {
+                            String line = br.readLine(); //한 줄씩 읽는다.
+                            if (line == null) break; //행을 다 읽었을 경우 null이 나온다. while문을 빠져나온다.
+                            json += line; //body += line;
+                        }
+
+                        br.close();
+                        reader.close();
+                        is.close();
+
+                    } else {
+                        Log.i("myLog", "응답 OK를 받지못하였음");
+                    }
+
+                    conn.disconnect();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                return json;
+            }
+
+            @Override
+            protected void onPostExecute(String json) {
+
+                Log.i("myLog","받은 json:"+json);
+
+                //JSON을 파싱하는 코드
+                try {
+
+                    JSONArray root = new JSONArray(json);
+                    for (int i = 0; i < root.length(); i++) {
+
+                        JSONObject jsonObject = root.getJSONObject(i);
+                        String rname = jsonObject.getString("rname");
+                        String rpname = jsonObject.getString("rpname");
+                        String rphone = jsonObject.getString("rphone");
+                        String rtime = jsonObject.getString("rtime");
+
+                        ReserveListItem item = new ReserveListItem();
+                        item.setrName(rname);
+                        item.setrPetName(rpname);
+                        item.setrPhone(rphone);
+                        item.setrTime(rtime);
+
+                        viewAdapter.addItem(item);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        };
+
+        Log.i("myLog", site + "/reserve/getSubscriberList?clinicId="+clinicId+"&date="+date);
+
+        asyncTask.execute(site + "/reserve/getSubscriberList?clinicId="+clinicId+"&date="+date);
+
+        Log.i("myLog", "asyncTask 수행 완료");
     }
 }

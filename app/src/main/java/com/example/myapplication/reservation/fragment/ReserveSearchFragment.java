@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.calendar.CalendarFragment;
@@ -110,7 +111,11 @@ public class ReserveSearchFragment extends Fragment {
         return view;
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        Toast.makeText(getContext(), "onResume 호출됨", Toast.LENGTH_LONG).show();
+    }
 
     public void setReserveInfo(View view) {
 
@@ -128,9 +133,11 @@ public class ReserveSearchFragment extends Fragment {
         sp.setPrompt("애완동물을 선택해주세요"); // 스피너 제목
         sp.setAdapter(adapter);
         sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                Log.i("myLog", "스피너뷰 클릭됨");
                 //예약할 애완동물 이름 변경한다.
                 rpname = arraylist.get(position);
             }
