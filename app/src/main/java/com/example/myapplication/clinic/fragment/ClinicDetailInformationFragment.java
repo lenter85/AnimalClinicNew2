@@ -28,6 +28,7 @@ public class ClinicDetailInformationFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ClinicDetailInformationAdapter clinicDetailInformationAdapter;
+    public static String clinicId;
 
     public ClinicDetailInformationFragment() {
         // Required empty public constructor

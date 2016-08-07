@@ -5,58 +5,69 @@ package com.example.myapplication.clinic.dto;
  */
 public class Review {
 
-    private String pname = "사진이름";
-    private int clinicPicture=2;
-    private String content= "안녕하세요";
-    private int score=3;
-    private String image;
+    private int rno;
+    private String rcontent;
+    private int rscore;
+    private String rimage;
+    private String ruserid="test";
+    private String rclinicid;
 
-    public String getImage() {
-        return image;
+    public Review() {}
+
+    public Review(int rno, String rcontent, int rscore, String rimage, String ruserid, String rclinicid) {
+        this.rno = rno;
+        this.rcontent = rcontent;
+        this.rscore = rscore;
+        this.rimage = rimage;
+        this.ruserid = ruserid;
+        this.rclinicid = rclinicid;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public int getRno() {
+        return rno;
     }
 
-    public Review(String pname, int clinicPicture, String content, int score) {
-        this.pname = pname;
-        this.clinicPicture = clinicPicture;
-        this.content = content;
-        this.score = score;
+    public void setRno(int rno) {
+        this.rno = rno;
     }
 
-    public Review () {}
-
-    public String getPname() {
-        return pname;
+    public String getRcontent() {
+        return rcontent;
     }
 
-    public void setPname(String pname) {
-        this.pname = pname;
+    public void setRcontent(String rcontent) {
+        this.rcontent = rcontent;
     }
 
-    public int getClinicPicture() {
-        return clinicPicture;
+    public int getRscore() {
+        return rscore;
     }
 
-    public void setClinicPicture(int clinicPicture) {
-        this.clinicPicture = clinicPicture;
+    public void setRscore(int rscore) {
+        this.rscore = rscore;
     }
 
-    public String getContent() {
-        return content;
+    public String getRimage() {
+        return rimage;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setRimage(String rimage) {
+        this.rimage = rimage;
     }
 
-    public int getScore() {
-        return score;
+    public String getRuserid() {
+        return ruserid;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setRuserid(String ruserid) {
+        this.ruserid = ruserid;
+    }
+
+    public String getRclinicid() {
+        return rclinicid;
+    }
+
+    public void setRclinicid(String rclinicid) {
+        this.rclinicid = rclinicid;
     }
 }
