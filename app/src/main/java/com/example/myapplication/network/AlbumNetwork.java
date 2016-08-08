@@ -189,6 +189,7 @@ public class AlbumNetwork {
 
                     }
 
+
                     //연결 끊기
                     conn.disconnect();
                 } catch (Exception e) {
