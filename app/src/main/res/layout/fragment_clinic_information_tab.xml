@@ -74,7 +74,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="상세주소 : "
+                    android:text="전화번호"
                     android:id="@+id/textView44"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
@@ -84,7 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="경찰병원역 3번 출구"
-                    android:id="@+id/textViewDLocation"
+                    android:id="@+id/textViewPhone"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp" />

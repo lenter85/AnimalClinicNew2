@@ -7,23 +7,43 @@ public class ClinicInformation {
     private String cid;
     private String cname;
     private String clocation;
-    private String cdlocation;
+    private String cphone;
     private String copentime;
     private String cclosetime;
     private String cintroduction;
+    private String clongitude;
+    private String clatitude;
 
     //기본 생성자
     public ClinicInformation() {
     }
 
-    public ClinicInformation(String cid, String cname, String clocation, String cdlocation, String copentime, String cclosetime, String cintroduction) {
+    public ClinicInformation(String cid, String cname, String clocation, String cphone, String copentime, String cclosetime, String cintroduction, String clongitude, String clatitude) {
         this.cid = cid;
         this.cname = cname;
         this.clocation = clocation;
-        this.cdlocation = cdlocation;
+        this.cphone = cphone;
         this.copentime = copentime;
         this.cclosetime = cclosetime;
         this.cintroduction = cintroduction;
+        this.clongitude = clongitude;
+        this.clatitude = clatitude;
+    }
+
+    public String getClongitude() {
+        return clongitude;
+    }
+
+    public void setClongitude(String clongitude) {
+        this.clongitude = clongitude;
+    }
+
+    public String getClatitude() {
+        return clatitude;
+    }
+
+    public void setClatitude(String clatitude) {
+        this.clatitude = clatitude;
     }
 
     public String getCid() {
@@ -50,12 +70,12 @@ public class ClinicInformation {
         this.clocation = clocation;
     }
 
-    public String getCdlocation() {
-        return cdlocation;
+    public String getCphone() {
+        return cphone;
     }
 
-    public void setCdlocation(String cdlocation) {
-        this.cdlocation = cdlocation;
+    public void setCphone(String cphone) {
+        this.cphone = cphone;
     }
 
     public String getCopentime() {
