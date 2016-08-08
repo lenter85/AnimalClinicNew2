@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:weightSum="1"
     android:orientation="vertical"
-    android:background="@drawable/dog2">
+    android:background="#FFFFD4">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:background="#ffffff"
+        android:background="#FFFFE9"
         android:gravity="center_vertical">
 
         <TextView
@@ -19,9 +19,10 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="우리동네 동물병원"
-            android:id="@+id/txtClinicId"
+            android:id="@+id/txtCname"
             android:layout_gravity="center_horizontal"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#5D5D5D" />
     </LinearLayout>
 
     <RelativeLayout
@@ -32,7 +33,7 @@
         android:layout_gravity="center_horizontal"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:background="#ffffff">
+        android:background="#FFFFE9">
 
         <LinearLayout
             android:orientation="vertical"
@@ -50,7 +51,8 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="2016.07.05"
                 android:id="@+id/txtRdate"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textColor="#5D5D5D" />
 
         </LinearLayout>
 
@@ -81,7 +83,8 @@
             android:id="@+id/txtDow"
             android:textSize="20dp"
             android:layout_below="@+id/linearLayout5"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:textColor="#5D5D5D" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -94,7 +97,8 @@
             android:layout_toLeftOf="@+id/linearLayout5"
             android:layout_toStartOf="@+id/linearLayout5"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textColor="#5D5D5D" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -107,7 +111,8 @@
             android:layout_toRightOf="@+id/linearLayout5"
             android:layout_toEndOf="@+id/linearLayout5"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textColor="#5D5D5D" />
 
     </RelativeLayout>
 
@@ -119,7 +124,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/timeListView"
-            android:choiceMode="none" />
+            android:choiceMode="none"
+            android:background="#FFFFE9" />
 
         <Button
             android:layout_width="70dp"
