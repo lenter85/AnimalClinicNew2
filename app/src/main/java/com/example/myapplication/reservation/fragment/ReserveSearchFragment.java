@@ -49,6 +49,7 @@ public class ReserveSearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
+        getActivity().setTitle("예약하기");
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_reserve_search, container, false);
         txtCname = (TextView) view.findViewById(R.id.txtCname);

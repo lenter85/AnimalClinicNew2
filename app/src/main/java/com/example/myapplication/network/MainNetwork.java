@@ -27,7 +27,7 @@ import java.util.List;
 public class MainNetwork {
 
     private Bitmap bm;
-    private static final String site = "http://192.168.0.21:8080/Petopia";
+    private static final String site = "http://192.168.0.11:9090/Petopia";
 
     public static void setReserveList(final ClinicListViewAdapter clinicListViewAdapter) {
 

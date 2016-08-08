@@ -29,9 +29,9 @@ import java.util.Map;
 
 public class Network {
 
-    private static final String site = "http://192.168.0.21:8080/Petopia";
+    private static final String site = "http://192.168.0.11:9090/Petopia";
 
-    public static void setReserveList(final TimeViewAdapter timeViewAdapter, List<String> local_timeList, Map<String, String> map){
+    public static void setReserveList(final TimeViewAdapter timeViewAdapter, List<String> local_timeList, Map<String, String> map) {
 
         final List<String> nonReservedTimeList = local_timeList;
         final List<String> dbReservedTimeList = new ArrayList<>();
@@ -41,11 +41,11 @@ public class Network {
 
             @Override
             protected String doInBackground(String... params) {
-                Log.i("myLog","asyncTask 시작 중");
+                Log.i("myLog", "asyncTask 시작 중");
 
                 String json = "";
 
-                Log.i("myLog","Network 클래스의 doInBackground()를 실행합니다");
+                Log.i("myLog", "Network 클래스의 doInBackground()를 실행합니다");
 
                 try {
                     //먼저 URL 객체를 만든다.
@@ -86,13 +86,13 @@ public class Network {
                         reader.close();
                         is.close();
 
-                    }else{
+                    } else {
                         Log.i("myLog", "응답 OK를 받지못하였음");
                     }
 
                     conn.disconnect();
 
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
@@ -108,11 +108,11 @@ public class Network {
             protected void onPostExecute(String json) {
 
                 //int currentTime   = Integer.parseInt(new java.text.SimpleDateFormat("HHmm").format(new java.util.Date()));
-                int currentTime   = 1638;
+                int currentTime = 1638;
 
-                Log.i("myLog","현재시간: "+currentTime);
+                Log.i("myLog", "현재시간: " + currentTime);
 
-                Log.i("myLog","asyncTask 시작 종료");
+                Log.i("myLog", "asyncTask 시작 종료");
 
                 /* Spring 서버에서 안드로이드로 보내는 데이터 형태
                 [
@@ -125,9 +125,9 @@ public class Network {
 
                 //JSON을 파싱하는 코드
                 try {
-                    Log.i("myLog","받아 온 시간 데이터");
+                    Log.i("myLog", "받아 온 시간 데이터");
                     JSONArray root = new JSONArray(json);
-                    for(int i=0; i<root.length(); i++){
+                    for (int i = 0; i < root.length(); i++) {
 
                         String time = root.getString(i);
                         Log.i("myLog", time);
@@ -135,13 +135,13 @@ public class Network {
                     }
 
 
-                    for(int i = 0; i< nonReservedTimeList.size(); i++){
+                    for (int i = 0; i < nonReservedTimeList.size(); i++) {
 
-                        int localTime = Integer.parseInt(nonReservedTimeList.get(i).replace(":",""));
+                        int localTime = Integer.parseInt(nonReservedTimeList.get(i).replace(":", ""));
 
                         //현재 시간보다 이전 시간은 지운다.
-                        if(currentTime > localTime){
-                            Log.i("myLog",nonReservedTimeList.get(i)+" 제거");
+                        if (currentTime > localTime) {
+                            Log.i("myLog", nonReservedTimeList.get(i) + " 제거");
                             nonReservedTimeList.remove(i);
                             i--;
                             continue;
@@ -150,11 +150,11 @@ public class Network {
                         String registerTime = nonReservedTimeList.get(i);
                         //Log.i("myList", "registerTime"+registerTime);
 
-                        for(int j=0; j<dbReservedTimeList.size(); j++){
+                        for (int j = 0; j < dbReservedTimeList.size(); j++) {
                             String dbClinicTime = dbReservedTimeList.get(j);
                             //Log.i("myList", "dbClinicTime"+dbClinicTime);
 
-                            if(registerTime.equals(dbClinicTime)){
+                            if (registerTime.equals(dbClinicTime)) {
 
                                 //Log.i("mylog", registerTime+"과 "+dbClinicTime+"는 같으므로 제거");
 
@@ -177,16 +177,16 @@ public class Network {
             }
         };
 
-        Log.i("myLog","asyncTask 시작 전");
+        Log.i("myLog", "asyncTask 시작 전");
         String clinicid = map.get("clinicid");
         String date = map.get("date");
 
-        Log.i("myLog", clinicid+","+date);
+        Log.i("myLog", clinicid + "," + date);
 
         //asyncTask를 실행한다. doInBackground 메소드를 실행한다.
-        Log.i("myLog",site+"/reserve/getTimeList?clinicid="+clinicid+"&date="+date);
+        Log.i("myLog", site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + date);
 
-        asyncTask.execute(site+"/reserve/getTimeList?clinicid="+clinicid+"&date="+date); //doInBackground()의 매개값으로 들어간다.
+        asyncTask.execute(site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + date); //doInBackground()의 매개값으로 들어간다.
     }
 
 
@@ -261,7 +261,7 @@ public class Network {
                     e.printStackTrace();
                 }
 
-                List<String> list = calculateReserveTime(json, dbReservedTimeList ,nonReservedTimeList);
+                List<String> list = calculateReserveTime(json, dbReservedTimeList, nonReservedTimeList);
 
                 return list;
             }
@@ -269,20 +269,20 @@ public class Network {
         //asyncTask의 끝
 
 
-        Log.i("myLog",site+"/reserve/getTimeList?clinicid="+clinicid+"&date="+ Util.getSimpleDate(date));
+        Log.i("myLog", site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + Util.getSimpleDate(date));
 
-        try{
-            List<String> finalList = asyncTask.execute(site+"/reserve/getTimeList?clinicid="+clinicid+"&date="+ Util.getSimpleDate(date)).get(); //doInBackground()의 매개값으로 들어간다.
+        try {
+            List<String> finalList = asyncTask.execute(site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + Util.getSimpleDate(date)).get(); //doInBackground()의 매개값으로 들어간다.
             return finalList;
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
 
-    public static void getMyReserveList(final String rpname, final String ruserid, final MyReserveViewAdapter myReserveViewAdapter){
+    public static void getMyReserveList(final String rpname, final String ruserid, final MyReserveViewAdapter myReserveViewAdapter) {
 
         final AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
 
@@ -377,19 +377,17 @@ public class Network {
                     }
 
 
-
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         };
 
-        asyncTask.execute(site+"/reserve/getMyReserveList?rpname="+rpname+"&ruserid="+ruserid);
+        asyncTask.execute(site + "/reserve/getMyReserveList?rpname=" + rpname + "&ruserid=" + ruserid);
     }
 
 
-
-    private static List<String> calculateReserveTime(String json, List<String> dbReservedTimeList , List<String> nonReservedTimeList ){
+    private static List<String> calculateReserveTime(String json, List<String> dbReservedTimeList, List<String> nonReservedTimeList) {
 
         try {
 
@@ -432,7 +430,7 @@ public class Network {
         }
     }
 
-    public static void isReserved(final MonthItemView itemView, String clinicid, String date){
+    public static void isReserved(final MonthItemView itemView, String clinicid, String date) {
 
         Log.i("test", "isReserved메소드를 호출했습니다.");
 
@@ -486,7 +484,7 @@ public class Network {
                         reader.close();
                         is.close();
 
-                        Log.i("test", "응답 OK를 받음: 받은 json: "+json);
+                        Log.i("test", "응답 OK를 받음: 받은 json: " + json);
 
                     } else {
                         Log.i("test", "응답 OK를 받지못하였음");
@@ -504,24 +502,23 @@ public class Network {
             @Override
             protected void onPostExecute(String json) {
 
-                Log.i("test","받은 json 데이터는 :"+ json);
+                Log.i("test", "받은 json 데이터는 :" + json);
 
                 int num = Integer.parseInt(json);
 
-                Log.i("test","예약 조회결과 :"+ num);
-                if(num <= 0) {
+                Log.i("test", "예약 조회결과 :" + num);
+                if (num <= 0) {
                     Log.i("test", "예약 0건 배경 하얀색");
                     itemView.setBackgroundColor(Color.WHITE);
-                }
-                else {
+                } else {
                     Log.i("test", "예약 1건 이상 배경 노란색");
                     itemView.setBackgroundColor(Color.YELLOW);
                 }
             }
         };
 
-        Log.i("test", site+"/reserve/getReserveNo?clinicid="+clinicid+"&date="+ Util.getSimpleDate(date));
-        asyncTask.execute(site+"/reserve/getReserveNo?clinicid="+clinicid+"&date="+ Util.getSimpleDate(date)); //doInBackground()의 매개값으로 들어간다.
+        Log.i("test", site + "/reserve/getReserveNo?clinicid=" + clinicid + "&date=" + Util.getSimpleDate(date));
+        asyncTask.execute(site + "/reserve/getReserveNo?clinicid=" + clinicid + "&date=" + Util.getSimpleDate(date)); //doInBackground()의 매개값으로 들어간다.
     }
 
 
@@ -590,7 +587,7 @@ public class Network {
             @Override
             protected void onPostExecute(String json) {
 
-                Log.i("myLog","받은 json:"+json);
+                Log.i("myLog", "받은 json:" + json);
 
                 //JSON을 파싱하는 코드
                 try {
@@ -620,9 +617,9 @@ public class Network {
             }
         };
 
-        Log.i("myLog", site + "/reserve/getSubscriberList?clinicId="+clinicId+"&date="+date);
+        Log.i("myLog", site + "/reserve/getSubscriberList?clinicId=" + clinicId + "&date=" + date);
 
-        asyncTask.execute(site + "/reserve/getSubscriberList?clinicId="+clinicId+"&date="+date);
+        asyncTask.execute(site + "/reserve/getSubscriberList?clinicId=" + clinicId + "&date=" + date);
 
         Log.i("myLog", "asyncTask 수행 완료");
     }
