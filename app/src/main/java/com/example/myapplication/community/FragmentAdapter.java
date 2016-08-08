@@ -5,7 +5,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.myapplication.community.board.BoardFragment;
-import com.example.myapplication.community.information.InformationFragment;
 import com.example.myapplication.community.gallery.GalleryFragment;
 
 /**
@@ -19,10 +18,8 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if(position == 0){
-            return new InformationFragment();
-        } else if(position == 1){
             return new GalleryFragment();
-        } else if(position == 2){
+        } else if(position == 1){
             return new BoardFragment();
         }
         return null;
@@ -30,16 +27,14 @@ public class FragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 2;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
         if(position == 0) {
-            return "정 보";
-        }else if(position == 1) {
             return "갤러리";
-        }else if(position == 2) {
+        }else if(position == 1) {
             return "게시판";
         }
         return null;

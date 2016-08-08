@@ -13,16 +13,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.clinic.dto.Review;
 
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -34,6 +35,9 @@ public class WriteReviewFragment extends Fragment {
     private Button btnRegister;
     ImageView imageViewReviewImg;
     private Bitmap bitmap;
+    private RatingBar ratingBar;
+    private EditText editTextContent;
+
     public WriteReviewFragment() {
         // Required empty public constructor
     }
@@ -45,7 +49,7 @@ public class WriteReviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_write_review, container, false);
-
+        editTextContent = (EditText) view.findViewById(R.id.editTextContent);
         imageViewReviewImg = (ImageView) view.findViewById(R.id.imageViewReviewImg);
 
         imageViewReviewImg.setOnClickListener(new View.OnClickListener() {
@@ -56,10 +60,20 @@ public class WriteReviewFragment extends Fragment {
                 startActivityForResult(intent, 1);
             }
         });
+
+        ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
+        /*ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                ratingBar.setRating(rating);
+            }
+        });*/
+
         buttonCancel = (Button) view.findViewById(R.id.buttonCancel);
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ClinicDetailInformationFragment())
                         .commit();
             }
@@ -70,6 +84,12 @@ public class WriteReviewFragment extends Fragment {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Review review = new Review();
+                review.setRuserid(MainActivity.loginId);
+                review.setRcontent(editTextContent.getText().toString());
+                review.setRscore(ratingBar.getNumStars());
+                sendReview(review, bitmap);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ClinicDetailInformationFragment())
                         .commit();
             }
@@ -107,7 +127,7 @@ public class WriteReviewFragment extends Fragment {
     }
 
 
-    public static void sendFoodReview(final Review review, final Bitmap bitmap) {
+    public static void sendReview(final Review review, final Bitmap bitmap) {
         new AsyncTask<Void, Integer, String>() {
             @Override
             protected String doInBackground(Void... params) {
@@ -120,7 +140,7 @@ public class WriteReviewFragment extends Fragment {
                     String delimiter = "\r\n--" + boundary + "\r\n";    //규약
 
                     // 커넥션 생성 및 설정
-                    URL url = new URL("http://192.168.0.38:8080/AnimalClinicProject/androidupload");
+                    URL url = new URL("http://192.168.0.38:8080/Petopia/registerreivew");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setDoInput(true);
                     conn.setDoOutput(true);
@@ -139,43 +159,43 @@ public class WriteReviewFragment extends Fragment {
                     //int resultCode = conn.getResponseCode();
 
                     //출력 스트림 얻기
-                    DataOutputStream out = new DataOutputStream(new BufferedOutputStream(conn.getOutputStream()));
+                    OutputStream out = conn.getOutputStream();
 
                     //문자열 데이터 전송
                     StringBuffer postDataBuilder = new StringBuffer();
                     postDataBuilder.append(delimiter);
-                    postDataBuilder.append(setValue("score", String.valueOf(review.getScore())));
+                    postDataBuilder.append(setValue("rscore", String.valueOf(review.getRscore())));
                     postDataBuilder.append(delimiter);
-                    postDataBuilder.append(setValue("content", review.getContent()));
+                    postDataBuilder.append(setValue("ruserid", String.valueOf(review.getRuserid())));
                     postDataBuilder.append(delimiter);
-                    postDataBuilder.append(setFile("clinicImage", review.getPname()));
-                    out.writeUTF(postDataBuilder.toString()); //첫번째 전송
+                    postDataBuilder.append(setValue("rcontent", review.getRcontent()));
+                    postDataBuilder.append(delimiter);
+                    postDataBuilder.append(setValue("rclinicid", review.getRclinicid()));
+                    postDataBuilder.append(delimiter);
+                    postDataBuilder.append(setFile("clinicImage", "filename.png"));
+                    out.write(postDataBuilder.toString().getBytes()); //첫번째 전송
 
 
 
 
 
                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 50, bos);
                     byte[] bitmapdata = bos.toByteArray();
 
-                    ByteArrayInputStream bs = new ByteArrayInputStream(bitmapdata);
-                    byte[] byteArray = new byte[1024];
-                    int readByteNum = -1;
-                    while((readByteNum = bs.read(byteArray)) != -1) {
-                        out.write(byteArray, 0, readByteNum);
-                    }
+                    out.write(bitmapdata);
+                    bos.close();
 
 
                     //종료 구분자 넣기  //세번째 전송
-                    out.writeUTF("\r\n--" + boundary + "--\r\n");  //규약
+                    out.write(("\r\n--" + boundary + "--\r\n").getBytes());  //규약
 
                     //출력스트림 닫기
                     out.flush();
                     out.close();
 
                     bos.close();
-                    bs.close();
+
 
                     //응답 코드 확인
                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {

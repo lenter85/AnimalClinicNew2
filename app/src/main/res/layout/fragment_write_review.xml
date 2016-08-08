@@ -19,37 +19,15 @@
             android:text="하트 주기"
             android:id="@+id/textView54"
             android:textSize="20dp"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp" />
 
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:id="@+id/imageView1"
-            android:src="@drawable/heart" />
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingBar"
+            style="@style/Widget.AppCompat.RatingBar" />
 
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:id="@+id/imageView2"
-            android:src="@drawable/heart" />
-
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:id="@+id/imageView3"
-            android:src="@drawable/heart" />
-
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:id="@+id/imageView4"
-            android:src="@drawable/heart" />
-
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:id="@+id/imageView5"
-            android:src="@drawable/heart" />
     </LinearLayout>
 
     <LinearLayout
@@ -102,7 +80,7 @@
         <EditText
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:id="@+id/editText8"
+            android:id="@+id/editTextContent"
             android:layout_margin="50dp" />
 
     </FrameLayout>

@@ -16,13 +16,11 @@ import com.example.myapplication.R;
 import com.example.myapplication.community.dto.Gallery;
 import com.example.myapplication.network.GalleryNetwork;
 
-import java.util.List;
-
 public class GalleryFragment extends Fragment {
     private GridView gridView;
     private GalleryFragmentAdapter galleryFragmentAdapter;
     private FloatingActionButton fab;
-    private List<Gallery> list;
+    public static Gallery selectedGallery = new Gallery();
 
     private boolean lastItem;
     private int pageNo = 1;
@@ -63,14 +61,14 @@ public class GalleryFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                selectedGallery = (Gallery)galleryFragmentAdapter.getItem(position);
                 getActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, new GalleryDetailFragment())
                         .addToBackStack(null)
                         .commit();
-
+                GalleryNetwork.getGalleryData(pageNo, galleryFragmentAdapter);
             }
         });
 

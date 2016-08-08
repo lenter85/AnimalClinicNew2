@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.network.ClinicNetwork;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,8 +44,8 @@ public class ClinicFacilitiesFragment extends Fragment {
         imageView3 = (ImageView) view.findViewById(R.id.imageView3);
         imageView4 = (ImageView) view.findViewById(R.id.imageView4);
 
-        /*ClinicNetwork clinicNetwork = new ClinicNetwork();
-        clinicNetwork.getClinicFacility(imageView1);*/
+        ClinicNetwork clinicNetwork = new ClinicNetwork();
+        clinicNetwork.getClinicFacility(MainActivity.clinicId, imageView1, imageView2, imageView3, imageView4);
 
 
         return view;

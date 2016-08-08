@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity
 
     public static List<RegisterLocation> list = new ArrayList<>();
     public static String clinicLocation = null;
+    public static String loginId = "test";
+    public static String clinicId = "test";
 
     public static RegisterClinicFragment registerClinicFragment;
 
@@ -96,9 +99,56 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        } /*else if(getVisibleFragment() instanceof RegisterVaccinationFragment) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, new VaccinationFragment())
+                    .commit();
+        }*/
+
+        else {
             super.onBackPressed();
         }
+
+        /*if(getVisibleFragment() instanceof RegisterVaccinationFragment) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, new VaccinationFragment())
+                    .commit();
+        }
+
+        if(getVisibleFragment() instanceof VaccinationFragment) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, new MyDiaryFragment())
+                    .commit();
+        }
+
+        if(getVisibleFragment() instanceof MyDiaryFragment) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, new DiaryFragment())
+                    .commit();
+        }
+
+        if(getVisibleFragment() instanceof DiaryFragment) {
+            Intent intent = new Intent(this, HomeActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }*/
+    }
+
+    public Fragment getVisibleFragment(){
+        FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        if(fragments != null){
+            for(Fragment fragment : fragments){
+                if(fragment != null && fragment.isVisible())
+                    return fragment;
+            }
+        }
+        return null;
     }
 
 

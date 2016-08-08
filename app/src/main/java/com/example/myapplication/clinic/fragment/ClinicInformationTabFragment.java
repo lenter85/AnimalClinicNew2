@@ -33,7 +33,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class ClinicInformationTabFragment extends Fragment {
     TextView textViewName;
     TextView textViewLocation;
-    TextView textViewDLocation;
+    TextView textViewPhone;
     TextView textViewOpenTime;
     TextView textViewCloseTime;
     TextView textViewIntroduction;
@@ -55,13 +55,13 @@ public class ClinicInformationTabFragment extends Fragment {
 
         textViewName = (TextView) view.findViewById(R.id.textViewName);
         textViewLocation = (TextView) view.findViewById(R.id.textViewLocation);
-        textViewDLocation = (TextView) view.findViewById(R.id.textViewDLocation);
+        textViewPhone = (TextView) view.findViewById(R.id.textViewPhone);
         textViewOpenTime = (TextView) view.findViewById(R.id.textViewOpenTime);
         textViewCloseTime = (TextView) view.findViewById(R.id.textViewCloseTime);
         textViewIntroduction = (TextView) view.findViewById(R.id.textViewIntroduction);
 
         ClinicNetwork clinicNetwork = new ClinicNetwork();
-        clinicNetwork.getClinicInformationTab(view);
+        clinicNetwork.getClinicInformationTab(view, googleMap);
 
         mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapFragment);
         mapFragment.getMapAsync(new OnMapReadyCallback() {
@@ -79,6 +79,8 @@ public class ClinicInformationTabFragment extends Fragment {
         return view;
     }
 
+
+    //현재 내 위치 얻는 메소드
     private void startLocationService() {
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&

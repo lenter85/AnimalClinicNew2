@@ -17,16 +17,14 @@
             android:layout_height="150dp"
             android:id="@+id/imageView1"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/facility1" />
+            android:layout_marginTop="20dp" />
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:id="@+id/imageView2"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/facility3" />
+            android:layout_marginTop="20dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -39,15 +37,13 @@
             android:layout_height="150dp"
             android:id="@+id/imageView3"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/facility4" />
+            android:layout_marginTop="20dp" />
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:id="@+id/imageView4"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/facility1" />
+            android:layout_marginTop="20dp" />
     </LinearLayout>
 </LinearLayout>

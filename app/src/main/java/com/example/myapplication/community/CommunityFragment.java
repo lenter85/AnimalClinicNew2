@@ -41,7 +41,6 @@ public class CommunityFragment extends Fragment {
 
         tabLayout.getTabAt(0).setIcon(android.R.drawable.ic_menu_my_calendar);
         tabLayout.getTabAt(1).setIcon(android.R.drawable.ic_menu_mylocation);
-        tabLayout.getTabAt(2).setIcon(android.R.drawable.ic_menu_myplaces);
 
 
         return view;

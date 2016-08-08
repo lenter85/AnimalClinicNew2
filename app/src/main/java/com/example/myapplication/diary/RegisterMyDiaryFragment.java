@@ -36,7 +36,7 @@ public class RegisterMyDiaryFragment extends Fragment {
     private ImageView imgRdimage;
     private EditText txtRdname;
     private EditText txtRdbirth;
-    private EditText txtRdage;
+
     private RadioButton maleButton;
     private RadioButton femaleButton;
     private String filePath;
@@ -57,7 +57,7 @@ public class RegisterMyDiaryFragment extends Fragment {
         imgRdimage = (ImageView) view.findViewById(R.id.imgRdimage);
         txtRdname = (EditText) view.findViewById(R.id.txtRdname);
         txtRdbirth = (EditText) view.findViewById(R.id.txtRdbirth);
-        txtRdage = (EditText) view.findViewById(R.id.txtRdage);
+
         rGroup = (RadioGroup) view.findViewById(R.id.rgroup);
         maleButton = (RadioButton) view.findViewById(R.id.maleButton);
         femaleButton = (RadioButton) view.findViewById(R.id.femaleButton);
@@ -115,7 +115,6 @@ public class RegisterMyDiaryFragment extends Fragment {
         btnPickPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Activity activity = getActivity();
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent, 1);

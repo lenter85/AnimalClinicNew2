@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.clinic.dto.ClinicFacility;
 import com.example.myapplication.clinic.dto.ClinicInformation;
 import com.example.myapplication.clinic.dto.ClinicRegister;
 import com.example.myapplication.clinic.dto.RegisterLocation;
@@ -25,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -35,6 +38,7 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +54,11 @@ public class ClinicNetwork {
     private GoogleMap googleMap;
     private Context context;
 
+    private Bitmap bm1=null;
+    private Bitmap bm2=null;
+    private Bitmap bm3=null;
+    private Bitmap bm4=null;
+
     public void setGoogleMap (GoogleMap googleMap) {
         this.googleMap = googleMap;
     }
@@ -58,7 +67,7 @@ public class ClinicNetwork {
         this.context = context;
     }
 
-    public void getClinicInformation(final View view) {
+    /*public void getClinicInformation(final View view) {
         new AsyncTask<String, Integer, ClinicInformation>() {
             ClinicInformation clinicInformation = new ClinicInformation();
 
@@ -101,13 +110,10 @@ public class ClinicNetwork {
                         clinicInformation.setCid(jsonObject.getString("cid"));
                         clinicInformation.setCname(jsonObject.getString("cname"));
                         clinicInformation.setClocation(jsonObject.getString("clocation"));
-                        clinicInformation.setCdlocation(jsonObject.getString("cdlocation"));
+                        clinicInformation.setCphone(jsonObject.getString("cphone"));
                         clinicInformation.setCopentime(jsonObject.getString("csopentime"));
                         clinicInformation.setCclosetime(jsonObject.getString("cclosetime"));
                         clinicInformation.setCintroduction(jsonObject.getString("cintroduction"));
-
-
-
 
 
                     }
@@ -124,14 +130,14 @@ public class ClinicNetwork {
 
             @Override
             protected void onPostExecute(ClinicInformation clinicInformation) {
-                TextView textView = (TextView)view.findViewById(R.id.editTextClinicName);
-                textView.setText(clinicInformation.getCname());
+
+
             }
         }.execute(url + "clinicinformation");
-    }
+    }*/
 
 
-    public void getClinicInformationTab(final View view) {
+    public void getClinicInformationTab(final View view, GoogleMap googleMap) {
         new AsyncTask<String, Integer, ClinicInformation>() {
             ClinicInformation clinicInformation = new ClinicInformation();
 
@@ -174,12 +180,12 @@ public class ClinicNetwork {
                         clinicInformation.setCid(jsonObject.getString("cid"));
                         clinicInformation.setCname(jsonObject.getString("cname"));
                         clinicInformation.setClocation(jsonObject.getString("clocation"));
-                        clinicInformation.setCdlocation(jsonObject.getString("cdlocation"));
+                        clinicInformation.setCphone(jsonObject.getString("cphone"));
                         clinicInformation.setCopentime(jsonObject.getString("copentime"));
                         clinicInformation.setCclosetime(jsonObject.getString("cclosetime"));
                         clinicInformation.setCintroduction(jsonObject.getString("cintroduction"));
-
-
+                        clinicInformation.setClongitude(jsonObject.getString("clongitude"));
+                        clinicInformation.setClatitude(jsonObject.getString("clatitude"));
 
 
                     }
@@ -198,29 +204,35 @@ public class ClinicNetwork {
             protected void onPostExecute(ClinicInformation clinicInformation) {
                 TextView textViewName = (TextView) view.findViewById(R.id.textViewName);
                 TextView textViewLocation = (TextView) view.findViewById(R.id.textViewLocation);
-                TextView textViewDLocation = (TextView) view.findViewById(R.id.textViewDLocation);
+                TextView textViewDLocation = (TextView) view.findViewById(R.id.textViewPhone);
                 TextView textViewOpenTime = (TextView) view.findViewById(R.id.textViewOpenTime);
                 TextView textViewCloseTime = (TextView) view.findViewById(R.id.textViewCloseTime);
                 TextView textViewIntroduction = (TextView) view.findViewById(R.id.textViewIntroduction);
 
                 textViewName.setText(clinicInformation.getCname());
                 textViewLocation.setText(clinicInformation.getClocation());
-                textViewDLocation.setText(clinicInformation.getCdlocation());
+                textViewDLocation.setText(clinicInformation.getCphone());
                 textViewOpenTime.setText(clinicInformation.getCopentime());
                 textViewCloseTime.setText(clinicInformation.getCclosetime());
                 textViewIntroduction.setText(clinicInformation.getCintroduction());
+
+
             }
-        }.execute(url + "clinicinformation");
+        }.execute(url + "clinicinformation?cid=" + MainActivity.loginId);
     }
 
 
-    public void getClinicFacility(final ImageView imageView) {
+
+
+    public void getClinicFacility(String clinicId, final ImageView imageView1, final ImageView imageView2, final ImageView imageView3, final ImageView imageView4 ) {
+
+
         Log.i("mylog", "getClicFacility 실행");
-        new AsyncTask<String, Integer, ClinicInformation>() {
-            ClinicInformation clinicInformation = new ClinicInformation();
+        new AsyncTask<String, Void, Void>() {
+            ClinicFacility clinicFacility = new ClinicFacility();
 
             @Override
-            protected ClinicInformation doInBackground(String... params) {
+            protected Void doInBackground(String... params) {
                 Log.i("mylog", "getClicFacility do in background 실행");
                 Log.i("mylog", "요청주소는 " + params[0]);
                 String result = "fail";
@@ -233,7 +245,7 @@ public class ClinicNetwork {
 
                     Log.i("my",""+conn.getResponseCode());
 
-                   /* if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         body="";
                         InputStream is = conn.getInputStream();
                         Reader reader = new InputStreamReader(is);
@@ -255,30 +267,95 @@ public class ClinicNetwork {
                     conn.disconnect();
 
 
+                    JSONObject jsonObject = new JSONObject(body);
 
-                    URL url2 = new URL("http://106.253.56.123:8080/Petopia/" + body);
-                    Log.i("mylog", url2.toString());
-                    URLConnection conn2 = url2.openConnection();
-                    conn2.connect();
-                    BufferedInputStream bis = new BufferedInputStream(conn2.getInputStream());
-                    bm = BitmapFactory.decodeStream(bis);
-                    bis.close();*/
+                    Log.i("mylog", "getClinicFacility 의 json은 : "  + body);
+                    if(jsonObject.getString("cimage1") != "noimage") {
+                        Log.i("mylog", "cimage1 : " + jsonObject.getString("cimage1"));
 
+                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage1"));
+                        Log.i("mylog", url2.toString());
+                        URLConnection conn2 = url2.openConnection();
+                        conn2.connect();
+                        BufferedInputStream bis = new BufferedInputStream(conn2.getInputStream());
+                        bm1 = BitmapFactory.decodeStream(bis);
+                        bis.close();
 
-                    conn.disconnect();
+                        conn.disconnect();
 
+                    }
+
+                    if(jsonObject.getString("cimage2") != "noimage") {
+                        Log.i("mylog", "cimage2 : " + jsonObject.getString("cimage2"));
+
+                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage2"));
+                        Log.i("mylog", url2.toString());
+                        URLConnection conn2 = url2.openConnection();
+                        conn2.connect();
+                        BufferedInputStream bis = new BufferedInputStream(conn2.getInputStream());
+                        bm2 = BitmapFactory.decodeStream(bis);
+                        bis.close();
+
+                        conn.disconnect();
+
+                    }
+
+                    if(jsonObject.getString("cimage3") != "noimage") {
+                        Log.i("mylog", "cimage3 : " + jsonObject.getString("cimage3"));
+
+                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage3"));
+                        Log.i("mylog", url2.toString());
+                        URLConnection conn2 = url2.openConnection();
+                        conn2.connect();
+                        BufferedInputStream bis = new BufferedInputStream(conn2.getInputStream());
+                        bm3 = BitmapFactory.decodeStream(bis);
+                        bis.close();
+
+                        conn.disconnect();
+
+                    }
+
+                    if(jsonObject.getString("cimage4") != "noimage") {
+                        Log.i("mylog", "cimage4 : " + jsonObject.getString("cimage4"));
+
+                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage4"));
+                        Log.i("mylog", url2.toString());
+                        URLConnection conn2 = url2.openConnection();
+                        conn2.connect();
+                        BufferedInputStream bis = new BufferedInputStream(conn2.getInputStream());
+                        bm4 = BitmapFactory.decodeStream(bis);
+                        bis.close();
+
+                        conn.disconnect();
+
+                    }
 
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                return clinicInformation;
+
+                return null;
             }
 
             @Override
-            protected void onPostExecute(ClinicInformation clinicInformation) {
-                imageView.setImageBitmap(bm);
+            protected void onPostExecute(Void aVoid) {
+                if (bm1!=null) {
+                    imageView1.setImageBitmap(bm1);
+                }
+
+                if (bm2!=null) {
+                    imageView2.setImageBitmap(bm2);
+                }
+
+                if (bm3!=null) {
+                    imageView3.setImageBitmap(bm3);
+                }
+
+                if (bm4!=null) {
+                    imageView4.setImageBitmap(bm4);
+                }
             }
-        }.execute("http://192.168.0.38:8080/Petopia/" + "clinicfacility1?cid=test");
+        }.execute(NetworkSetting.baseUrl2 + "clinicinformation?cid=" + MainActivity.clinicId);
     }
 
 

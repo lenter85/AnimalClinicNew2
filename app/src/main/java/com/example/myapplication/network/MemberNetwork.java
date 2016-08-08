@@ -19,11 +19,16 @@ import java.net.URL;
 
 public class MemberNetwork {
     public void Login(final String mid, final String mpassword){
+        Log.i("mylog","Login() 실행");
+        Log.i("mylog","mid : " + mid);
+        Log.i("mylog","mpass : " + mpassword);
+
         AsyncTask<String,Void,String> asyncTask = new AsyncTask<String, Void, String>() {
             String result = "fail";
             String json = "";
             @Override
             protected String doInBackground(String... params) {
+                Log.i("mylog","Login() doInBackground 실행");
                 try {
                     URL url = new URL(params[0]);
                     //커넥션 객체 생성
@@ -57,10 +62,9 @@ public class MemberNetwork {
                         reader.close();
                         is.close();
                     }
-
                     if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         result = "success";
-                        Log.i("mylog",result);
+                        Log.i("mylog","결과 : " + result);
                     }
 
                     conn.disconnect();
@@ -83,6 +87,7 @@ public class MemberNetwork {
                         member.setMtype(jsonObject.getString("mtype"));
                         member.setMimage(jsonObject.getString("mimage"));
 
+                        Log.i("mylog",member.getMid());
                     } catch (Exception e){
                         e.printStackTrace();
                     }
