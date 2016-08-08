@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.calendar.CalendarFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,15 +53,17 @@ public class MenuFragment extends Fragment {
         textView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new CheckReservationFragment()).commit();
+                MainActivity.LoginId = "CLINIC";
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, new CalendarFragment())
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 
         return view;
     }
-
-
-
-
 
 }

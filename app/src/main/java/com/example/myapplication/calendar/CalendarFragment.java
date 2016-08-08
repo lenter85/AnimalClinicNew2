@@ -11,11 +11,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.reservation.fragment.ReserveEditFragment;
+import com.example.myapplication.reservation.fragment.ReserveListFragment;
 import com.example.myapplication.reservation.fragment.ReserveSearchFragment;
 import com.example.myapplication.reservation.fragment.ReserveSearchResultFragment;
+
 import java.util.Calendar;
 
 
@@ -48,7 +52,14 @@ public class CalendarFragment extends Fragment {
      */
     int curMonth;
 
+    int realMonth;
+    int realYear;
+
     public CalendarFragment() {
+
+        Calendar oCalendar = Calendar.getInstance( );  // 현재 날짜/시간 등의 각종 정보 얻기
+        realYear = oCalendar.get(Calendar.YEAR);
+        realMonth = oCalendar.get(Calendar.MONTH) + 1;
 
     }
 
@@ -73,42 +84,46 @@ public class CalendarFragment extends Fragment {
                 int day = curItem.getDay();
 
                 Log.i("myLog", "선택된 날짜는 "+curYear+"년"+(curMonth+1)+"월"+day+"일 입니다");
-
-               /* getActivity()
-                    .getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragmentContainer, new ReserveListFragment())
-                    .addToBackStack(null)
-                    .commit();*/
-
                 ReserveSearchFragment.rdate = getDatetoKorean(curYear, curMonth, day);
 
-                if(previousPage.equals("SEARCH")){
+                if(MainActivity.LoginId.equals("NOMAL")){
 
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragmentContainer, new ReserveSearchFragment())
-                            .commit();
+                    if(previousPage.equals("SEARCH")){
 
-                }else if(previousPage.equals("SEARCH_RESULT")){
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentContainer, new ReserveSearchFragment())
+                                .commit();
 
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragmentContainer, new ReserveSearchResultFragment())
-                            .commit();
+                    }else if(previousPage.equals("SEARCH_RESULT")){
 
-                }else if(previousPage.equals("EDIT")){
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentContainer, new ReserveSearchResultFragment())
+                                .commit();
 
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragmentContainer, new ReserveEditFragment())
-                            .commit();
-                }else if(previousPage.equals("VACCINE")){
+                    }else if(previousPage.equals("EDIT")){
 
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragmentContainer, new ReserveSearchFragment())
-                            .commit();
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentContainer, new ReserveEditFragment())
+                                .commit();
+                    }else if(previousPage.equals("VACCINE")){
+
+                        getActivity().getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentContainer, new ReserveSearchFragment())
+                                .commit();
+                    }
+
+                }else if(MainActivity.LoginId.equals("CLINIC")){
+
+                    getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, new ReserveListFragment())
+                        .addToBackStack(null)
+                        .commit();
                 }
 
             }
@@ -121,6 +136,16 @@ public class CalendarFragment extends Fragment {
         Button monthPrevious = (Button) view.findViewById(R.id.monthPrevious);
         monthPrevious.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                if(MainActivity.LoginId.equals("NOMAL")){
+
+                    if((realYear == curYear) && (curMonth < realMonth)){
+                        Toast.makeText(getContext(), "이전달 선택 불가", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                }
+
+
                 monthViewAdapter.setPreviousMonth();
                 monthViewAdapter.notifyDataSetChanged();
 

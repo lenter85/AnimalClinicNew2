@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity
 
     public static RegisterClinicFragment registerClinicFragment;
 
+    public static String cName;
+
     //mainmain
     //메인 받아짐??
     //준식커밋
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     //민규 컴퓨터
 
     public static Fragment previousFragment;
+    public static String LoginId = "NOMAL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

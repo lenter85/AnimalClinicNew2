@@ -9,8 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.clinic.dto.Clinic;
 import com.example.myapplication.network.MainNetwork;
 
 /**
@@ -32,16 +35,6 @@ public class ClinicList_Fragment extends Fragment {
 
         clinicListViewAdapter = new ClinicListViewAdapter();
 
-        /*for(int i=1; i<=10; i++){
-            Clinic clinic = new Clinic();
-            clinic.setCid(String.valueOf(i));
-            clinic.setCname("동물병원"+i);
-            clinic.setClocation("경찰병원역 "+i+"번 출구");
-            clinic.setCscore(i);
-
-            clinicListViewAdapter.addItem(clinic);
-        }*/
-
         clinicListView.setAdapter(clinicListViewAdapter);
 
         //DB에서 병원 리스트를 불러온다.
@@ -53,7 +46,11 @@ public class ClinicList_Fragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Log.i("mylog", "리스트뷰가 클릭됨");
-                //Clinic clinic = (Clinic)clinicListViewAdapter.getItem(position);
+
+                Clinic clinic = (Clinic)clinicListViewAdapter.getItem(position);
+                MainActivity.cName = clinic.getCname();
+
+                Toast.makeText(getContext(), clinic.getCname(), Toast.LENGTH_LONG).show();
 
                 getActivity()
                         .getSupportFragmentManager()

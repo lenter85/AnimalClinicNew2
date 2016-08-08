@@ -1,6 +1,7 @@
 package com.example.myapplication.reservation.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.calendar.CalendarFragment;
 
@@ -41,6 +43,7 @@ public class ReserveSearchFragment extends Fragment {
     Button btnBeauty;
     TextView txtRdate;
     ImageButton imgCalendar;
+    TextView txtCname;
 
 
     @Override
@@ -48,7 +51,7 @@ public class ReserveSearchFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_reserve_search, container, false);
-
+        txtCname = (TextView) view.findViewById(R.id.txtCname);
 
         //화면에 기본값인 오늘 날짜를 등록해준다.
         setReserveInfo(view);
@@ -76,7 +79,9 @@ public class ReserveSearchFragment extends Fragment {
             public void onClick(View v) {
                 rtype = "진료";
                 btnClinic.setBackgroundResource(R.drawable.green_round_angle);
+                btnClinic.setTextColor(Color.parseColor("#FFFFFF"));
                 btnBeauty.setBackgroundResource(R.drawable.round_angle);
+                btnBeauty.setTextColor(Color.parseColor("#5D5D5D"));
             }
         });
 
@@ -87,7 +92,10 @@ public class ReserveSearchFragment extends Fragment {
             public void onClick(View v) {
                 rtype="미용";
                 btnClinic.setBackgroundResource(R.drawable.round_angle);
+                btnClinic.setTextColor(Color.parseColor("#5D5D5D"));
                 btnBeauty.setBackgroundResource(R.drawable.green_round_angle);
+                btnBeauty.setTextColor(Color.parseColor("#FFFFFF"));
+
             }
         });
 
@@ -99,6 +107,8 @@ public class ReserveSearchFragment extends Fragment {
 
                 //달력을 누르기 전에 지금 페이지에 대한 정보를 넘긴다.
                 CalendarFragment.previousPage = "SEARCH";
+
+                MainActivity.LoginId = "NOMAL";
 
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
@@ -123,9 +133,7 @@ public class ReserveSearchFragment extends Fragment {
         //애완 동물명 세팅
         final ArrayList<String> arraylist = new ArrayList<String>();
         arraylist.add("우디");
-        arraylist.add("미유");
-        arraylist.add("두유");
-        arraylist.add("수정");
+        arraylist.add("페르");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, arraylist);
         //스피너 속성
@@ -133,7 +141,6 @@ public class ReserveSearchFragment extends Fragment {
         sp.setPrompt("애완동물을 선택해주세요"); // 스피너 제목
         sp.setAdapter(adapter);
         sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -174,12 +181,15 @@ public class ReserveSearchFragment extends Fragment {
         //병원 아이디 세팅
         rclinicid = "test";
 
-        rclinicname = "우리동네 동물병원";
+        rclinicname = MainActivity.cName;
 
         //애완동물명 세팅
         rpname = arraylist.get(0); //애완동물은 처음엔 스피너의 첫번째 리스트항목에 있는 애완동물명으로 세팅한다.
 
         calendarDay = null;
+
+
+        txtCname.setText(rclinicname);
 
     }
 
