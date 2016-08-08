@@ -66,6 +66,19 @@ public class LogInFragment extends Fragment {
                 } else {
                     memberNetwork.Login(email.getText().toString(), password.getText().toString());
 
+                    /*if(!email.getText().toString().equals(memberNetwork.member.getMid())){
+                        dialog("이메일을 다시 입력해주세요.");
+                    } else if(!password.getText().toString().equals(memberNetwork.member.getMpassword())){
+                        dialog("비밀번호를 다시 입력해주세요.");
+                    } else {
+                        Toast toast = new Toast(getContext());
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setText(memberNetwork.member.getMname() + "님 환영합니다.");
+                        toast.show();
+
+                        Intent intent = new Intent(getActivity(), HomeActivity.class);
+                        startActivity(intent);
+                    }*/
                     Intent intent = new Intent(getActivity(), HomeActivity.class);
                     startActivity(intent);
                 }
