@@ -6,7 +6,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#FFFFE9">
+    android:background="#FFFFE9"
+    android:clickable="true">
 
     <LinearLayout
         android:orientation="vertical"
@@ -87,13 +88,12 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:id="@+id/imgCalendar"
-        android:src="@drawable/calendaricon"
         android:layout_alignTop="@+id/textViewName"
         android:layout_toRightOf="@+id/textView"
         android:layout_toEndOf="@+id/textView"
         android:scaleType="fitXY"
-        android:background="@android:color/transparent"
-        android:layout_marginLeft="5dp" />
+        android:src="@drawable/calendar"
+        android:background="@android:color/transparent" />
 
     <Button
         android:layout_width="200dp"

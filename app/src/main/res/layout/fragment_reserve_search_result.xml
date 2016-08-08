@@ -67,13 +67,13 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/btnCalendar"
-            android:src="@drawable/calendaricon"
+            android:src="@drawable/calendar"
             android:scaleType="fitXY"
             android:background="@android:color/transparent"
             android:layout_alignBottom="@+id/txtDow"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
