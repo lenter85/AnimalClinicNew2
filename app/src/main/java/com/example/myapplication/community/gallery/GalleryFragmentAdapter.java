@@ -23,7 +23,6 @@ public class GalleryFragmentAdapter extends BaseAdapter {
     }
 
     private List<Gallery> list = new ArrayList<>();
-
     public List<Gallery> getList() {
         return list;
     }
