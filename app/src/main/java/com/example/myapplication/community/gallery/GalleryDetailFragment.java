@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.community.dto.Gallery;
 import com.example.myapplication.network.GalleryNetwork;
 
 /**
@@ -41,6 +40,7 @@ public class GalleryDetailFragment extends Fragment {
         galleryContent = (TextView)view.findViewById(R.id.galleryContent);
         id = (TextView)view.findViewById(R.id.id);
 
+        setDetail();
         return view;
     }
 
@@ -76,12 +76,12 @@ public class GalleryDetailFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setDetail(Gallery gallery){
-        id.setText(gallery.getMid());
-        galleryTitle.setText(gallery.getGtitle());
-        galleryContent.setText(gallery.getGcontent());
-        GalleryNetwork.getGalleryImage(gallery.getGimagelarge(),imageViewLarge);
-        galleryDate.setText(gallery.getGdate());
+    public void setDetail(){
+        id.setText(GalleryFragment.selectedGallery.getMid());
+        galleryTitle.setText(GalleryFragment.selectedGallery.getGtitle());
+        galleryContent.setText(GalleryFragment.selectedGallery.getGcontent());
+        GalleryNetwork.getGalleryImage(GalleryFragment.selectedGallery.getGimagelarge(),imageViewLarge);
+        galleryDate.setText(GalleryFragment.selectedGallery.getGdate());
 
     }
 }
