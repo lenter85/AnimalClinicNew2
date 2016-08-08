@@ -172,7 +172,7 @@ public class WriteReviewFragment extends Fragment {
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setValue("rclinicid", review.getRclinicid()));
                     postDataBuilder.append(delimiter);
-                    postDataBuilder.append(setFile("clinicImage", "filename"));
+                    postDataBuilder.append(setFile("clinicImage", "filename.png"));
                     out.write(postDataBuilder.toString().getBytes()); //첫번째 전송
 
 

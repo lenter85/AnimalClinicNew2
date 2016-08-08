@@ -1,5 +1,7 @@
 package com.example.myapplication.clinic.dto;
 
+import com.example.myapplication.MainActivity;
+
 /**
  * Created by Administrator on 2016-07-08.
  */
@@ -9,8 +11,8 @@ public class Review {
     private String rcontent;
     private int rscore;
     private String rimage;
-    private String ruserid="test2";
-    private String rclinicid="test";
+    private String ruserid= MainActivity.loginId;
+    private String rclinicid=MainActivity.clinicId;
 
     public Review() {}
 
