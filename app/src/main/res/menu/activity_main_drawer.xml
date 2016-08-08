@@ -24,6 +24,7 @@
         <menu>
 
             <item
+
                 android:id="@+id/nav_send"
                 android:icon="@drawable/administrator1"
                 android:title="병원관리 메뉴" />
