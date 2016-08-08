@@ -21,11 +21,9 @@ import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.clinic.dto.Review;
 
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -161,45 +159,43 @@ public class WriteReviewFragment extends Fragment {
                     //int resultCode = conn.getResponseCode();
 
                     //출력 스트림 얻기
-                    DataOutputStream out = new DataOutputStream(new BufferedOutputStream(conn.getOutputStream()));
+                    OutputStream out = conn.getOutputStream();
 
                     //문자열 데이터 전송
                     StringBuffer postDataBuilder = new StringBuffer();
                     postDataBuilder.append(delimiter);
-                    postDataBuilder.append(setValue("score", String.valueOf(review.getRscore())));
+                    postDataBuilder.append(setValue("rscore", String.valueOf(review.getRscore())));
                     postDataBuilder.append(delimiter);
-                    postDataBuilder.append(setValue("id", String.valueOf(review.getRuserid())));
+                    postDataBuilder.append(setValue("ruserid", String.valueOf(review.getRuserid())));
                     postDataBuilder.append(delimiter);
-                    postDataBuilder.append(setValue("content", review.getRcontent()));
+                    postDataBuilder.append(setValue("rcontent", review.getRcontent()));
                     postDataBuilder.append(delimiter);
-                    postDataBuilder.append(setFile("clinicImage", review.getRimage()));
-                    out.writeUTF(postDataBuilder.toString()); //첫번째 전송
+                    postDataBuilder.append(setValue("rclinicid", review.getRclinicid()));
+                    postDataBuilder.append(delimiter);
+                    postDataBuilder.append(setFile("clinicImage", "filename"));
+                    out.write(postDataBuilder.toString().getBytes()); //첫번째 전송
 
 
 
 
 
                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 50, bos);
                     byte[] bitmapdata = bos.toByteArray();
 
-                    ByteArrayInputStream bs = new ByteArrayInputStream(bitmapdata);
-                    byte[] byteArray = new byte[1024];
-                    int readByteNum = -1;
-                    while((readByteNum = bs.read(byteArray)) != -1) {
-                        out.write(byteArray, 0, readByteNum);
-                    }
+                    out.write(bitmapdata);
+                    bos.close();
 
 
                     //종료 구분자 넣기  //세번째 전송
-                    out.writeUTF("\r\n--" + boundary + "--\r\n");  //규약
+                    out.write(("\r\n--" + boundary + "--\r\n").getBytes());  //규약
 
                     //출력스트림 닫기
                     out.flush();
                     out.close();
 
                     bos.close();
-                    bs.close();
+
 
                     //응답 코드 확인
                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {

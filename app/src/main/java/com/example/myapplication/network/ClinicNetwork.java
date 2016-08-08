@@ -19,7 +19,6 @@ import com.example.myapplication.clinic.dto.ClinicInformation;
 import com.example.myapplication.clinic.dto.ClinicRegister;
 import com.example.myapplication.clinic.dto.RegisterLocation;
 import com.example.myapplication.clinic.fragment.ClinicDetailInformationFragment;
-import com.example.myapplication.clinic.fragment.ClinicFacilitiesFragment;
 import com.example.myapplication.clinic.fragment.RegisterClinicFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -291,8 +290,8 @@ public class ClinicNetwork {
             }
 
             @Override
-            protected void onPostExecute( ) {
-
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
             }
         }.execute("http://192.168.0.38:8080/Petopia/" + "clinicfacility?cid=" + ClinicDetailInformationFragment.clinicId);
     }
