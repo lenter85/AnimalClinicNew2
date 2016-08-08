@@ -1,23 +1,17 @@
 package com.example.myapplication.clinic.fragment;
 
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.myapplication.R;
-import com.example.myapplication.network.ClinicNetwork;
 import com.example.myapplication.reservation.fragment.ReserveSearchFragment;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +22,6 @@ public class ClinicDetailInformationFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ClinicDetailInformationAdapter clinicDetailInformationAdapter;
-    public static String clinicId;
 
     public ClinicDetailInformationFragment() {
         // Required empty public constructor
@@ -42,8 +35,6 @@ public class ClinicDetailInformationFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_clinic_detail_information, container, false);
 
-        ClinicNetwork clinicNetwork = new ClinicNetwork();
-        clinicNetwork.getClinicInformation(view);
 
         btnReserve = (Button)view.findViewById(R.id.btnReserve);
 
@@ -82,48 +73,6 @@ public class ClinicDetailInformationFragment extends Fragment {
 
 
 
-    public void getClinicInformation () {
-        new AsyncTask<Void, Integer, String>() {
-            @Override
-            protected String doInBackground(Void... params) {
-                String result = "fail";
-                try {
-                    // 데이터 구분 문자
-                    String boundary = "----" + System.currentTimeMillis();
 
-                    // 데이터 경계선
-                    String delimiter = "\r\n--" + boundary + "\r\n";    //규약
-
-                    // 커넥션 생성 및 설정
-                    URL url = new URL("http://192.168.0.38:8080/AnimalClinicProject/clinicinformation");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.connect();
-
-
-                    //응답 코드 확인
-                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                        result = "success";
-                    }
-
-                    //연결 끊기
-                    conn.disconnect();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return result;
-            }
-
-            @Override
-            protected void onPostExecute(String result) {
-                if (result.equals("success")) {
-                    Log.i("mylog", "성공");
-
-                } else {
-                    Log.i("mylog","실패");
-                }
-            }
-        }.execute();
-
-    }
 
 }

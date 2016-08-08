@@ -18,7 +18,6 @@ import com.example.myapplication.clinic.dto.ClinicFacility;
 import com.example.myapplication.clinic.dto.ClinicInformation;
 import com.example.myapplication.clinic.dto.ClinicRegister;
 import com.example.myapplication.clinic.dto.RegisterLocation;
-import com.example.myapplication.clinic.fragment.ClinicDetailInformationFragment;
 import com.example.myapplication.clinic.fragment.RegisterClinicFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -55,10 +54,10 @@ public class ClinicNetwork {
     private GoogleMap googleMap;
     private Context context;
 
-    private Bitmap bm1;
-    private Bitmap bm2;
-    private Bitmap bm3;
-    private Bitmap bm4;
+    private Bitmap bm1=null;
+    private Bitmap bm2=null;
+    private Bitmap bm3=null;
+    private Bitmap bm4=null;
 
     public void setGoogleMap (GoogleMap googleMap) {
         this.googleMap = googleMap;
@@ -68,7 +67,7 @@ public class ClinicNetwork {
         this.context = context;
     }
 
-    public void getClinicInformation(final View view) {
+    /*public void getClinicInformation(final View view) {
         new AsyncTask<String, Integer, ClinicInformation>() {
             ClinicInformation clinicInformation = new ClinicInformation();
 
@@ -131,11 +130,11 @@ public class ClinicNetwork {
 
             @Override
             protected void onPostExecute(ClinicInformation clinicInformation) {
-                TextView textView = (TextView)view.findViewById(R.id.editTextClinicName);
-                textView.setText(clinicInformation.getCname());
+
+
             }
         }.execute(url + "clinicinformation");
-    }
+    }*/
 
 
     public void getClinicInformationTab(final View view, GoogleMap googleMap) {
@@ -223,7 +222,9 @@ public class ClinicNetwork {
     }
 
 
-    public void getClinicFacility(String clinicId, ImageView imageView1,ImageView imageView2, ImageView imageView3, ImageView imageView4 ) {
+
+
+    public void getClinicFacility(String clinicId, final ImageView imageView1, final ImageView imageView2, final ImageView imageView3, final ImageView imageView4 ) {
 
 
         Log.i("mylog", "getClicFacility 실행");
@@ -267,15 +268,62 @@ public class ClinicNetwork {
 
 
                     JSONObject jsonObject = new JSONObject(body);
-                    if(jsonObject.getString("cimage1") != null) {
 
+                    Log.i("mylog", "getClinicFacility 의 json은 : "  + body);
+                    if(jsonObject.getString("cimage1") != "noimage") {
+                        Log.i("mylog", "cimage1 : " + jsonObject.getString("cimage1"));
 
-                        URL url2 = new URL("http://106.253.56.123:8080/Petopia/clinicFacilityImage?cimage1=" + jsonObject.getString("cimage1"));
+                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage1"));
                         Log.i("mylog", url2.toString());
                         URLConnection conn2 = url2.openConnection();
                         conn2.connect();
                         BufferedInputStream bis = new BufferedInputStream(conn2.getInputStream());
                         bm1 = BitmapFactory.decodeStream(bis);
+                        bis.close();
+
+                        conn.disconnect();
+
+                    }
+
+                    if(jsonObject.getString("cimage2") != "noimage") {
+                        Log.i("mylog", "cimage2 : " + jsonObject.getString("cimage2"));
+
+                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage2"));
+                        Log.i("mylog", url2.toString());
+                        URLConnection conn2 = url2.openConnection();
+                        conn2.connect();
+                        BufferedInputStream bis = new BufferedInputStream(conn2.getInputStream());
+                        bm2 = BitmapFactory.decodeStream(bis);
+                        bis.close();
+
+                        conn.disconnect();
+
+                    }
+
+                    if(jsonObject.getString("cimage3") != "noimage") {
+                        Log.i("mylog", "cimage3 : " + jsonObject.getString("cimage3"));
+
+                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage3"));
+                        Log.i("mylog", url2.toString());
+                        URLConnection conn2 = url2.openConnection();
+                        conn2.connect();
+                        BufferedInputStream bis = new BufferedInputStream(conn2.getInputStream());
+                        bm3 = BitmapFactory.decodeStream(bis);
+                        bis.close();
+
+                        conn.disconnect();
+
+                    }
+
+                    if(jsonObject.getString("cimage4") != "noimage") {
+                        Log.i("mylog", "cimage4 : " + jsonObject.getString("cimage4"));
+
+                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage4"));
+                        Log.i("mylog", url2.toString());
+                        URLConnection conn2 = url2.openConnection();
+                        conn2.connect();
+                        BufferedInputStream bis = new BufferedInputStream(conn2.getInputStream());
+                        bm4 = BitmapFactory.decodeStream(bis);
                         bis.close();
 
                         conn.disconnect();
@@ -291,9 +339,23 @@ public class ClinicNetwork {
 
             @Override
             protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
+                if (bm1!=null) {
+                    imageView1.setImageBitmap(bm1);
+                }
+
+                if (bm2!=null) {
+                    imageView2.setImageBitmap(bm2);
+                }
+
+                if (bm3!=null) {
+                    imageView3.setImageBitmap(bm3);
+                }
+
+                if (bm4!=null) {
+                    imageView4.setImageBitmap(bm4);
+                }
             }
-        }.execute("http://192.168.0.38:8080/Petopia/" + "clinicfacility?cid=" + ClinicDetailInformationFragment.clinicId);
+        }.execute(NetworkSetting.baseUrl2 + "clinicinformation?cid=" + MainActivity.clinicId);
     }
 
 

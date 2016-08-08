@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.network.ClinicNetwork;
 
@@ -44,7 +45,7 @@ public class ClinicFacilitiesFragment extends Fragment {
         imageView4 = (ImageView) view.findViewById(R.id.imageView4);
 
         ClinicNetwork clinicNetwork = new ClinicNetwork();
-        clinicNetwork.getClinicFacility(ClinicDetailInformationFragment.clinicId, imageView1, imageView2, imageView3, imageView4);
+        clinicNetwork.getClinicFacility(MainActivity.clinicId, imageView1, imageView2, imageView3, imageView4);
 
 
         return view;
