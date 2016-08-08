@@ -32,12 +32,12 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="우리동네 동물병원"
             android:id="@+id/textView31"
-            android:background="#BDBDBD"
+            android:background="@drawable/round_gray_angle"
             android:padding="10dp"
             android:allowUndo="false"
-            android:textColor="#6f6d6d"
-            android:textStyle="bold"
-            android:textSize="20dp" />
+            android:textColor="#5D5D5D"
+            android:textSize="17dp"
+            android:gravity="center_vertical" />
 
     </LinearLayout>
 
@@ -65,11 +65,11 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="우디"
             android:id="@+id/textView32"
-            android:textSize="20dp"
-            android:background="#BDBDBD"
-            android:padding="5dp"
-            android:textColor="#6f6d6d"
-            android:textStyle="bold" />
+            android:textSize="17dp"
+            android:background="@drawable/round_gray_angle"
+            android:padding="10dp"
+            android:textColor="#5D5D5D"
+            android:gravity="center_vertical" />
 
     </LinearLayout>
 
@@ -150,11 +150,11 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="미용 예약"
             android:id="@+id/textView42"
-            android:textSize="20dp"
-            android:background="#BDBDBD"
-            android:padding="5dp"
-            android:textColor="#6f6d6d"
-            android:textStyle="bold" />
+            android:textSize="17dp"
+            android:background="@drawable/round_gray_angle"
+            android:padding="10dp"
+            android:textColor="#5D5D5D"
+            android:gravity="center_vertical|clip_vertical" />
     </LinearLayout>
 
     <LinearLayout
@@ -184,7 +184,9 @@
             android:background="@drawable/round_angle"
             android:padding="5dp"
             android:textStyle="bold"
-            android:textColor="#5D5D5D" />
+            android:textColor="#5D5D5D"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -214,7 +216,9 @@
             android:background="@drawable/round_angle"
             android:padding="5dp"
             android:textStyle="bold"
-            android:textColor="#5D5D5D" />
+            android:textColor="#5D5D5D"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp" />
     </LinearLayout>
 
 </RelativeLayout>
