@@ -20,7 +20,7 @@
             android:title="로그인" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="관리자 메뉴">
         <menu>
 
             <item

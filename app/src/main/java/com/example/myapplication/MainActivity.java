@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -25,8 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 //import com.example.myapplication.member.fragment.LogInFragment;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static List<RegisterLocation> list = new ArrayList<>();
     public static String clinicLocation = null;
@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     public static RegisterClinicFragment registerClinicFragment;
 
     public static String cName;
+    public static ProgressDialog asyncDialog;
 
     //mainmain
     //메인 받아짐??
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        asyncDialog = new ProgressDialog(this);
 
         setTitle("펫토피아");
 

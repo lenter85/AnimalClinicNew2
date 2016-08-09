@@ -79,8 +79,8 @@ public class ReserveEditFragment extends Fragment {
                 getActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack(null)
                         .replace(R.id.fragmentContainer, new CalendarFragment())
+                        .addToBackStack(null)
                         .commit();
             }
         });

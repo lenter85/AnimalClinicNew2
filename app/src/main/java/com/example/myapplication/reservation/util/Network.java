@@ -1,9 +1,12 @@
 package com.example.myapplication.reservation.util;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.calendar.MonthItemView;
 import com.example.myapplication.reservation.dto.Reserve;
 import com.example.myapplication.reservation.dto.ReserveListItem;
@@ -21,8 +24,11 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 //네트워크 관련 코드는 한 클래스에서 담당하는 것이 나중에 유지보수 할 떄를 위해서도 좋다.
@@ -107,10 +113,13 @@ public class Network {
             @Override
             protected void onPostExecute(String json) {
 
-                //int currentTime   = Integer.parseInt(new java.text.SimpleDateFormat("HHmm").format(new java.util.Date()));
-                int currentTime = 1638;
+                long curTime = System.currentTimeMillis();
+                SimpleDateFormat dayTime = new SimpleDateFormat("hhmm");
+                String tempTime = dayTime.format(new Date(curTime));
 
-                Log.i("myLog", "현재시간: " + currentTime);
+                Log.i("test", "현재 시간은 : " + tempTime);
+
+                int currentTime = Integer.parseInt(tempTime);
 
                 Log.i("myLog", "asyncTask 시작 종료");
 
@@ -431,14 +440,19 @@ public class Network {
     }
 
     public static void isReserved(final MonthItemView itemView, String clinicid, String date) {
+        ProgressDialog dialog;
 
         Log.i("test", "isReserved메소드를 호출했습니다.");
+
+        //시작할 때 로딩바 올리고 끝나면 종료하기
 
         AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
 
             //doInBackground의 리턴값 String은 onPostExecute의 매개변수로 들어간다.
             @Override
             protected String doInBackground(String... params) {
+
+
                 Log.i("test", "doInBackground() 시작");
 
                 String json = "";

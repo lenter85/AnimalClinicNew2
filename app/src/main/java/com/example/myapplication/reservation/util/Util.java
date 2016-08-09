@@ -43,16 +43,16 @@ public class Util {
         clinicTimeList.add("18:00");
         clinicTimeList.add("18:30");
         clinicTimeList.add("19:00");
-        clinicTimeList.add("19:30");
-        clinicTimeList.add("20:00");
-        clinicTimeList.add("20:30");
-        clinicTimeList.add("21:00");
-        clinicTimeList.add("21:30");
-        clinicTimeList.add("22:00");
-        clinicTimeList.add("22:30");
-        clinicTimeList.add("23:00");
-        clinicTimeList.add("23:30");
-        clinicTimeList.add("24:00");
+        //clinicTimeList.add("19:30");
+        //clinicTimeList.add("20:00");
+//        clinicTimeList.add("20:30");
+//        clinicTimeList.add("21:00");
+//        clinicTimeList.add("21:30");
+//        clinicTimeList.add("22:00");
+//        clinicTimeList.add("22:30");
+//        clinicTimeList.add("23:00");
+//        clinicTimeList.add("23:30");
+//        clinicTimeList.add("24:00");
 
         return clinicTimeList;
     }

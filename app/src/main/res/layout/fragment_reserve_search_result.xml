@@ -128,11 +128,12 @@
             android:background="#FFFFE9" />
 
         <Button
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:id="@+id/btnRefresh"
             android:layout_gravity="bottom|right"
-            android:background="@drawable/refresh" />
+            android:background="@drawable/refresh"
+            android:layout_margin="10dp" />
 
     </FrameLayout>
 </LinearLayout>

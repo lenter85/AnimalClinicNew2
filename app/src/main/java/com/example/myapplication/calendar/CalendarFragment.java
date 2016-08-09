@@ -2,10 +2,13 @@ package com.example.myapplication.calendar;
 
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -54,12 +57,14 @@ public class CalendarFragment extends Fragment {
 
     int realMonth;
     int realYear;
+    int realDay;
 
     public CalendarFragment() {
 
         Calendar oCalendar = Calendar.getInstance( );  // 현재 날짜/시간 등의 각종 정보 얻기
         realYear = oCalendar.get(Calendar.YEAR);
         realMonth = oCalendar.get(Calendar.MONTH) + 1;
+        realDay = oCalendar.get(Calendar.DATE)+1;
 
     }
 
@@ -82,6 +87,14 @@ public class CalendarFragment extends Fragment {
                 // 현재 선택한 일자 정보 표시
                 MonthItem curItem = (MonthItem) monthViewAdapter.getItem(position);
                 int day = curItem.getDay();
+
+                if(( (curMonth+1) == realMonth )){
+
+                    if((day < 1) || (day > 31) || ( day < realDay)){
+                        //Toast.makeText(getContext(), "선택불가능한 날짜입니다", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                }
 
                 Log.i("myLog", "선택된 날짜는 "+curYear+"년"+(curMonth+1)+"월"+day+"일 입니다");
                 ReserveSearchFragment.rdate = getDatetoKorean(curYear, curMonth, day);
@@ -157,6 +170,9 @@ public class CalendarFragment extends Fragment {
         Button monthNext = (Button) view.findViewById(R.id.monthNext);
         monthNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                //일단 DB를 탐색하고 색을 지정해주고
+                //월을 변경한다.
                 monthViewAdapter.setNextMonth();
                 monthViewAdapter.notifyDataSetChanged();
 

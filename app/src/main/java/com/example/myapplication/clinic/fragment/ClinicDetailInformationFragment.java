@@ -39,16 +39,17 @@ public class ClinicDetailInformationFragment extends Fragment {
         btnReserve = (Button)view.findViewById(R.id.btnReserve);
 
 
-        final ReserveSearchFragment reserveSearchFragment = new ReserveSearchFragment();
-        reserveSearchFragment.setArguments(new Bundle());  //setArgument메소드로 번들 셋팅은 딲 한번 가능
+
 
         btnReserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                ReserveSearchFragment reserveSearchFragment = new ReserveSearchFragment();
+
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragmentContainer, reserveSearchFragment, "ReserveSearchFragment")
-                        .addToBackStack(null)
+                        .replace(R.id.fragmentContainer, reserveSearchFragment)
                         .commit();
             }
         });

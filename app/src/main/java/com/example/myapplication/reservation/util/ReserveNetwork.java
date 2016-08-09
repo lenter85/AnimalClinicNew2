@@ -23,6 +23,7 @@ class ReserveNetwork extends AsyncTask<String, Integer, Long> {
             if (isCancelled()) break;
         }
         return totalSize;
+
     }
 
     @Override

@@ -44,6 +44,9 @@ public class CalendarMonthAdapter extends BaseAdapter {
     int firstDay;
     int lastDay;
 
+    int realMonth;
+    int realDay;
+
     Calendar mCalendar;
     boolean recreateItems = false;
 
@@ -70,6 +73,9 @@ public class CalendarMonthAdapter extends BaseAdapter {
         recalculate();
         resetDayNumbers();
 
+        Calendar oCalendar = Calendar.getInstance();  // 현재 날짜/시간 등의 각종 정보 얻기
+        realMonth = oCalendar.get(Calendar.MONTH) + 1;
+        realDay = oCalendar.get(Calendar.DATE) + 1;
     }
 
     public void recalculate() {
@@ -182,21 +188,24 @@ public class CalendarMonthAdapter extends BaseAdapter {
         }
 
         // create a params
-        GridView.LayoutParams params = new GridView.LayoutParams(
-                GridView.LayoutParams.MATCH_PARENT,
-                300);
+        GridView.LayoutParams params = new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, 240);
 
         // calculate row and column
         int rowIndex = position / countColumn;
         int columnIndex = position % countColumn;
 
+
+        int month = getCurMonth() + 1;
+        int day = items[position].getDay();
+
+
         Log.d(TAG, "Index : " + rowIndex + ", " + columnIndex);
 
         // set item data and properties
         itemView.setItem(items[position]);
-        Log.i("test", "items[position]: " + items[position].getDay());
+        //Log.i("test", "items[position]: " + items[position].getDay());
         itemView.setLayoutParams(params);
-        itemView.setPadding(2, 2, 2, 2);
+        itemView.setPadding(4, 4, 4, 4);
 
         // set properties
         itemView.setGravity(Gravity.LEFT);
@@ -209,12 +218,20 @@ public class CalendarMonthAdapter extends BaseAdapter {
 
         if (MainActivity.LoginId.equals("NOMAL")) {
 
-            itemView.setBackgroundColor(Color.WHITE);
+            if ((month == realMonth) && (1 <= day) && (day <= 31) && (day < realDay)) {
+
+                //현재 날짜보다 이전 날짜라면 회색
+                //itemView.append("\n예약불가");
+                //itemView.setTextSize(10);
+
+                itemView.setBackgroundColor(Color.parseColor("#BDBDBD"));
+                itemView.setClickable(false);
+
+            }else {
+                itemView.setBackgroundColor(Color.parseColor("#F6FFCC"));
+            }
 
         } else {
-
-            int month = getCurMonth() + 1;
-            int day = items[position].getDay();
 
 
             StringBuilder reserveDate = new StringBuilder();
@@ -230,7 +247,7 @@ public class CalendarMonthAdapter extends BaseAdapter {
 
             //int로 리턴받는다. 1이상이면 예약된 것 0이면 예약안된 것.
 
-            Network.isReserved(itemView, "test", reserveDate.toString());
+            Network.isReserved( itemView, "test", reserveDate.toString());
         }
 
 

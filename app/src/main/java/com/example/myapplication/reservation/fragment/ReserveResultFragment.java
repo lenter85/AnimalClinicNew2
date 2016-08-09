@@ -82,6 +82,7 @@ public class ReserveResultFragment extends Fragment {
                         .getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, new ReserveEditFragment())
+                        .addToBackStack(null)
                         .commit();
             }
         });

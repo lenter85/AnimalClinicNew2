@@ -121,7 +121,7 @@
         android:layout_below="@+id/linearLayout9"
         android:layout_alignLeft="@+id/linearLayout9"
         android:layout_alignStart="@+id/linearLayout9"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_alignRight="@+id/linearLayout9"
         android:layout_alignEnd="@+id/linearLayout9"
         android:textColor="#ffffff"
@@ -220,5 +220,27 @@
             android:gravity="center_vertical"
             android:paddingLeft="5dp" />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="터치하여 날짜를 변경하세요"
+        android:id="@+id/textView37"
+        android:layout_below="@+id/linearLayout8"
+        android:layout_alignLeft="@+id/linearLayout9"
+        android:layout_alignStart="@+id/linearLayout9"
+        android:textColor="#FF2424" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="터치하여 시간을 변경하세요"
+        android:id="@+id/textView65"
+        android:textColor="#FF2424"
+        android:layout_below="@+id/linearLayout9"
+        android:layout_alignRight="@+id/textView37"
+        android:layout_alignEnd="@+id/textView37" />
 
 </RelativeLayout>
