@@ -98,15 +98,15 @@
         android:gravity="center_horizontal">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="등록"
             android:id="@+id/btnRegister"
-            android:background="@drawable/green_round_angle"
-            android:layout_marginRight="40dp" />
+            android:background="@drawable/round_green"
+            android:layout_marginRight="20dp" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="취소"
             android:id="@+id/buttonCancel"
