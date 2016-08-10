@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".clinic.fragment.MenuFragment"
     android:orientation="vertical"
-    android:background="@drawable/catimage1"
+    android:background="@drawable/catimage2"
     android:gravity="right">
 
     <LinearLayout
