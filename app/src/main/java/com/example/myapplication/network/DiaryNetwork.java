@@ -74,7 +74,7 @@ public class DiaryNetwork {
                 }
             }
         };
-        asyncTask.execute(baseUrl + "diary/list");
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "diary/list");
     }
 
     public static void getDiaryImage(String imageName, final ImageView imageView) {
@@ -104,7 +104,7 @@ public class DiaryNetwork {
                 imageView.setImageBitmap(bitmap);
             }
         };
-        asyncTask.execute(baseUrl + "diary/image?dimage=" + imageName);
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "diary/image?dimage=" + imageName);
     }
 
     public static void sendDiary(final Diary diary, final String filePath) {

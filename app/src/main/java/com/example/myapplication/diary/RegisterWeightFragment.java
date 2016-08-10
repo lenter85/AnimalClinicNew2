@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.myapplication.R;
+import com.google.android.gms.vision.text.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +18,8 @@ import com.example.myapplication.R;
 public class RegisterWeightFragment extends Fragment {
     private Button btnAddWeight;
     private Button btnCancelw;
+    private TextView txtWeight;
+    private TextView txtWeightDate;
 
     public RegisterWeightFragment() {
         // Required empty public constructor
@@ -30,6 +34,7 @@ public class RegisterWeightFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_register_weight, container, false);
 
         btnAddWeight = (Button) view.findViewById(R.id.btnAddWeight);
+
         btnAddWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

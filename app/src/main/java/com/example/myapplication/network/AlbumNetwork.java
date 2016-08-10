@@ -83,7 +83,7 @@ public class AlbumNetwork {
             }
         };
 
-        asyncTask.execute(baseUrl + "album/getlist?pageNo=" + pageNo);
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "album/getlist?pageNo=" + pageNo);
 
 
     }
@@ -121,7 +121,7 @@ public class AlbumNetwork {
             }
         };
 
-        asyncTask.execute(baseUrl + "album/download?aimage=" + imageName);
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "album/download?aimage=" + imageName);
     }
 
     public static void sendAlbum(final Album album, final Bitmap bitmap) {
@@ -198,7 +198,7 @@ public class AlbumNetwork {
                 return null;
             }
         };
-        asyncTask.execute(baseUrl + "album/register");
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "album/register");
     }
 
     public static String setValue(String key, String value) {
