@@ -12,7 +12,7 @@ import java.net.URL;
  */
 public class WeightNetwork {
     private static String url = NetworkSetting.baseUrl2;
-    public void registerWeight(String weight, String wdate) {
+    public void registerWeight(double weight, String wdate) {
         AsyncTask<String, Void, Void> asyncTask = new AsyncTask<String, Void, Void>() {
             @Override
             protected Void doInBackground(String... params) {
