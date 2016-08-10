@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,8 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 //import com.example.myapplication.member.fragment.LogInFragment;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static List<RegisterLocation> list = new ArrayList<>();
     public static String clinicLocation = null;
@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity
 
     public static RegisterClinicFragment registerClinicFragment;
 
+    public static String cName;
+    public static ProgressDialog asyncDialog;
+
     //mainmain
     //메인 받아짐??
     //준식커밋
@@ -59,10 +62,16 @@ public class MainActivity extends AppCompatActivity
     //민규 컴퓨터
 
     public static Fragment previousFragment;
+    public static String LoginId = "NOMAL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        asyncDialog = new ProgressDialog(this);
+
+        setTitle("펫토피아");
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

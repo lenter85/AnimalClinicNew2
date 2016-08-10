@@ -36,7 +36,7 @@ public class ReserveEditFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        getActivity().setTitle("수정하기");
         View view = inflater.inflate(R.layout.fragment_reserve_edit, container, false);
 
         btnOk = (Button)view.findViewById(R.id.btnOk);
@@ -79,8 +79,8 @@ public class ReserveEditFragment extends Fragment {
                 getActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()
-                        .addToBackStack(null)
                         .replace(R.id.fragmentContainer, new CalendarFragment())
+                        .addToBackStack(null)
                         .commit();
             }
         });

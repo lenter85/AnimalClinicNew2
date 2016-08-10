@@ -14,10 +14,10 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="5dp"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
-            android:background="#dedede">
+            android:background="#ffffff">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:textSize="20dp"
+                android:textSize="17dp"
                 android:layout_marginLeft="10dp"
                 android:textStyle="bold" />
 
@@ -38,20 +38,25 @@
                 android:gravity="center_vertical"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true">
+                android:layout_alignParentEnd="true"
+                android:layout_margin="7dp">
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:id="@+id/imageButton7"
-                    android:src="@android:drawable/ic_menu_mylocation" />
+                    android:src="@drawable/gps"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="거리순"
-                    android:id="@+id/textView36" />
+                    android:id="@+id/textView36"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </RelativeLayout>
@@ -62,6 +67,7 @@
             android:id="@+id/clinicListView"
             android:layout_weight="9"
             android:dividerHeight="2dp"
-            android:divider="#ffffff" />
+            android:divider="#ffffff"
+            android:background="@color/material_grey_300" />
     </LinearLayout>
 </FrameLayout>

@@ -46,7 +46,7 @@ public class ReserveResultFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        getActivity().setTitle("예약결과");
         View view = inflater.inflate(R.layout.fragment_reserve_result, container, false);
 
 
@@ -82,6 +82,7 @@ public class ReserveResultFragment extends Fragment {
                         .getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, new ReserveEditFragment())
+                        .addToBackStack(null)
                         .commit();
             }
         });

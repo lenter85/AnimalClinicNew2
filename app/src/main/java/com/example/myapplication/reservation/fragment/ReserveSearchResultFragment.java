@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.calendar.CalendarFragment;
 import com.example.myapplication.reservation.util.Network;
@@ -36,6 +37,7 @@ public class ReserveSearchResultFragment extends Fragment {
 
     TextView txtRdate;
     TextView txtDow;
+    TextView txtCname;
     ImageButton btnCalendar;
 
     Button btnPrevious;
@@ -58,11 +60,12 @@ public class ReserveSearchResultFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        getActivity().setTitle("조회결과");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_reserve_search_result, container, false);
 
         txtDow = (TextView) view.findViewById(R.id.txtDow);
+        txtCname = (TextView) view.findViewById(R.id.txtCname);
         txtRdate = (TextView) view.findViewById(R.id.txtRdate);
         btnCalendar = (ImageButton) view.findViewById(R.id.btnCalendar);
 
@@ -315,6 +318,8 @@ public class ReserveSearchResultFragment extends Fragment {
     }
 
     private void setItemSetting() {
+
+        txtCname.setText(MainActivity.cName);
 
         String clinicid = "test";
 
