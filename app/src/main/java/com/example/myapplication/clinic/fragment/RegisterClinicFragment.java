@@ -38,6 +38,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class RegisterClinicFragment extends Fragment {
+
     private ImageView imageViewAdd;
     private ImageView imageViewSmall1;
     private ImageView imageViewSmall2;

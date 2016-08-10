@@ -37,13 +37,27 @@ public class Network {
 
     private static final String site = "http://192.168.0.11:9090/Petopia";
 
-    public static void setReserveList(final TimeViewAdapter timeViewAdapter, List<String> local_timeList, Map<String, String> map) {
+    public static void setReserveList(final Context context, final TimeViewAdapter timeViewAdapter, List<String> local_timeList, Map<String, String> map) {
 
         final List<String> nonReservedTimeList = local_timeList;
         final List<String> dbReservedTimeList = new ArrayList<>();
 
         //첫번째 매개변수는 doInBackground()로, 두번째 매개변수는 onProgressUpdate()로, 세번째 매개변수는 반환값을 의미한다.
         AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
+
+            ProgressDialog asyncDialog = new ProgressDialog(context);
+
+            @Override
+            protected void onPreExecute() {
+
+                asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                asyncDialog.setMessage("예약 가능한 시간을 불러오고 있습니다..");
+
+                // show dialog
+                asyncDialog.show();
+                super.onPreExecute();
+            }
+
 
             @Override
             protected String doInBackground(String... params) {
@@ -183,6 +197,7 @@ public class Network {
                 timeViewAdapter.setList(nonReservedTimeList);
                 timeViewAdapter.notifyDataSetChanged();
 
+                asyncDialog.dismiss();
             }
         };
 
@@ -195,7 +210,7 @@ public class Network {
         //asyncTask를 실행한다. doInBackground 메소드를 실행한다.
         Log.i("myLog", site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + date);
 
-        asyncTask.execute(site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + date); //doInBackground()의 매개값으로 들어간다.
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + date); //doInBackground()의 매개값으로 들어간다.
     }
 
 
@@ -281,7 +296,7 @@ public class Network {
         Log.i("myLog", site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + Util.getSimpleDate(date));
 
         try {
-            List<String> finalList = asyncTask.execute(site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + Util.getSimpleDate(date)).get(); //doInBackground()의 매개값으로 들어간다.
+            List<String> finalList = asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + Util.getSimpleDate(date)).get(); //doInBackground()의 매개값으로 들어간다.
             return finalList;
 
         } catch (Exception e) {
@@ -392,7 +407,7 @@ public class Network {
             }
         };
 
-        asyncTask.execute(site + "/reserve/getMyReserveList?rpname=" + rpname + "&ruserid=" + ruserid);
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "/reserve/getMyReserveList?rpname=" + rpname + "&ruserid=" + ruserid);
     }
 
 
@@ -523,16 +538,20 @@ public class Network {
                 Log.i("test", "예약 조회결과 :" + num);
                 if (num <= 0) {
                     Log.i("test", "예약 0건 배경 하얀색");
-                    itemView.setBackgroundColor(Color.WHITE);
+                    itemView.setBackgroundColor(Color.parseColor("#F6FFCC"));
+                    itemView.setTextSize(13);
                 } else {
                     Log.i("test", "예약 1건 이상 배경 노란색");
-                    itemView.setBackgroundColor(Color.YELLOW);
+                    itemView.setBackgroundColor(Color.parseColor("#FF5A5A"));
+
+                    itemView.append("\n\n\n예약 내역\n "+num+"건");
+                    itemView.setTextSize(10);
                 }
             }
         };
 
         Log.i("test", site + "/reserve/getReserveNo?clinicid=" + clinicid + "&date=" + Util.getSimpleDate(date));
-        asyncTask.execute(site + "/reserve/getReserveNo?clinicid=" + clinicid + "&date=" + Util.getSimpleDate(date)); //doInBackground()의 매개값으로 들어간다.
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "/reserve/getReserveNo?clinicid=" + clinicid + "&date=" + Util.getSimpleDate(date)); //doInBackground()의 매개값으로 들어간다.
     }
 
 
@@ -633,7 +652,7 @@ public class Network {
 
         Log.i("myLog", site + "/reserve/getSubscriberList?clinicId=" + clinicId + "&date=" + date);
 
-        asyncTask.execute(site + "/reserve/getSubscriberList?clinicId=" + clinicId + "&date=" + date);
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "/reserve/getSubscriberList?clinicId=" + clinicId + "&date=" + date);
 
         Log.i("myLog", "asyncTask 수행 완료");
     }

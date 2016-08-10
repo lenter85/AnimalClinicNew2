@@ -39,8 +39,6 @@ public class ClinicDetailInformationFragment extends Fragment {
         btnReserve = (Button)view.findViewById(R.id.btnReserve);
 
 
-
-
         btnReserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,9 +63,9 @@ public class ClinicDetailInformationFragment extends Fragment {
 
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setIcon(R.drawable.info1);
-        tabLayout.getTabAt(1).setIcon(R.drawable.photo1);
-        tabLayout.getTabAt(2).setIcon(R.drawable.review1);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu_camera);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_menu_gallery);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_menu_manage);
 
         return view;
     }

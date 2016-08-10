@@ -146,7 +146,7 @@ public class MainNetwork {
 
         Log.i("myLog", site + "/main/getClinicList");
 
-        asyncTask.execute(site + "/main/getClinicList"); //doInBackground()의 매개값으로 들어간다.
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "/main/getClinicList"); //doInBackground()의 매개값으로 들어간다.
     }
 
     public static void getClinicImage(String imageName, final ImageView imageView){
@@ -179,7 +179,7 @@ public class MainNetwork {
             }
         };
 
-        asyncTask.execute(site+"/main/download?cimage=" + imageName);
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site+"/main/download?cimage=" + imageName);
     }
 
 

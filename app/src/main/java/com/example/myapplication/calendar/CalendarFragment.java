@@ -2,6 +2,7 @@ package com.example.myapplication.calendar;
 
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -71,6 +72,8 @@ public class CalendarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        getActivity().setTitle("달력");
 
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
@@ -159,6 +162,11 @@ public class CalendarFragment extends Fragment {
                 }
 
 
+                if(MainActivity.LoginId.equals("CLINIC")){
+                    showProgressDialog();
+                }
+
+
                 monthViewAdapter.setPreviousMonth();
                 monthViewAdapter.notifyDataSetChanged();
 
@@ -171,6 +179,11 @@ public class CalendarFragment extends Fragment {
         monthNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                if(MainActivity.LoginId.equals("CLINIC")){
+                    showProgressDialog();
+                }
+
+
                 //일단 DB를 탐색하고 색을 지정해주고
                 //월을 변경한다.
                 monthViewAdapter.setNextMonth();
@@ -181,6 +194,46 @@ public class CalendarFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void showProgressDialog() {
+
+        AsyncTask<Void, Void, Void> asyncTask = new AsyncTask<Void, Void, Void>() {
+
+            ProgressDialog asyncDialog = new ProgressDialog(getContext());
+
+            @Override
+            protected void onPreExecute() {
+                Log.i("test", "setReserveList onPreExecute()실행 ");
+                asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                asyncDialog.setMessage("예약 정보를 불러오고 있습니다..");
+
+                // show dialog
+                asyncDialog.show();
+                super.onPreExecute();
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+
+                asyncDialog.dismiss();
+
+            }
+        };
+
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR , null);
     }
 
     private static String getDatetoKorean(int curYear , int curMonth, int curDay) {
