@@ -157,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:text="친절한 의사선생님과 최신 시설을 구비한 봄빛 동물병원 입니다"
                     android:id="@+id/textViewIntroduction"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     android:layout_margin="35dp" />
             </FrameLayout>
             <fragment
