@@ -14,19 +14,21 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#eff2ed">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_marginBottom="5dp">
+                android:layout_weight="1.2"
+                android:background="@drawable/round_angle_ye"
+                android:layout_margin="10dp">
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:id="@+id/imgDimage"
+                    android:id="@+id/myDimage"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:src="@drawable/dog04_small" />
@@ -43,7 +45,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="나비"
-                        android:id="@+id/txtDname"
+                        android:id="@+id/myDname"
                         android:textSize="25dp"
                         android:layout_marginBottom="18dp"
                         android:layout_marginTop="15dp" />
@@ -65,7 +67,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="New Text"
-                            android:id="@+id/txtDbirth"
+                            android:id="@+id/myDbirth"
                             android:layout_marginRight="5dp" />
 
                         <TextView
@@ -93,7 +95,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/txtDgender"
+                            android:id="@+id/myDgender"
                             android:textSize="16dp"
                             android:text="m"
                             android:layout_marginTop="5dp" />
@@ -135,24 +137,27 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=" 예약 내역"
+                            android:text="예약 내역"
                             android:id="@+id/textView8"
-                            android:textSize="22dp"
-                            android:layout_marginTop="23dp"
+                            android:textSize="19dp"
+                            android:layout_marginTop="28dp"
                             android:layout_alignParentTop="true"
                             android:layout_alignLeft="@+id/reservationList"
                             android:layout_alignStart="@+id/reservationList"
-                            android:layout_gravity="center" />
+                            android:layout_gravity="center"
+                            android:textColor="#848a84" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="140dp"
+                            android:layout_height="140dp"
                             android:id="@+id/reservationList"
                             android:onClick="onClickReservationList"
                             android:layout_below="@+id/textView8"
                             android:layout_alignParentLeft="true"
                             android:layout_alignParentStart="true"
-                            android:src="@drawable/reservation" />
+                            android:src="@drawable/reservation"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp" />
 
                     </LinearLayout>
 
@@ -165,14 +170,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=" 예방접종"
+                            android:text="예방접종"
                             android:id="@+id/textView9"
                             android:layout_alignTop="@+id/textView8"
                             android:layout_alignLeft="@+id/vaccination"
                             android:layout_alignStart="@+id/vaccination"
-                            android:textSize="22dp"
-                            android:layout_marginTop="23dp"
-                            android:layout_gravity="center" />
+                            android:textSize="19dp"
+                            android:layout_marginTop="28dp"
+                            android:layout_gravity="center"
+                            android:textColor="#848a84" />
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -182,7 +188,8 @@
 
                             android:layout_alignTop="@+id/reservationList"
                             android:layout_alignParentRight="true"
-                            android:layout_alignParentEnd="true" />
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/vacci" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -202,14 +209,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="  앨범"
+                            android:text="앨범"
                             android:id="@+id/textView10"
-                            android:textSize="22dp"
+                            android:textSize="19dp"
                             android:layout_above="@+id/album"
                             android:layout_alignLeft="@+id/album"
                             android:layout_alignStart="@+id/album"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp" />
+                            android:layout_marginTop="5dp"
+                            android:textColor="#FF999D99" />
 
                         <ImageView
                             android:layout_width="wrap_content"
@@ -231,14 +239,15 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="  몸무게"
+                            android:text="몸무게"
                             android:id="@+id/textView11"
-                            android:textSize="22dp"
+                            android:textSize="19dp"
                             android:layout_alignTop="@+id/textView10"
                             android:layout_alignLeft="@+id/weight"
                             android:layout_alignStart="@+id/weight"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp" />
+                            android:layout_marginTop="5dp"
+                            android:textColor="#FF999D99" />
 
                         <ImageView
                             android:layout_width="wrap_content"

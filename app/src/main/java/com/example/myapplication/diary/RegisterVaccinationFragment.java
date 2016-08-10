@@ -69,8 +69,9 @@ public class RegisterVaccinationFragment extends Fragment {
                 vaccination.setVname(txtVname.getText().toString());
                 vaccination.setVdate(txtVdate.getText().toString());
                 vaccination.setVndate(txtVndate.getText().toString());
-                ////////////////임의값
-                vaccination.setDname("우디");
+
+                vaccination.setDname(MyDiaryFragment.my.getDname());
+                /////임의의 멤버아이디값
                 vaccination.setMid("test");
                 ////////////////
                 VaccinationNetwork.sendVaccination(vaccination);

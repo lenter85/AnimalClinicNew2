@@ -14,67 +14,53 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/imgAddWeight"
-        android:layout_marginTop="27dp"
         android:onClick="onClickToRegisterWeight"
+        android:src="@android:drawable/ic_input_add"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:src="@android:drawable/ic_input_add" />
+        android:layout_marginTop="47dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="현재체중 :"
         android:id="@+id/textView28"
-        android:textSize="25dp"
-        android:layout_alignTop="@+id/textView29"
+        android:textSize="20dp"
+        android:layout_marginTop="41dp"
+        android:layout_below="@+id/chart1"
         android:layout_toLeftOf="@+id/textView29"
         android:layout_toStartOf="@+id/textView29"
-        android:layout_marginRight="24dp"
-        android:layout_marginEnd="24dp" />
+        android:layout_marginRight="39dp"
+        android:layout_marginEnd="39dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="5 kg"
         android:id="@+id/textView29"
-        android:textSize="25dp"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="27dp"
+        android:textSize="20dp"
 
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignTop="@+id/textView28"
+        android:layout_alignLeft="@+id/imgAddWeight"
+        android:layout_alignStart="@+id/imgAddWeight" />
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:id="@+id/chart1"
+        android:layout_below="@+id/imgAddWeight"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="특이사항"
+        android:text="몸무게 그래프"
         android:id="@+id/textView30"
-        android:layout_marginTop="28dp"
-        android:textSize="20dp"
-        android:layout_below="@+id/textView28"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:text="New Text"
-        android:id="@+id/textView50"
-        android:layout_below="@+id/textView30"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="39dp"
-        android:background="@drawable/round_angle"
-        android:layout_alignRight="@+id/textView29"
-        android:layout_alignEnd="@+id/textView29" />
-
-    <com.github.mikephil.charting.charts.LineChart
-        android:layout_width="305dp"
-        android:layout_height="250dp"
-        android:id="@+id/chart1"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="15dp" />
 
 </RelativeLayout>
