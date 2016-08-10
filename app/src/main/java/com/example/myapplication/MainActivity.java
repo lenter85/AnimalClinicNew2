@@ -19,7 +19,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.example.myapplication.clinic.dto.RegisterLocation;
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Bitmap bitmap;
     private Bitmap smallbitmap;
 
-
+    public static boolean loginStatus;
     public static RegisterClinicFragment registerClinicFragment;
 
     public static String cName;

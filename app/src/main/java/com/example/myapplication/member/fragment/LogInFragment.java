@@ -52,6 +52,9 @@ public class LogInFragment extends Fragment {
         email = (EditText)view.findViewById(R.id.login_email);
         password = (EditText)view.findViewById(R.id.login_password);
 
+        email.setText("park9831@naver.com");
+        password.setText("1234");
+
         //btnLogin.setEnabled(false);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +74,7 @@ public class LogInFragment extends Fragment {
                     if(memberNetwork.loginResult == false){
                         dialog("아이디와 비밀번호가 일치하지 않습니다.");
                     } else if(memberNetwork.loginResult == true){
-                        Toast.makeText(getContext(),"로그인 성공",Toast.LENGTH_SHORT);
+                        Toast.makeText(getContext(),"로그인 성공",Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(getActivity(), HomeActivity.class);
                         startActivity(intent);

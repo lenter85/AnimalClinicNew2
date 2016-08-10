@@ -1,10 +1,12 @@
 package com.example.myapplication.member.fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.myapplication.HomeActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.member.dao.CheckUser;
 import com.example.myapplication.member.dto.Member;
@@ -98,11 +102,18 @@ public class NewAccountFragment extends Fragment {
                     member.setMpassword(password.getText().toString());
                     member.setMtype("1");
 
-                    memberNetwork.checkUserId(email.getText().toString(), member);
+                    if(memberNetwork.checkUserId(email.getText().toString())){
+                        Toast.makeText(getContext(),"동일한 ID 존재", Toast.LENGTH_SHORT).show();
+                        Log.i("mylog","동일한 ID 존재");
+                        } else {
+                            memberNetwork.join(member);
+                            Toast.makeText(getContext(),"회원가입 성공", Toast.LENGTH_SHORT).show();
 
+                            Intent intent = new Intent(getActivity(), HomeActivity.class);
+                            startActivity(intent);
+                        }
+                    }
                 }
-            }
-
         });
         return view;
     }
