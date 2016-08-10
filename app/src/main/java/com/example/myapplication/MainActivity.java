@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        View nav_header_view = navigationView.getHeaderView(0);
+        /*View nav_header_view = navigationView.getHeaderView(0);
 
 
         imageViewReviewImg = (ImageView) nav_header_view.findViewById(R.id.imageViewReviewImg);
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
                 dialog();
             }
-        });
+        });*/
 
         Intent intent = getIntent();
         String page = intent.getStringExtra("page");
