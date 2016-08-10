@@ -2,6 +2,8 @@ package com.example.myapplication.network;
 
 import android.os.AsyncTask;
 
+import com.example.myapplication.MainActivity;
+import com.example.myapplication.diary.MyDiaryFragment;
 import com.example.myapplication.diary.dto.Weight;
 
 import java.net.HttpURLConnection;
@@ -29,6 +31,7 @@ public class WeightNetwork {
                 return null;
             }
         };
-        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url + "weight/register?weight=" + weight + "?wdate=" + wdate);
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url + "weight/register?weight=" + weight + "?wdate=" + wdate +
+                "?mid=" + MainActivity.LoginId + "?dname=" + MyDiaryFragment.my.getDname());
     }
 }
