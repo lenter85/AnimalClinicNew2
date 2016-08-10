@@ -99,7 +99,7 @@ public class MemberNetwork {
                 }
             }
         };
-        asyncTask.execute(NetworkSetting.baseUrl + "member/login");
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl + "member/login");
     }
 
     public void join(final Member member){
@@ -161,7 +161,7 @@ public class MemberNetwork {
             }
         };
 
-        asyncTask.execute(NetworkSetting.baseUrl+"member/join");
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl+"member/join");
     }
 
     public void checkUserId(final String mid, final Member member){
@@ -225,6 +225,6 @@ public class MemberNetwork {
                 }
             }
         };
-        asyncTask.execute(NetworkSetting.baseUrl+"member/checkUserId");
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl+"member/checkUserId");
     }
 }
