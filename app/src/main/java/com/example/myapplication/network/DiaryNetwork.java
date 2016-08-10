@@ -187,7 +187,7 @@ public class DiaryNetwork {
             protected void onPostExecute(String result) {
 
             }
-        }.execute();
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public static String setValue(String key, String value) {

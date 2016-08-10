@@ -75,18 +75,18 @@ public class RegisterVaccinationFragment extends Fragment {
                 vaccination.setMid("test");
                 ////////////////
                 VaccinationNetwork.sendVaccination(vaccination);
-                getChildFragmentManager().
-                        beginTransaction().
-                        replace(R.id.fragmentContainer, new VaccinationFragment1())
-                        .addToBackStack(null)
-                        .commit();
-
-                /*getActivity().
-                        getSupportFragmentManager().
+                /*getChildFragmentManager().
                         beginTransaction().
                         replace(R.id.fragmentContainer, new VaccinationFragment1())
                         .addToBackStack(null)
                         .commit();*/
+
+                getActivity().
+                        getSupportFragmentManager().
+                        beginTransaction().
+                        replace(R.id.fragmentContainer, new MyDiaryFragment())
+                        .addToBackStack(null)
+                        .commit();
             }
         });
 

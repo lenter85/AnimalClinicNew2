@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.myapplication.diary.WeightActivity">
+    tools:context="com.example.myapplication.diary.WeightActivity"
+    android:background="#eff6f8">
 
 
     <ImageView
@@ -51,16 +52,18 @@
         android:id="@+id/chart1"
         android:layout_below="@+id/imgAddWeight"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="#ffffff" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="몸무게 그래프"
         android:id="@+id/textView30"
+        android:textSize="18dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textSize="15dp" />
+        android:layout_marginTop="23dp" />
 
 </RelativeLayout>
