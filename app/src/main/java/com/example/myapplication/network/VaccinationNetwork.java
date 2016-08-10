@@ -22,11 +22,11 @@ import java.util.List;
  * Created by Administrator on 2016-07-22.
  */
 public class VaccinationNetwork {
-    public static String baseUrl = "http://192.168.0.24:8080/Petopia/";
+    public static String baseUrl = "http://192.168.0.29:8080/Petopia/";
     //public static String baseUrl = "http://106.253.56.123:8080/Petopia/";
     //public static String baseUrl = "http://192.168.0.24:8080/SpringMVCProject2/";
     private static String strjson;
-    public static void getVaccinationList(final VaccinationAdapter vaccinationAdapter) {
+    public static void getVaccinationList(String dname, final VaccinationAdapter vaccinationAdapter) {
         AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... params) {
@@ -81,7 +81,7 @@ public class VaccinationNetwork {
             }
         };
 
-        asyncTask.execute(baseUrl + "vaccination/list");
+        asyncTask.execute(baseUrl + "vaccination/list?dname=" + dname);
 
     }
 

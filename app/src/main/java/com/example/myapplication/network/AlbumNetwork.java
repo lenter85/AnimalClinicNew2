@@ -26,7 +26,7 @@ import java.net.URL;
  * Created by Administrator on 2016-07-22.
  */
 public class AlbumNetwork {
-    private static String baseUrl = "http://192.168.0.24:8080/Petopia/";
+    private static String baseUrl = "http://192.168.0.29:8080/Petopia/";
 
 
     public static void getAlbumData(int pageNo, final AlbumAdapter albumAdapter) {
@@ -158,7 +158,6 @@ public class AlbumNetwork {
                     postDataBuilder.append(setValue("aname", album.getAname()));
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setValue("adate", album.getAdate()));
-                    Log.i("mylog", album.getAdate());
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setValue("acontent", album.getAcontent()));
                     postDataBuilder.append(delimiter);
