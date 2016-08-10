@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.diary.dto.Diary;
 import com.example.myapplication.network.DiaryNetwork;
 
 /**
@@ -21,6 +22,8 @@ public class DiaryFragment extends Fragment {
     private ListView listViewDiary;
     private DiaryAdapter diaryAdapter;
     private ImageView dimage;
+    public static Diary myDiary;
+
 
     public DiaryFragment() {
         // Required empty public constructor
@@ -66,6 +69,7 @@ public class DiaryFragment extends Fragment {
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            myDiary = (Diary) diaryAdapter.getItem(position);
             getActivity()
                     .getSupportFragmentManager()
                     .beginTransaction()

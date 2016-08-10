@@ -19,21 +19,26 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.diary.custom.DayAxisValueFormatter;
 import com.example.myapplication.diary.custom.MyMarkerView;
 import com.example.myapplication.diary.dto.Weight;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.AxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.renderer.XAxisRenderer;
 import com.github.mikephil.charting.utils.Utils;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,11 +57,11 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WeightFragment extends Fragment implements SeekBar.OnSeekBarChangeListener, OnChartGestureListener, OnChartValueSelectedListener {
+public class WeightFragment extends Fragment implements  OnChartValueSelectedListener {
     private ImageView imgAddWeight;
 
     private LineChart mChart;
-    private SeekBar mSeekBarX, mSeekBarY;
+
     private TextView tvX,
             tvY;
 
@@ -113,13 +118,13 @@ public class WeightFragment extends Fragment implements SeekBar.OnSeekBarChangeL
         mChart.setTouchEnabled(true);
 
         // enable scaling and dragging
-        mChart.setDragEnabled(true);
-        mChart.setScaleEnabled(true);
+        //mChart.setDragEnabled(true);
+        //mChart.setScaleEnabled(true);
         // mChart.setScaleXEnabled(true);
         // mChart.setScaleYEnabled(true);
 
         // if disabled, scaling can be done on x- and y-axis separately
-        mChart.setPinchZoom(true);
+        //mChart.setPinchZoom(true);
 
         // set an alternative background color
         // mChart.setBackgroundColor(Color.GRAY);
@@ -145,23 +150,33 @@ public class WeightFragment extends Fragment implements SeekBar.OnSeekBarChangeL
         //xAxis.setValueFormatter(new MyCustomXAxisValueFormatter());
         //xAxis.addLimitLine(llXAxis); // add x-axis limit line
 
-        /*xAxis.setValueFormatter(new AxisValueFormatter() {
+        mChart.setScaleEnabled(false);
+
+        mChart.setScaleX(1f);
+        mChart.setX(1f);
+        Log.i("mylog", String.valueOf(mChart.getScaleX()));
+        xAxis.setXOffset(1f);
+
+
+
+        xAxis.setValueFormatter(new AxisValueFormatter() {
 
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
                 Log.i("value", String.valueOf(value));
 
-                //String month = mMonths[(int) value % mMonths.length];
-                String month = String.valueOf((int) value % mMonths.length);
+                String month = mMonths[(int) value % mMonths.length];
+                return month;
+               /* String month = String.valueOf((int) value % mMonths.length);
                 String day = getDay(value);
-                return month + "/" + day;
+                return month + "/" + day;*/
             }
 
             @Override
             public int getDecimalDigits() {
                 return 0;
             }
-        });*/
+        });
 
 
         Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
@@ -367,29 +382,7 @@ public class WeightFragment extends Fragment implements SeekBar.OnSeekBarChangeL
         return true;
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-        tvX.setText("" + (mSeekBarX.getProgress() + 1));
-        tvY.setText("" + (mSeekBarY.getProgress()));
-
-        //setData(mSeekBarX.getProgress() + 1, mSeekBarY.getProgress());
-
-        // redraw
-        mChart.invalidate();
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-        // TODO Auto-generated method stub
-
-    }
 
     private void setData(List list) {
 
@@ -446,49 +439,7 @@ public class WeightFragment extends Fragment implements SeekBar.OnSeekBarChangeL
         }
     }
 
-    @Override
-    public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-        Log.i("Gesture", "START, x: " + me.getX() + ", y: " + me.getY());
-    }
 
-    @Override
-    public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-        Log.i("Gesture", "END, lastGesture: " + lastPerformedGesture);
-
-        // un-highlight values after the gesture is finished and no single-tap
-        if(lastPerformedGesture != ChartTouchListener.ChartGesture.SINGLE_TAP)
-            mChart.highlightValues(null); // or highlightTouch(null) for callback to onNothingSelected(...)
-    }
-
-    @Override
-    public void onChartLongPressed(MotionEvent me) {
-        Log.i("LongPress", "Chart longpressed.");
-    }
-
-    @Override
-    public void onChartDoubleTapped(MotionEvent me) {
-        Log.i("DoubleTap", "Chart double-tapped.");
-    }
-
-    @Override
-    public void onChartSingleTapped(MotionEvent me) {
-        Log.i("SingleTap", "Chart single-tapped.");
-    }
-
-    @Override
-    public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
-        Log.i("Fling", "Chart flinged. VeloX: " + velocityX + ", VeloY: " + velocityY);
-    }
-
-    @Override
-    public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
-        Log.i("Scale / Zoom", "ScaleX: " + scaleX + ", ScaleY: " + scaleY);
-    }
-
-    @Override
-    public void onChartTranslate(MotionEvent me, float dX, float dY) {
-        Log.i("Translate / Move", "dX: " + dX + ", dY: " + dY);
-    }
 
     @Override
     public void onValueSelected(Entry e, Highlight h) {
@@ -509,7 +460,7 @@ public class WeightFragment extends Fragment implements SeekBar.OnSeekBarChangeL
 
                 String strjson="";
                 try {
-                    URL url = new URL("http://192.168.0.24:8080/SpringMVCProject2" + "/getweightlist");
+                    URL url = new URL("http://192.168.0.29:8080/Petopia" + "/getweightlist");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.connect();
 

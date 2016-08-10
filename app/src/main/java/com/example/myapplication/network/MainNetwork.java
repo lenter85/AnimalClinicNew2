@@ -15,7 +15,12 @@ import com.example.myapplication.clinic.fragment.ClinicListViewAdapter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -31,6 +36,7 @@ public class MainNetwork {
 
     private Bitmap bm;
     private static final String site = "http://192.168.0.11:9090/Petopia";
+    private static String baseUrl = "http://192.168.0.29:8080/Petopia/";
 
     public static void setReserveList(final ClinicListViewAdapter clinicListViewAdapter, final Context context) {
 
@@ -182,6 +188,96 @@ public class MainNetwork {
         asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site+"/main/download?cimage=" + imageName);
     }
 
+    public static void registerMemberImage(final String mid, final String fileName, final Bitmap bitmap) {
+        AsyncTask<String, Void, Void> asyncTask = new AsyncTask<String, Void, Void>() {
+            @Override
+            protected Void doInBackground(String... params) {
+
+                try {
+                    // 데이터 구분 문자
+                    String boundary = "----" + System.currentTimeMillis();
+
+                    // 데이터 경계선
+                    String delimiter = "\r\n--" + boundary + "\r\n";
+
+                    // 커넥션 생성 및 설정
+                    URL url = new URL(params[0]);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoInput(true);
+                    conn.setDoOutput(true);
+                    conn.setUseCaches(false);
+                    conn.setRequestMethod("POST");
+                    conn.setRequestProperty("Connection", "Keep-Alive");
+                    conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+
+                    //연결하기
+                    conn.connect();
+
+                    //출력 스트림 얻기
+                    DataOutputStream out = new DataOutputStream(new BufferedOutputStream(conn.getOutputStream()));
+
+                    //문자열 데이터 전송
+                    StringBuffer postDataBuilder = new StringBuffer();
+                    postDataBuilder.append(delimiter);
+                    postDataBuilder.append(setValue("mid", mid));
+                    postDataBuilder.append(delimiter);
+                    postDataBuilder.append(setFile("memberimage", fileName));
+                    out.writeUTF(postDataBuilder.toString());
+
+
+                    //파일 데이터 전송
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 50, bos);
+                    /*if(album.getAimage().contains(".jpg")) {
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bos);
+                    } else if(album.getAimage().contains(".png")) {
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 50, bos);
+                    }*/
+                    byte[] bitmapdata = bos.toByteArray();
+                    out.write(bitmapdata);
+                    bos.close();
+
+
+                    //종료 구분자 넣기
+                    //out.writeUTF(delimiter);
+                    out.writeUTF("\r\n--" + boundary + "--\r\n");
+
+                    //출력스트림 닫기
+                    out.flush();
+                    out.close();
+
+                    //응답 코드 확인
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    }
+
+                    //연결 끊기
+                    conn.disconnect();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+                return null;
+            }
+        };
+
+        asyncTask.execute(baseUrl + "registermemberimage");
+    }
+
+    public static String setValue(String key, String value) {
+        String str = "Content-Disposition: form-data; name=\"" + key + "\"";
+        str += "\r\n\r\n";
+        str += value;
+        return str;
+    }
+
+    public static String setFile(String key, String fileName) {
+        String str = "Content-Disposition: form-data; name=\"" + key + "\"; filename=\"" + fileName + "\"";
+        str += "\r\n";
+        str += "Content-Type: image/png";
+        str += "\r\n\r\n";
+        return str;
+    }
 
 
 }

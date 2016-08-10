@@ -12,9 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.diary.dto.Diary;
 import com.example.myapplication.diary.dto.Vaccination;
+import com.google.android.gms.vision.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,11 @@ public class MyDiaryFragment extends Fragment {
     private ImageView vaccination;
     private ImageView weight;
     private List<Vaccination> list = new ArrayList<>();
-
+    private TextView myDname;
+    private TextView myDbirth;
+    private TextView myDgender;
+    private ImageView myDimage;
+    public static Diary my;
     public MyDiaryFragment() {
         // Required empty public constructor
     }
@@ -39,6 +46,16 @@ public class MyDiaryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mydiary, container, false);
+
+        my = DiaryFragment.myDiary;
+        myDname = (TextView) view.findViewById(R.id.myDname);
+        myDbirth = (TextView) view.findViewById(R.id.myDbirth);
+        myDgender = (TextView) view.findViewById(R.id.myDgender);
+        myDimage = (ImageView) view.findViewById(R.id.myDimage);
+
+        myDname.setText(my.getDname());
+        myDbirth.setText(my.getDbirth());
+        myDgender.setText(my.getDgender());
 
 
         album = (ImageView) view.findViewById(R.id.album);
@@ -54,7 +71,7 @@ public class MyDiaryFragment extends Fragment {
         });
 
         Bitmap albumbitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.albumimg);
-        albumbitmap = getCircleBitmap(albumbitmap, 300);
+        albumbitmap = getCircleBitmap(albumbitmap, 220);
         album.setImageBitmap(albumbitmap);
 
 
@@ -87,7 +104,7 @@ public class MyDiaryFragment extends Fragment {
         });
 
         Bitmap vbitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.vacci);
-        vbitmap = getCircleBitmap(vbitmap, 300);
+        vbitmap = getCircleBitmap(vbitmap, 250);
         vaccination.setImageBitmap(vbitmap);
 
 
@@ -104,7 +121,7 @@ public class MyDiaryFragment extends Fragment {
         });
 
         Bitmap wbitmap = BitmapFactory.decodeResource(getResources(), R.drawable.weightimg);
-        wbitmap = getCircleBitmap(wbitmap, 300);
+        wbitmap = getCircleBitmap(wbitmap, 220);
         weight.setImageBitmap(wbitmap);
 
         return view;

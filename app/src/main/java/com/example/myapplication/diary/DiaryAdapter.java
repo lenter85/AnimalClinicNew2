@@ -54,12 +54,14 @@ public class DiaryAdapter extends BaseAdapter {
 
         TextView txtDname = (TextView) convertView.findViewById(R.id.txtDname);
         TextView txtDgender = (TextView) convertView.findViewById(R.id.txtDgender);
+        TextView txtDbirth = (TextView) convertView.findViewById(R.id.txtDbirth);
         ImageView imgDimage = (ImageView) convertView.findViewById(R.id.imgDimage);
 
         Diary diary = list.get(position);
         DiaryNetwork.getDiaryImage(diary.getDimage(), imgDimage);
         txtDname.setText(diary.getDname());
         txtDgender.setText(diary.getDgender());
+        txtDbirth.setText(diary.getDbirth());
 
 
         return convertView;

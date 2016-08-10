@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class DiaryNetwork {
 
-    private static String baseUrl ="http://192.168.0.24:8080/Petopia/";
+    private static String baseUrl ="http://192.168.0.29:8080/Petopia/";
     public static void getDiaryData(final DiaryAdapter diaryAdapter) {
         AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
             @Override
@@ -63,7 +63,7 @@ public class DiaryNetwork {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         Diary diary = new Diary();
                         diary.setDname(jsonObject.getString("dname"));
-
+                        diary.setDbirth(jsonObject.getString("dbirth"));
                         diary.setDgender(jsonObject.getString("dgender"));
                         diary.setDimage(jsonObject.getString("dimage"));
                         diaryAdapter.addItem(diary);

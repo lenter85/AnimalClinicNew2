@@ -19,8 +19,8 @@
             android:onClick="onClickClinicBtn"
             android:padding="10dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/imageView27"
-            android:layout_alignStart="@+id/imageView27" />
+            android:layout_alignLeft="@+id/homePetImg"
+            android:layout_alignStart="@+id/homePetImg" />
 
         <ImageView
             android:layout_width="100dp"
@@ -41,8 +41,8 @@
             android:padding="10dp"
             android:onClick="onClickCommunityBtn"
             android:layout_alignTop="@+id/imageView4"
-            android:layout_alignRight="@+id/imageView27"
-            android:layout_alignEnd="@+id/imageView27" />
+            android:layout_alignRight="@+id/homePetImg"
+            android:layout_alignEnd="@+id/homePetImg" />
 
         <ImageView
             android:layout_width="300dp"
@@ -51,13 +51,13 @@
             android:src="@drawable/petopia_light_outline"
             android:layout_marginTop="51dp"
             android:layout_alignParentTop="true"
-            android:layout_alignLeft="@+id/imageView27"
-            android:layout_alignStart="@+id/imageView27" />
+            android:layout_alignLeft="@+id/homePetImg"
+            android:layout_alignStart="@+id/homePetImg" />
 
         <ImageView
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:id="@+id/imageView27"
+            android:id="@+id/homePetImg"
             android:src="@drawable/add_your_pet"
             android:layout_below="@+id/imageView8"
             android:layout_centerHorizontal="true"
