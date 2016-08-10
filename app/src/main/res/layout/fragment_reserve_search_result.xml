@@ -64,8 +64,8 @@
             android:layout_gravity="center_horizontal" />
 
         <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:id="@+id/btnCalendar"
             android:src="@drawable/calendar"
             android:scaleType="fitXY"

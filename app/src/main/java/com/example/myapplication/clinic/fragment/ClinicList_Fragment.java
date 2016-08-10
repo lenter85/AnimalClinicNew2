@@ -31,7 +31,7 @@ public class ClinicList_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 
-        Toast.makeText(getContext(), "onCreateView()호출 ", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(), "onCreateView()호출 ", Toast.LENGTH_LONG).show();
         View view =  inflater.inflate(R.layout.fragment_cliniclist, container, false);
         clinicListView = (ListView)view.findViewById(R.id.clinicListView);
 

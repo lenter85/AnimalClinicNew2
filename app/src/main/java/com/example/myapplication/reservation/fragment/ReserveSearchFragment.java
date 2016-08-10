@@ -125,7 +125,7 @@ public class ReserveSearchFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Toast.makeText(getContext(), "onResume 호출됨", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(), "onResume 호출됨", Toast.LENGTH_LONG).show();
     }
 
     public void setReserveInfo(View view) {
