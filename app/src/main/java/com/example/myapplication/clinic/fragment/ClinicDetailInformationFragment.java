@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.reservation.fragment.ReserveSearchFragment;
 
@@ -42,6 +45,18 @@ public class ClinicDetailInformationFragment extends Fragment {
         btnReserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(MainActivity.loginStatus == false){
+
+                    Toast toast ;
+                    toast = Toast.makeText(getContext(), "로그인 후에 이용하실 수 있습니다." , Toast.LENGTH_LONG);
+                    int offsetX = 0;
+                    int offsetY = 0;
+                    toast.setGravity(Gravity.CENTER, offsetX, offsetY);
+                    toast.show();
+
+                    return;
+                }
 
                 ReserveSearchFragment reserveSearchFragment = new ReserveSearchFragment();
 

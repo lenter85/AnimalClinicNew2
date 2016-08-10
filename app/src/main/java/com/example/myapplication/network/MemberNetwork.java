@@ -4,6 +4,7 @@ package com.example.myapplication.network;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.member.dto.Member;
 
 import org.json.JSONObject;
@@ -18,19 +19,20 @@ import java.net.URL;
 
 
 public class MemberNetwork {
-    public boolean loginResult;
-    //public String chkResult;
+    public boolean loginResult = false;
+    public boolean joinResult = false;
+    public boolean chkUserId = false;
 
-    public void Login(final String mid, final String mpassword){
+    public boolean Login(final String mid, final String mpassword){
         Log.i("mylog","Login() 실행");
         Log.i("mylog","mid : " + mid);
         Log.i("mylog","mpass : " + mpassword);
 
-        AsyncTask<String,Void,String> asyncTask = new AsyncTask<String, Void, String>() {
+        AsyncTask<String,Void,Boolean> asyncTask = new AsyncTask<String, Void, Boolean>() {
             String result = "fail";
             String json = "";
             @Override
-            protected String doInBackground(String... params) {
+            protected Boolean doInBackground(String... params) {
                 Log.i("mylog","Login() doInBackground 실행");
                 try {
                     URL url = new URL(params[0]);
@@ -69,20 +71,13 @@ public class MemberNetwork {
                         result = "success";
                         Log.i("mylog","결과 : " + result);
                     }
-
                     conn.disconnect();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-                return json;
-            }
-            @Override
-            protected void onPostExecute(String json) {
-                if(result == "success"){
+                Log.i("mylog",json);
+                if(!json.equals(null)){
                     try{
-                        loginResult = true;
-
                         JSONObject jsonObject = new JSONObject(json);
                         Member member = new Member();
                         member.setMid(jsonObject.getString("mid"));
@@ -92,14 +87,29 @@ public class MemberNetwork {
                         member.setMtype(jsonObject.getString("mtype"));
                         member.setMimage(jsonObject.getString("mimage"));
 
+                        if(member.getMid().equals("")){
+                            loginResult = false;
+                            MainActivity.loginStatus = loginResult;
+                        } else {
+                            loginResult = true;
+                            MainActivity.loginStatus = loginResult;
+                        }
+
                         Log.i("mylog",member.getMid());
                     } catch (Exception e){
                         e.printStackTrace();
                     }
                 }
+
+                return loginResult;
             }
         };
-        asyncTask.execute(NetworkSetting.baseUrl + "member/login");
+        try {
+            loginResult = asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl + "member/login").get();
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+        return loginResult;
     }
 
     public void join(final Member member){
@@ -161,15 +171,15 @@ public class MemberNetwork {
             }
         };
 
-        asyncTask.execute(NetworkSetting.baseUrl+"member/join");
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl+"member/join");
     }
 
-    public void checkUserId(final String mid, final Member member){
+    public boolean checkUserId(final String mid){
         Log.i("mylog","checkUserId() 실행");
-        AsyncTask<String,Void,String> asyncTask = new AsyncTask<String, Void, String>() {
+        AsyncTask<String,Void,Boolean> asyncTask = new AsyncTask<String, Void, Boolean>() {
             String body = ""; //null로 초기화하면 안된다.
             @Override
-            protected String doInBackground(String... params) {
+            protected Boolean doInBackground(String... params) {
 
                 try {
                     URL url = new URL(params[0]);
@@ -208,23 +218,24 @@ public class MemberNetwork {
                         is.close();
                     }
 
+                    if(body.equals("1")){
+                        chkUserId = true;
+                    } else if(body.equals("0")){
+                        chkUserId = false;
+                    }
+
                     conn.disconnect();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                return body;
-            }
-
-            @Override
-            protected void onPostExecute(String body) {
-                if(body.equals("1")){
-                    //Toast.makeText(getContext(),"동일한 ID 존재",Toast.LENGTH_SHORT).show();
-                    Log.i("mylog","동일한 ID 존재");
-                } else if(body.equals("0")){
-                    join(member);
-                }
+                return chkUserId;
             }
         };
-        asyncTask.execute(NetworkSetting.baseUrl+"member/checkUserId");
+        try {
+            chkUserId = asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl+"member/checkUserId").get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return chkUserId;
     }
 }

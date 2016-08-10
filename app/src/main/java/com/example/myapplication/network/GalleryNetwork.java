@@ -80,7 +80,7 @@ public class GalleryNetwork {
                 }
             }
         };
-        asyncTask.execute(NetworkSetting.baseUrl+"gallery/list?pageNo=" + pageNo);
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl+"gallery/list?pageNo=" + pageNo);
     }
 
     public static void getGalleryImage(String imageName, final ImageView imageView){
@@ -112,7 +112,7 @@ public class GalleryNetwork {
                 imageView.setImageBitmap(bitmap);
             }
         };
-        asyncTask.execute(NetworkSetting.baseUrl+"gallery/download?gimage=" + imageName);
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl+"gallery/download?gimage=" + imageName);
     }
 
     public static void writeGallery(final Gallery gallery, final Bitmap bitmap, final Bitmap smallBitmap){
@@ -228,7 +228,7 @@ public class GalleryNetwork {
 
             }
         };
-        asyncTask.execute(NetworkSetting.baseUrl + "gallery/write");
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl + "gallery/write");
     }
 
 
