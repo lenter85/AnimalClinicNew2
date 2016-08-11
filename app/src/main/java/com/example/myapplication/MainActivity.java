@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Bitmap bitmap;
     private Bitmap smallbitmap;
 
+
     public static boolean loginStatus;
     public static RegisterClinicFragment registerClinicFragment;
 
