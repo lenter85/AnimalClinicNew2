@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.diary.custom.DayAxisValueFormatter;
 import com.example.myapplication.diary.custom.MyMarkerView;
@@ -59,6 +60,7 @@ import java.util.List;
  */
 public class WeightFragment extends Fragment implements  OnChartValueSelectedListener {
     private ImageView imgAddWeight;
+    private TextView currentWeight;
 
     private LineChart mChart;
 
@@ -92,6 +94,9 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
                         .commit();
             }
         });
+
+        currentWeight = (TextView) view.findViewById(R.id.currentWeight);
+
 
         /*tvX = (TextView) findViewById(R.id.tvXMax);
         tvY = (TextView) findViewById(R.id.tvYMax);
@@ -208,15 +213,15 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
 //        mChart.setVisibleYRange(20f, AxisDependency.LEFT);
 //        mChart.centerViewTo(20, 50, AxisDependency.LEFT);
 
-        mChart.animateX(2500);
+        //mChart.animateX(2500);
         //mChart.invalidate();
 
-        // get the legend (only possible after setting data)
-        Legend l = mChart.getLegend();
+        // get the legend (only possible after setting data) ------------------------------------------------legend
+        //Legend l = mChart.getLegend();
 
         // modify the legend ...
         // l.setPosition(LegendPosition.LEFT_OF_CHART);
-        l.setForm(Legend.LegendForm.LINE);
+        //l.setForm(Legend.LegendForm.LINE);
 
         // // dont forget to refresh the drawing
         // mChart.invalidate();
@@ -460,7 +465,8 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
 
                 String strjson="";
                 try {
-                    URL url = new URL("http://192.168.0.29:8080/Petopia" + "/getweightlist");
+                    URL url = new URL("http://192.168.0.29:8080/Petopia" + "/weight/list?mid=" + MainActivity.loginId + "&dname=" + MyDiaryFragment.my.getDname());
+
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.connect();
 
@@ -493,7 +499,15 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
                         weight = new Weight();
                         weight.setWeight(jsonObject.getInt("weight"));
                         weight.setWdate(jsonObject.getString("wdate"));
-                        Double d = jsonObject.getDouble("fdate");
+
+                        String originaldate = weight.getWdate();
+                        String year = originaldate.substring(0, 4);
+                        String month = originaldate.substring(5,7);
+                        String day = originaldate.substring(8,10);
+                        String tdate = month + "." + day;
+                        Double ddate = Double.parseDouble(tdate);
+                        Double d = ddate;
+                        //Double d = jsonObject.getDouble("fdate");
                         weight.setFdate(decimalCut(d));
                         String fl = String.format("%.2f", d);
                         Log.i("stringformat", fl);
@@ -501,6 +515,8 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
                         float fday = list.get(i).getFdate();
                         Log.i("dd", String.valueOf(fday));
                     }
+
+                    currentWeight.setText(list.get(list.size()-1).getWeight() + " kg");
                     setData(list);
                     //setData(10,10);
 
