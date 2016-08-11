@@ -51,6 +51,7 @@ public class ClinicList_Fragment extends Fragment {
 
                 Clinic clinic = (Clinic)clinicListViewAdapter.getItem(position);
                 MainActivity.cName = clinic.getCname();
+                MainActivity.clinicId = clinic.getCid();
 
                 Toast.makeText(getContext(), clinic.getCname(), Toast.LENGTH_LONG).show();
 

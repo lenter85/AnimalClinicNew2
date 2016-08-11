@@ -45,11 +45,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //로그인 아이디 저장
     public static String loginId;
-    public static String clinicId = "test";
+    public static String clinicId;
     private ImageView imageViewReviewImg;
     private String mimageName;
     private Bitmap bitmap;
     private Bitmap smallbitmap;
+
 
     public static boolean loginStatus;
     public static RegisterClinicFragment registerClinicFragment;
@@ -118,10 +119,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
         }else{
             if(page.equals("note")){
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, new DiaryFragment())
-                        .commit();
+                if(loginId!=null) {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragmentContainer, new DiaryFragment())
+                            .commit();
+                } else {
+
+                }
             }else if(page.equals("clinic")){
                 getSupportFragmentManager()
                         .beginTransaction()

@@ -20,6 +20,7 @@ import android.widget.RatingBar;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.clinic.dto.Review;
+import com.example.myapplication.diary.RegisterAlbumFragment;
 import com.example.myapplication.network.NetworkSetting;
 
 import java.io.ByteArrayOutputStream;
@@ -89,7 +90,8 @@ public class WriteReviewFragment extends Fragment {
                 Review review = new Review();
                 review.setRuserid(MainActivity.loginId);
                 review.setRcontent(editTextContent.getText().toString());
-                review.setRscore(ratingBar.getNumStars());
+                review.setRscore(ratingBar.getRating());
+                RegisterAlbumFragment.getResizedBitmap(bitmap, 100);
                 sendReview(review, bitmap);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ClinicDetailInformationFragment())
                         .commit();

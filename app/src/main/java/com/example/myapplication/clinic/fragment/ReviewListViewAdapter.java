@@ -83,7 +83,7 @@ public class ReviewListViewAdapter extends BaseAdapter {
         //dto인 review에 데이터 집어넣기 작업해야 한다.
 
         Log.i("mylog", "별점은? " + review.getRscore());
-        ratingBar.setNumStars(review.getRscore());
+        //ratingBar.setNumStars(review.getRscore());
         ratingBar.setRating(review.getRscore());
         textView.setText(review.getRuserid());
         textView2.setText(review.getRcontent());

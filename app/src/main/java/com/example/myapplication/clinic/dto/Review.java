@@ -9,21 +9,12 @@ public class Review {
 
     private int rno;
     private String rcontent;
-    private int rscore;
+    private float rscore;
     private String rimage;
     private String ruserid= MainActivity.loginId;
     private String rclinicid=MainActivity.clinicId;
 
     public Review() {}
-
-    public Review(int rno, String rcontent, int rscore, String rimage, String ruserid, String rclinicid) {
-        this.rno = rno;
-        this.rcontent = rcontent;
-        this.rscore = rscore;
-        this.rimage = rimage;
-        this.ruserid = ruserid;
-        this.rclinicid = rclinicid;
-    }
 
     public int getRno() {
         return rno;
@@ -41,11 +32,11 @@ public class Review {
         this.rcontent = rcontent;
     }
 
-    public int getRscore() {
+    public float getRscore() {
         return rscore;
     }
 
-    public void setRscore(int rscore) {
+    public void setRscore(float rscore) {
         this.rscore = rscore;
     }
 

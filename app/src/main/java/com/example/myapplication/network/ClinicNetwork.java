@@ -223,7 +223,7 @@ public class ClinicNetwork {
 
 
             }
-        }.execute(url + "clinicinformation?cid=" + MainActivity.loginId);
+        }.execute(url + "clinicinformation?cid=" + MainActivity.clinicId);
     }
 
 
