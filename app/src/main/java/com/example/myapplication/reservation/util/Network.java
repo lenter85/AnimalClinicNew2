@@ -129,11 +129,13 @@ public class Network {
             @Override
             protected void onPostExecute(String json) {
 
+                Log.i("myLog", "받아온 시간 정보:"+json);
+
                 long curTime = System.currentTimeMillis();
                 SimpleDateFormat dayTime = new SimpleDateFormat("hhmm");
                 String tempTime = dayTime.format(new Date(curTime));
 
-                Log.i("test", "현재 시간은 : " + tempTime);
+                Log.i("myLog", "현재 시간은 : " + tempTime);
 
                 int currentTime = Integer.parseInt(tempTime);
 
@@ -166,7 +168,7 @@ public class Network {
 
                         //현재 시간보다 이전 시간은 지운다.
                         if (currentTime > localTime) {
-                            Log.i("myLog", nonReservedTimeList.get(i) + " 제거");
+                            Log.i("myLog", "현재 시간보다 이전 시간이므로 "+nonReservedTimeList.get(i) + " 제거");
                             nonReservedTimeList.remove(i);
                             i--;
                             continue;
@@ -181,7 +183,7 @@ public class Network {
 
                             if (registerTime.equals(dbClinicTime)) {
 
-                                //Log.i("mylog", registerTime+"과 "+dbClinicTime+"는 같으므로 제거");
+                                Log.i("mylog", registerTime+"과 "+dbClinicTime+"는 같으므로 제거");
 
                                 //Log.i("mylog",i+"번째에 있는"+clinicTimeList.get(i)+"를 제거합니다.");
                                 nonReservedTimeList.remove(i);
