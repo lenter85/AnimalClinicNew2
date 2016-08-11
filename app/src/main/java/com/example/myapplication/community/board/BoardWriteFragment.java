@@ -7,12 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.myapplication.R;
 
 
 public class BoardWriteFragment extends Fragment {
     private Button cancelBtn;
+    private EditText boardTitle;
+    private EditText boardContent;
 
     public BoardWriteFragment() {
         // Required empty public constructor
@@ -26,11 +29,15 @@ public class BoardWriteFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_board_write, container, false);
 
         cancelBtn = (Button)view.findViewById(R.id.cancelBtn);
+        boardTitle = (EditText)view.findViewById(R.id.boardTitle);
+        boardContent = (EditText)view.findViewById(R.id.boardContent);
+
+
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getActivity().onBackPressed();
             }
         });
 

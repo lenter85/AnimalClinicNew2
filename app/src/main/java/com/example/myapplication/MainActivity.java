@@ -236,11 +236,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragmentContainer, new CommunityFragment())
+                    .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_manage) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragmentContainer, new LogInFragment())
+                    .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_share) {
 
