@@ -112,10 +112,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
         }else{
             if(page.equals("note")){
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, new DiaryFragment())
-                        .commit();
+                if(loginId!=null) {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragmentContainer, new DiaryFragment())
+                            .commit();
+                } else {
+
+                }
             }else if(page.equals("clinic")){
                 getSupportFragmentManager()
                         .beginTransaction()
