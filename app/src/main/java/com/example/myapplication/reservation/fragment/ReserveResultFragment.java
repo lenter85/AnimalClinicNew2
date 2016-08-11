@@ -2,6 +2,7 @@ package com.example.myapplication.reservation.fragment;
 
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -113,7 +114,17 @@ public class ReserveResultFragment extends Fragment {
                         toast.setGravity(Gravity.CENTER, offsetX, offsetY);
                         toast.show();
 
+
                         // 병원 정보 화면으로 돌아간다.
+                        android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        int back = fragmentManager.getBackStackEntryCount();
+
+                        for(int i=0; i<back-1; i++){
+                            fragmentManager.popBackStack();
+                        }
+
+                        Log.i("myBack", String.valueOf(back));
+
                         getActivity()
                                 .getSupportFragmentManager()
                                 .beginTransaction()
