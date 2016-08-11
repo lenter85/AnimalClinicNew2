@@ -18,6 +18,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -294,6 +295,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i("mylog", "onActivityResult!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         if(requestCode == 1) {
             bitmap = (Bitmap) data.getExtras().get("data");
             smallbitmap = getResizedBitmap(bitmap, 500);
@@ -321,6 +323,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public static Bitmap getResizedBitmap(Bitmap bitmap, int maxSize) {
