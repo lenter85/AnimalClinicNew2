@@ -3,6 +3,8 @@ package com.example.myapplication.network;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.myapplication.community.dto.Board;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -12,7 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class BoardNetwork {
-    public void write(){
+    public void write(final Board board){
         AsyncTask<String,Void,String> asyncTask = new AsyncTask<String, Void, String>() {
             String body = ""; //null로 초기화하면 안된다.
             @Override
@@ -30,7 +32,7 @@ public class BoardNetwork {
 
                     //요청 내용 본문에 작성
                     OutputStream os = conn.getOutputStream();
-                    String data = "";
+                    String data = "mid="+board.getmId()+"&bTitle="+board.getbTitle()+"&bcontent="+board.getbContent()+"&mimage=member01.jpg";
                     byte[] bytedata = data.getBytes();
                     os.write(bytedata);
                     os.flush();
