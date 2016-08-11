@@ -124,7 +124,7 @@
                 <TextView
                     android:layout_width="230dp"
                     android:layout_height="35dp"
-                    android:id="@+id/textView"
+                    android:id="@+id/textViewContent"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/round_angle"
                     android:textSize="20dp" />

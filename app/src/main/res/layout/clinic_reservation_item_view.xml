@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="09:00 ~ 09:30"
-        android:id="@+id/textView"
+        android:id="@+id/textViewContent"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="25dp"
         android:textSize="15dp" />

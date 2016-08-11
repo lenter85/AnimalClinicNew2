@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="일"
-            android:id="@+id/textView"
+            android:id="@+id/textViewContent"
             android:textColor="#ff0000"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp" />

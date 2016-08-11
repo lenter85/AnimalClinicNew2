@@ -89,8 +89,8 @@
         android:id="@+id/imgCalendar"
         android:src="@drawable/calendaricon"
         android:layout_alignTop="@+id/textViewName"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView"
+        android:layout_toRightOf="@+id/textViewContent"
+        android:layout_toEndOf="@+id/textViewContent"
         android:scaleType="fitXY"
         android:background="@android:color/transparent"
         android:layout_marginLeft="5dp" />

@@ -7,7 +7,7 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/imageViewReviewImg"
+        android:id="@+id/imageView"
         android:layout_marginRight="10dp"
         android:src="@drawable/woman" />
 
@@ -20,47 +20,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="멍뭉맘"
-            android:id="@+id/textView" />
+            android:id="@+id/textViewUserId" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView16"
-                android:src="@drawable/heart" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView17"
-                android:src="@drawable/heart" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView18"
-                android:src="@drawable/heart" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView19"
-                android:src="@drawable/heart" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageView21"
-                android:src="@drawable/heart" />
-        </LinearLayout>
+        <RatingBar
+            style="@style/Widget.AppCompat.RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingBar" />
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="80dp"
             android:id="@+id/imageViewLarge"
             android:src="@drawable/facility3"
             android:scaleType="fitXY" />
@@ -69,6 +39,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="시설이 좋아요!!"
-            android:id="@+id/textView51" />
+            android:id="@+id/textViewContent" />
     </LinearLayout>
 </LinearLayout>
