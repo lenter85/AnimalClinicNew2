@@ -1,9 +1,11 @@
 package com.example.myapplication.community.board;
 
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,12 +51,16 @@ public class BoardFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, new BoardWriteFragment())
-                        .addToBackStack(null)
-                        .commit();
+                if(MainActivity.loginStatus){
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragmentContainer, new BoardWriteFragment())
+                            .addToBackStack(null)
+                            .commit();
+                } else {
+                    dialog("로그인 후 사용 가능합니다.");
+                }
             }
         });
 
@@ -88,7 +94,21 @@ public class BoardFragment extends Fragment {
                         .commit();
             }
         });
-
         return view;
+    }
+
+    public void dialog(String message){
+        //다이얼로그
+        new AlertDialog.Builder(getContext())
+                .setTitle("로그인 필요")
+                .setMessage(message)
+                .setIcon(R.drawable.check)
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .show();
     }
 }
