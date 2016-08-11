@@ -46,12 +46,13 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/reserveListView"
+        android:id="@+id/myReserveListView"
         android:layout_below="@+id/linearLayout10"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
         android:layout_margin="0dp"
         android:dividerHeight="15dp"
         android:divider="#c3e3a3"
-        android:padding="15dp" />
+        android:padding="15dp"
+        android:choiceMode="none" />
 </RelativeLayout>
