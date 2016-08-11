@@ -105,4 +105,34 @@
         android:layout_alignStart="@+id/checkBox2"
         android:checked="false" />
 
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/name"
+        android:layout_alignStart="@+id/name"
+        android:layout_marginTop="10dp">
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="일반회원"
+        android:id="@+id/nomal"
+        android:checked="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/name"
+        android:layout_alignStart="@+id/name" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="병원"
+        android:id="@+id/clinic"
+        android:checked="false"
+        android:layout_alignTop="@+id/nomal"
+        android:layout_toRightOf="@+id/nomal"
+        android:layout_toEndOf="@+id/nomal" />
+    </RadioGroup>
+
 </RelativeLayout>

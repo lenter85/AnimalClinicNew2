@@ -13,10 +13,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.HomeActivity;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.member.dao.CheckUser;
 import com.example.myapplication.member.dto.Member;
@@ -30,6 +33,9 @@ public class NewAccountFragment extends Fragment {
     private CheckBox checkBox2;
     private CheckBox checkBox3;
     private Button btnSend;
+    private RadioButton nomal;
+    private RadioButton clinic;
+    private RadioGroup radioGroup;
 
     private TextView name;
     private TextView phone;
@@ -51,6 +57,10 @@ public class NewAccountFragment extends Fragment {
         checkBox1 = (CheckBox)view.findViewById(R.id.checkBox1);
         checkBox2 = (CheckBox)view.findViewById(R.id.checkBox2);
         checkBox3 = (CheckBox)view.findViewById(R.id.checkBox3);
+        nomal = (RadioButton)view.findViewById(R.id.nomal);
+        clinic = (RadioButton)view.findViewById(R.id.clinic);
+        radioGroup = (RadioGroup)view.findViewById(R.id.radioGroup);
+
 
         name = (EditText)view.findViewById(R.id.name);
         email = (EditText)view.findViewById(R.id.login_email);
@@ -64,6 +74,23 @@ public class NewAccountFragment extends Fragment {
 
         btnSend.setEnabled(false);
         checkBox();
+
+        nomal.setChecked(true);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(nomal.isChecked()) {
+                    nomal.setChecked(true);
+                    clinic.setChecked(false);
+                    MainActivity.LoginId = "NOMAL";
+                } else if (clinic.isChecked()) {
+                    nomal.setChecked(false);
+                    clinic.setChecked(true);
+                    MainActivity.LoginId = "CLINIC";
+                }
+            }
+        });
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +127,7 @@ public class NewAccountFragment extends Fragment {
                     member.setMphone(phone.getText().toString());
                     member.setMid(email.getText().toString());
                     member.setMpassword(password.getText().toString());
-                    member.setMtype("1");
+                    member.setMtype(MainActivity.LoginId);
 
                     if(memberNetwork.checkUserId(email.getText().toString())){
                         Toast.makeText(getContext(),"동일한 ID 존재", Toast.LENGTH_SHORT).show();
