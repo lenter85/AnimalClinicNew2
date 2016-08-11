@@ -46,7 +46,7 @@ public class ClinicDetailInformationFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                /*if(MainActivity.loginStatus == false){
+                if(MainActivity.loginStatus == false){
 
                     Toast toast ;
                     toast = Toast.makeText(getContext(), "로그인 후에 이용하실 수 있습니다." , Toast.LENGTH_LONG);
@@ -56,7 +56,7 @@ public class ClinicDetailInformationFragment extends Fragment {
                     toast.show();
 
                     return;
-                }*/
+                }
 
                 ReserveSearchFragment reserveSearchFragment = new ReserveSearchFragment();
 
