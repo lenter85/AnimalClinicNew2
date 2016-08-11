@@ -86,6 +86,7 @@ public class ReviewListViewAdapter extends BaseAdapter {
         textView.setText(review.getRuserid());
         textView2.setText(review.getRcontent());
 
+        Log.i("mylog", "review어댑터, list에서 get으로 review객체를 뽑아온후 Ruserid를 보면? : " + review.getRuserid());
         ClinicNetwork clinicNetwork = new ClinicNetwork();
         clinicNetwork.getReviewUserImage(review.getRuserid(), imageView);
         clinicNetwork.getReviewLargeImage(review.getRimage(),imageViewLarge);

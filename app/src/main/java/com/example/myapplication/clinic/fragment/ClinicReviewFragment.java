@@ -3,6 +3,7 @@ package com.example.myapplication.clinic.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class ClinicReviewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_clinic_review, container, false);
         button = (Button) view.findViewById(R.id.button);
 
-        list.add(new Review());
+        //list.add(new Review());
         //list.add(new Review());
 
         //ListView에 어댑터 설정
@@ -52,6 +53,8 @@ public class ClinicReviewFragment extends Fragment {
         reviewListViewAdapter = new ReviewListViewAdapter();
         reviewListViewAdapter.setList(list);
         listView.setAdapter(reviewListViewAdapter);
+        ClinicNetwork.getReviewData(pageNo, reviewListViewAdapter);
+        Log.i("mylog","getReviewData() 실행");
 
         //ListView 이벤트 처리
        /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
