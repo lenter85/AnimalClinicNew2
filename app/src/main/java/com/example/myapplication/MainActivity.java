@@ -18,6 +18,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -41,12 +42,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public static List<RegisterLocation> list = new ArrayList<>();
     public static String clinicLocation = null;
-    public static String loginId = "test";
-    public static String clinicId = "test";
+
+    //로그인 아이디 저장
+    public static String loginId;
+    public static String clinicId;
     private ImageView imageViewReviewImg;
     private String mimageName;
     private Bitmap bitmap;
     private Bitmap smallbitmap;
+
 
     public static boolean loginStatus;
     public static RegisterClinicFragment registerClinicFragment;
@@ -61,7 +65,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //민규 컴퓨터
 
     public static Fragment previousFragment;
+
+    //일반회원, 병원회원 구분 플래그
     public static String LoginId = "NOMAL";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,10 +119,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
         }else{
             if(page.equals("note")){
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, new DiaryFragment())
-                        .commit();
+                if(loginId!=null) {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragmentContainer, new DiaryFragment())
+                            .commit();
+                } else {
+
+                }
             }else if(page.equals("clinic")){
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -288,6 +300,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i("mylog", "onActivityResult!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         if(requestCode == 1) {
             bitmap = (Bitmap) data.getExtras().get("data");
             smallbitmap = getResizedBitmap(bitmap, 500);
@@ -315,6 +328,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public static Bitmap getResizedBitmap(Bitmap bitmap, int maxSize) {

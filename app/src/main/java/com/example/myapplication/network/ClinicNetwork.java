@@ -223,7 +223,7 @@ public class ClinicNetwork {
 
 
             }
-        }.execute(url + "clinicinformation?cid=" + MainActivity.loginId);
+        }.execute(url + "clinicinformation?cid=" + MainActivity.clinicId);
     }
 
 
@@ -753,7 +753,7 @@ public class ClinicNetwork {
                 }
             }
         };
-        asyncTask.execute(NetworkSetting.baseUrl3+"reviewlist?pageNo=" + pageNo);
+        asyncTask.execute(NetworkSetting.baseUrl3+"reviewlist?pageNo=" + pageNo + "&cid=" + MainActivity.clinicId);
     }
 
 

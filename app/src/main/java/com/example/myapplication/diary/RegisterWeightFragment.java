@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.network.WeightNetwork;
 import com.google.android.gms.vision.text.Text;
 
 /**
@@ -34,10 +35,13 @@ public class RegisterWeightFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_register_weight, container, false);
 
         btnAddWeight = (Button) view.findViewById(R.id.btnAddWeight);
+        txtWeight = (TextView) view.findViewById(R.id.txtWeight);
+        txtWeightDate = (TextView) view.findViewById(R.id.txtWeightDate);
 
         btnAddWeight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                WeightNetwork.registerWeight(Double.parseDouble(txtWeight.getText().toString()), txtWeightDate.getText().toString());
                 getActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()

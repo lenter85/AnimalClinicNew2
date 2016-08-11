@@ -28,6 +28,8 @@ import android.widget.TextView;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.clinic.dto.ClinicRegister;
+import com.example.myapplication.diary.RegisterAlbumFragment;
+import com.example.myapplication.diary.RegisterMyDiaryFragment;
 import com.example.myapplication.network.ClinicNetwork;
 
 import java.io.File;
@@ -296,7 +298,7 @@ public class RegisterClinicFragment extends Fragment {
         public void onClick(View v) {
 
             ClinicRegister clinicRegister = new ClinicRegister();
-            clinicRegister.setCid("testID");
+            clinicRegister.setCid(MainActivity.loginId);
             clinicRegister.setClocation(textView.getText().toString());
             clinicRegister.setCname(editText1.getText().toString());
             clinicRegister.setCintroduction(editText3.getText().toString());
@@ -321,6 +323,22 @@ public class RegisterClinicFragment extends Fragment {
             Log.i("mylog", "위도 경도 받나? : " + latitude);
 
             ClinicNetwork clinicNetwork = new ClinicNetwork();
+            if(bitmap1 != null) {
+                RegisterAlbumFragment.getResizedBitmap(bitmap1, 100);
+            }
+
+            if(bitmap2 != null) {
+                RegisterAlbumFragment.getResizedBitmap(bitmap2, 100);
+            }
+
+            if(bitmap3 != null) {
+                RegisterAlbumFragment.getResizedBitmap(bitmap3, 100);
+            }
+
+            if(bitmap4 != null) {
+                RegisterAlbumFragment.getResizedBitmap(bitmap4, 100);
+            }
+
             clinicNetwork.clinicRegister(clinicRegister, bitmap1, bitmap2, bitmap3, bitmap4);
 
         }

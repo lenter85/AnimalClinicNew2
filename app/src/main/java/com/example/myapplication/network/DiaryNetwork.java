@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class DiaryNetwork {
 
-    private static String baseUrl ="http://192.168.0.29:8080/Petopia/";
+    private static String baseUrl = NetworkSetting.baseUrl2;
     public static void getDiaryData(final DiaryAdapter diaryAdapter) {
         AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
             @Override

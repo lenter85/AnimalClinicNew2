@@ -14,7 +14,7 @@ import java.net.URL;
  */
 public class WeightNetwork {
     private static String url = NetworkSetting.baseUrl2;
-    public void registerWeight(double weight, String wdate) {
+    public static void registerWeight(double weight, String wdate) {
         AsyncTask<String, Void, Void> asyncTask = new AsyncTask<String, Void, Void>() {
             @Override
             protected Void doInBackground(String... params) {
@@ -31,7 +31,12 @@ public class WeightNetwork {
                 return null;
             }
         };
-        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url + "weight/register?weight=" + weight + "?wdate=" + wdate +
-                "?mid=" + MainActivity.LoginId + "?dname=" + MyDiaryFragment.my.getDname());
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url + "weight/register?weight=" + weight + "&wdate=" + wdate +
+                "&mid=" + MainActivity.loginId + "&dname=" + MyDiaryFragment.my.getDname());
     }
+
+
+
+
+
 }

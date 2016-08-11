@@ -20,6 +20,7 @@ import android.widget.RatingBar;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.clinic.dto.Review;
+import com.example.myapplication.diary.RegisterAlbumFragment;
 import com.example.myapplication.network.NetworkSetting;
 
 import java.io.ByteArrayOutputStream;
@@ -34,7 +35,7 @@ import java.net.URL;
 public class WriteReviewFragment extends Fragment {
     private Button buttonCancel;
     private Button btnRegister;
-    ImageView imageViewReviewImg;
+    private ImageView imageViewReviewImg;
     private Bitmap bitmap;
     private RatingBar ratingBar;
     private EditText editTextContent;
@@ -89,7 +90,8 @@ public class WriteReviewFragment extends Fragment {
                 Review review = new Review();
                 review.setRuserid(MainActivity.loginId);
                 review.setRcontent(editTextContent.getText().toString());
-                review.setRscore(ratingBar.getNumStars());
+                review.setRscore(ratingBar.getRating());
+                RegisterAlbumFragment.getResizedBitmap(bitmap, 100);
                 sendReview(review, bitmap);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ClinicDetailInformationFragment())
                         .commit();
@@ -112,13 +114,15 @@ public class WriteReviewFragment extends Fragment {
 
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("mylog", "Result 시작");
+        Log.i("mylog", "writeReview에 사진등록 결과");
         if(resultCode == Activity.RESULT_OK){
             if(requestCode == 1) {
                 try {
                     bitmap 	= MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
 
                     imageViewReviewImg.setImageBitmap(bitmap);
+
+                    Log.i("mylog", "bitmap 정보는 ? : " + bitmap.getConfig().name());
 
                 } catch (IOException e) {
                     e.printStackTrace();

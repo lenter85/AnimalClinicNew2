@@ -26,7 +26,7 @@ import java.net.URL;
  * Created by Administrator on 2016-07-22.
  */
 public class AlbumNetwork {
-    private static String baseUrl = "http://192.168.0.29:8080/Petopia/";
+    private static String baseUrl = NetworkSetting.baseUrl2;
 
 
     public static void getAlbumData(int pageNo, final AlbumAdapter albumAdapter) {
