@@ -9,7 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.myapplication.R;
 
@@ -17,18 +17,31 @@ import com.example.myapplication.R;
  * A simple {@link Fragment} subclass.
  */
 public class BoardDetailFragment extends Fragment {
-    private Button cancelBtn;
 
     public BoardDetailFragment() {
         // Required empty public constructor
     }
-
+    private TextView boardTitle;
+    private TextView boardContent;
+    private TextView boardDate;
+    private TextView mid;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_board_detail, container, false);
+
+        boardTitle = (TextView)view.findViewById(R.id.boardTitle);
+        boardContent = (TextView)view.findViewById(R.id.boardContent);
+        boardDate = (TextView)view.findViewById(R.id.boardDate);
+        mid = (TextView)view.findViewById(R.id.mid);
+
+        boardTitle.setText(BoardFragment.selectedBoard.getbTitle());
+        boardContent.setText(BoardFragment.selectedBoard.getbContent());
+        boardDate.setText(BoardFragment.selectedBoard.getbDate());
+        mid.setText(BoardFragment.selectedBoard.getmId());
+
 
         setHasOptionsMenu(true);
         return view;

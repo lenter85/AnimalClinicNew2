@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.myapplication.R;
 import com.example.myapplication.community.dto.Board;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BoardFragmentAdapter extends BaseAdapter{
@@ -18,17 +19,17 @@ public class BoardFragmentAdapter extends BaseAdapter{
     private Context context;
     private ImageView boardImage;
     private TextView boardTitle;
+    private TextView boardDate;
 
     public BoardFragmentAdapter(Context context){
         this.context = context;
     }
 
     //리스트 객체 추가
-    private List<Board> list;
-    public void setList(List<Board> list) {
-        this.list = list;
+    private List<Board> list = new ArrayList<>();
+    public List<Board> getList(){
+        return list;
     }
-
 
     @Override
     public int getCount() {
@@ -48,7 +49,7 @@ public class BoardFragmentAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        context = parent.getContext();
+        //context = parent.getContext();
 
         //아이템 뷰 생성
         if(convertView == null){
@@ -59,12 +60,22 @@ public class BoardFragmentAdapter extends BaseAdapter{
         //데이터 세팅
         boardImage = (ImageView) convertView.findViewById(R.id.boardImage);
         boardTitle = (TextView) convertView.findViewById(R.id.boardTitle);
+        boardDate = (TextView) convertView.findViewById(R.id.boardDate);
 
-        Board board = list.get(position);
-        boardImage.setImageResource(board.getbImage());
+
+        Board board = (Board)getItem(position);
+        //BoardNetwork.getBoard(1);
+        //boardImage.setImageResource(board.getbImage());
         boardTitle.setText(board.getbTitle());
+        boardDate.setText(board.getbDate());
 
         //아이템 뷰 리턴
         return convertView;
     }
+
+    public void addItem(Board board) {
+        list.add(board);
+        this.notifyDataSetChanged();
+    }
+
 }
