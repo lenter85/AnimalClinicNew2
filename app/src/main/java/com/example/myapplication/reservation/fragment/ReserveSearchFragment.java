@@ -19,9 +19,11 @@ import android.widget.Toast;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.calendar.CalendarFragment;
+import com.example.myapplication.reservation.util.Network;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -132,9 +134,8 @@ public class ReserveSearchFragment extends Fragment {
 
 
         //애완 동물명 세팅
-        final ArrayList<String> arraylist = new ArrayList<String>();
-        arraylist.add("우디");
-        arraylist.add("페르");
+        final List<String> arraylist = Network.getMyPetList();
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, arraylist);
         //스피너 속성
@@ -177,10 +178,10 @@ public class ReserveSearchFragment extends Fragment {
         rtype = "진료";
 
         //유저 아이디 세팅
-        ruserid = "test";
+        ruserid = MainActivity.loginId;
 
         //병원 아이디 세팅
-        rclinicid = "test";
+        rclinicid = MainActivity.clinicId;
 
         rclinicname = MainActivity.cName;
 

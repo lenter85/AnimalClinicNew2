@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.clinic.fragment.ClinicDetailInformationFragment;
 import com.example.myapplication.network.NetworkSetting;
@@ -174,11 +175,11 @@ public class ReserveResultFragment extends Fragment {
         reserve.setRtype(ReserveSearchFragment.rtype);
         reserve.setRdate(rdate);
         reserve.setRtime(ReserveSearchFragment.rtime);
-        reserve.setRclinicid(ReserveSearchFragment.rclinicid);
-        reserve.setRuserid(ReserveSearchFragment.ruserid);
+        reserve.setRclinicid(MainActivity.clinicId);
+        reserve.setRuserid(MainActivity.loginId);
         reserve.setRpname(ReserveSearchFragment.rpname);
-        reserve.setRclinicName(ReserveSearchFragment.rclinicname);
-        reserve.setRaddress("테스트 주소");
+        reserve.setRclinicName(MainActivity.cName);
+        reserve.setRaddress(MainActivity.clinicLocation);
 
         sendReserve(reserve);
 

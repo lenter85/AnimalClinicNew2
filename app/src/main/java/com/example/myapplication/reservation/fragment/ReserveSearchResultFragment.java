@@ -321,17 +321,15 @@ public class ReserveSearchResultFragment extends Fragment {
 
         txtCname.setText(MainActivity.cName);
 
-        String clinicid = "test";
-
         Log.i("myLog", "setItemSetting() 메소드 호출" + ReserveSearchFragment.rdate);
         String date = Util.getSimpleDate(ReserveSearchFragment.rdate);
 
 
         Map<String, String> map = new HashMap<>();
-        map.put("clinicid", clinicid);
+        map.put("clinicid", MainActivity.clinicId);
         map.put("date", date);
 
-        Log.i("myLog", "서버에 병원 아이디:" + clinicid + "의 " + date + "날짜의 예약시간 정보를 요청합니다.");
+        Log.i("myLog", "서버에 병원 아이디:" + MainActivity.clinicId + "의 " + date + "날짜의 예약시간 정보를 요청합니다.");
 
         //리스트뷰에 예약 가능한 시간만 보여줍니다.
         Network.setReserveList(getContext(), timeViewAdapter, Util.getClinicTimeList(), map);

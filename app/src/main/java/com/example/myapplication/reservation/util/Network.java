@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.calendar.MonthItemView;
@@ -661,4 +662,97 @@ public class Network {
 
         Log.i("myLog", "asyncTask 수행 완료");
     }
+
+    public static List<String> getMyPetList(){
+
+        final ArrayList<String> myPetList = new ArrayList<>();
+
+        AsyncTask<String, Void, List<String>> asyncTask = new AsyncTask<String, Void, List<String>>() {
+
+            //doInBackground의 리턴값 String은 onPostExecute의 매개변수로 들어간다.
+            @Override
+            protected List<String> doInBackground(String... params) {
+
+                String json = "";
+
+                try {
+                    //먼저 URL 객체를 만든다.
+                    URL url = new URL(params[0]);
+                    Log.i("myLog", params[0]);
+
+                    //연결 객체를 만든다.
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoInput(true);
+                    conn.setDoOutput(true);
+                    conn.setUseCaches(false);
+                    conn.setRequestMethod("GET");
+                    conn.setRequestProperty("Connection", "Keep-Alive");
+                    conn.setRequestProperty("Content-Type", "application/json");
+                    //실제 연결
+                    conn.connect();
+
+
+                    /* 응답 */
+
+                    //요청을 처리하고 응답이 온다.
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) { //200은 정상 응답을 의미한다. ( 잘못 요청: 404, 서버 에러: 500 )
+                        //Log.i("myLog", "응답 OK를 받았음");
+                        //응답코드가 200번일 경우에 본문 내용을 읽고싶다.
+
+                        InputStream is = conn.getInputStream(); //응답의 결과를 읽는다.
+                        Reader reader = new InputStreamReader(is); //문자일 경우 Reader로 읽는 것이 더 낫다.
+                        BufferedReader br = new BufferedReader(reader); //한 라인 단위로 읽으려면 BufferedReader로 읽는 것이 낫다. 보조 스트림을 다는 것.
+
+
+                        while (true) {
+                            String line = br.readLine(); //한 줄씩 읽는다.
+                            if (line == null) break; //행을 다 읽었을 경우 null이 나온다. while문을 빠져나온다.
+                            json += line; //body += line;
+                        }
+
+                        br.close();
+                        reader.close();
+                        is.close();
+
+                    } else {
+                        Log.i("myLog", "응답 OK를 받지못하였음");
+                    }
+
+                    conn.disconnect();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+
+                    JSONArray jsonArray = new JSONArray(json);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        String pet = jsonArray.getString(i);
+                        Log.i("myLog", pet);
+                        myPetList.add(pet);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                return myPetList;
+            }
+        };
+
+
+        Log.i("myLog", site + "/reserve/getMyPetList?userid="+MainActivity.loginId);
+        try {
+            List<String> diaryList = asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "/reserve/getMyPetList?userid="+MainActivity.loginId).get(); //doInBackground()의 매개값으로 들어간다.
+            return diaryList;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 }
