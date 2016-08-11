@@ -20,6 +20,7 @@ import android.widget.RatingBar;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.clinic.dto.Review;
+import com.example.myapplication.network.NetworkSetting;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -140,7 +141,7 @@ public class WriteReviewFragment extends Fragment {
                     String delimiter = "\r\n--" + boundary + "\r\n";    //규약
 
                     // 커넥션 생성 및 설정
-                    URL url = new URL("http://192.168.0.38:8080/Petopia/registerreivew");
+                    URL url = new URL(NetworkSetting.baseUrl2 + "registerreivew");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setDoInput(true);
                     conn.setDoOutput(true);

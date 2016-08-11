@@ -6,12 +6,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.clinic.dto.Review;
+import com.example.myapplication.network.ClinicNetwork;
+import com.example.myapplication.network.GalleryNetwork;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,8 @@ public class ClinicReviewFragment extends Fragment {
     private List<Review> list = new ArrayList<>();
 
     private Button button;
+    private boolean lastItem;
+    private int pageNo = 1;
 
 
     public ClinicReviewFragment() {
@@ -49,12 +54,31 @@ public class ClinicReviewFragment extends Fragment {
         listView.setAdapter(reviewListViewAdapter);
 
         //ListView 이벤트 처리
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Review review = list.get(position);
                 Review review = (Review) reviewListViewAdapter.getItem(position);
                 //imageViewLarge.setImageResource(review.getImageLarge());
+            }
+        });*/
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if(totalItemCount>0 && (firstVisibleItem+visibleItemCount>=totalItemCount-1)) {
+                    lastItem = true;
+                } else {
+                    lastItem = false;
+                }
+            }
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if(lastItem && scrollState==AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    pageNo++;
+                    ClinicNetwork.getReviewData(pageNo, reviewListViewAdapter);
+                }
             }
         });
 

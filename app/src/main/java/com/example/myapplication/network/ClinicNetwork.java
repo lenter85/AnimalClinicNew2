@@ -18,7 +18,12 @@ import com.example.myapplication.clinic.dto.ClinicFacility;
 import com.example.myapplication.clinic.dto.ClinicInformation;
 import com.example.myapplication.clinic.dto.ClinicRegister;
 import com.example.myapplication.clinic.dto.RegisterLocation;
+import com.example.myapplication.clinic.dto.Review;
+import com.example.myapplication.clinic.fragment.ClinicListViewAdapter;
 import com.example.myapplication.clinic.fragment.RegisterClinicFragment;
+import com.example.myapplication.clinic.fragment.ReviewListViewAdapter;
+import com.example.myapplication.community.dto.Gallery;
+import com.example.myapplication.community.gallery.GalleryFragmentAdapter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
@@ -48,7 +53,7 @@ import java.util.List;
  */
 public class ClinicNetwork {
 
-    private String url = "http://192.168.0.38:8080/Petopia/";
+    private String url = NetworkSetting.baseUrl3;
     private String body="";  //여기 처음에 String body; 로 안해야 한다. 주의해라!!
     private Bitmap bm;
     private GoogleMap googleMap;
@@ -273,7 +278,7 @@ public class ClinicNetwork {
                     if(jsonObject.getString("cimage1") != "noimage") {
                         Log.i("mylog", "cimage1 : " + jsonObject.getString("cimage1"));
 
-                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage1"));
+                        URL url2 = new URL(NetworkSetting.baseUrl3 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage1"));
                         Log.i("mylog", url2.toString());
                         URLConnection conn2 = url2.openConnection();
                         conn2.connect();
@@ -288,7 +293,7 @@ public class ClinicNetwork {
                     if(jsonObject.getString("cimage2") != "noimage") {
                         Log.i("mylog", "cimage2 : " + jsonObject.getString("cimage2"));
 
-                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage2"));
+                        URL url2 = new URL(NetworkSetting.baseUrl3 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage2"));
                         Log.i("mylog", url2.toString());
                         URLConnection conn2 = url2.openConnection();
                         conn2.connect();
@@ -303,7 +308,7 @@ public class ClinicNetwork {
                     if(jsonObject.getString("cimage3") != "noimage") {
                         Log.i("mylog", "cimage3 : " + jsonObject.getString("cimage3"));
 
-                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage3"));
+                        URL url2 = new URL(NetworkSetting.baseUrl3 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage3"));
                         Log.i("mylog", url2.toString());
                         URLConnection conn2 = url2.openConnection();
                         conn2.connect();
@@ -318,7 +323,7 @@ public class ClinicNetwork {
                     if(jsonObject.getString("cimage4") != "noimage") {
                         Log.i("mylog", "cimage4 : " + jsonObject.getString("cimage4"));
 
-                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage4"));
+                        URL url2 = new URL(NetworkSetting.baseUrl3 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage4"));
                         Log.i("mylog", url2.toString());
                         URLConnection conn2 = url2.openConnection();
                         conn2.connect();
@@ -355,7 +360,7 @@ public class ClinicNetwork {
                     imageView4.setImageBitmap(bm4);
                 }
             }
-        }.execute(NetworkSetting.baseUrl2 + "clinicinformation?cid=" + MainActivity.clinicId);
+        }.execute(NetworkSetting.baseUrl3 + "clinicinformation?cid=" + MainActivity.clinicId);
     }
 
 
@@ -485,7 +490,7 @@ public class ClinicNetwork {
                     String delimiter = "\r\n--" + boundary + "\r\n";    //규약
 
                     // 커넥션 생성 및 설정
-                    URL url = new URL("http://192.168.0.38:8080/Petopia/clinicregister");
+                    URL url = new URL(NetworkSetting.baseUrl3 + "clinicregister");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setDoInput(true);
                     conn.setDoOutput(true);
@@ -682,4 +687,141 @@ public class ClinicNetwork {
         return str;
     }
 
+
+
+
+    public static void getReviewData(int pageNo, final ReviewListViewAdapter reviewListViewAdapter){
+        Log.i("mylog","getGalleryData() 실행");
+        AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                String json = "";
+                try {
+                    URL url = new URL(params[0]);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    conn.connect();
+
+                    Log.i("mylog", ""+ conn.getResponseCode());
+                    if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        InputStream is = conn.getInputStream();
+                        Reader reader = new InputStreamReader(is);
+                        BufferedReader br = new BufferedReader(reader);
+                        String data = null;
+                        while((data = br.readLine()) != null) {
+                            json += data;
+                        }
+                        br.close();
+                        reader.close();
+                        is.close();
+                    }
+
+                    conn.disconnect();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+                return json;
+            }
+
+            @Override
+            protected void onPostExecute(String json) {
+                List<Review> list = new ArrayList<>();
+
+                try {
+                    JSONArray jsonArray = new JSONArray(json);
+                    Log.i("mylog", "리뷰리스트 json 파싱 중");
+                    for(int i=0; i<jsonArray.length();i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        Review review = new Review();
+
+                        review.setRno(jsonObject.getInt("rno"));
+                        review.setRclinicid(jsonObject.getString("rclinicid"));
+                        review.setRcontent(jsonObject.getString("rcontent"));
+                        review.setRimage((jsonObject.getString("rimage")));
+                        review.setRscore(jsonObject.getInt("rscore"));
+                        review.setRuserid(jsonObject.getString("ruserid"));
+
+                        list.add(review);
+
+                        //galleryFragmentAdapter.addItem(gallery);
+                    }
+
+                    reviewListViewAdapter.setList(list);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        asyncTask.execute(NetworkSetting.baseUrl3+"reviewlist?pageNo=" + pageNo);
+    }
+
+
+
+    public void getReviewUserImage(String ruserid, final ImageView imageView) {
+        Log.i("mylog", "getReviewUserImage 실행, userId는 : " + ruserid);
+        AsyncTask<String, Void, Bitmap> asyncTask = new AsyncTask<String, Void, Bitmap>() {
+            @Override
+            protected Bitmap doInBackground(String... params) {
+                Bitmap bm = null;
+                try {
+                    URL url = new URL(params[0]);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.connect();
+
+                    if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        InputStream is = conn.getInputStream();
+                        bm = BitmapFactory.decodeStream(is);
+                        is.close();
+                    }
+                    conn.disconnect();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return bm;
+            }
+
+            @Override
+            protected void onPostExecute(Bitmap bitmap) {
+                Log.i("mylog", "2");
+                imageView.setImageBitmap(bitmap);
+            }
+        };
+        asyncTask.execute(NetworkSetting.baseUrl3+"reviewUserImage?ruserid=" + ruserid);
+
+
+    }
+
+    public void getReviewLargeImage(String rimage, final ImageView imageViewLarge) {
+        Log.i("mylog", "getReviewLargeImage 실행, rimage : " + rimage);
+        AsyncTask<String, Void, Bitmap> asyncTask = new AsyncTask<String, Void, Bitmap>() {
+            @Override
+            protected Bitmap doInBackground(String... params) {
+                Bitmap bm = null;
+                try {
+                    URL url = new URL(params[0]);
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.connect();
+
+                    if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        InputStream is = conn.getInputStream();
+                        bm = BitmapFactory.decodeStream(is);
+                        is.close();
+                    }
+                    conn.disconnect();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return bm;
+            }
+
+            @Override
+            protected void onPostExecute(Bitmap bitmap) {
+                Log.i("mylog", "2");
+                imageViewLarge.setImageBitmap(bitmap);
+            }
+        };
+        asyncTask.execute(NetworkSetting.baseUrl3+"reviewImage?rimage=" + rimage);
+
+    }
 }

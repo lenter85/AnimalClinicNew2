@@ -1,14 +1,22 @@
 package com.example.myapplication.clinic.fragment;
 
 import android.content.Context;
+import android.media.Rating;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.clinic.dto.Review;
+import com.example.myapplication.community.dto.Gallery;
+import com.example.myapplication.network.ClinicNetwork;
+import com.example.myapplication.network.GalleryNetwork;
+import com.google.android.gms.vision.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,15 +74,25 @@ public class ReviewListViewAdapter extends BaseAdapter {
         //데이터 셋팅
         ImageView imageView = (ImageView) convertView.findViewById(R.id.imageViewReviewImg);
         ImageView imageViewLarge = (ImageView) convertView.findViewById(R.id.imageViewLarge);
+        RatingBar ratingBar = (RatingBar) convertView.findViewById(R.id.ratingBar);
+        TextView textView = (TextView) convertView.findViewById(R.id.textViewUserId);
+        TextView textView2 = (TextView) convertView.findViewById(R.id.textViewContent);
 
 
-
-        //Review review = list.get(position);
+        Review review = list.get(position);
         //dto인 review에 데이터 집어넣기 작업해야 한다.
 
+        ratingBar.setNumStars(review.getRscore());
+        textView.setText(review.getRuserid());
+        textView2.setText(review.getRcontent());
+
+        ClinicNetwork clinicNetwork = new ClinicNetwork();
+        clinicNetwork.getReviewUserImage(review.getRuserid(), imageView);
+        clinicNetwork.getReviewLargeImage(review.getRimage(),imageViewLarge);
 
 
         //ItemView 리턴
         return convertView;
+
     }
 }

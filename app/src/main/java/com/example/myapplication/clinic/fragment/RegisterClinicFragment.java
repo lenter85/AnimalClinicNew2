@@ -108,7 +108,7 @@ public class RegisterClinicFragment extends Fragment {
         editText2 = (EditText) view.findViewById(R.id.editText2);
         editText3 = (EditText) view.findViewById(R.id.editText3);
 
-        textView = (TextView) view.findViewById(R.id.textView);
+        textView = (TextView) view.findViewById(R.id.textViewContent);
         textView.setText(MainActivity.clinicLocation);
         btnRegister = (Button) view.findViewById(R.id.btnRegister);
         btnCancel = (Button) view.findViewById(R.id.btnCancel);
