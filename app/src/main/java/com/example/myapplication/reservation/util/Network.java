@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.calendar.MonthItemView;
+import com.example.myapplication.network.NetworkSetting;
 import com.example.myapplication.reservation.dto.Reserve;
 import com.example.myapplication.reservation.dto.ReserveListItem;
 import com.example.myapplication.reservation.fragment.MyReserveViewAdapter;
@@ -35,7 +36,7 @@ import java.util.Map;
 
 public class Network {
 
-    private static final String site = "http://192.168.0.11:9090/Petopia";
+    private static final String site = NetworkSetting.baseUrl4;
 
     public static void setReserveList(final Context context, final TimeViewAdapter timeViewAdapter, List<String> local_timeList, Map<String, String> map) {
 
