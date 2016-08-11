@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.clinic.fragment.ClinicDetailInformationFragment;
+import com.example.myapplication.clinic.fragment.ClinicList_Fragment;
 import com.example.myapplication.network.NetworkSetting;
 import com.example.myapplication.reservation.dto.Reserve;
 
@@ -119,7 +120,7 @@ public class ReserveResultFragment extends Fragment {
                         android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         int back = fragmentManager.getBackStackEntryCount();
 
-                        for(int i=0; i<back-1; i++){
+                        for(int i=0; i<back; i++){
                             fragmentManager.popBackStack();
                         }
 
@@ -128,7 +129,7 @@ public class ReserveResultFragment extends Fragment {
                         getActivity()
                                 .getSupportFragmentManager()
                                 .beginTransaction()
-                                .replace(R.id.fragmentContainer, new ClinicDetailInformationFragment())
+                                .replace(R.id.fragmentContainer, new ClinicList_Fragment())
                                 .commit();
 
                         return;
