@@ -3,18 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.myapplication.diary.ReservationListFragment"
-    android:background="#c3e3a3">
+    android:background="#E4F7BA">
 
     <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#ffffff"
-        android:id="@+id/linearLayout10">
+        android:background="#EAEAEA"
+        android:id="@+id/linearLayout10"
+        android:gravity="center_vertical">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -52,7 +53,7 @@
         android:layout_alignParentStart="false"
         android:layout_margin="0dp"
         android:dividerHeight="15dp"
-        android:divider="#c3e3a3"
+        android:divider="#E4F7BA"
         android:padding="15dp"
         android:choiceMode="none" />
 </RelativeLayout>
