@@ -5,13 +5,17 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.community.dto.Board;
+import com.example.myapplication.network.BoardNetwork;
 
 
 public class BoardWriteFragment extends Fragment {
@@ -19,6 +23,8 @@ public class BoardWriteFragment extends Fragment {
     private Button confirmBtn;
     private EditText boardTitle;
     private EditText boardContent;
+
+    BoardNetwork boardNetwork = new BoardNetwork();
 
     public BoardWriteFragment() {
         // Required empty public constructor
@@ -46,6 +52,15 @@ public class BoardWriteFragment extends Fragment {
                 } else if(boardContent.getText().toString().matches("")){
                     dialog("내용을 입력하세요.");
                 } else {
+
+                    Board board = new Board();
+                    board.setmId(MainActivity.loginId);
+                    board.setbTitle(boardTitle.getText().toString());
+                    board.setbContent(boardContent.getText().toString());
+
+                    boardNetwork.write(board);
+                    Log.i("mylog","write() 실행");
+
                     getActivity()
                             .getSupportFragmentManager()
                             .beginTransaction()
