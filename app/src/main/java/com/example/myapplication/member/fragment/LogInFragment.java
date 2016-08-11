@@ -2,7 +2,6 @@ package com.example.myapplication.member.fragment;
 
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -15,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.myapplication.HomeActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.member.dao.CheckUser;
 import com.example.myapplication.network.MemberNetwork;
@@ -76,8 +74,7 @@ public class LogInFragment extends Fragment {
                     } else if(memberNetwork.loginResult == true){
                         Toast.makeText(getContext(),"로그인 성공",Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(getActivity(), HomeActivity.class);
-                        startActivity(intent);
+                        getActivity().onBackPressed();
                     }
                 }
             }

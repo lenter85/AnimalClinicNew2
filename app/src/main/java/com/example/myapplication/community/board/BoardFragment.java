@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.community.dto.Board;
 
@@ -38,6 +39,13 @@ public class BoardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_board, container, false);
 
         fab = (FloatingActionButton)view.findViewById(R.id.fab);
+
+        if(MainActivity.loginStatus){
+            fab.setVisibility(View.VISIBLE);
+        } else {
+            fab.setVisibility(View.INVISIBLE);
+        }
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,9 +61,8 @@ public class BoardFragment extends Fragment {
         list = new ArrayList<>();
         for(int i=1; i<=10; i++){
             Board board = new Board();
-            board.setBoardTitle("게시판 제목"+i);
-            board.setBoardContent("게시판 내용"+i);
-            board.getBoardImage();
+            board.setbTitle("게시판 제목"+i);
+            board.setbContent("게시판 내용"+i);
 
             list.add(board);
         }

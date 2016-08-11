@@ -61,8 +61,8 @@ public class BoardFragmentAdapter extends BaseAdapter{
         boardTitle = (TextView) convertView.findViewById(R.id.boardTitle);
 
         Board board = list.get(position);
-        boardImage.setImageResource(board.getBoardImage());
-        boardTitle.setText(board.getBoardTitle());
+        boardImage.setImageResource(board.getbImage());
+        boardTitle.setText(board.getbTitle());
 
         //아이템 뷰 리턴
         return convertView;

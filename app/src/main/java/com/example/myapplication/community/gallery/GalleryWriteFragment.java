@@ -92,11 +92,7 @@ public class GalleryWriteFragment extends Fragment {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, new CommunityFragment())
-                        .commit();
+                getActivity().onBackPressed();
             }
         });
 

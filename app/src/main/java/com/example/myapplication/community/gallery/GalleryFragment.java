@@ -12,6 +12,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.community.dto.Gallery;
 import com.example.myapplication.network.GalleryNetwork;
@@ -37,6 +38,12 @@ public class GalleryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_gallery, container, false);
 
         fab = (FloatingActionButton)view.findViewById(R.id.fab);
+
+        if(MainActivity.loginStatus){
+            fab.setVisibility(View.VISIBLE);
+        } else {
+            fab.setVisibility(View.INVISIBLE);
+        }
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
