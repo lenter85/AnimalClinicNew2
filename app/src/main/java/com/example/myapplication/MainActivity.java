@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //로그인 아이디 저장
     public static String loginId;
-    public static String clinicId = "test";
+    public static String clinicId;
     private ImageView imageViewReviewImg;
     private String mimageName;
     private Bitmap bitmap;
