@@ -53,7 +53,7 @@ import java.util.List;
  */
 public class ClinicNetwork {
 
-    private String url = NetworkSetting.baseUrl2;
+    private String url = NetworkSetting.baseUrl3;
     private String body="";  //여기 처음에 String body; 로 안해야 한다. 주의해라!!
     private Bitmap bm;
     private GoogleMap googleMap;
@@ -278,7 +278,7 @@ public class ClinicNetwork {
                     if(jsonObject.getString("cimage1") != "noimage") {
                         Log.i("mylog", "cimage1 : " + jsonObject.getString("cimage1"));
 
-                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage1"));
+                        URL url2 = new URL(NetworkSetting.baseUrl3 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage1"));
                         Log.i("mylog", url2.toString());
                         URLConnection conn2 = url2.openConnection();
                         conn2.connect();
@@ -293,7 +293,7 @@ public class ClinicNetwork {
                     if(jsonObject.getString("cimage2") != "noimage") {
                         Log.i("mylog", "cimage2 : " + jsonObject.getString("cimage2"));
 
-                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage2"));
+                        URL url2 = new URL(NetworkSetting.baseUrl3 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage2"));
                         Log.i("mylog", url2.toString());
                         URLConnection conn2 = url2.openConnection();
                         conn2.connect();
@@ -308,7 +308,7 @@ public class ClinicNetwork {
                     if(jsonObject.getString("cimage3") != "noimage") {
                         Log.i("mylog", "cimage3 : " + jsonObject.getString("cimage3"));
 
-                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage3"));
+                        URL url2 = new URL(NetworkSetting.baseUrl3 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage3"));
                         Log.i("mylog", url2.toString());
                         URLConnection conn2 = url2.openConnection();
                         conn2.connect();
@@ -323,7 +323,7 @@ public class ClinicNetwork {
                     if(jsonObject.getString("cimage4") != "noimage") {
                         Log.i("mylog", "cimage4 : " + jsonObject.getString("cimage4"));
 
-                        URL url2 = new URL(NetworkSetting.baseUrl2 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage4"));
+                        URL url2 = new URL(NetworkSetting.baseUrl3 + "clinicFacilityImage?cimage=" + jsonObject.getString("cimage4"));
                         Log.i("mylog", url2.toString());
                         URLConnection conn2 = url2.openConnection();
                         conn2.connect();
@@ -360,7 +360,7 @@ public class ClinicNetwork {
                     imageView4.setImageBitmap(bm4);
                 }
             }
-        }.execute(NetworkSetting.baseUrl2 + "clinicinformation?cid=" + MainActivity.clinicId);
+        }.execute(NetworkSetting.baseUrl3 + "clinicinformation?cid=" + MainActivity.clinicId);
     }
 
 
@@ -490,7 +490,7 @@ public class ClinicNetwork {
                     String delimiter = "\r\n--" + boundary + "\r\n";    //규약
 
                     // 커넥션 생성 및 설정
-                    URL url = new URL(NetworkSetting.baseUrl2 + "clinicregister");
+                    URL url = new URL(NetworkSetting.baseUrl3 + "clinicregister");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setDoInput(true);
                     conn.setDoOutput(true);
@@ -753,7 +753,7 @@ public class ClinicNetwork {
                 }
             }
         };
-        asyncTask.execute(NetworkSetting.baseUrl2+"reviewlist?pageNo=" + pageNo);
+        asyncTask.execute(NetworkSetting.baseUrl3+"reviewlist?pageNo=" + pageNo);
     }
 
 
@@ -787,7 +787,7 @@ public class ClinicNetwork {
                 imageView.setImageBitmap(bitmap);
             }
         };
-        asyncTask.execute(NetworkSetting.baseUrl2+"reviewUserImage?ruserid=" + ruserid);
+        asyncTask.execute(NetworkSetting.baseUrl3+"reviewUserImage?ruserid=" + ruserid);
 
 
     }
@@ -821,7 +821,7 @@ public class ClinicNetwork {
                 imageViewLarge.setImageBitmap(bitmap);
             }
         };
-        asyncTask.execute(NetworkSetting.baseUrl2+"reviewImage?rimage=" + rimage);
+        asyncTask.execute(NetworkSetting.baseUrl3+"reviewImage?rimage=" + rimage);
 
     }
 }
