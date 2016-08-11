@@ -835,9 +835,9 @@ public class ClinicNetwork {
     }
 
 
-    private void showMarker (Double latitude, Double longitude) {
+    public void showMarker () {
         MarkerOptions marker = new MarkerOptions();
-        marker.position(new LatLng(latitude, longitude));
+        marker.position(new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude)));
 
         marker.draggable(true);
         marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));

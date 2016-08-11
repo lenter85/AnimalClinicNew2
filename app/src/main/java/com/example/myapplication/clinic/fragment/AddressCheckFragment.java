@@ -215,13 +215,10 @@ public class AddressCheckFragment extends Fragment {
     private void showAbbBankItems (Double latitude, Double longitude) {
         MarkerOptions marker = new MarkerOptions();
         marker.position(new LatLng(latitude, longitude));
-        marker.title("지점명 : 중앙대학교");
-        marker.snippet("주소 : 동작구");
         marker.draggable(true);
-        marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.woman));
+        marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
 
         googleMap.addMarker(marker);
-
 
     }
 

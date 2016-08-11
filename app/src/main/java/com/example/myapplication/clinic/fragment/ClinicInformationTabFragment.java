@@ -74,10 +74,11 @@ public class ClinicInformationTabFragment extends Fragment {
                 ClinicInformationTabFragment.this.googleMap = googleMap;
                 //startLocationService();
 
-                
+
                 clinicNetwork.setContext(getContext());
                 clinicNetwork.setGoogleMap(googleMap);
                 clinicNetwork.setClinicLocation();
+                clinicNetwork.showMarker();
             }
         });
 
