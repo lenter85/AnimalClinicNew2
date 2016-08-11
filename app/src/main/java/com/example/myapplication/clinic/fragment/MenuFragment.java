@@ -48,7 +48,8 @@ public class MenuFragment extends Fragment {
         textView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ModifyClinicInformationFragment()).commit();
+                Toast.makeText(getContext(), "서비스 준비중 입니다.", Toast.LENGTH_LONG).show();
+                //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ModifyClinicInformationFragment()).commit();
             }
         });
 

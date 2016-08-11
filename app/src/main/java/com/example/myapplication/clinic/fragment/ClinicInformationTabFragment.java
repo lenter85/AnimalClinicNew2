@@ -42,6 +42,7 @@ public class ClinicInformationTabFragment extends Fragment {
     private LocationManager locationManager;
     private SupportMapFragment mapFragment;
     private GoogleMap googleMap;
+    ClinicNetwork clinicNetwork = new ClinicNetwork();
 
     public ClinicInformationTabFragment() {
         // Required empty public constructor
@@ -63,15 +64,21 @@ public class ClinicInformationTabFragment extends Fragment {
         textViewCloseTime = (TextView) view.findViewById(R.id.textViewCloseTime);
         textViewIntroduction = (TextView) view.findViewById(R.id.textViewIntroduction);
 
-        ClinicNetwork clinicNetwork = new ClinicNetwork();
-        clinicNetwork.getClinicInformationTab(view, googleMap);
+
+        clinicNetwork.getClinicInformationTab(view);
 
         mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.mapFragment);
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 ClinicInformationTabFragment.this.googleMap = googleMap;
-                startLocationService();
+                //startLocationService();
+
+
+                clinicNetwork.setContext(getContext());
+                clinicNetwork.setGoogleMap(googleMap);
+                clinicNetwork.setClinicLocation();
+                clinicNetwork.showMarker();
             }
         });
 
@@ -79,8 +86,11 @@ public class ClinicInformationTabFragment extends Fragment {
 
 
 
+
         return view;
     }
+
+
 
 
     //현재 내 위치 얻는 메소드
@@ -167,7 +177,7 @@ public class ClinicInformationTabFragment extends Fragment {
         }
         googleMap.setMyLocationEnabled(true);
 
-        showAbbBankItems(latitude, longitude);
+        //showAbbBankItems(latitude, longitude);
     }
 
     @Override
