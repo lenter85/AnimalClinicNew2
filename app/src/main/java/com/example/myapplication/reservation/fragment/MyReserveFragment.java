@@ -11,6 +11,8 @@ import android.widget.ListView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.reservation.dto.Reserve;
+import com.example.myapplication.reservation.util.Network;
+import com.example.myapplication.reservation.util.Util;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +39,8 @@ public class MyReserveFragment extends Fragment {
         itemSetting();
 
         myReserveListView.setAdapter(myReserveViewAdapter);
+
+        Network.getMyReserveList("우디", "test", myReserveViewAdapter);
 
         myReserveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
