@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class DiaryNetwork {
 
-    private static String baseUrl ="http://192.168.0.24:8080/Petopia/";
+    private static String baseUrl ="http://192.168.0.29:8080/Petopia/";
     public static void getDiaryData(final DiaryAdapter diaryAdapter) {
         AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
             @Override
@@ -63,7 +63,7 @@ public class DiaryNetwork {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         Diary diary = new Diary();
                         diary.setDname(jsonObject.getString("dname"));
-
+                        diary.setDbirth(jsonObject.getString("dbirth"));
                         diary.setDgender(jsonObject.getString("dgender"));
                         diary.setDimage(jsonObject.getString("dimage"));
                         diaryAdapter.addItem(diary);
@@ -74,7 +74,7 @@ public class DiaryNetwork {
                 }
             }
         };
-        asyncTask.execute(baseUrl + "diary/list");
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "diary/list");
     }
 
     public static void getDiaryImage(String imageName, final ImageView imageView) {
@@ -104,7 +104,7 @@ public class DiaryNetwork {
                 imageView.setImageBitmap(bitmap);
             }
         };
-        asyncTask.execute(baseUrl + "diary/image?dimage=" + imageName);
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "diary/image?dimage=" + imageName);
     }
 
     public static void sendDiary(final Diary diary, final String filePath) {
@@ -187,7 +187,7 @@ public class DiaryNetwork {
             protected void onPostExecute(String result) {
 
             }
-        }.execute();
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public static String setValue(String key, String value) {

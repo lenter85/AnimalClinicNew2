@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class ReserveResultFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        getActivity().setTitle("예약결과");
         View view = inflater.inflate(R.layout.fragment_reserve_result, container, false);
 
 
@@ -82,6 +83,7 @@ public class ReserveResultFragment extends Fragment {
                         .getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, new ReserveEditFragment())
+                        .addToBackStack(null)
                         .commit();
             }
         });
@@ -91,7 +93,7 @@ public class ReserveResultFragment extends Fragment {
     private void showDialog() {
 
         AlertDialog.Builder alert_confirm = new AlertDialog.Builder(getActivity());
-        alert_confirm.setMessage("입력한 정보로 예약하시겠습니까?").setCancelable(false)
+        alert_confirm.setMessage("입력하신 정보로 예약하시겠습니까?").setCancelable(false)
 
                 .setPositiveButton("확인",
                 new DialogInterface.OnClickListener() {
@@ -102,7 +104,12 @@ public class ReserveResultFragment extends Fragment {
                         //예약 테이블에 예약 데이터를 삽입한다.
                         reserve();
 
-                        Toast.makeText(getContext(), "예약이 신청되었습니다.",Toast.LENGTH_LONG).show();
+                        Toast toast ;
+                        toast = Toast.makeText(getContext(), "예약신청이 처리되었습니다." , Toast.LENGTH_LONG);
+                        int offsetX = 0;
+                        int offsetY = 0;
+                        toast.setGravity(Gravity.CENTER, offsetX, offsetY);
+                        toast.show();
 
                         // 병원 정보 화면으로 돌아간다.
                         getActivity()

@@ -1,6 +1,7 @@
 package com.example.myapplication.diary.custom;
 
 import com.github.mikephil.charting.charts.BarLineChartBase;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.AxisValueFormatter;
 
@@ -16,6 +17,9 @@ public class DayAxisValueFormatter implements AxisValueFormatter {
     private BarLineChartBase<?> chart;
 
     public DayAxisValueFormatter(BarLineChartBase<?> chart) {
+        this.chart = chart;
+    }
+    public DayAxisValueFormatter(LineChart chart) {
         this.chart = chart;
     }
 

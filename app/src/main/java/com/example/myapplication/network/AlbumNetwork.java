@@ -26,7 +26,7 @@ import java.net.URL;
  * Created by Administrator on 2016-07-22.
  */
 public class AlbumNetwork {
-    private static String baseUrl = "http://192.168.0.24:8080/Petopia/";
+    private static String baseUrl = "http://192.168.0.29:8080/Petopia/";
 
 
     public static void getAlbumData(int pageNo, final AlbumAdapter albumAdapter) {
@@ -83,7 +83,7 @@ public class AlbumNetwork {
             }
         };
 
-        asyncTask.execute(baseUrl + "album/getlist?pageNo=" + pageNo);
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "album/getlist?pageNo=" + pageNo);
 
 
     }
@@ -121,7 +121,7 @@ public class AlbumNetwork {
             }
         };
 
-        asyncTask.execute(baseUrl + "album/download?aimage=" + imageName);
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "album/download?aimage=" + imageName);
     }
 
     public static void sendAlbum(final Album album, final Bitmap bitmap) {
@@ -158,7 +158,6 @@ public class AlbumNetwork {
                     postDataBuilder.append(setValue("aname", album.getAname()));
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setValue("adate", album.getAdate()));
-                    Log.i("mylog", album.getAdate());
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setValue("acontent", album.getAcontent()));
                     postDataBuilder.append(delimiter);
@@ -199,7 +198,7 @@ public class AlbumNetwork {
                 return null;
             }
         };
-        asyncTask.execute(baseUrl + "album/register");
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "album/register");
     }
 
     public static String setValue(String key, String value) {

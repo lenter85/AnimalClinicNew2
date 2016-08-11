@@ -30,7 +30,8 @@
                     android:id="@+id/textView40"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp"
+                    android:textColor="#8C8C8C" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -39,7 +40,8 @@
                     android:id="@+id/textViewName"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -50,11 +52,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="위치 : "
+                    android:text="위       치 : "
                     android:id="@+id/textView42"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp"
+                    android:textColor="#8C8C8C" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -63,7 +66,8 @@
                     android:id="@+id/textViewLocation"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -74,11 +78,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="전화번호"
+                    android:text="전화번호 : "
                     android:id="@+id/textView44"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp"
+                    android:textColor="#8C8C8C" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -87,7 +92,8 @@
                     android:id="@+id/textViewPhone"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -98,11 +104,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="진료시간 : "
+                    android:text="진료시간 :  "
                     android:id="@+id/textView46"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp"
+                    android:textColor="#8C8C8C" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -111,7 +118,8 @@
                     android:id="@+id/textViewOpenTime"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -129,7 +137,8 @@
                     android:id="@+id/textViewCloseTime"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
@@ -139,7 +148,8 @@
                 android:id="@+id/textView48"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textColor="#8C8C8C" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -149,16 +159,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/imageView20"
-                    android:src="@drawable/blankbox"
-                    android:scaleType="fitXY" />
+                    android:scaleType="fitXY"
+                    android:background="@drawable/round_info"
+                    android:layout_margin="10dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="친절한 의사선생님과 최신 시설을 구비한 봄빛 동물병원 입니다"
                     android:id="@+id/textViewIntroduction"
-                    android:textSize="20dp"
-                    android:layout_margin="35dp" />
+                    android:textSize="15dp"
+                    android:layout_margin="25dp" />
             </FrameLayout>
             <fragment
                 android:layout_width="match_parent"

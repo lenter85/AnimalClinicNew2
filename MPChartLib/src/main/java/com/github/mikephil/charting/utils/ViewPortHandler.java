@@ -220,7 +220,7 @@ public class ViewPortHandler {
     public void zoomOut(float x, float y, Matrix outputMatrix) {
         outputMatrix.reset();
         outputMatrix.set(mMatrixTouch);
-        outputMatrix.postScale(0.7f, 0.7f, x, y);
+        outputMatrix.postScale(1f, 1f, x, y);
     }
 
     /**

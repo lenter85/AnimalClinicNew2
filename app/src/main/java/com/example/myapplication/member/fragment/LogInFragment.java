@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.myapplication.HomeActivity;
 import com.example.myapplication.R;
@@ -50,6 +52,9 @@ public class LogInFragment extends Fragment {
         email = (EditText)view.findViewById(R.id.login_email);
         password = (EditText)view.findViewById(R.id.login_password);
 
+        email.setText("park9831@naver.com");
+        password.setText("1234");
+
         //btnLogin.setEnabled(false);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -65,22 +70,15 @@ public class LogInFragment extends Fragment {
                     dialog("비밀번호를 다시 입력해 주세요.");
                 } else {
                     memberNetwork.Login(email.getText().toString(), password.getText().toString());
-
-                    /*if(!email.getText().toString().equals(memberNetwork.member.getMid())){
-                        dialog("이메일을 다시 입력해주세요.");
-                    } else if(!password.getText().toString().equals(memberNetwork.member.getMpassword())){
-                        dialog("비밀번호를 다시 입력해주세요.");
-                    } else {
-                        Toast toast = new Toast(getContext());
-                        toast.setDuration(Toast.LENGTH_SHORT);
-                        toast.setText(memberNetwork.member.getMname() + "님 환영합니다.");
-                        toast.show();
+                    Log.i("mylog",""+memberNetwork.loginResult);
+                    if(memberNetwork.loginResult == false){
+                        dialog("아이디와 비밀번호가 일치하지 않습니다.");
+                    } else if(memberNetwork.loginResult == true){
+                        Toast.makeText(getContext(),"로그인 성공",Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(getActivity(), HomeActivity.class);
                         startActivity(intent);
-                    }*/
-                    Intent intent = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(intent);
+                    }
                 }
             }
         });
@@ -117,14 +115,12 @@ public class LogInFragment extends Fragment {
                 .setTitle("로그인 실패")
                 .setMessage(message)
                 .setIcon(R.drawable.check)
-                .setPositiveButton("확인",onClickListener)
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
                 .show();
     }
-
-    DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialog, int which) {
-            dialog.cancel();
-        }
-    };
 }

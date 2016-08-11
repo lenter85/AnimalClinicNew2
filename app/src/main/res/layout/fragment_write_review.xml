@@ -16,11 +16,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="하트 주기"
+            android:text="별점 주기"
             android:id="@+id/textView54"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="15dp"
+            android:textStyle="bold" />
 
         <RatingBar
             android:layout_width="wrap_content"
@@ -33,20 +34,22 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="사진 등록"
             android:id="@+id/textView53"
-            android:textSize="20dp" />
+            android:textSize="15dp"
+            android:textStyle="bold" />
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/imageViewReviewImg"
-            android:src="@drawable/add"
+            android:src="@drawable/camera"
             android:layout_marginLeft="10dp" />
 
         <TextView
@@ -63,25 +66,28 @@
         android:layout_height="wrap_content"
         android:text="후기 작성"
         android:id="@+id/textView50"
-        android:textSize="20dp" />
+        android:textSize="15dp"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_width="380dp"
+            android:layout_width="350dp"
             android:layout_height="320dp"
             android:id="@+id/imageView7"
-            android:src="@drawable/blankbox"
+            android:src="@drawable/round_review"
             android:scaleType="fitXY"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp" />
 
         <EditText
-            android:layout_width="250dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:id="@+id/editTextContent"
-            android:layout_margin="50dp" />
+            android:layout_margin="15dp" />
 
     </FrameLayout>
 
@@ -92,16 +98,19 @@
         android:gravity="center_horizontal">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="등록"
-            android:id="@+id/btnRegister" />
+            android:id="@+id/btnRegister"
+            android:background="@drawable/round_green"
+            android:layout_marginRight="20dp" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="취소"
-            android:id="@+id/buttonCancel" />
+            android:id="@+id/buttonCancel"
+            android:background="@drawable/green_round_angle" />
     </LinearLayout>
 
 </LinearLayout>

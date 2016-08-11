@@ -47,7 +47,7 @@ public class VaccinationFragment1 extends Fragment {
 
         vaccinationAdapter = new VaccinationAdapter();
         vaccinationAdapter.setContext(getActivity());
-        VaccinationNetwork.getVaccinationList(vaccinationAdapter);
+        VaccinationNetwork.getVaccinationList(MyDiaryFragment.my.getDname(), vaccinationAdapter);
         listViewVaccination.setAdapter(vaccinationAdapter);
 
 

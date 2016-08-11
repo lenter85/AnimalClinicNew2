@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.reservation.fragment.ReserveSearchFragment;
 
@@ -39,16 +42,27 @@ public class ClinicDetailInformationFragment extends Fragment {
         btnReserve = (Button)view.findViewById(R.id.btnReserve);
 
 
-        final ReserveSearchFragment reserveSearchFragment = new ReserveSearchFragment();
-        reserveSearchFragment.setArguments(new Bundle());  //setArgument메소드로 번들 셋팅은 딲 한번 가능
-
         btnReserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(MainActivity.loginStatus == false){
+
+                    Toast toast ;
+                    toast = Toast.makeText(getContext(), "로그인 후에 이용하실 수 있습니다." , Toast.LENGTH_LONG);
+                    int offsetX = 0;
+                    int offsetY = 0;
+                    toast.setGravity(Gravity.CENTER, offsetX, offsetY);
+                    toast.show();
+
+                    return;
+                }
+
+                ReserveSearchFragment reserveSearchFragment = new ReserveSearchFragment();
+
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragmentContainer, reserveSearchFragment, "ReserveSearchFragment")
-                        .addToBackStack(null)
+                        .replace(R.id.fragmentContainer, reserveSearchFragment)
                         .commit();
             }
         });
@@ -64,14 +78,14 @@ public class ClinicDetailInformationFragment extends Fragment {
 
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setIcon(android.R.drawable.ic_menu_my_calendar);
-        tabLayout.getTabAt(1).setIcon(android.R.drawable.ic_menu_mylocation);
-        tabLayout.getTabAt(2).setIcon(android.R.drawable.ic_menu_myplaces);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu_camera);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_menu_gallery);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_menu_manage);
 
         return view;
     }
 
-
+//dd
 
 
 

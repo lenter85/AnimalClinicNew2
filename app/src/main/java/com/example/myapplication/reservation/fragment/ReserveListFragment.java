@@ -27,7 +27,7 @@ public class ReserveListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        getActivity().setTitle("예약자 정보");
         View view = inflater.inflate(R.layout.fragment_reserve_list, container, false);
 
         reserveListView = (ListView) view.findViewById(R.id.reserveListView);

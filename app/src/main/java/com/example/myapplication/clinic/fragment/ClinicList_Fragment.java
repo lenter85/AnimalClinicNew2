@@ -30,6 +30,8 @@ public class ClinicList_Fragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+
+        //Toast.makeText(getContext(), "onCreateView()호출 ", Toast.LENGTH_LONG).show();
         View view =  inflater.inflate(R.layout.fragment_cliniclist, container, false);
         clinicListView = (ListView)view.findViewById(R.id.clinicListView);
 
@@ -38,7 +40,7 @@ public class ClinicList_Fragment extends Fragment {
         clinicListView.setAdapter(clinicListViewAdapter);
 
         //DB에서 병원 리스트를 불러온다.
-        MainNetwork.setReserveList(clinicListViewAdapter);
+        MainNetwork.setReserveList(clinicListViewAdapter, getContext());
 
 
         clinicListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -52,10 +54,12 @@ public class ClinicList_Fragment extends Fragment {
 
                 Toast.makeText(getContext(), clinic.getCname(), Toast.LENGTH_LONG).show();
 
+                ClinicDetailInformationFragment fragment = new ClinicDetailInformationFragment();
+
                 getActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragmentContainer, new ClinicDetailInformationFragment())
+                        .replace(R.id.fragmentContainer, fragment)
                         .addToBackStack(null)
                         .commit();
             }
@@ -64,5 +68,4 @@ public class ClinicList_Fragment extends Fragment {
 
         return view;
     }
-
 }
