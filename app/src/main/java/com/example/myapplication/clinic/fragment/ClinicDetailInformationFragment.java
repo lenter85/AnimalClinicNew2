@@ -85,8 +85,5 @@ public class ClinicDetailInformationFragment extends Fragment {
         return view;
     }
 
-//dd
-
-
 
 }

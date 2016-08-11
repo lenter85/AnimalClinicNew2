@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,8 @@ public class ClinicInformationTabFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_clinic_information_tab, container, false);
+
+        Log.i("mylog", "clinicinformationtab실행");
 
         textViewName = (TextView) view.findViewById(R.id.textViewName);
         textViewLocation = (TextView) view.findViewById(R.id.textViewLocation);
