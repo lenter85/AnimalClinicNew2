@@ -211,7 +211,7 @@ public class Network {
         //asyncTask를 실행한다. doInBackground 메소드를 실행한다.
         Log.i("myLog", site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + date);
 
-        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + date); //doInBackground()의 매개값으로 들어간다.
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "reserve/getTimeList?clinicid=" + clinicid + "&date=" + date); //doInBackground()의 매개값으로 들어간다.
     }
 
 
