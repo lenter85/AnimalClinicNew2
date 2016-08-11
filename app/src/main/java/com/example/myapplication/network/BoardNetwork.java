@@ -3,7 +3,12 @@ package com.example.myapplication.network;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.myapplication.community.board.BoardFragmentAdapter;
 import com.example.myapplication.community.dto.Board;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -32,7 +37,7 @@ public class BoardNetwork {
 
                     //요청 내용 본문에 작성
                     OutputStream os = conn.getOutputStream();
-                    String data = "mid="+board.getmId()+"&bTitle="+board.getbTitle()+"&bcontent="+board.getbContent()+"&mimage=member01.jpg";
+                    String data = "mid="+board.getmId()+"&btitle="+board.getbTitle()+"&bcontent="+board.getbContent()+"&mimage=member01.jpg";
                     byte[] bytedata = data.getBytes();
                     os.write(bytedata);
                     os.flush();
@@ -66,12 +71,63 @@ public class BoardNetwork {
 
                 return body;
             }
-
-            @Override
-            protected void onPostExecute(String s) {
-
-            }
         };
         asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl+"board/write");
+    }
+
+    public static void getBoard(int pageNo, final BoardFragmentAdapter boardFragmentAdapter){
+        Log.i("mylog","getBoard() 실행");
+        AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
+            @Override
+            protected String doInBackground(String... params) {
+                String json = "";
+                try {
+                    URL url = new URL(params[0]);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    conn.connect();
+
+                    Log.i("mylog", ""+ conn.getResponseCode());
+                    if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        InputStream is = conn.getInputStream();
+                        Reader reader = new InputStreamReader(is);
+                        BufferedReader br = new BufferedReader(reader);
+                        String data = null;
+                        while((data = br.readLine()) != null) {
+                            json += data;
+                        }
+                        br.close();
+                        reader.close();
+                        is.close();
+                    }
+
+                    conn.disconnect();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+                return json;
+            }
+
+            @Override
+            protected void onPostExecute(String json) {
+                try {
+                    JSONArray ja = new JSONArray(json);
+                    Log.i("mylog", "json 파싱 중");
+                    for(int i=0; i<ja.length();i++){
+                        JSONObject jo = ja.getJSONObject(i);
+                        Board board = new Board();
+                        board.setmId(jo.getString("mid"));
+                        board.setbTitle(jo.getString("btitle"));
+                        board.setbContent(jo.getString("bcontent"));
+                        board.setbDate(jo.getString("bdate"));
+                        board.setbImage(jo.getString("mimage"));
+
+                        boardFragmentAdapter.addItem(board);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl+"board/list?pageNo=" + pageNo);
     }
 }

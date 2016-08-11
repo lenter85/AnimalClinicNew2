@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:weightSum="1">
 
             <ImageView
                 android:layout_width="50dp"
@@ -25,13 +26,43 @@
                 android:id="@+id/boardImage"
                 android:layout_margin="5dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="boardTitle"
-                android:id="@+id/boardTitle"
-                android:textSize="23dp"
-                android:layout_marginLeft="10dp" />
+            <RelativeLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BoardTitle"
+                    android:id="@+id/boardTitle"
+                    android:textSize="20dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Id"
+                    android:id="@+id/mid"
+                    android:layout_below="@+id/boardTitle"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2016-07-12"
+                    android:id="@+id/boardDate"
+                    android:layout_above="@+id/mid"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -45,7 +76,8 @@
                 android:layout_height="wrap_content"
                 android:text="boardContent"
                 android:id="@+id/boardContent"
-                android:layout_marginLeft="15dp" />
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp" />
         </LinearLayout>
 
     </LinearLayout>

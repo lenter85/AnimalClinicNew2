@@ -9,7 +9,7 @@ public class Board {
     private String bContent;
     private String mId;
     private String bDate;
-    private int bImage;
+    private String bImage;
 
     public String getbTitle() {
         return bTitle;
@@ -35,11 +35,11 @@ public class Board {
         this.bDate = bDate;
     }
 
-    public int getbImage() {
+    public String getbImage() {
         return bImage;
     }
 
-    public void setbImage(int bImage) {
+    public void setbImage(String bImage) {
         this.bImage = bImage;
     }
 

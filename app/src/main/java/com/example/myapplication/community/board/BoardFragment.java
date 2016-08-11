@@ -6,17 +6,19 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.community.dto.Board;
+import com.example.myapplication.network.BoardNetwork;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +30,10 @@ public class BoardFragment extends Fragment {
     private ListView boardListView;
     private BoardFragmentAdapter boardFragmentAdapter;
     private List<Board> list;
+    public static Board selectedBoard = new Board();
+
+    private boolean lastItem;
+    private int pageNo = 1;
 
     public BoardFragment() {
         // Required empty public constructor
@@ -58,34 +64,54 @@ public class BoardFragment extends Fragment {
             }
         });
 
-        list = new ArrayList<>();
+        /*list = new ArrayList<>();
         for(int i=1; i<=10; i++){
             Board board = new Board();
             board.setbTitle("게시판 제목"+i);
             board.setbContent("게시판 내용"+i);
 
             list.add(board);
-        }
+        }*/
 
         boardListView = (ListView)view.findViewById(R.id.boardListView);
 
         //어댑터 생성 및 세팅
         boardFragmentAdapter = new BoardFragmentAdapter(getContext());
-        boardFragmentAdapter.setList(list);
-
+        //boardFragmentAdapter.setList(list);
         boardListView.setAdapter(boardFragmentAdapter);
-
+        BoardNetwork.getBoard(pageNo, boardFragmentAdapter);
+        Log.i("mylog","getBoard() 실행");
 
         //아이템 클릭 이벤트 처리
         boardListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                selectedBoard = (Board)boardFragmentAdapter.getItem(position);
                 getActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer,new BoardDetailFragment())
                         .commit();
+            }
+        });
+
+        boardListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if(totalItemCount>0 && (firstVisibleItem+visibleItemCount>=totalItemCount-1)) {
+                    lastItem = true;
+                } else {
+                    lastItem = false;
+                }
+            }
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if(lastItem && scrollState==AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    pageNo++;
+                    BoardNetwork.getBoard(pageNo, boardFragmentAdapter);
+                    Log.i("mylog","getBoard() 실행2");
+                }
             }
         });
         return view;
