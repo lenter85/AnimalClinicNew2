@@ -47,17 +47,37 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="5dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="10:00 - 11:00 예약완료"
-            android:id="@+id/txtTime"
-            android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/txtCname"
-            android:layout_alignStart="@+id/txtCname"
-            android:layout_marginLeft="5dp"
-            android:textStyle="bold" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="2016년 8월 11일"
+                android:id="@+id/txtDate"
+                android:layout_alignParentBottom="true"
+                android:layout_alignLeft="@+id/txtCname"
+                android:layout_alignStart="@+id/txtCname"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="10:00 - 11:00"
+                android:id="@+id/txtTime"
+                android:layout_alignParentBottom="true"
+                android:layout_alignLeft="@+id/txtCname"
+                android:layout_alignStart="@+id/txtCname"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <RelativeLayout
