@@ -19,6 +19,7 @@ import com.example.myapplication.clinic.dto.ClinicInformation;
 import com.example.myapplication.clinic.dto.ClinicRegister;
 import com.example.myapplication.clinic.dto.RegisterLocation;
 import com.example.myapplication.clinic.dto.Review;
+import com.example.myapplication.clinic.fragment.ClinicInformationTabFragment;
 import com.example.myapplication.clinic.fragment.ClinicListViewAdapter;
 import com.example.myapplication.clinic.fragment.RegisterClinicFragment;
 import com.example.myapplication.clinic.fragment.ReviewListViewAdapter;
@@ -26,7 +27,9 @@ import com.example.myapplication.community.dto.Gallery;
 import com.example.myapplication.community.gallery.GalleryFragmentAdapter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,6 +66,9 @@ public class ClinicNetwork {
     private Bitmap bm2=null;
     private Bitmap bm3=null;
     private Bitmap bm4=null;
+
+    private String latitude;
+    private String longitude;
 
     public void setGoogleMap (GoogleMap googleMap) {
         this.googleMap = googleMap;
@@ -142,7 +148,7 @@ public class ClinicNetwork {
     }*/
 
 
-    public void getClinicInformationTab(final View view, GoogleMap googleMap) {
+    public void getClinicInformationTab(final View view) {
         new AsyncTask<String, Integer, ClinicInformation>() {
             ClinicInformation clinicInformation = new ClinicInformation();
 
@@ -192,7 +198,9 @@ public class ClinicNetwork {
                         clinicInformation.setClongitude(jsonObject.getString("clongitude"));
                         clinicInformation.setClatitude(jsonObject.getString("clatitude"));
 
-
+                        Log.i("mylog", "clinicnetwork에서 가져온 clinicinformation 의 위도 : " + clinicInformation.getClatitude());
+                        latitude = clinicInformation.getClatitude();
+                        longitude = clinicInformation.getClongitude();
                     }
 
 
@@ -221,6 +229,7 @@ public class ClinicNetwork {
                 textViewCloseTime.setText(clinicInformation.getCclosetime());
                 textViewIntroduction.setText(clinicInformation.getCintroduction());
 
+                //showCurrentLocation(Double.parseDouble(clinicInformation.getClocation()), Double.parseDouble(clinicInformation.getClongitude()));
 
             }
         }.execute(url + "clinicinformation?cid=" + MainActivity.clinicId);
@@ -822,6 +831,24 @@ public class ClinicNetwork {
             }
         };
         asyncTask.execute(NetworkSetting.baseUrl3+"reviewImage?rimage=" + rimage);
+
+    }
+
+
+    private void showMarker (Double latitude, Double longitude) {
+        MarkerOptions marker = new MarkerOptions();
+        marker.position(new LatLng(latitude, longitude));
+
+        marker.draggable(true);
+        marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
+
+        googleMap.addMarker(marker);
+
+
+    }
+
+    public void setClinicLocation() {
+        showCurrentLocation(Double.parseDouble(latitude), Double.parseDouble(longitude));
 
     }
 }

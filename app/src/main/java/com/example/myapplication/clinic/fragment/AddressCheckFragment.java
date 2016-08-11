@@ -34,7 +34,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class AddressCheckFragment extends Fragment {
     private LocationManager locationManager;
     private SupportMapFragment mapFragment;
-    private GoogleMap googleMap;
+    public static GoogleMap googleMap;
     private EditText editText;
     private ImageButton imageButton;
     private ListView listView;

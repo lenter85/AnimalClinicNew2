@@ -324,19 +324,19 @@ public class RegisterClinicFragment extends Fragment {
 
             ClinicNetwork clinicNetwork = new ClinicNetwork();
             if(bitmap1 != null) {
-                RegisterAlbumFragment.getResizedBitmap(bitmap1, 100);
+                RegisterAlbumFragment.getResizedBitmap(bitmap1, 30);
             }
 
             if(bitmap2 != null) {
-                RegisterAlbumFragment.getResizedBitmap(bitmap2, 100);
+                RegisterAlbumFragment.getResizedBitmap(bitmap2, 30);
             }
 
             if(bitmap3 != null) {
-                RegisterAlbumFragment.getResizedBitmap(bitmap3, 100);
+                RegisterAlbumFragment.getResizedBitmap(bitmap3, 30);
             }
 
             if(bitmap4 != null) {
-                RegisterAlbumFragment.getResizedBitmap(bitmap4, 100);
+                RegisterAlbumFragment.getResizedBitmap(bitmap4, 30);
             }
 
             clinicNetwork.clinicRegister(clinicRegister, bitmap1, bitmap2, bitmap3, bitmap4);
