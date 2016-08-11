@@ -313,6 +313,7 @@ public class Network {
 
             @Override
             protected String doInBackground(String... params) {
+                Log.i("mytest", "getMyReserveList 호출- doInBackground 시작");
 
                 String json = "";
                 try {
@@ -360,7 +361,7 @@ public class Network {
 
             @Override
             protected void onPostExecute(String json) {
-
+                Log.i("mytest", "getMyReserveList 호출- onPostExecute 시작");
                 try {
 
                     JSONArray root = new JSONArray(json);
@@ -408,6 +409,9 @@ public class Network {
             }
         };
 
+        Log.i("mytest", "getMyReserveList 호출- asyncTask 시작");
+
+        Log.i("mytest", site + "/reserve/getMyReserveList?rpname=" + rpname + "&ruserid=" + ruserid);
         asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "/reserve/getMyReserveList?rpname=" + rpname + "&ruserid=" + ruserid);
     }
 
