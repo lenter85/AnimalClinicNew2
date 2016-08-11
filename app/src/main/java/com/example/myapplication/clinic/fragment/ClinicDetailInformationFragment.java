@@ -78,9 +78,9 @@ public class ClinicDetailInformationFragment extends Fragment {
 
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu_camera);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_menu_gallery);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_menu_manage);
+        tabLayout.getTabAt(0).setIcon(R.drawable.info1);
+        tabLayout.getTabAt(1).setIcon(R.drawable.photo1);
+        tabLayout.getTabAt(2).setIcon(R.drawable.review1);
 
         return view;
     }
