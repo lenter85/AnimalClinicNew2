@@ -34,7 +34,7 @@ import java.net.URL;
 public class WriteReviewFragment extends Fragment {
     private Button buttonCancel;
     private Button btnRegister;
-    ImageView imageViewReviewImg;
+    private ImageView imageViewReviewImg;
     private Bitmap bitmap;
     private RatingBar ratingBar;
     private EditText editTextContent;
@@ -112,13 +112,15 @@ public class WriteReviewFragment extends Fragment {
 
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("mylog", "Result 시작");
+        Log.i("mylog", "writeReview에 사진등록 결과");
         if(resultCode == Activity.RESULT_OK){
             if(requestCode == 1) {
                 try {
                     bitmap 	= MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
 
                     imageViewReviewImg.setImageBitmap(bitmap);
+
+                    Log.i("mylog", "bitmap 정보는 ? : " + bitmap.getConfig().name());
 
                 } catch (IOException e) {
                     e.printStackTrace();

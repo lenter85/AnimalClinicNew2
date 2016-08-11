@@ -126,7 +126,7 @@ public class RegisterMyDiaryFragment extends Fragment {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        Log.i("mylog", "onActivityResult#########################################");
         if(resultCode == Activity.RESULT_OK){
             if(requestCode == 1) {
                 try {
