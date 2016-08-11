@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.member.dao.CheckUser;
 import com.example.myapplication.network.MemberNetwork;
@@ -73,7 +74,7 @@ public class LogInFragment extends Fragment {
                         dialog("아이디와 비밀번호가 일치하지 않습니다.");
                     } else if(memberNetwork.loginResult == true){
                         Toast.makeText(getContext(),"로그인 성공",Toast.LENGTH_SHORT).show();
-
+                        MainActivity.loginId = email.getText().toString();
                         getActivity().onBackPressed();
                     }
                 }

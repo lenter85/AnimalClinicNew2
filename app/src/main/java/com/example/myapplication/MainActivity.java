@@ -42,7 +42,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public static List<RegisterLocation> list = new ArrayList<>();
     public static String clinicLocation = null;
-    public static String loginId = "test";
+
+    //로그인 아이디 저장
+    public static String loginId;
     public static String clinicId = "test";
     private ImageView imageViewReviewImg;
     private String mimageName;
@@ -62,7 +64,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //민규 컴퓨터
 
     public static Fragment previousFragment;
+
+    //일반회원, 병원회원 구분 플래그
     public static String LoginId = "NOMAL";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
