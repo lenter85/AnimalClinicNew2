@@ -42,12 +42,6 @@ public class BoardFragment extends Fragment {
 
         fab = (FloatingActionButton)view.findViewById(R.id.fab);
 
-        if(MainActivity.loginStatus){
-            fab.setVisibility(View.VISIBLE);
-        } else {
-            fab.setVisibility(View.INVISIBLE);
-        }
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

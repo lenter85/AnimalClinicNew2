@@ -753,7 +753,7 @@ public class ClinicNetwork {
                 }
             }
         };
-        asyncTask.execute(NetworkSetting.baseUrl3+"reviewlist?pageNo=" + pageNo);
+        asyncTask.execute(NetworkSetting.baseUrl3+"reviewlist?pageNo=" + pageNo + "&cid=" + MainActivity.clinicId);
     }
 
 

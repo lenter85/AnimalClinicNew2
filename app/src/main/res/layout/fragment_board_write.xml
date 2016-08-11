@@ -34,6 +34,8 @@
                 android:layout_weight="1"
                 android:hint="제목을 입력해 주세요."
                 android:textSize="20dp"
+                android:singleLine = "true"
+                android:lines = "1"
                 android:layout_marginRight="5dp" />
 
         </LinearLayout>
