@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.myapplication.diary.WeightActivity"
+    tools:context="com.example.myapplication.diary.WeightFragment"
     android:background="#eff6f8">
 
 
@@ -25,25 +25,23 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="현재체중 :"
+        android:text="현재 체중 :"
         android:id="@+id/textView28"
         android:textSize="20dp"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="40dp"
         android:layout_below="@+id/chart1"
-        android:layout_toLeftOf="@+id/currentWeight"
-        android:layout_toStartOf="@+id/currentWeight"
-        android:layout_marginRight="39dp"
-        android:layout_marginEnd="39dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/currentWeight"
         android:textSize="20dp"
-
         android:layout_alignTop="@+id/textView28"
-        android:layout_alignLeft="@+id/imgAddWeight"
-        android:layout_alignStart="@+id/imgAddWeight" />
+        android:layout_toRightOf="@+id/textView28"
+        android:layout_toEndOf="@+id/textView28"
+        android:layout_marginLeft="12dp"
+        android:text="sdfsdf" />
 
     <com.github.mikephil.charting.charts.LineChart
         android:layout_width="match_parent"
