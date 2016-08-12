@@ -57,7 +57,7 @@ public class MenuFragment extends Fragment {
         textView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.LoginId = "CLINIC";
+                MainActivity.LoginType = "CLINIC";
                 getActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()

@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String mimageName;
     private Bitmap bitmap;
     private Bitmap smallbitmap;
-    private MenuItem miLogin;
+    public static MenuItem miLogin;
 
 
     public static boolean loginStatus;
@@ -144,10 +144,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             .addToBackStack(null)
                             .commit();
 
-                    miLogin.setTitle("로그아웃");
+
                 } else {
                     MainActivity.loginId = null;
                     MainActivity.loginStatus = false;
+                    HomeActivity.loginId=null;
                     miLogin.setTitle("로그인");
                 }
 

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.myapplication.HomeActivity;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.member.dao.CheckUser;
@@ -75,6 +76,11 @@ public class LogInFragment extends Fragment {
                     } else if(memberNetwork.loginResult == true){
                         Toast.makeText(getContext(),"로그인 성공",Toast.LENGTH_SHORT).show();
                         MainActivity.loginId = email.getText().toString();
+
+
+                        //여기 추가
+                        MainActivity.miLogin.setTitle("로그아웃");
+                        HomeActivity.loginId = email.getText().toString();
 
                         getActivity().onBackPressed();
                     }

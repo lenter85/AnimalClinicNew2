@@ -111,7 +111,7 @@ public class ReserveSearchFragment extends Fragment {
                 //달력을 누르기 전에 지금 페이지에 대한 정보를 넘긴다.
                 CalendarFragment.previousPage = "SEARCH";
 
-                MainActivity.LoginId = "NOMAL";
+                MainActivity.LoginType = "NOMAL";
 
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
