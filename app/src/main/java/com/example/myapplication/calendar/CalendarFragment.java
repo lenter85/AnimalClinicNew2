@@ -65,7 +65,7 @@ public class CalendarFragment extends Fragment {
         Calendar oCalendar = Calendar.getInstance( );  // 현재 날짜/시간 등의 각종 정보 얻기
         realYear = oCalendar.get(Calendar.YEAR);
         realMonth = oCalendar.get(Calendar.MONTH) + 1;
-        realDay = oCalendar.get(Calendar.DATE)+1;
+        realDay = oCalendar.get(Calendar.DATE);
 
     }
 
