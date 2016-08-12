@@ -40,6 +40,7 @@ public class RegisterMyDiaryFragment extends Fragment {
     private EditText txtRdbirth;
     private Bitmap bitmap;
 
+
     private RadioButton maleButton;
     private RadioButton femaleButton;
     private String filePath;
