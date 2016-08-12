@@ -75,7 +75,7 @@ public class CalendarMonthAdapter extends BaseAdapter {
 
         Calendar oCalendar = Calendar.getInstance();  // 현재 날짜/시간 등의 각종 정보 얻기
         realMonth = oCalendar.get(Calendar.MONTH) + 1;
-        realDay = oCalendar.get(Calendar.DATE) + 1;
+        realDay = oCalendar.get(Calendar.DATE);
     }
 
     public void recalculate() {
@@ -188,7 +188,7 @@ public class CalendarMonthAdapter extends BaseAdapter {
         }
 
         // create a params
-        GridView.LayoutParams params = new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, 240);
+        GridView.LayoutParams params = new GridView.LayoutParams(GridView.LayoutParams.MATCH_PARENT, 330);
 
         // calculate row and column
         int rowIndex = position / countColumn;
@@ -218,6 +218,9 @@ public class CalendarMonthAdapter extends BaseAdapter {
 
         if (MainActivity.LoginType.equals("NOMAL")) {
 
+            Log.i("test2","선택한 day:"+day);
+            Log.i("test2","realDay:"+realDay);
+
             if ((month == realMonth) && (1 <= day) && (day <= 31) && (day < realDay)) {
 
                 //현재 날짜보다 이전 날짜라면 회색
@@ -237,7 +240,7 @@ public class CalendarMonthAdapter extends BaseAdapter {
             StringBuilder reserveDate = new StringBuilder();
             reserveDate.append(getCurYear()).append("-").append(month).append("-").append(day);
 
-            Log.i("test", "예약 조회일: " + reserveDate.toString());
+            Log.i("test1", "예약 조회일: " + reserveDate.toString());
 
             //해당일에 예약이 되있으면 파란색
 
@@ -246,6 +249,7 @@ public class CalendarMonthAdapter extends BaseAdapter {
             //예약이 됐는지 안됐는지의 여부는 해당일에 예약된 예약테이블에 행이 1개 이상이면 예약된 것 아니면 예약되지 않은 것이다.
 
             //int로 리턴받는다. 1이상이면 예약된 것 0이면 예약안된 것.
+
 
             Network.isReserved( itemView, MainActivity.loginId, reserveDate.toString());
         }

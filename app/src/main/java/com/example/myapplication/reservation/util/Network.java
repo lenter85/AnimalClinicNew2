@@ -14,6 +14,7 @@ import com.example.myapplication.reservation.dto.Reserve;
 import com.example.myapplication.reservation.dto.ReserveListItem;
 import com.example.myapplication.reservation.fragment.MyReserveViewAdapter;
 import com.example.myapplication.reservation.fragment.ReserveListViewAdapter;
+import com.example.myapplication.reservation.fragment.ReserveSearchFragment;
 import com.example.myapplication.reservation.fragment.TimeViewAdapter;
 
 import org.json.JSONArray;
@@ -28,6 +29,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -45,7 +47,12 @@ public class Network {
         final List<String> dbReservedTimeList = new ArrayList<>();
 
         //첫번째 매개변수는 doInBackground()로, 두번째 매개변수는 onProgressUpdate()로, 세번째 매개변수는 반환값을 의미한다.
+
+
         AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
+
+            int curSum = 0;
+            int cal_sum = 0;
 
             ProgressDialog asyncDialog = new ProgressDialog(context);
 
@@ -58,6 +65,38 @@ public class Network {
                 // show dialog
                 asyncDialog.show();
                 super.onPreExecute();
+
+                Calendar cal = Calendar.getInstance();
+
+                //현재 년도, 월, 일
+                int curMonth = cal.get ( cal.MONTH ) + 1 ;
+                int curDate = cal.get ( cal.DATE ) ;
+                curSum = curMonth + curDate;
+
+                Log.i("test2", "curSum" + curSum);
+
+
+                String fullDate = ReserveSearchFragment.rdate;
+                if (fullDate.contains("(오늘)")) {
+                    fullDate = fullDate.replace("(오늘)", "");
+                }
+
+                Log.i("test2", "fullDate" + fullDate);
+
+                int firstIndex = fullDate.indexOf("년");
+                int year = Integer.parseInt(fullDate.substring(0, firstIndex));
+
+                int secondIndex = fullDate.indexOf("월");
+                int cal_month = Integer.parseInt(fullDate.substring(firstIndex + 1, secondIndex));
+
+                int thirdIndex = fullDate.indexOf("일");
+                int cal_date = Integer.parseInt(fullDate.substring(secondIndex + 1, thirdIndex));
+
+                Log.i("test2", "cal_month:"+cal_month);
+                Log.i("test2", "cal_date:"+cal_date);
+
+                cal_sum = cal_month + cal_date;
+                Log.i("test2", "cal_sum" + cal_sum);
             }
 
 
@@ -120,6 +159,13 @@ public class Network {
 
                 //Log.i("myLog", json);
 
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
                 return json;
                 //doInBackground가 종료하면 onPostExecute(String json)을 호출한다.
             }
@@ -132,7 +178,7 @@ public class Network {
                 Log.i("myLog", "받아온 시간 정보:"+json);
 
                 long curTime = System.currentTimeMillis();
-                SimpleDateFormat dayTime = new SimpleDateFormat("hhmm");
+                SimpleDateFormat dayTime = new SimpleDateFormat("HHmm");
                 String tempTime = dayTime.format(new Date(curTime));
 
                 Log.i("myLog", "현재 시간은 : " + tempTime);
@@ -167,7 +213,8 @@ public class Network {
                         int localTime = Integer.parseInt(nonReservedTimeList.get(i).replace(":", ""));
 
                         //현재 시간보다 이전 시간은 지운다.
-                        if (currentTime > localTime) {
+                        if ((curSum == cal_sum) && currentTime > localTime) {
+                            //Toast.makeText(context, "현재시간보다 이전시간 제거", Toast.LENGTH_LONG).show();
                             Log.i("myLog", "현재 시간보다 이전 시간이므로 "+nonReservedTimeList.get(i) + " 제거");
                             nonReservedTimeList.remove(i);
                             i--;
@@ -201,18 +248,22 @@ public class Network {
                 timeViewAdapter.setList(nonReservedTimeList);
                 timeViewAdapter.notifyDataSetChanged();
 
+
+
                 asyncDialog.dismiss();
             }
         };
 
-        Log.i("myLog", "asyncTask 시작 전");
+
+
+
         String clinicid = map.get("clinicid");
         String date = map.get("date");
 
-        Log.i("myLog", clinicid + "," + date);
+        //Log.i("myLog", clinicid + "," + date);
 
-        //asyncTask를 실행한다. doInBackground 메소드를 실행한다.
-        Log.i("myLog", site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + date);
+        //Log.i("myLog", site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + date);
+
 
         asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "reserve/getTimeList?clinicid=" + clinicid + "&date=" + date); //doInBackground()의 매개값으로 들어간다.
     }
@@ -553,7 +604,7 @@ public class Network {
                     itemView.setBackgroundColor(Color.parseColor("#FF5A5A"));
 
                     itemView.append("\n\n\n예약 내역\n "+num+"건");
-                    itemView.setTextSize(10);
+                    itemView.setTextSize(13);
                 }
             }
         };

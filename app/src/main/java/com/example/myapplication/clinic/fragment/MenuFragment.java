@@ -3,6 +3,7 @@ package com.example.myapplication.clinic.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.calendar.CalendarFragment;
+import com.example.myapplication.reservation.util.Util;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,13 +59,26 @@ public class MenuFragment extends Fragment {
         textView3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.LoginType = "CLINIC";
-                getActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, new CalendarFragment())
-                        .addToBackStack(null)
-                        .commit();
+
+
+                if(MainActivity.loginStatus == true){
+                    if(MainActivity.LoginType.equals("CLINIC")){
+                        getActivity()
+                                .getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentContainer, new CalendarFragment())
+                                .addToBackStack(null)
+                                .commit();
+                    }else{
+
+                        Util.showToast(getContext(),  "병원 관리자 기능입니다.");
+                    }
+                }else{
+
+                    Util.showToast(getContext(), "로그인 후 이용하실 수 있습니다.");
+                }
+
+
             }
         });
 

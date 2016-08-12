@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.reservation.fragment.ReserveSearchFragment;
+import com.example.myapplication.reservation.util.Util;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,14 +49,14 @@ public class ClinicDetailInformationFragment extends Fragment {
 
                 if(MainActivity.loginStatus == false){
 
-                    Toast toast ;
-                    toast = Toast.makeText(getContext(), "로그인 후에 이용하실 수 있습니다." , Toast.LENGTH_LONG);
-                    int offsetX = 0;
-                    int offsetY = 0;
-                    toast.setGravity(Gravity.CENTER, offsetX, offsetY);
-                    toast.show();
-
+                    Util.showToast(getContext(), "로그인 후에 이용하실 수 있습니다.");
                     return;
+                }else{
+
+                    if(MainActivity.LoginType.equals("CLINIC")){
+                        Util.showToast(getContext(), "병원 관리자 이용불가");
+                        return;
+                    }
                 }
 
                 ReserveSearchFragment reserveSearchFragment = new ReserveSearchFragment();

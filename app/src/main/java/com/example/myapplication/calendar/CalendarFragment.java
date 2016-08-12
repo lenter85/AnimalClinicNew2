@@ -87,22 +87,33 @@ public class CalendarFragment extends Fragment {
             @SuppressLint("LongLogTag")
             public void onDataSelected(AdapterView parent, View v, int position, long id) {
 
+                Log.i("test1", "날짜가 선택됨");
+
                 // 현재 선택한 일자 정보 표시
                 MonthItem curItem = (MonthItem) monthViewAdapter.getItem(position);
                 int day = curItem.getDay();
+                Log.i("test1", String.valueOf(day));
 
-                if(( (curMonth+1) == realMonth )){
 
-                    if((day < 1) || (day > 31) || ( day < realDay)){
-                        //Toast.makeText(getContext(), "선택불가능한 날짜입니다", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                }
-
-                Log.i("myLog", "선택된 날짜는 "+curYear+"년"+(curMonth+1)+"월"+day+"일 입니다");
+                Log.i("test1", "선택된 날짜는 "+curYear+"년"+(curMonth+1)+"월"+day+"일 입니다");
                 ReserveSearchFragment.rdate = getDatetoKorean(curYear, curMonth, day);
 
                 if(MainActivity.LoginType.equals("NOMAL")){
+
+                    if((curMonth + 1) == realMonth){
+                        if((day < 1) || (day > 31) || (day < realDay)){
+                            Toast.makeText(getContext(), "선택불가능한 날짜입니다", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                    }else{
+                        if((day < 1) || (day > 31)){
+                            Toast.makeText(getContext(), "선택불가능한 날짜입니다", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                    }
+
+
+                    Log.i("test1", "일반회원 선택");
 
                     if(previousPage.equals("SEARCH")){
 
@@ -133,6 +144,16 @@ public class CalendarFragment extends Fragment {
                     }
 
                 }else if(MainActivity.LoginType.equals("CLINIC")){
+
+                    Log.i("test1", "병원관리자 선택");
+
+
+                        if((day < 1) || (day > 31)){
+                            Toast.makeText(getContext(), "선택불가능한 날짜입니다", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                    Log.i("test1", "병원 아이디:"+MainActivity.loginId+"의 "+(curMonth+1)+"월"+ day+"일자 예약 정보를 요청합니다.");
 
                     getActivity()
                         .getSupportFragmentManager()
