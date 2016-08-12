@@ -7,6 +7,7 @@ public abstract class BaseEntry {
 
     /** the y value */
     private float y = 0f;
+
     private String s = null;
     /** optional spot for additional data this Entry represents */
     private Object mData = null;
@@ -18,6 +19,8 @@ public abstract class BaseEntry {
     public BaseEntry(float y) {
         this.y = y;
     }
+
+
 
     public BaseEntry(String y) {
         this.s = y;
@@ -45,6 +48,7 @@ public abstract class BaseEntry {
     public void setY(float y) {
         this.y = y;
     }
+
 
     /**
      * Returns the data, additional information that this Entry represents, or

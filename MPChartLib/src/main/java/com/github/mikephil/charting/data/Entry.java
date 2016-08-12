@@ -119,7 +119,7 @@ public class Entry extends BaseEntry implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeFloat(this.x);
-        dest.writeFloat(this.getY());
+        dest.writeDouble(this.getY());
         if (getData() != null) {
             if (getData() instanceof Parcelable) {
                 dest.writeInt(1);
