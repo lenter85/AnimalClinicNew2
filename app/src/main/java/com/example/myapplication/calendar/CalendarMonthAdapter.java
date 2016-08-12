@@ -216,7 +216,7 @@ public class CalendarMonthAdapter extends BaseAdapter {
             itemView.setTextColor(Color.BLACK);
         }
 
-        if (MainActivity.LoginId.equals("NOMAL")) {
+        if (MainActivity.LoginType.equals("NOMAL")) {
 
             if ((month == realMonth) && (1 <= day) && (day <= 31) && (day < realDay)) {
 
@@ -247,7 +247,7 @@ public class CalendarMonthAdapter extends BaseAdapter {
 
             //int로 리턴받는다. 1이상이면 예약된 것 0이면 예약안된 것.
 
-            Network.isReserved( itemView, "test", reserveDate.toString());
+            Network.isReserved( itemView, MainActivity.loginId, reserveDate.toString());
         }
 
 
