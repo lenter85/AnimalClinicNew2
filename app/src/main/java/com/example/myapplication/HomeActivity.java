@@ -11,10 +11,13 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.myapplication.network.HomeNetwork;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +27,8 @@ public class HomeActivity extends AppCompatActivity {
     private Bitmap bitmap;
     private Bitmap circlebitmap;
     private String imageName;
+    public static String loginId;
+
     /*ImageView mImageView;
     int mDegree = -30;*/
 
@@ -42,6 +47,8 @@ public class HomeActivity extends AppCompatActivity {
                 dialog();
             }
         });
+
+
 
 
        /* mImageView = (ImageView) findViewById(R.id.imageView);
@@ -93,23 +100,25 @@ public class HomeActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == 1) {
             bitmap = (Bitmap) data.getExtras().get("data");
-            circlebitmap = getCircleBitmap(bitmap, 500);
+            circlebitmap = getCircleBitmap(bitmap, 550);
             homePetImg.setImageBitmap(circlebitmap);
 
             Uri uri = data.getData();
             String realPath = getAbsolutePathFromUri(this, uri);
             File file = new File(realPath);
             imageName = file.getName();
+            HomeNetwork.sendImage(MainActivity.loginId, bitmap);
 
         } else if(requestCode == 2) {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
-                circlebitmap = getCircleBitmap(bitmap, 500);
+                circlebitmap = getCircleBitmap(bitmap, 550);
                 homePetImg.setImageBitmap(circlebitmap);
                 Uri uri = data.getData();
                 String realPath = getAbsolutePathFromUri(this, uri);
                 File file = new File(realPath);
                 imageName = file.getName();
+                HomeNetwork.sendImage(MainActivity.loginId, bitmap);
 
             } catch (IOException e) {
                 e.printStackTrace();

@@ -16,11 +16,12 @@
             android:layout_height="80dp"
             android:id="@+id/imgAddDiary"
             android:layout_marginBottom="44dp"
-            android:background="@android:drawable/ic_input_add"
+            android:background="@drawable/add_btn"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:onClick="onClickToRegisterMyDiary" />
+            android:onClick="onClickToRegisterMyDiary"
+            android:src="@drawable/ic_add_entry" />
 
         <ListView
             android:layout_width="wrap_content"
@@ -28,7 +29,8 @@
             android:id="@+id/listViewDiary"
             android:layout_alignRight="@+id/imgAddDiary"
             android:layout_alignEnd="@+id/imgAddDiary"
-            android:layout_marginTop="40dp" />
+            android:layout_marginTop="40dp"
+            android:choiceMode="none" />
 
     </RelativeLayout>
 

@@ -2,6 +2,7 @@ package com.example.myapplication.reservation.fragment;
 
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,8 +16,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.clinic.fragment.ClinicDetailInformationFragment;
+import com.example.myapplication.clinic.fragment.ClinicList_Fragment;
+import com.example.myapplication.network.NetworkSetting;
 import com.example.myapplication.reservation.dto.Reserve;
 
 import org.json.JSONObject;
@@ -111,11 +115,21 @@ public class ReserveResultFragment extends Fragment {
                         toast.setGravity(Gravity.CENTER, offsetX, offsetY);
                         toast.show();
 
+
                         // 병원 정보 화면으로 돌아간다.
+                        android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        int back = fragmentManager.getBackStackEntryCount();
+
+                        for(int i=0; i<back; i++){
+                            fragmentManager.popBackStack();
+                        }
+
+                        Log.i("myBack", String.valueOf(back));
+
                         getActivity()
                                 .getSupportFragmentManager()
                                 .beginTransaction()
-                                .replace(R.id.fragmentContainer, new ClinicDetailInformationFragment())
+                                .replace(R.id.fragmentContainer, new ClinicList_Fragment())
                                 .commit();
 
                         return;
@@ -173,9 +187,11 @@ public class ReserveResultFragment extends Fragment {
         reserve.setRtype(ReserveSearchFragment.rtype);
         reserve.setRdate(rdate);
         reserve.setRtime(ReserveSearchFragment.rtime);
-        reserve.setRclinicid(ReserveSearchFragment.rclinicid);
-        reserve.setRuserid(ReserveSearchFragment.ruserid);
+        reserve.setRclinicid(MainActivity.clinicId);
+        reserve.setRuserid(MainActivity.loginId);
         reserve.setRpname(ReserveSearchFragment.rpname);
+        reserve.setRclinicName(MainActivity.cName);
+        reserve.setRaddress(MainActivity.clinicLocation);
 
         sendReserve(reserve);
 
@@ -183,47 +199,42 @@ public class ReserveResultFragment extends Fragment {
 
     public void sendReserve(final Reserve reserve) {
 
+        Log.i("mytest","sendReserve 호출");
 
-        new AsyncTask<Void, Void, Void>() {
+        AsyncTask<String, Void, Void> asyncTask = new AsyncTask<String, Void, Void>() {
 
             @Override
-            protected Void doInBackground(Void... params) {
+            protected Void doInBackground(String... params) {
 
                 String strJson = "";
 
                 Log.i("myLog", "어싱크태스크 실행되는 중");
 
                 try {
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("rtype", reserve.getRtype());
-                    jsonObject.put("rdate", reserve.getRdate());
-                    jsonObject.put("rtime", reserve.getRtime());
-                    jsonObject.put("rclinicid", reserve.getRclinicid());
-                    jsonObject.put("ruserid", reserve.getRuserid());
-                    jsonObject.put("rpname", reserve.getRpname());
 
-                    strJson = jsonObject.toString();
-
-                    URL url = new URL("http://192.168.0.21:8080/Petopia/reserve/register?json_reserve="+strJson);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setDoInput(true);
+                    URL url = new URL(params[0]);
+                    //커넥션 객체 생성
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
                     conn.setDoOutput(true);
-                    conn.setUseCaches(false);
-                    conn.setRequestMethod("GET");
-                    conn.setRequestProperty("Connection", "Keep-Alive");
-                    conn.setRequestProperty("Content-Type", "application/json");
+                    conn.setDoInput(true);
+                    conn.setRequestMethod("POST");
                     conn.connect();
 
-                    //출력스트림
+                    //요청 내용 본문에 작성
                     OutputStream os = conn.getOutputStream();
-                    os.write(strJson.getBytes());
+                    String data = "rtype="+reserve.getRtype()+"&rdate="+reserve.getRdate()
+                            +"&rtime="+reserve.getRtime()+"&rclinicid="+reserve.getRclinicid()+"&ruserid="+reserve.getRuserid()
+                            +"&rpname="+reserve.getRpname()+"&rcname="+reserve.getRclinicName()+"&raddress="+reserve.getRaddress();
+                    Log.i("mytest", "보낼 파라미터값들:"+data);
 
+                    byte[] bytedata = data.getBytes();
+                    os.write(bytedata);
                     os.flush();
                     os.close();
 
                     //응답코드 확인
                     if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                        Log.i("myLog", "응답ok");
+                        Log.i("mytest", "응답ok");
                     }
 
                     conn.disconnect();
@@ -234,7 +245,11 @@ public class ReserveResultFragment extends Fragment {
 
                 return null;
             }
-        }.execute();
+        };
+
+        Log.i("mytest", NetworkSetting.baseUrl4 + "reserve/register");
+
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl4 + "reserve/register");
     }
 
 }

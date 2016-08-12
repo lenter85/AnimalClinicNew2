@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String mimageName;
     private Bitmap bitmap;
     private Bitmap smallbitmap;
+    public static MenuItem miLogin;
 
 
     public static boolean loginStatus;
@@ -68,13 +70,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static Fragment previousFragment;
 
     //일반회원, 병원회원 구분 플래그
-    public static String LoginId = "NOMAL";
+    public static String LoginType = "NOMAL";
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        if(loginStatus == true){
+            Log.i("mytest", "로그인");
+            if(LoginType.equals("NOMAL")){
+                Log.i("mytest", "NOMAL");
+                //Toast.makeText(getApplicationContext(), "일반 회원으로 로그인 하셨습니다.", Toast.LENGTH_LONG).show();
+            }else{
+                Log.i("mytest", "CLINIC");
+                //Toast.makeText(getApplicationContext(), "병원 회원으로 로그인 하셨습니다.", Toast.LENGTH_LONG).show();
+            }
+        }else{
+            Log.i("mytest", "비로그인");
+            //Toast.makeText(getApplicationContext(), "로그인 안됨", Toast.LENGTH_LONG).show();
+        }
+
 
         asyncDialog = new ProgressDialog(this);
 
@@ -83,6 +101,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+        ////toobar에 home 버튼 이벤트처리 /////////
+        ImageView imageViewHome = (ImageView) toolbar.findViewById(R.id.imageViewHome);
+        imageViewHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for ( int i = 0 ; i < fragmentManager.getBackStackEntryCount() ; i++) {
+                    fragmentManager.popBackStack();
+                }
+
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 
@@ -96,6 +130,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //********************************************** 왼쪽 슬라이딩 메뉴 설정코드
+        miLogin = navigationView.getMenu().findItem(R.id.nav_manage);
+        miLogin.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                if(miLogin.getTitle().toString().equals("로그인")) {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragmentContainer, new LogInFragment())
+                            .addToBackStack(null)
+                            .commit();
+
+
+                } else {
+                    MainActivity.loginId = null;
+                    MainActivity.loginStatus = false;
+                    HomeActivity.loginId=null;
+                    miLogin.setTitle("로그인");
+                }
+
+                return false;
+            }
+        });
+
+        //**********************************************
+
+
 
         /*View nav_header_view = navigationView.getHeaderView(0);
 
@@ -143,6 +206,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -255,13 +321,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .replace(R.id.fragmentContainer, new CommunityFragment())
                     .addToBackStack(null)
                     .commit();
-        } else if (id == R.id.nav_manage) {
+        }/* else if (id == R.id.nav_manage) {    //이부분 필요없어져서 주석처리
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragmentContainer, new LogInFragment())
                     .addToBackStack(null)
                     .commit();
-        } else if (id == R.id.nav_share) {
+        }*/ else if (id == R.id.nav_share) {
 
             getSupportFragmentManager()
                     .beginTransaction()

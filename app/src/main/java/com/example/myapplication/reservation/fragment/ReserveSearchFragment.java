@@ -19,9 +19,12 @@ import android.widget.Toast;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.calendar.CalendarFragment;
+import com.example.myapplication.reservation.util.Network;
+import com.example.myapplication.reservation.util.Util;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,6 +48,7 @@ public class ReserveSearchFragment extends Fragment {
     ImageButton imgCalendar;
     TextView txtCname;
 
+    List<String> arraylist;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -63,6 +67,11 @@ public class ReserveSearchFragment extends Fragment {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(arraylist.isEmpty()){
+                    Util.showToast(getContext(), "동물수첩에서 반려동물을 등록한 후에 사용하실 수 있습니다.\n반려동물을 등록해주세요.");
+                    return;
+                }
 
                 getActivity()
                         .getSupportFragmentManager()
@@ -109,7 +118,7 @@ public class ReserveSearchFragment extends Fragment {
                 //달력을 누르기 전에 지금 페이지에 대한 정보를 넘긴다.
                 CalendarFragment.previousPage = "SEARCH";
 
-                MainActivity.LoginId = "NOMAL";
+                MainActivity.LoginType = "NOMAL";
 
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
@@ -130,11 +139,12 @@ public class ReserveSearchFragment extends Fragment {
 
     public void setReserveInfo(View view) {
 
-
         //애완 동물명 세팅
-        final ArrayList<String> arraylist = new ArrayList<String>();
-        arraylist.add("우디");
-        arraylist.add("페르");
+        arraylist = Network.getMyPetList();
+
+        if(arraylist.isEmpty()){
+            Util.showToast(getContext(), "동물수첩에서 반려동물을 등록한 후에 사용하실 수 있습니다.\n반려동물을 등록해주세요.");
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, arraylist);
         //스피너 속성
@@ -177,15 +187,17 @@ public class ReserveSearchFragment extends Fragment {
         rtype = "진료";
 
         //유저 아이디 세팅
-        ruserid = "test";
+        ruserid = MainActivity.loginId;
 
         //병원 아이디 세팅
-        rclinicid = "test";
+        rclinicid = MainActivity.clinicId;
 
         rclinicname = MainActivity.cName;
 
         //애완동물명 세팅
-        rpname = arraylist.get(0); //애완동물은 처음엔 스피너의 첫번째 리스트항목에 있는 애완동물명으로 세팅한다.
+        if(arraylist.isEmpty() == false){
+            rpname = arraylist.get(0); //애완동물은 처음엔 스피너의 첫번째 리스트항목에 있는 애완동물명으로 세팅한다.
+        }
 
         calendarDay = null;
 

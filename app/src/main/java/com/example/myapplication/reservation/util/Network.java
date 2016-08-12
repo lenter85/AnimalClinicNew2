@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.calendar.MonthItemView;
@@ -13,6 +14,7 @@ import com.example.myapplication.reservation.dto.Reserve;
 import com.example.myapplication.reservation.dto.ReserveListItem;
 import com.example.myapplication.reservation.fragment.MyReserveViewAdapter;
 import com.example.myapplication.reservation.fragment.ReserveListViewAdapter;
+import com.example.myapplication.reservation.fragment.ReserveSearchFragment;
 import com.example.myapplication.reservation.fragment.TimeViewAdapter;
 
 import org.json.JSONArray;
@@ -27,6 +29,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -44,7 +47,12 @@ public class Network {
         final List<String> dbReservedTimeList = new ArrayList<>();
 
         //첫번째 매개변수는 doInBackground()로, 두번째 매개변수는 onProgressUpdate()로, 세번째 매개변수는 반환값을 의미한다.
+
+
         AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
+
+            int curSum = 0;
+            int cal_sum = 0;
 
             ProgressDialog asyncDialog = new ProgressDialog(context);
 
@@ -57,6 +65,38 @@ public class Network {
                 // show dialog
                 asyncDialog.show();
                 super.onPreExecute();
+
+                Calendar cal = Calendar.getInstance();
+
+                //현재 년도, 월, 일
+                int curMonth = cal.get ( cal.MONTH ) + 1 ;
+                int curDate = cal.get ( cal.DATE ) ;
+                curSum = curMonth + curDate;
+
+                Log.i("test2", "curSum" + curSum);
+
+
+                String fullDate = ReserveSearchFragment.rdate;
+                if (fullDate.contains("(오늘)")) {
+                    fullDate = fullDate.replace("(오늘)", "");
+                }
+
+                Log.i("test2", "fullDate" + fullDate);
+
+                int firstIndex = fullDate.indexOf("년");
+                int year = Integer.parseInt(fullDate.substring(0, firstIndex));
+
+                int secondIndex = fullDate.indexOf("월");
+                int cal_month = Integer.parseInt(fullDate.substring(firstIndex + 1, secondIndex));
+
+                int thirdIndex = fullDate.indexOf("일");
+                int cal_date = Integer.parseInt(fullDate.substring(secondIndex + 1, thirdIndex));
+
+                Log.i("test2", "cal_month:"+cal_month);
+                Log.i("test2", "cal_date:"+cal_date);
+
+                cal_sum = cal_month + cal_date;
+                Log.i("test2", "cal_sum" + cal_sum);
             }
 
 
@@ -119,6 +159,13 @@ public class Network {
 
                 //Log.i("myLog", json);
 
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+
                 return json;
                 //doInBackground가 종료하면 onPostExecute(String json)을 호출한다.
             }
@@ -128,11 +175,13 @@ public class Network {
             @Override
             protected void onPostExecute(String json) {
 
+                Log.i("myLog", "받아온 시간 정보:"+json);
+
                 long curTime = System.currentTimeMillis();
-                SimpleDateFormat dayTime = new SimpleDateFormat("hhmm");
+                SimpleDateFormat dayTime = new SimpleDateFormat("HHmm");
                 String tempTime = dayTime.format(new Date(curTime));
 
-                Log.i("test", "현재 시간은 : " + tempTime);
+                Log.i("myLog", "현재 시간은 : " + tempTime);
 
                 int currentTime = Integer.parseInt(tempTime);
 
@@ -164,8 +213,9 @@ public class Network {
                         int localTime = Integer.parseInt(nonReservedTimeList.get(i).replace(":", ""));
 
                         //현재 시간보다 이전 시간은 지운다.
-                        if (currentTime > localTime) {
-                            Log.i("myLog", nonReservedTimeList.get(i) + " 제거");
+                        if ((curSum == cal_sum) && currentTime > localTime) {
+                            //Toast.makeText(context, "현재시간보다 이전시간 제거", Toast.LENGTH_LONG).show();
+                            Log.i("myLog", "현재 시간보다 이전 시간이므로 "+nonReservedTimeList.get(i) + " 제거");
                             nonReservedTimeList.remove(i);
                             i--;
                             continue;
@@ -180,7 +230,7 @@ public class Network {
 
                             if (registerTime.equals(dbClinicTime)) {
 
-                                //Log.i("mylog", registerTime+"과 "+dbClinicTime+"는 같으므로 제거");
+                                Log.i("mylog", registerTime+"과 "+dbClinicTime+"는 같으므로 제거");
 
                                 //Log.i("mylog",i+"번째에 있는"+clinicTimeList.get(i)+"를 제거합니다.");
                                 nonReservedTimeList.remove(i);
@@ -198,20 +248,24 @@ public class Network {
                 timeViewAdapter.setList(nonReservedTimeList);
                 timeViewAdapter.notifyDataSetChanged();
 
+
+
                 asyncDialog.dismiss();
             }
         };
 
-        Log.i("myLog", "asyncTask 시작 전");
+
+
+
         String clinicid = map.get("clinicid");
         String date = map.get("date");
 
-        Log.i("myLog", clinicid + "," + date);
+        //Log.i("myLog", clinicid + "," + date);
 
-        //asyncTask를 실행한다. doInBackground 메소드를 실행한다.
-        Log.i("myLog", site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + date);
+        //Log.i("myLog", site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + date);
 
-        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "/reserve/getTimeList?clinicid=" + clinicid + "&date=" + date); //doInBackground()의 매개값으로 들어간다.
+
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "reserve/getTimeList?clinicid=" + clinicid + "&date=" + date); //doInBackground()의 매개값으로 들어간다.
     }
 
 
@@ -313,6 +367,7 @@ public class Network {
 
             @Override
             protected String doInBackground(String... params) {
+                Log.i("mytest", "getMyReserveList 호출- doInBackground 시작");
 
                 String json = "";
                 try {
@@ -360,7 +415,7 @@ public class Network {
 
             @Override
             protected void onPostExecute(String json) {
-
+                Log.i("mytest", "getMyReserveList 호출- onPostExecute 시작");
                 try {
 
                     JSONArray root = new JSONArray(json);
@@ -408,6 +463,9 @@ public class Network {
             }
         };
 
+        Log.i("mytest", "getMyReserveList 호출- asyncTask 시작");
+
+        Log.i("mytest", site + "/reserve/getMyReserveList?rpname=" + rpname + "&ruserid=" + ruserid);
         asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "/reserve/getMyReserveList?rpname=" + rpname + "&ruserid=" + ruserid);
     }
 
@@ -546,7 +604,7 @@ public class Network {
                     itemView.setBackgroundColor(Color.parseColor("#FF5A5A"));
 
                     itemView.append("\n\n\n예약 내역\n "+num+"건");
-                    itemView.setTextSize(10);
+                    itemView.setTextSize(13);
                 }
             }
         };
@@ -657,4 +715,97 @@ public class Network {
 
         Log.i("myLog", "asyncTask 수행 완료");
     }
+
+    public static List<String> getMyPetList(){
+
+        final ArrayList<String> myPetList = new ArrayList<>();
+
+        AsyncTask<String, Void, List<String>> asyncTask = new AsyncTask<String, Void, List<String>>() {
+
+            //doInBackground의 리턴값 String은 onPostExecute의 매개변수로 들어간다.
+            @Override
+            protected List<String> doInBackground(String... params) {
+
+                String json = "";
+
+                try {
+                    //먼저 URL 객체를 만든다.
+                    URL url = new URL(params[0]);
+                    Log.i("myLog", params[0]);
+
+                    //연결 객체를 만든다.
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoInput(true);
+                    conn.setDoOutput(true);
+                    conn.setUseCaches(false);
+                    conn.setRequestMethod("GET");
+                    conn.setRequestProperty("Connection", "Keep-Alive");
+                    conn.setRequestProperty("Content-Type", "application/json");
+                    //실제 연결
+                    conn.connect();
+
+
+                    /* 응답 */
+
+                    //요청을 처리하고 응답이 온다.
+                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) { //200은 정상 응답을 의미한다. ( 잘못 요청: 404, 서버 에러: 500 )
+                        //Log.i("myLog", "응답 OK를 받았음");
+                        //응답코드가 200번일 경우에 본문 내용을 읽고싶다.
+
+                        InputStream is = conn.getInputStream(); //응답의 결과를 읽는다.
+                        Reader reader = new InputStreamReader(is); //문자일 경우 Reader로 읽는 것이 더 낫다.
+                        BufferedReader br = new BufferedReader(reader); //한 라인 단위로 읽으려면 BufferedReader로 읽는 것이 낫다. 보조 스트림을 다는 것.
+
+
+                        while (true) {
+                            String line = br.readLine(); //한 줄씩 읽는다.
+                            if (line == null) break; //행을 다 읽었을 경우 null이 나온다. while문을 빠져나온다.
+                            json += line; //body += line;
+                        }
+
+                        br.close();
+                        reader.close();
+                        is.close();
+
+                    } else {
+                        Log.i("myLog", "응답 OK를 받지못하였음");
+                    }
+
+                    conn.disconnect();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+
+                    JSONArray jsonArray = new JSONArray(json);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+
+                        String pet = jsonArray.getString(i);
+                        Log.i("myLog", pet);
+                        myPetList.add(pet);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                return myPetList;
+            }
+        };
+
+
+        Log.i("myLog", site + "/reserve/getMyPetList?userid="+MainActivity.loginId);
+        try {
+            List<String> diaryList = asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "/reserve/getMyPetList?userid="+MainActivity.loginId).get(); //doInBackground()의 매개값으로 들어간다.
+            return diaryList;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 }

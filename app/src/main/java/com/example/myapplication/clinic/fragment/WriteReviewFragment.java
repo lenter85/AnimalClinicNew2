@@ -91,7 +91,7 @@ public class WriteReviewFragment extends Fragment {
                 review.setRuserid(MainActivity.loginId);
                 review.setRcontent(editTextContent.getText().toString());
                 review.setRscore(ratingBar.getRating());
-                RegisterAlbumFragment.getResizedBitmap(bitmap, 30);
+                RegisterAlbumFragment.getResizedBitmap(bitmap, 500);
                 sendReview(review, bitmap);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ClinicDetailInformationFragment())
                         .commit();

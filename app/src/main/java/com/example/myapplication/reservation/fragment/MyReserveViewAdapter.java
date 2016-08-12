@@ -50,6 +50,7 @@ public class MyReserveViewAdapter extends BaseAdapter {
         TextView txtRtype = (TextView)convertView.findViewById(R.id.txtRtype);
         Button btnEdit = (Button)convertView.findViewById(R.id.btnEdit);
         Button btnCancle = (Button)convertView.findViewById(R.id.btnCancle);
+        TextView txtDate = (TextView)convertView.findViewById(R.id.txtDate);
 
         reserve = (Reserve)getItem(position);
 
@@ -58,6 +59,7 @@ public class MyReserveViewAdapter extends BaseAdapter {
         Log.i("test", reserve.getRaddress());
         Log.i("test", reserve.getRtime());
         Log.i("test", reserve.getRtype());
+        Log.i("test", reserve.getRdate());
 
 
 
@@ -66,7 +68,7 @@ public class MyReserveViewAdapter extends BaseAdapter {
         txtCaddress.setText(reserve.getRaddress());
         txtTime.setText(reserve.getRtime());
         txtRtype.setText(reserve.getRtype());
-
+        txtDate.setText((reserve.getRdate()));
 
 
         btnEdit.setOnClickListener(new View.OnClickListener() {

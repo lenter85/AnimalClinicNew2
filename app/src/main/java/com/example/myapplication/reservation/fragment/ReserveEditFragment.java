@@ -30,6 +30,10 @@ public class ReserveEditFragment extends Fragment {
     TextView txtRdate;
     TextView txtRtime;
 
+    TextView txtCname;
+    TextView txtPname;
+    TextView txtRtype;
+
     public ReserveEditFragment() {
         // Required empty public constructor
     }
@@ -38,6 +42,15 @@ public class ReserveEditFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getActivity().setTitle("수정하기");
         View view = inflater.inflate(R.layout.fragment_reserve_edit, container, false);
+
+        txtCname = (TextView)view.findViewById(R.id.txtCname);
+        txtPname = (TextView)view.findViewById(R.id.txtPname);
+        txtRtype = (TextView)view.findViewById(R.id.txtRtype);
+
+        txtCname.setText(ReserveSearchFragment.rclinicname);
+        txtPname.setText(ReserveSearchFragment.rpname);
+        txtRtype.setText(ReserveSearchFragment.rtype);
+
 
         btnOk = (Button)view.findViewById(R.id.btnOk);
         btnOk.setOnClickListener(new View.OnClickListener() {
