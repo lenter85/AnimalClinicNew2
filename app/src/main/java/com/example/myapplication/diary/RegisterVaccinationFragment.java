@@ -47,21 +47,7 @@ public class RegisterVaccinationFragment extends Fragment {
         txtVname = (EditText) view.findViewById(R.id.txtVname);
         txtVdate = (EditText) view.findViewById(R.id.txtVdate);
         txtVndate = (EditText) view.findViewById(R.id.txtVndate);
-        imgCalendar1 = (ImageView) view.findViewById(R.id.imgCalendar1);
-        imgCalendar2 = (ImageView) view.findViewById(R.id.imgCalendar2);
 
-
-        imgCalendar1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.fragmentContainer, new CalendarFragment())
-                        .commit();
-            }
-        });
 
 
         btnRegisterVac.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +70,7 @@ public class RegisterVaccinationFragment extends Fragment {
                 getActivity().
                         getSupportFragmentManager().
                         beginTransaction().
-                        replace(R.id.fragmentContainer, new MyDiaryFragment())
+                        replace(R.id.fragmentContainer, new VaccinationFragment1())
                         .addToBackStack(null)
                         .commit();
             }
@@ -100,7 +86,6 @@ public class RegisterVaccinationFragment extends Fragment {
                         getSupportFragmentManager().
                         beginTransaction().
                         replace(R.id.fragmentContainer, new VaccinationFragment())
-                        .addToBackStack(null)
                         .commit();
             }
         });

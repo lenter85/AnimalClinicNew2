@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.myapplication.diary.RegisterVaccinationFragment">
+    tools:context="com.example.myapplication.diary.RegisterVaccinationFragment"
+    android:background="#fcfcfd">
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,7 +27,7 @@
         android:layout_height="40dp"
         android:text="접종일"
         android:id="@+id/textView16"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
         android:textSize="20dp"
         android:layout_below="@+id/textView15"
         android:layout_alignLeft="@+id/textView15"
@@ -44,7 +45,7 @@
         android:layout_below="@+id/textView16"
         android:layout_alignLeft="@+id/textView16"
         android:layout_alignStart="@+id/textView16"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="40dp" />
 
     <EditText
         android:layout_width="150dp"
@@ -74,26 +75,6 @@
         android:layout_marginLeft="10dp"
         android:background="@drawable/round_angle" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/imgCalendar2"
-        android:layout_alignBottom="@+id/txtVndate"
-        android:src="@drawable/calendar"
-        android:layout_alignTop="@+id/txtVndate"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/imgCalendar1"
-        android:layout_alignBottom="@+id/txtVdate"
-        android:src="@drawable/calendar"
-        android:layout_alignTop="@+id/txtVdate"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -112,25 +93,26 @@
         android:id="@+id/btnCancelVac"
         android:textSize="19dp"
         android:onClick="onClickCancel"
-        android:layout_below="@+id/txtVndate"
-        android:layout_toLeftOf="@+id/imgCalendar2"
-        android:layout_toStartOf="@+id/imgCalendar2"
-        android:layout_marginTop="72dp" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/txtVndate"
+        android:layout_alignEnd="@+id/txtVndate"
+        android:layout_marginBottom="52dp" />
 
     <ImageView
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:id="@+id/imageView22"
-        android:src="@drawable/checkbox"
+        android:src="@drawable/checkch3"
         android:layout_alignTop="@+id/textView15"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="3dp" />
 
     <ImageView
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:id="@+id/imageView23"
-        android:src="@drawable/check"
+        android:src="@drawable/checkch3"
         android:layout_alignTop="@+id/textView16"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -140,14 +122,14 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:id="@+id/imageView24"
-        android:src="@drawable/check"
+        android:src="@drawable/checkch3"
         android:layout_alignTop="@+id/textView17"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="5dp"/>
 
     <ImageView
-        android:layout_width="200dp"
+        android:layout_width="220dp"
         android:layout_height="200dp"
         android:id="@+id/imageView11"
         android:src="@drawable/vaccinationimg3"
@@ -165,5 +147,27 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ex) 2016.01.01"
+        android:id="@+id/textView"
+        android:layout_below="@+id/txtVdate"
+        android:layout_alignLeft="@+id/txtVdate"
+        android:layout_alignStart="@+id/txtVdate"
+        android:layout_marginTop="11dp"
+        android:layout_marginLeft="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ex) 2016.01.01"
+        android:id="@+id/textView23"
+        android:layout_below="@+id/txtVndate"
+        android:layout_alignLeft="@+id/txtVndate"
+        android:layout_alignStart="@+id/txtVndate"
+        android:layout_marginTop="11dp"
+        android:layout_marginLeft="5dp" />
 
 </RelativeLayout>

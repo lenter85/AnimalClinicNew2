@@ -5,14 +5,13 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.calendar.MonthItemView;
+import com.example.myapplication.diary.MyReserveViewAdapter;
 import com.example.myapplication.network.NetworkSetting;
 import com.example.myapplication.reservation.dto.Reserve;
 import com.example.myapplication.reservation.dto.ReserveListItem;
-import com.example.myapplication.reservation.fragment.MyReserveViewAdapter;
 import com.example.myapplication.reservation.fragment.ReserveListViewAdapter;
 import com.example.myapplication.reservation.fragment.ReserveSearchFragment;
 import com.example.myapplication.reservation.fragment.TimeViewAdapter;
@@ -24,6 +23,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 //네트워크 관련 코드는 한 클래스에서 담당하는 것이 나중에 유지보수 할 떄를 위해서도 좋다.
@@ -61,6 +60,9 @@ public class Network {
 
                 asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 asyncDialog.setMessage("예약 가능한 시간을 불러오고 있습니다..");
+                //다이얼로그 설정
+                //asyncDialog.setCanceledOnTouchOutside(false);
+
 
                 // show dialog
                 asyncDialog.show();
@@ -371,17 +373,24 @@ public class Network {
 
                 String json = "";
                 try {
+
                     URL url = new URL(params[0]);
-
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    //커넥션 객체 생성
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    conn.setDoOutput(true);
                     conn.setDoInput(true);
-                    conn.setDoInput(true);
-                    conn.setUseCaches(false);
-                    conn.setRequestMethod("GET");
-                    conn.setRequestProperty("Connection", "Keep-Alive");
-                    conn.setRequestProperty("Content-Type", "application/json");
-
+                    conn.setRequestMethod("POST");
                     conn.connect();
+
+                    //요청 내용 본문에 작성
+                    OutputStream os = conn.getOutputStream();
+                    String data = "rpname=" + rpname + "&ruserid=" + ruserid;
+                    Log.i("mytest", "보낼 파라미터값들:"+data);
+
+                    byte[] bytedata = data.getBytes();
+                    os.write(bytedata);
+                    os.flush();
+                    os.close();
 
                     if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
 
@@ -466,7 +475,7 @@ public class Network {
         Log.i("mytest", "getMyReserveList 호출- asyncTask 시작");
 
         Log.i("mytest", site + "/reserve/getMyReserveList?rpname=" + rpname + "&ruserid=" + ruserid);
-        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "/reserve/getMyReserveList?rpname=" + rpname + "&ruserid=" + ruserid);
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, site + "/reserve/getMyReserveList");
     }
 
 

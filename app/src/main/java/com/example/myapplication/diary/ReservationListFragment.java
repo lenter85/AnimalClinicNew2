@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.reservation.dto.Reserve;
-import com.example.myapplication.reservation.fragment.MyReserveViewAdapter;
 import com.example.myapplication.reservation.fragment.ReserveResultFragment;
 import com.example.myapplication.reservation.util.Network;
 
@@ -39,7 +39,7 @@ public class ReservationListFragment extends Fragment {
 
         myReserveListView.setAdapter(myReserveViewAdapter);
 
-        Network.getMyReserveList("우디", "test", myReserveViewAdapter);
+        Network.getMyReserveList(MyDiaryFragment.my.getDname(), MainActivity.loginId, myReserveViewAdapter);
 
         myReserveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

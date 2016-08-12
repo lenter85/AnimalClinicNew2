@@ -52,6 +52,8 @@ public class MainNetwork {
                 Log.i("test", "setReserveList onPreExecute()실행 ");
                 asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 asyncDialog.setMessage("로딩중입니다..");
+                asyncDialog.setCancelable(false);
+                asyncDialog.setCanceledOnTouchOutside(false);
 
                 // show dialog
                 asyncDialog.show();

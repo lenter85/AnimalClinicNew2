@@ -33,6 +33,7 @@ import com.example.myapplication.community.CommunityFragment;
 import com.example.myapplication.diary.DiaryFragment;
 import com.example.myapplication.member.fragment.LogInFragment;
 import com.example.myapplication.network.MainNetwork;
+import com.example.myapplication.reservation.util.Util;
 
 import java.io.File;
 import java.io.IOException;
@@ -189,14 +190,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
         }else{
             if(page.equals("note")){
-
-                if(loginId!=null) {
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragmentContainer, new DiaryFragment())
-                            .commit();
+                if(LoginType.equals("NOMAL")) {
+                    if (loginId != null) {
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentContainer, new DiaryFragment())
+                                .commit();
+                    } else {
+                        Util.showToast(getApplicationContext(),"로그인 후 이용해주세요.");
+                    }
                 } else {
-                    Toast.makeText(this,"로그인 후 이용해주세요.",Toast.LENGTH_SHORT).show();
+                    Util.showToast(getApplicationContext(),"일반 회원만 이용 가능합니다.");
                 }
             }else if(page.equals("clinic")){
                 getSupportFragmentManager()
@@ -313,15 +317,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_gallery) {
-            if(MainActivity.loginId!=null) {
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, new DiaryFragment())
-                        .addToBackStack(null)
-                        .commit();
+            if(LoginType.equals("NOMAL")) {
+                if(MainActivity.loginId!=null) {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragmentContainer, new DiaryFragment())
+                            .commit();
+                } else {
+                    Util.showToast(getApplicationContext(),"로그인 후 이용해주세요.");
+                    Toast.makeText(this,"로그인 후 이용해주세요.",Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(this,"로그인 후 이용해주세요.",Toast.LENGTH_SHORT).show();
+                Util.showToast(getApplicationContext(),"일반 회원만 이용 가능합니다." );
             }
+
         } else if (id == R.id.nav_slideshow) {
             //커뮤니티 클릭
             getSupportFragmentManager()

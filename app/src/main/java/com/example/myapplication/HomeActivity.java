@@ -11,13 +11,13 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.myapplication.network.HomeNetwork;
+import com.example.myapplication.reservation.util.Util;
 
 import java.io.File;
 import java.io.IOException;
@@ -140,9 +140,18 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void onClickNoteBtn(View v){
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("page", "note");
-        startActivity(intent);
+        if(MainActivity.LoginType.equals("NOMAL")) {
+            if(MainActivity.loginId!=null) {
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("page", "note");
+                startActivity(intent);
+            } else {
+                Util.showToast(getApplicationContext(),"로그인 후 이용해주세요." );
+            }
+        } else {
+            Util.showToast(getApplicationContext(),"일반 회원만 이용 가능합니다." );
+        }
+
     }
 
     public static String getAbsolutePathFromUri(Context context, Uri uri) {
