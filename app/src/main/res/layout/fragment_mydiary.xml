@@ -140,8 +140,8 @@
                             android:textColor="#848a84" />
 
                         <ImageView
-                            android:layout_width="140dp"
-                            android:layout_height="140dp"
+                            android:layout_width="250dp"
+                            android:layout_height="120dp"
                             android:id="@+id/reservationList"
                             android:onClick="onClickReservationList"
                             android:layout_below="@+id/textView8"
@@ -149,7 +149,7 @@
                             android:layout_alignParentStart="true"
                             android:src="@drawable/reservation"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="8dp" />
+                            android:layout_marginTop="5dp" />
 
                     </LinearLayout>
 
@@ -173,15 +173,17 @@
                             android:textColor="#848a84" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="250dp"
+                            android:layout_height="120dp"
                             android:id="@+id/vaccination"
                             android:onClick="onClickVaccination"
 
                             android:layout_alignTop="@+id/reservationList"
                             android:layout_alignParentRight="true"
                             android:layout_alignParentEnd="true"
-                            android:src="@drawable/vacci" />
+                            android:src="@drawable/vacci"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -212,14 +214,16 @@
                             android:textColor="#FF999D99" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="250dp"
+                            android:layout_height="120dp"
                             android:id="@+id/album"
                             android:onClick="onClickAlbum"
                             android:src="@drawable/albumimg"
                             android:layout_alignParentBottom="true"
                             android:layout_alignLeft="@+id/reservationList"
-                            android:layout_alignStart="@+id/reservationList" />
+                            android:layout_alignStart="@+id/reservationList"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -242,14 +246,16 @@
                             android:textColor="#FF999D99" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="250dp"
+                            android:layout_height="120dp"
                             android:id="@+id/weight"
                             android:onClick="onClickWeight"
                             android:layout_alignTop="@+id/album"
                             android:layout_alignLeft="@+id/vaccination"
                             android:layout_alignStart="@+id/vaccination"
-                            android:src="@drawable/weightimg" />
+                            android:src="@drawable/weightimg"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp" />
                     </LinearLayout>
 
                 </LinearLayout>

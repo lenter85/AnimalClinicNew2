@@ -1,6 +1,7 @@
 package com.example.myapplication.network;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -484,8 +485,22 @@ public class ClinicNetwork {
 
 
 
-    public static void clinicRegister(final ClinicRegister clinicRegister, final Bitmap bitmap1, final Bitmap bitmap2, final Bitmap bitmap3, final Bitmap bitmap4 ) {
+    public static void clinicRegister(final ClinicRegister clinicRegister, final Bitmap bitmap1, final Bitmap bitmap2, final Bitmap bitmap3, final Bitmap bitmap4, final Context context ) {
         new AsyncTask<Void, Integer, String>() {
+            ProgressDialog asyncDialog = new ProgressDialog(context);
+
+            @Override
+            protected void onPreExecute() {
+
+                asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                asyncDialog.setMessage("예약 가능한 시간을 불러오고 있습니다..");
+
+                // show dialog
+                asyncDialog.show();
+                super.onPreExecute();
+            }
+
+
             @Override
             protected String doInBackground(Void... params) {
                 Log.i("mylog", "clinicRegister메소드 실행");
@@ -671,6 +686,8 @@ public class ClinicNetwork {
 
             @Override
             protected void onPostExecute(String result) {
+                asyncDialog.dismiss();
+
                 if (result.equals("success")) {
                     Log.i("mylog", "성공");
 

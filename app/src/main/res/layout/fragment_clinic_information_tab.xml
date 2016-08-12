@@ -36,7 +36,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="봄빛 동물병원"
                     android:id="@+id/textViewName"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
@@ -62,7 +61,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="서울시 경찰병원역"
                     android:id="@+id/textViewLocation"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
@@ -88,7 +86,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="경찰병원역 3번 출구"
                     android:id="@+id/textViewPhone"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
@@ -114,7 +111,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="09:00"
                     android:id="@+id/textViewOpenTime"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
@@ -133,7 +129,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="13:00"
                     android:id="@+id/textViewCloseTime"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
@@ -166,7 +161,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="친절한 의사선생님과 최신 시설을 구비한 봄빛 동물병원 입니다"
                     android:id="@+id/textViewIntroduction"
                     android:textSize="15dp"
                     android:layout_margin="25dp" />

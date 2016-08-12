@@ -62,7 +62,6 @@ public class ClinicList_Fragment extends Fragment {
                         .getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, fragment)
-                        .addToBackStack(null)
                         .commit();
             }
         });

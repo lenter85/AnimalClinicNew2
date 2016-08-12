@@ -52,7 +52,7 @@ public class LogInFragment extends Fragment {
         email = (EditText)view.findViewById(R.id.login_email);
         password = (EditText)view.findViewById(R.id.login_password);
 
-        email.setText("park9831@naver.com");
+        email.setText("nomal@naver.com");
         password.setText("1234");
 
 

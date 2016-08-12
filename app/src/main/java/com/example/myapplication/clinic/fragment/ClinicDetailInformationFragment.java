@@ -77,6 +77,9 @@ public class ClinicDetailInformationFragment extends Fragment {
 
         clinicDetailInformationAdapter = new ClinicDetailInformationAdapter(getChildFragmentManager());
         viewPager.setAdapter(clinicDetailInformationAdapter);
+        clinicDetailInformationAdapter.notifyDataSetChanged();
+
+
 
         tabLayout.setupWithViewPager(viewPager);
 

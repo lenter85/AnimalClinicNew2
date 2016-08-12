@@ -40,12 +40,29 @@ public class ClinicReviewFragment extends Fragment {
     }
 
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_clinic_review, container, false);
         button = (Button) view.findViewById(R.id.button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MainActivity.loginId!=null) {
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, new WriteReviewFragment())
+                        .commit();
+                } else {
+                    Toast.makeText(getActivity(),"로그인 후 이용해주세요.",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         //list.add(new Review());
         //list.add(new Review());
@@ -87,21 +104,9 @@ public class ClinicReviewFragment extends Fragment {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(MainActivity.loginId != null) {
-                    getActivity()
-                            .getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragmentContainer, new WriteReviewFragment())
-                            .addToBackStack(null)
-                            .commit();
-                } else {
-                    Toast.makeText(getActivity(),"로그인 후 이용해주세요.",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
+
+
 
         return view;
     }
