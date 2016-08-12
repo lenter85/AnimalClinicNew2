@@ -27,7 +27,6 @@ import com.example.myapplication.network.DiaryNetwork;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -97,7 +96,6 @@ public class RegisterMyDiaryFragment extends Fragment {
                         .getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, new DiaryFragment())
-                        .addToBackStack(null)
                         .commit();
             }
         });
