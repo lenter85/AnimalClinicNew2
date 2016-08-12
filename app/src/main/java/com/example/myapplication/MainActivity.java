@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.myapplication.clinic.dto.RegisterLocation;
 import com.example.myapplication.clinic.fragment.ClinicDetailInformationFragment;
@@ -69,13 +70,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static Fragment previousFragment;
 
     //일반회원, 병원회원 구분 플래그
-    public static String LoginId = "NOMAL";
+    public static String LoginType = "NOMAL";
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        if(loginStatus == true){
+            Log.i("mytest", "로그인");
+            if(LoginType.equals("NOMAL")){
+                Log.i("mytest", "NOMAL");
+                //Toast.makeText(getApplicationContext(), "일반 회원으로 로그인 하셨습니다.", Toast.LENGTH_LONG).show();
+            }else{
+                Log.i("mytest", "CLINIC");
+                //Toast.makeText(getApplicationContext(), "병원 회원으로 로그인 하셨습니다.", Toast.LENGTH_LONG).show();
+            }
+        }else{
+            Log.i("mytest", "비로그인");
+            //Toast.makeText(getApplicationContext(), "로그인 안됨", Toast.LENGTH_LONG).show();
+        }
+
 
         asyncDialog = new ProgressDialog(this);
 

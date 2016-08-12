@@ -102,7 +102,7 @@ public class CalendarFragment extends Fragment {
                 Log.i("myLog", "선택된 날짜는 "+curYear+"년"+(curMonth+1)+"월"+day+"일 입니다");
                 ReserveSearchFragment.rdate = getDatetoKorean(curYear, curMonth, day);
 
-                if(MainActivity.LoginId.equals("NOMAL")){
+                if(MainActivity.LoginType.equals("NOMAL")){
 
                     if(previousPage.equals("SEARCH")){
 
@@ -132,7 +132,7 @@ public class CalendarFragment extends Fragment {
                                 .commit();
                     }
 
-                }else if(MainActivity.LoginId.equals("CLINIC")){
+                }else if(MainActivity.LoginType.equals("CLINIC")){
 
                     getActivity()
                         .getSupportFragmentManager()
@@ -153,7 +153,7 @@ public class CalendarFragment extends Fragment {
         monthPrevious.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                if(MainActivity.LoginId.equals("NOMAL")){
+                if(MainActivity.LoginType.equals("NOMAL")){
 
                     if((realYear == curYear) && (curMonth < realMonth)){
                         Toast.makeText(getContext(), "이전달 선택 불가", Toast.LENGTH_LONG).show();
@@ -162,7 +162,7 @@ public class CalendarFragment extends Fragment {
                 }
 
 
-                if(MainActivity.LoginId.equals("CLINIC")){
+                if(MainActivity.LoginType.equals("CLINIC")){
                     showProgressDialog();
                 }
 
@@ -179,7 +179,7 @@ public class CalendarFragment extends Fragment {
         monthNext.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                if(MainActivity.LoginId.equals("CLINIC")){
+                if(MainActivity.LoginType.equals("CLINIC")){
                     showProgressDialog();
                 }
 
