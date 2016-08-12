@@ -93,6 +93,13 @@ public class MemberNetwork {
                         } else {
                             loginResult = true;
                             MainActivity.loginStatus = loginResult;
+
+                            if(member.getMtype().equals("NOMAL")){
+
+                                MainActivity.LoginType = "NOMAL";
+                            }else{
+                                MainActivity.LoginType = "CLINIC";
+                            }
                         }
 
                         Log.i("mylog",member.getMid());
