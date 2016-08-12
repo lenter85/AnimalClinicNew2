@@ -339,7 +339,7 @@ public class RegisterClinicFragment extends Fragment {
                 bitmap4 = RegisterAlbumFragment.getResizedBitmap(bitmap4, 100);
             }
 
-            clinicNetwork.clinicRegister(clinicRegister, bitmap1, bitmap2, bitmap3, bitmap4);
+            clinicNetwork.clinicRegister(clinicRegister, bitmap1, bitmap2, bitmap3, bitmap4, getContext());
 
         }
     };

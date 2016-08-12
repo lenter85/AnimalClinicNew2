@@ -2,12 +2,15 @@ package com.example.myapplication.clinic.fragment;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
+import com.example.myapplication.HomeActivity;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.clinic.dto.Review;
@@ -34,7 +38,7 @@ import java.net.URL;
  * A simple {@link Fragment} subclass.
  */
 public class WriteReviewFragment extends Fragment {
-    private Button buttonCancel;
+
     private Button btnRegister;
     private ImageView imageViewReviewImg;
     private Bitmap bitmap;
@@ -46,6 +50,7 @@ public class WriteReviewFragment extends Fragment {
     }
 
     Review review = new Review();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,15 +77,7 @@ public class WriteReviewFragment extends Fragment {
             }
         });*/
 
-        buttonCancel = (Button) view.findViewById(R.id.buttonCancel);
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ClinicDetailInformationFragment())
-                        .commit();
-            }
-        });
 
 
         btnRegister = (Button) view.findViewById(R.id.btnRegister);
@@ -93,7 +90,7 @@ public class WriteReviewFragment extends Fragment {
                 review.setRcontent(editTextContent.getText().toString());
                 review.setRscore(ratingBar.getRating());
                 bitmap = GalleryWriteFragment.getResizedBitmap(bitmap, 100);
-                sendReview(review, bitmap);
+                sendReview(review, bitmap, getContext());
                 /*getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ClinicDetailInformationFragment())
                         .commit();*/
             }
@@ -133,8 +130,22 @@ public class WriteReviewFragment extends Fragment {
     }
 
 
-    public static void sendReview(final Review review, final Bitmap bitmap) {
+    public static void sendReview(final Review review, final Bitmap bitmap, final Context context) {
         new AsyncTask<Void, Integer, String>() {
+            ProgressDialog asyncDialog = new ProgressDialog(context);
+
+            @Override
+            protected void onPreExecute() {
+                //다이얼로그 시작
+                asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                asyncDialog.setMessage("리뷰를 등록중 입니다.");
+
+                // show dialog
+                asyncDialog.show();
+                super.onPreExecute();
+            }
+
+
             @Override
             protected String doInBackground(Void... params) {
                 String result = "fail";
@@ -218,6 +229,9 @@ public class WriteReviewFragment extends Fragment {
 
             @Override
             protected void onPostExecute(String result) {
+                //다이얼로그 사라지기
+                asyncDialog.dismiss();
+
              if (result.equals("success")) {
                    Log.i("mylog", "성공");
 

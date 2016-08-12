@@ -145,11 +145,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             .commit();
 
 
+
                 } else {
                     MainActivity.loginId = null;
                     MainActivity.loginStatus = false;
                     HomeActivity.loginId=null;
                     miLogin.setTitle("로그인");
+
+                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(intent);
+
+
                 }
 
                 return false;
