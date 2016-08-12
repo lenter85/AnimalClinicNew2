@@ -58,6 +58,7 @@ public class AlbumAdapter extends BaseAdapter {
 
 
         Album album = (Album) getItem(position);
+        //Album album = list.get(position);
         AlbumNetwork.getAlbumImage(album.getAimage(), imgViewPhoto);
         ///이미지 받아오는 거 바꿔야 한다
         //imgViewPhoto.setImageResource(R.drawable.smile);
