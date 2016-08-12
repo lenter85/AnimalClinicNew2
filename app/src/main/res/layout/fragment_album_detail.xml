@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.myapplication.diary.AlbumDetailFragment"
-    android:background="#bee0cf">
+    android:background="#e4f5ed">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -36,8 +36,8 @@
         android:text="날짜"
         android:id="@+id/albumDate"
         android:textSize="15dp"
-        android:layout_marginRight="82dp"
-        android:layout_marginEnd="82dp"
+        android:layout_marginRight="65dp"
+        android:layout_marginEnd="65dp"
         android:layout_above="@+id/aDetailTitle"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
