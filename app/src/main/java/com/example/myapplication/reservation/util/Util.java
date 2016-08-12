@@ -1,5 +1,9 @@
 package com.example.myapplication.reservation.util;
 
+import android.content.Context;
+import android.view.Gravity;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,5 +59,15 @@ public class Util {
 //        clinicTimeList.add("24:00");
 
         return clinicTimeList;
+    }
+
+
+    public static void showToast(Context context, String message){
+        Toast toast ;
+        toast = Toast.makeText(context,  message , Toast.LENGTH_LONG);
+        int offsetX = 0;
+        int offsetY = 0;
+        toast.setGravity(Gravity.CENTER, offsetX, offsetY);
+        toast.show();
     }
 }
