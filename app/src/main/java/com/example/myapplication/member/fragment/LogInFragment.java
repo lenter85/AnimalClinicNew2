@@ -55,6 +55,7 @@ public class LogInFragment extends Fragment {
         email.setText("park9831@naver.com");
         password.setText("1234");
 
+
         //btnLogin.setEnabled(false);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
