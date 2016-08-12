@@ -121,7 +121,7 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
 
         // no description text
         mChart.setDescription("");
-        mChart.setNoDataTextDescription("You need to provide data for the chart.");
+        mChart.setNoDataTextDescription("여기를 클릭해주세요.");
 
         // enable touch gestures
         mChart.setTouchEnabled(true);
