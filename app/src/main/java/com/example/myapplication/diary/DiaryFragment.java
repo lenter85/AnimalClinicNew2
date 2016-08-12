@@ -14,7 +14,6 @@ import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.diary.dto.Diary;
 import com.example.myapplication.network.DiaryNetwork;
-import com.example.myapplication.network.MainNetwork;
 
 /**
  * A simple {@link Fragment} subclass.

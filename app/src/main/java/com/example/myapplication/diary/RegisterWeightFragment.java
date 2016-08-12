@@ -9,13 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.network.WeightNetwork;
-import com.google.android.gms.vision.text.Text;
 
-import java.sql.SQLDataException;
 import java.util.regex.Pattern;
 
 /**
@@ -43,7 +40,6 @@ public class RegisterWeightFragment extends Fragment {
         txtWeight = (TextView) view.findViewById(R.id.txtWeight);
         txtWeightDate = (TextView) view.findViewById(R.id.txtWeightDate);
 
-        if(checkwdate(txtWeightDate.getText().toString()))
 
         btnAddWeight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,8 +53,6 @@ public class RegisterWeightFragment extends Fragment {
                             .replace(R.id.fragmentContainer, new WeightFragment())
                             .addToBackStack(null)
                             .commit();
-
-
 
             }
         });

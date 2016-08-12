@@ -34,7 +34,7 @@ public class AlbumDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_album_detail, container, false);
 
         image = (ImageView) view.findViewById(R.id.aDetailImage);
-        aDetailTitle = (TextView) view.findViewById(R.id.albumTitle);
+        aDetailTitle = (TextView) view.findViewById(R.id.aDetailTitle);
         aDetailContent = (TextView) view.findViewById(R.id.aDetailContent);
         albumDate = (TextView) view.findViewById(R.id.albumDate);
 

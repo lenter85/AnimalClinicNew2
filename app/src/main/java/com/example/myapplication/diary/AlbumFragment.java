@@ -38,7 +38,7 @@ public class AlbumFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_album, container, false);
         gridViewAlbum = (GridView) view.findViewById(R.id.gridViewAlbum);
-        gridViewAlbum.setNumColumns(3);
+        gridViewAlbum.setNumColumns(2);
 
         //list = new ArrayList<>();
 
