@@ -20,6 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.example.myapplication.clinic.dto.RegisterLocation;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String mimageName;
     private Bitmap bitmap;
     private Bitmap smallbitmap;
+    private MenuItem miLogin;
 
 
     public static boolean loginStatus;
@@ -83,6 +85,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+
+        ////toobar에 home 버튼 이벤트처리 /////////
+        ImageView imageViewHome = (ImageView) toolbar.findViewById(R.id.imageViewHome);
+        imageViewHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for ( int i = 0 ; i < fragmentManager.getBackStackEntryCount() ; i++) {
+                    fragmentManager.popBackStack();
+                }
+
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         registerClinicFragment = new RegisterClinicFragment();
@@ -95,6 +113,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //********************************************** 왼쪽 슬라이딩 메뉴 설정코드
+        miLogin = navigationView.getMenu().findItem(R.id.nav_manage);
+        miLogin.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                if(miLogin.getTitle().toString().equals("로그인")) {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragmentContainer, new LogInFragment())
+                            .addToBackStack(null)
+                            .commit();
+
+                    miLogin.setTitle("로그아웃");
+                } else {
+                    MainActivity.loginId = null;
+                    MainActivity.loginStatus = false;
+                    miLogin.setTitle("로그인");
+                }
+
+                return false;
+            }
+        });
+
+        //**********************************************
+
+
 
         /*View nav_header_view = navigationView.getHeaderView(0);
 
@@ -141,6 +187,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -250,13 +299,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .replace(R.id.fragmentContainer, new CommunityFragment())
                     .addToBackStack(null)
                     .commit();
-        } else if (id == R.id.nav_manage) {
+        }/* else if (id == R.id.nav_manage) {    //이부분 필요없어져서 주석처리
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragmentContainer, new LogInFragment())
                     .addToBackStack(null)
                     .commit();
-        } else if (id == R.id.nav_share) {
+        }*/ else if (id == R.id.nav_share) {
 
             getSupportFragmentManager()
                     .beginTransaction()
