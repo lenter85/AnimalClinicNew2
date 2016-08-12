@@ -1,4 +1,4 @@
-package com.example.myapplication.reservation.fragment;
+package com.example.myapplication.diary;
 
 import android.content.Context;
 import android.util.Log;

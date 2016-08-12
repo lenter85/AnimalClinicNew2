@@ -88,6 +88,7 @@ public class CalendarMonthAdapter extends BaseAdapter {
         firstDay = getFirstDay(dayOfWeek);
         Log.d(TAG, "firstDay : " + firstDay);
 
+
         mStartDay = mCalendar.getFirstDayOfWeek();
         curYear = mCalendar.get(Calendar.YEAR);
         curMonth = mCalendar.get(Calendar.MONTH);
