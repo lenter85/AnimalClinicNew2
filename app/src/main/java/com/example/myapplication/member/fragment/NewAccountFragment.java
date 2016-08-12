@@ -83,11 +83,11 @@ public class NewAccountFragment extends Fragment {
                 if(nomal.isChecked()) {
                     nomal.setChecked(true);
                     clinic.setChecked(false);
-                    MainActivity.LoginId = "NOMAL";
+                    MainActivity.LoginType = "NOMAL";
                 } else if (clinic.isChecked()) {
                     nomal.setChecked(false);
                     clinic.setChecked(true);
-                    MainActivity.LoginId = "CLINIC";
+                    MainActivity.LoginType = "CLINIC";
                 }
             }
         });
@@ -127,7 +127,7 @@ public class NewAccountFragment extends Fragment {
                     member.setMphone(phone.getText().toString());
                     member.setMid(email.getText().toString());
                     member.setMpassword(password.getText().toString());
-                    member.setMtype(MainActivity.LoginId);
+                    member.setMtype(MainActivity.LoginType);
 
                     if(memberNetwork.checkUserId(email.getText().toString())){
                         Toast.makeText(getContext(),"동일한 ID 존재", Toast.LENGTH_SHORT).show();

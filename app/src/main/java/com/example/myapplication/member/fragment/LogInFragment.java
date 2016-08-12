@@ -75,6 +75,7 @@ public class LogInFragment extends Fragment {
                     } else if(memberNetwork.loginResult == true){
                         Toast.makeText(getContext(),"로그인 성공",Toast.LENGTH_SHORT).show();
                         MainActivity.loginId = email.getText().toString();
+
                         getActivity().onBackPressed();
                     }
                 }
