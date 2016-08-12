@@ -18,8 +18,9 @@ import com.example.myapplication.network.AlbumNetwork;
  */
 public class AlbumDetailFragment extends Fragment {
     private ImageView image;
-    private TextView albumTitle;
+    private TextView aDetailTitle;
     private TextView albumDate;
+    private TextView aDetailContent;
 
     public AlbumDetailFragment() {
         // Required empty public constructor
@@ -33,12 +34,14 @@ public class AlbumDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_album_detail, container, false);
 
         image = (ImageView) view.findViewById(R.id.aDetailImage);
-        albumTitle = (TextView) view.findViewById(R.id.albumTitle);
+        aDetailTitle = (TextView) view.findViewById(R.id.albumTitle);
+        aDetailContent = (TextView) view.findViewById(R.id.aDetailContent);
         albumDate = (TextView) view.findViewById(R.id.albumDate);
 
         Album album = AlbumFragment.selectedItem;
         AlbumNetwork.getAlbumImage(album.getAimage(), image);
-        albumTitle.setText(album.getAname());
+        aDetailTitle.setText(album.getAname());
+        aDetailContent.setText(album.getAcontent());
         albumDate.setText(album.getAdate());
 
 

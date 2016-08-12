@@ -4,7 +4,7 @@ package com.example.myapplication.diary.dto;
  * Created by Administrator on 2016-07-18.
  */
 public class Weight {
-    int weight;
+    float weight;
     String wdate;
     float fdate;
 
@@ -16,11 +16,11 @@ public class Weight {
         this.fdate = fdate;
     }
 
-    public int getWeight() {
+    public float getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(float weight) {
         this.weight = weight;
     }
 

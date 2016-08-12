@@ -21,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.myapplication.clinic.dto.RegisterLocation;
 import com.example.myapplication.clinic.fragment.ClinicDetailInformationFragment;
@@ -119,13 +120,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
         }else{
             if(page.equals("note")){
+
                 if(loginId!=null) {
                     getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.fragmentContainer, new DiaryFragment())
                             .commit();
                 } else {
-
+                    Toast.makeText(this,"로그인 후 이용해주세요.",Toast.LENGTH_SHORT).show();
                 }
             }else if(page.equals("clinic")){
                 getSupportFragmentManager()
@@ -238,11 +240,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .replace(R.id.fragmentContainer, new ClinicList_Fragment())
                     .commit();
         } else if (id == R.id.nav_gallery) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragmentContainer, new DiaryFragment())
-                    .commit();
-
+            if(MainActivity.loginId!=null) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, new DiaryFragment())
+                        .commit();
+            } else {
+                Toast.makeText(this,"로그인 후 이용해주세요.",Toast.LENGTH_SHORT).show();
+            }
         } else if (id == R.id.nav_slideshow) {
             //커뮤니티 클릭
             getSupportFragmentManager()

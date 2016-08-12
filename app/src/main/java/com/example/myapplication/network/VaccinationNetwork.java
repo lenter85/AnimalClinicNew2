@@ -1,6 +1,7 @@
 package com.example.myapplication.network;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.myapplication.diary.VaccinationAdapter;
 import com.example.myapplication.diary.dto.Vaccination;
@@ -12,6 +13,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -25,7 +27,7 @@ public class VaccinationNetwork {
     public static String baseUrl = NetworkSetting.baseUrl2;
 
     private static String strjson;
-    public static void getVaccinationList(String dname, final VaccinationAdapter vaccinationAdapter) {
+    public static void getVaccinationList(final String dname, final VaccinationAdapter vaccinationAdapter) {
         AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... params) {
@@ -33,7 +35,16 @@ public class VaccinationNetwork {
                 try {
                     URL url = new URL(params[0]);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    conn.setRequestMethod("POST");
                     conn.connect();
+
+                    OutputStream os = conn.getOutputStream();
+                    String postData = "dname=" + dname;
+                    os.write(postData.getBytes());
+                    os.flush();
+                    os.close();
 
                     if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         InputStream is = conn.getInputStream();
@@ -60,7 +71,7 @@ public class VaccinationNetwork {
             @Override
             protected void onPostExecute(String s) {
                 List<Vaccination> list = new ArrayList<>();
-
+                Log.i("vaccination", s);
                 try {
                     JSONArray jsonArray = new JSONArray(s);
                     for(int i=0; i<jsonArray.length(); i++) {
@@ -80,7 +91,7 @@ public class VaccinationNetwork {
             }
         };
 
-        asyncTask.execute(baseUrl + "vaccination/list?dname=" + dname);
+        asyncTask.execute(baseUrl + "vaccination/list");
 
     }
 
@@ -91,9 +102,22 @@ public class VaccinationNetwork {
                 try {
                     URL url = new URL(params[0]);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    conn.setRequestMethod("POST");
                     conn.connect();
+
+                    OutputStream os = conn.getOutputStream();
+                    String vdata = "vname=" + vaccination.getVname() + "&vdate=" + vaccination.getVdate() +
+                    "&vndate=" + vaccination.getVndate() + "&mid=" + vaccination.getMid() + "&dname=" + vaccination.getDname();
+
+                    os.write(vdata.getBytes());
+                    os.flush();
+                    os.close();
+
                     if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                     }
+
                     conn.disconnect();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -101,7 +125,6 @@ public class VaccinationNetwork {
                 return null;
             }
         };
-        asyncTask.execute(baseUrl + "vaccination?vname=" + vaccination.getVname() + "&vdate=" + vaccination.getVdate() +
-                "&vndate=" + vaccination.getVndate() + "&mid=" + vaccination.getMid() + "&dname=" + vaccination.getDname());
+        asyncTask.execute(baseUrl + "vaccination");
     }
 }

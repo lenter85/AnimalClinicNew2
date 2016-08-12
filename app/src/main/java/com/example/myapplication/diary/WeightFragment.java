@@ -23,6 +23,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.diary.custom.DayAxisValueFormatter;
 import com.example.myapplication.diary.custom.MyMarkerView;
 import com.example.myapplication.diary.dto.Weight;
+import com.example.myapplication.network.NetworkSetting;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
@@ -48,9 +49,12 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -396,7 +400,9 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
         for(int i=0; i<list.size(); i++) {
             weight = (Weight) list.get(i);
             float val = weight.getFdate();
-            int w = weight.getWeight();
+            float w = weight.getWeight();
+
+            Log.i("float_weight", String.valueOf(w));
             values.add(new Entry(val, w));
         }
 
@@ -459,16 +465,26 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
     }
 
     public void getWeightList() {
-        new AsyncTask<Void, Void, String>() {
+        AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
             @Override
-            protected String doInBackground(Void... params) {
+            protected String doInBackground(String... params) {
 
                 String strjson="";
                 try {
-                    URL url = new URL("http://192.168.0.29:8080/Petopia" + "/weight/list?mid=" + MainActivity.loginId + "&dname=" + MyDiaryFragment.my.getDname());
+                    URL url = new URL(params[0]);
 
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoOutput(true);
+                    conn.setDoInput(true);
+                    conn.setRequestMethod("POST");
                     conn.connect();
+
+                    OutputStream os = conn.getOutputStream();
+                    String postdata = "mid=" + MainActivity.loginId + "&dname=" + MyDiaryFragment.my.getDname();
+                    os.write(postdata.getBytes());
+                    os.flush();
+                    os.close();
+
 
                     InputStream is = conn.getInputStream();
                     Reader reader = new InputStreamReader(is);
@@ -516,7 +532,9 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
                         Log.i("dd", String.valueOf(fday));
                     }
 
-                    currentWeight.setText(list.get(list.size()-1).getWeight() + " kg");
+                    if(list.size()>0) {
+                        currentWeight.setText(list.get(list.size() - 1).getWeight() + " kg");
+                    }
                     setData(list);
                     //setData(10,10);
 
@@ -526,7 +544,10 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
                 }
 
             }
-        }.execute();
+        };
+
+            asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl2 +
+                    "weight/list");
 
     }
 

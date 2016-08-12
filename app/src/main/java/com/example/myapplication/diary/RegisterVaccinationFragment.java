@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.calendar.CalendarFragment;
 import com.example.myapplication.diary.dto.Vaccination;
@@ -71,9 +72,8 @@ public class RegisterVaccinationFragment extends Fragment {
                 vaccination.setVndate(txtVndate.getText().toString());
 
                 vaccination.setDname(MyDiaryFragment.my.getDname());
-                /////임의의 멤버아이디값
-                vaccination.setMid("test");
-                ////////////////
+                vaccination.setMid(MainActivity.loginId);
+
                 VaccinationNetwork.sendVaccination(vaccination);
                 /*getChildFragmentManager().
                         beginTransaction().

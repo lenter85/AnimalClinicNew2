@@ -10,9 +10,11 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.diary.dto.Diary;
 import com.example.myapplication.network.DiaryNetwork;
+import com.example.myapplication.network.MainNetwork;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,7 +45,7 @@ public class DiaryFragment extends Fragment {
         dimage = (ImageView) view.findViewById(R.id.imgDimage);
         diaryAdapter = new DiaryAdapter();
         diaryAdapter.setContext(getActivity());
-        DiaryNetwork.getDiaryData(diaryAdapter);
+        DiaryNetwork.getDiaryData(diaryAdapter, MainActivity.loginId);
         listViewDiary.setAdapter(diaryAdapter);
 
         listViewDiary.setOnItemClickListener(onItemClickListener);

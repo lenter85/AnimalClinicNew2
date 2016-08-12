@@ -20,11 +20,14 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.diary.dto.Diary;
 import com.example.myapplication.network.DiaryNetwork;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +39,7 @@ public class RegisterMyDiaryFragment extends Fragment {
     private ImageView imgRdimage;
     private EditText txtRdname;
     private EditText txtRdbirth;
+    private Bitmap bitmap;
 
     private RadioButton maleButton;
     private RadioButton femaleButton;
@@ -86,8 +90,8 @@ public class RegisterMyDiaryFragment extends Fragment {
 
                 diary.setDname(txtRdname.getText().toString());
                 diary.setDbirth(txtRdbirth.getText().toString());
-
-                DiaryNetwork.sendDiary(diary, filePath);
+                diary.setMid(MainActivity.loginId);
+                DiaryNetwork.sendDiary(diary, bitmap);
 
                 getActivity()
                         .getSupportFragmentManager()
@@ -130,10 +134,11 @@ public class RegisterMyDiaryFragment extends Fragment {
         if(resultCode == Activity.RESULT_OK){
             if(requestCode == 1) {
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                    bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
                     Uri uri = data.getData();
                     filePath = getAbsolutePathFromUri(getActivity(), uri);
-
+                    File file = new File(filePath);
+                    diary.setDimage(file.getName());
 
                     imgRdimage.setImageBitmap(bitmap);
                     imgRdimage.setScaleType(ImageView.ScaleType.CENTER_CROP);

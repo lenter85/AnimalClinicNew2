@@ -1,5 +1,7 @@
 package com.example.myapplication.diary.dto;
 
+import java.util.Date;
+
 /**
  * Created by Administrator on 2016-07-11.
  */
@@ -10,14 +12,6 @@ public class Diary {
     String dgender;
     String dimage;
     String mid;
-
-    /*public Diary(String dname, String dbirth, String dgender, String dimage, String mid) {
-        this.dname = dname;
-        this.dbirth = dbirth;
-        this.dgender = dgender;
-        this.dimage = dimage;
-        this.mid = mid;
-    }*/
 
 
 

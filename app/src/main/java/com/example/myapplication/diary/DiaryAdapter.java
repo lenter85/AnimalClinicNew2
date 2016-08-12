@@ -60,9 +60,15 @@ public class DiaryAdapter extends BaseAdapter {
         Diary diary = list.get(position);
         DiaryNetwork.getDiaryImage(diary.getDimage(), imgDimage);
         txtDname.setText(diary.getDname());
-        txtDgender.setText(diary.getDgender());
-        txtDbirth.setText(diary.getDbirth());
 
+        if(diary.getDgender().equals("m")) {
+            txtDgender.setText("수컷");
+        }
+        else if(diary.getDgender().equals("f")) {
+            txtDgender.setText("암컷");
+        }
+
+        txtDbirth.setText(diary.getDbirth());
 
         return convertView;
     }

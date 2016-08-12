@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.diary.AlbumAdapter;
 import com.example.myapplication.diary.dto.Album;
 
@@ -70,7 +71,9 @@ public class AlbumNetwork {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         Album album = new Album();
                         album.setAname(jsonObject.getString("aname"));
-                        album.setAdate(jsonObject.getString("adate"));
+                        String str = jsonObject.getString("adate").substring(0, 10);
+                        album.setAdate(str);
+                        album.setAcontent(jsonObject.getString("acontent"));
                         album.setAimage(jsonObject.getString("aimage"));
                         album.setAlocation(jsonObject.getString("alocation"));
                         //album.setAimagelarge(jsonObject.getString("aimagelarge"));
@@ -83,7 +86,7 @@ public class AlbumNetwork {
             }
         };
 
-        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "album/getlist?pageNo=" + pageNo);
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "album/getlist?pageNo=" + pageNo + "&loginid=" + MainActivity.loginId);
 
 
     }
@@ -161,7 +164,7 @@ public class AlbumNetwork {
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setValue("acontent", album.getAcontent()));
                     postDataBuilder.append(delimiter);
-                    postDataBuilder.append(setValue("mid", "test"));
+                    postDataBuilder.append(setValue("mid", MainActivity.loginId));
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setFile("aaimage", album.getAimage()));
                     out.write(postDataBuilder.toString().getBytes());

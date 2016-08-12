@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.diary.DiaryAdapter;
 import com.example.myapplication.diary.dto.Diary;
 
@@ -14,11 +15,13 @@ import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,7 +33,7 @@ import java.util.List;
 public class DiaryNetwork {
 
     private static String baseUrl = NetworkSetting.baseUrl2;
-    public static void getDiaryData(final DiaryAdapter diaryAdapter) {
+    public static void getDiaryData(final DiaryAdapter diaryAdapter, String loginid) {
         AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
             @Override
             protected String doInBackground(String... params) {
@@ -63,7 +66,14 @@ public class DiaryNetwork {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         Diary diary = new Diary();
                         diary.setDname(jsonObject.getString("dname"));
-                        diary.setDbirth(jsonObject.getString("dbirth"));
+                        if(!(jsonObject.getString("dbirth").equals(""))) {
+                            String str = jsonObject.getString("dbirth").substring(0, 10);
+                            Log.i("substring", str);
+                            diary.setDbirth(str);
+                        } else {
+                            diary.setDbirth(jsonObject.getString("dbirth"));
+                        }
+
                         diary.setDgender(jsonObject.getString("dgender"));
                         diary.setDimage(jsonObject.getString("dimage"));
                         diaryAdapter.addItem(diary);
@@ -74,7 +84,7 @@ public class DiaryNetwork {
                 }
             }
         };
-        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "diary/list");
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "diary/list?loginid=" + MainActivity.loginId);
     }
 
     public static void getDiaryImage(String imageName, final ImageView imageView) {
@@ -107,10 +117,10 @@ public class DiaryNetwork {
         asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "diary/image?dimage=" + imageName);
     }
 
-    public static void sendDiary(final Diary diary, final String filePath) {
-        new AsyncTask<Void, Integer, String>() {
+    public static void sendDiary(final Diary diary, final Bitmap bitmap) {
+        AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
             @Override
-            protected String doInBackground(Void... params) {
+            protected String doInBackground(String... params) {
                 String result = "fail";
                 try {
                     // 데이터 구분 문자
@@ -120,7 +130,7 @@ public class DiaryNetwork {
                     String delimiter = "\r\n--" + boundary + "\r\n";
 
                     // 커넥션 생성 및 설정
-                    URL url = new URL(baseUrl + "diary/register");
+                    URL url = new URL(params[0]);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setDoInput(true);
                     conn.setDoOutput(true);
@@ -133,9 +143,10 @@ public class DiaryNetwork {
                     conn.connect();
 
                     //출력 스트림 얻기
-                    DataOutputStream out = new DataOutputStream(new BufferedOutputStream(conn.getOutputStream()));
-                    File file = new File(filePath);
-                    diary.setDimage(file.getName());
+                    //DataOutputStream out = new DataOutputStream(new BufferedOutputStream(conn.getOutputStream()));
+                    OutputStream out = conn.getOutputStream();
+                    //File file = new File(filePath);
+                    //diary.setDimage(file.getName());
                     //문자열 데이터 전송
                     StringBuffer postDataBuilder = new StringBuffer();
                     postDataBuilder.append(delimiter);
@@ -145,25 +156,37 @@ public class DiaryNetwork {
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setValue("dgender", diary.getDgender()));
                     postDataBuilder.append(delimiter);
-                    postDataBuilder.append(setValue("mid", "test"));
+                    postDataBuilder.append(setValue("dimage", diary.getDimage()));
+                    postDataBuilder.append(delimiter);
+                    postDataBuilder.append(setValue("mid", MainActivity.loginId));
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setFile("ddimage", diary.getDimage()));
-                    out.writeUTF(postDataBuilder.toString());
-
+                    //out.writeUTF(postDataBuilder.toString());
+                    out.write(postDataBuilder.toString().getBytes());
 
                     //파일 데이터 전송
-                    FileInputStream fis = new FileInputStream(filePath);
+                    /*FileInputStream fis = new FileInputStream(filePath);
                     byte[] byteArray = new byte[1024];
                     int readByteNum = -1;
                     while((readByteNum = fis.read(byteArray)) != -1) {
                         out.write(byteArray, 0, readByteNum);
                     }
-                    fis.close();
+                    fis.close();*/
 
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    if(diary.getDimage().contains(".jpg")) {
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, bos);
+                    } else if(diary.getDimage().contains(".png")) {
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 30, bos);
+                    }
+                    byte[] bitmapdata = bos.toByteArray();
+                    out.write(bitmapdata);
+                    bos.close();
 
                     //종료 구분자 넣기
                     //out.writeUTF(delimiter);
-                    out.writeUTF("\r\n--" + boundary + "--\r\n");
+                    //out.writeUTF("\r\n--" + boundary + "--\r\n");
+                    out.write(("\r\n--" + boundary + "--\r\n").getBytes());
 
                     //출력스트림 닫기
                     out.flush();
@@ -187,7 +210,9 @@ public class DiaryNetwork {
             protected void onPostExecute(String result) {
 
             }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        };
+
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "diary/register");
     }
 
     public static String setValue(String key, String value) {

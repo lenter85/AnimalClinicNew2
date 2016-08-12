@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.myapplication.R;
 import com.example.myapplication.diary.dto.Diary;
 import com.example.myapplication.diary.dto.Vaccination;
+import com.example.myapplication.network.DiaryNetwork;
 import com.google.android.gms.vision.text.Text;
 
 import java.util.ArrayList;
@@ -55,7 +56,14 @@ public class MyDiaryFragment extends Fragment {
 
         myDname.setText(my.getDname());
         myDbirth.setText(my.getDbirth());
-        myDgender.setText(my.getDgender());
+        if(my.getDgender().equals("m")) {
+            myDgender.setText("수컷");
+        } else if (my.getDgender().equals("f")) {
+            myDgender.setText("암컷");
+        }
+
+        DiaryNetwork.getDiaryImage(my.getDimage(), myDimage);
+
 
 
         album = (ImageView) view.findViewById(R.id.album);
