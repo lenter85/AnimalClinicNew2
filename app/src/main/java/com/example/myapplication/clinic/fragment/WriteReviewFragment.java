@@ -20,6 +20,7 @@ import android.widget.RatingBar;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.clinic.dto.Review;
+import com.example.myapplication.community.gallery.GalleryWriteFragment;
 import com.example.myapplication.diary.RegisterAlbumFragment;
 import com.example.myapplication.network.NetworkSetting;
 
@@ -91,10 +92,10 @@ public class WriteReviewFragment extends Fragment {
                 review.setRuserid(MainActivity.loginId);
                 review.setRcontent(editTextContent.getText().toString());
                 review.setRscore(ratingBar.getRating());
-                RegisterAlbumFragment.getResizedBitmap(bitmap, 500);
+                bitmap = GalleryWriteFragment.getResizedBitmap(bitmap, 100);
                 sendReview(review, bitmap);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ClinicDetailInformationFragment())
-                        .commit();
+                /*getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new ClinicDetailInformationFragment())
+                        .commit();*/
             }
         });
 
@@ -171,7 +172,7 @@ public class WriteReviewFragment extends Fragment {
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setValue("rscore", String.valueOf(review.getRscore())));
                     postDataBuilder.append(delimiter);
-                    postDataBuilder.append(setValue("ruserid", String.valueOf(review.getRuserid())));
+                    postDataBuilder.append(setValue("ruserid", review.getRuserid()));
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setValue("rcontent", review.getRcontent()));
                     postDataBuilder.append(delimiter);
@@ -185,7 +186,7 @@ public class WriteReviewFragment extends Fragment {
 
 
                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 50, bos);
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos);
                     byte[] bitmapdata = bos.toByteArray();
 
                     out.write(bitmapdata);

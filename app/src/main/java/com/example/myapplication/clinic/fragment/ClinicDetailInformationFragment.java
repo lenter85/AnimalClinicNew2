@@ -64,6 +64,7 @@ public class ClinicDetailInformationFragment extends Fragment {
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, reserveSearchFragment)
+                        .addToBackStack(null)
                         .commit();
             }
         });
