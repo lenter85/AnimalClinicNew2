@@ -101,6 +101,7 @@ public class AlbumNetwork {
                     URL url = new URL(params[0]);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.connect();
+                    Log.i("mylog", ""+ conn.getResponseCode());
 
                     if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                         InputStream is = conn.getInputStream();

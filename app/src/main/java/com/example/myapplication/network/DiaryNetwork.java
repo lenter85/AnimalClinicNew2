@@ -205,6 +205,7 @@ public class DiaryNetwork {
             @Override
             protected void onPostExecute(String result) {
 
+
             }
         };
 
