@@ -30,8 +30,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/myDimage"
                     android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/dog04_small" />
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -150,7 +149,7 @@
                             android:layout_alignParentStart="true"
                             android:src="@drawable/reservation"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginTop="8dp" />
 
                     </LinearLayout>
 

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,166 +11,229 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.myapplication.diary.RegisterVaccinationFragment"
-    android:background="#fcfcfd">
+    android:background="#fcfcfd"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:text="접종명"
-        android:id="@+id/textView15"
-        android:textSize="20dp"
-        android:paddingTop="5dp"
-        android:layout_below="@+id/imageView11"
-        android:layout_toRightOf="@+id/imageView22"
-        android:layout_toEndOf="@+id/imageView22"
-        android:layout_marginLeft="10dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:text="접종일"
-        android:id="@+id/textView16"
-        android:layout_marginTop="40dp"
-        android:textSize="20dp"
-        android:layout_below="@+id/textView15"
-        android:layout_alignLeft="@+id/textView15"
-        android:layout_alignStart="@+id/textView15"
-        android:paddingTop="5dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:text="다음 접종일"
-        android:id="@+id/textView17"
-        android:textSize="20dp"
-        android:paddingTop="6dp"
-        android:layout_below="@+id/textView16"
-        android:layout_alignLeft="@+id/textView16"
-        android:layout_alignStart="@+id/textView16"
-        android:layout_marginTop="40dp" />
-
-    <EditText
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:id="@+id/txtVname"
-        android:background="@drawable/round_angle"
-        android:layout_alignTop="@+id/textView15"
-        android:layout_alignLeft="@+id/txtVdate"
-        android:layout_alignStart="@+id/txtVdate" />
-
-    <EditText
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:id="@+id/txtVdate"
-        android:layout_alignTop="@+id/textView16"
-        android:layout_alignLeft="@+id/txtVndate"
-        android:layout_alignStart="@+id/txtVndate"
-        android:background="@drawable/round_angle" />
-
-    <EditText
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:id="@+id/txtVndate"
-        android:layout_alignTop="@+id/textView17"
-        android:layout_toRightOf="@+id/textView17"
-        android:layout_toEndOf="@+id/textView17"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/round_angle" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="등록"
-        android:id="@+id/btnRegisterVac"
-        android:textSize="19dp"
-        android:onClick="onClickRegisterVaccination"
-        android:layout_alignTop="@+id/btnCancelVac"
-        android:layout_toLeftOf="@+id/txtVdate"
-        android:layout_toStartOf="@+id/txtVdate" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="취소"
-        android:id="@+id/btnCancelVac"
-        android:textSize="19dp"
-        android:onClick="onClickCancel"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/txtVndate"
-        android:layout_alignEnd="@+id/txtVndate"
-        android:layout_marginBottom="52dp" />
-
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:id="@+id/imageView22"
-        android:src="@drawable/checkch3"
-        android:layout_alignTop="@+id/textView15"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="3dp" />
-
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:id="@+id/imageView23"
-        android:src="@drawable/checkch3"
-        android:layout_alignTop="@+id/textView16"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="5dp"/>
-
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:id="@+id/imageView24"
-        android:src="@drawable/checkch3"
-        android:layout_alignTop="@+id/textView17"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="5dp"/>
-
-    <ImageView
-        android:layout_width="220dp"
-        android:layout_height="200dp"
-        android:id="@+id/imageView11"
-        android:src="@drawable/vaccinationimg3"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:id="@+id/textView58"
-        android:background="#b5b7bb"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignBottom="@+id/imageView11"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="24dp" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ex) 2016.01.01"
-        android:id="@+id/textView"
-        android:layout_below="@+id/txtVdate"
-        android:layout_alignLeft="@+id/txtVdate"
-        android:layout_alignStart="@+id/txtVdate"
-        android:layout_marginTop="11dp"
-        android:layout_marginLeft="5dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ex) 2016.01.01"
-        android:id="@+id/textView23"
-        android:layout_below="@+id/txtVndate"
-        android:layout_alignLeft="@+id/txtVndate"
-        android:layout_alignStart="@+id/txtVndate"
-        android:layout_marginTop="11dp"
-        android:layout_marginLeft="5dp" />
 
-</RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="220dp"
+            android:layout_height="200dp"
+            android:id="@+id/imageView11"
+            android:src="@drawable/vaccinationimg3"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:id="@+id/textView58"
+            android:background="#b5b7bb"
+            android:layout_alignBottom="@+id/imageView11"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="24dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/imageView22"
+                    android:src="@drawable/checkch3"
+                    android:layout_alignTop="@+id/textView15"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="3dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="접종명"
+                    android:id="@+id/textView15"
+                    android:textSize="20dp"
+                    android:paddingTop="5dp"
+                    android:layout_below="@+id/imageView11"
+                    android:layout_toRightOf="@+id/imageView22"
+                    android:layout_toEndOf="@+id/imageView22"
+                    android:layout_marginLeft="10dp" />
+
+                <EditText
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/txtVname"
+                    android:background="@drawable/round_angle"
+                    android:layout_alignTop="@+id/textView15"
+                    android:layout_alignLeft="@+id/txtVdate"
+                    android:layout_alignStart="@+id/txtVdate"
+                    android:layout_marginLeft="74dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/imageView23"
+                    android:src="@drawable/checkch3"
+                    android:layout_alignTop="@+id/textView16"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="접종일"
+                    android:id="@+id/textView16"
+                    android:textSize="20dp"
+                    android:layout_below="@+id/textView15"
+                    android:layout_alignLeft="@+id/textView15"
+                    android:layout_alignStart="@+id/textView15"
+                    android:paddingTop="5dp"
+                    android:layout_marginLeft="10dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="74dp">
+
+                    <EditText
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/txtVdate"
+                        android:layout_alignTop="@+id/textView16"
+                        android:layout_alignLeft="@+id/txtVndate"
+                        android:layout_alignStart="@+id/txtVndate"
+                        android:background="@drawable/round_angle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ex) 2016.01.01"
+                        android:id="@+id/textView"
+                        android:layout_below="@+id/txtVdate"
+                        android:layout_alignLeft="@+id/txtVdate"
+                        android:layout_alignStart="@+id/txtVdate"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginLeft="5dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:id="@+id/imageView24"
+                    android:src="@drawable/checkch3"
+                    android:layout_alignTop="@+id/textView17"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="다음 접종일"
+                    android:id="@+id/textView17"
+                    android:textSize="20dp"
+                    android:paddingTop="6dp"
+                    android:layout_below="@+id/textView16"
+                    android:layout_alignLeft="@+id/textView16"
+                    android:layout_alignStart="@+id/textView16"
+                    android:layout_marginLeft="10dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp">
+
+                    <EditText
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/txtVndate"
+                        android:layout_alignTop="@+id/textView17"
+                        android:layout_toRightOf="@+id/textView17"
+                        android:layout_toEndOf="@+id/textView17"
+                        android:background="@drawable/round_angle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ex) 2016.01.01"
+                        android:id="@+id/textView23"
+                        android:layout_below="@+id/txtVndate"
+                        android:layout_alignLeft="@+id/txtVndate"
+                        android:layout_alignStart="@+id/txtVndate"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginLeft="5dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="등록"
+                    android:id="@+id/btnRegisterVac"
+                    android:textSize="19dp"
+                    android:onClick="onClickRegisterVaccination"
+                    android:layout_alignTop="@+id/btnCancelVac"
+                    android:layout_toLeftOf="@+id/txtVdate"
+                    android:layout_toStartOf="@+id/txtVdate"
+                    android:layout_marginRight="50dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="취소"
+                    android:id="@+id/btnCancelVac"
+                    android:textSize="19dp"
+                    android:onClick="onClickCancel"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignRight="@+id/txtVndate"
+                    android:layout_alignEnd="@+id/txtVndate" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

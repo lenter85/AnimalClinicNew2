@@ -138,6 +138,7 @@ public class RegisterMyDiaryFragment extends Fragment {
                     File file = new File(filePath);
                     diary.setDimage(file.getName());
 
+                    bitmap = MainActivity.getResizedBitmap(bitmap, 200);
                     imgRdimage.setImageBitmap(bitmap);
                     imgRdimage.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 } catch (IOException e) {
