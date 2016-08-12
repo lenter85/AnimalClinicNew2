@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         if(loginStatus == true){
+
             Log.i("mytest", "로그인");
             if(LoginType.equals("NOMAL")){
                 Log.i("mytest", "NOMAL");
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //Toast.makeText(getApplicationContext(), "병원 회원으로 로그인 하셨습니다.", Toast.LENGTH_LONG).show();
             }
         }else{
+
             Log.i("mytest", "비로그인");
             //Toast.makeText(getApplicationContext(), "로그인 안됨", Toast.LENGTH_LONG).show();
         }
@@ -138,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public boolean onMenuItemClick(MenuItem item) {
 
-                if(miLogin.getTitle().toString().equals("로그인")) {
+                if(MainActivity.loginStatus == false) {
                     getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.fragmentContainer, new LogInFragment())
@@ -213,6 +215,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .replace(R.id.fragmentContainer, new CommunityFragment())
                         .commit();
             }
+        }
+
+
+
+        if(loginStatus == true){
+            miLogin.setTitle("로그아웃");
+            Log.i("mytest", "로그인");
+            if(LoginType.equals("NOMAL")){
+                Log.i("mytest", "NOMAL");
+                //Toast.makeText(getApplicationContext(), "일반 회원으로 로그인 하셨습니다.", Toast.LENGTH_LONG).show();
+            }else{
+                Log.i("mytest", "CLINIC");
+                //Toast.makeText(getApplicationContext(), "병원 회원으로 로그인 하셨습니다.", Toast.LENGTH_LONG).show();
+            }
+        }else{
+            miLogin.setTitle("로그인");
+            Log.i("mytest", "비로그인");
+            //Toast.makeText(getApplicationContext(), "로그인 안됨", Toast.LENGTH_LONG).show();
         }
 
     }
