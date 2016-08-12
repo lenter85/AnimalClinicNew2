@@ -304,12 +304,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragmentContainer, new ClinicList_Fragment())
+                    .addToBackStack(null)
                     .commit();
         } else if (id == R.id.nav_gallery) {
             if(MainActivity.loginId!=null) {
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, new DiaryFragment())
+                        .addToBackStack(null)
                         .commit();
             } else {
                 Toast.makeText(this,"로그인 후 이용해주세요.",Toast.LENGTH_SHORT).show();

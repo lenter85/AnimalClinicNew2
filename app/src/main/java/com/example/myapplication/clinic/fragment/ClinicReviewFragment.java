@@ -11,7 +11,9 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.clinic.dto.Review;
 import com.example.myapplication.network.ClinicNetwork;
@@ -88,11 +90,16 @@ public class ClinicReviewFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, new WriteReviewFragment())
-                        .commit();
+                if(MainActivity.loginId != null) {
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragmentContainer, new WriteReviewFragment())
+                            .addToBackStack(null)
+                            .commit();
+                } else {
+                    Toast.makeText(getActivity(),"로그인 후 이용해주세요.",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
