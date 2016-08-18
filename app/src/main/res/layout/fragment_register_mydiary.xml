@@ -1,143 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.myapplication.diary.RegisterMyDiaryFragment"
     android:padding="20dp"
-    android:background="#F6F6F6">
+    android:background="#F6F6F6"
+    android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:id="@+id/imgRdimage"
-        android:background="#d7d6d6"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/btnPickPicture"
-        android:layout_toStartOf="@+id/btnPickPicture" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="사진 선택"
-        android:id="@+id/btnPickPicture"
-        android:textSize="15dp"
-
-
-        android:background="@drawable/green_round_angle"
-        android:layout_above="@+id/textView14"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginLeft="10dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="이름"
-        android:id="@+id/textView12"
-        android:textSize="22dp"
-        android:layout_marginTop="26dp"
-        android:layout_below="@+id/textView14"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="생일"
-        android:id="@+id/textView13"
-        android:layout_marginTop="23dp"
-        android:textSize="22dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/txtRdname" />
-
-    <Button
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnAddDiary"
-        android:textSize="20dp"
-        android:text="등록"
-        android:onClick="onClickRegisterMyDiary"
-        android:layout_below="@+id/textView66"
-        android:layout_toRightOf="@+id/textView56"
-        android:layout_toEndOf="@+id/textView56"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/green_round_angle" />
-
-    <EditText
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:id="@+id/txtRdname"
-        android:background="@drawable/round_angle"
-        android:layout_alignTop="@+id/textView12"
-        android:layout_alignLeft="@+id/imgRdimage"
-        android:layout_alignStart="@+id/imgRdimage" />
-
-    <EditText
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:id="@+id/txtRdbirth"
-        android:background="@drawable/round_angle"
-        android:layout_alignTop="@+id/textView13"
-        android:layout_alignLeft="@+id/txtRdname"
-        android:layout_alignStart="@+id/txtRdname" />
-
-    <Button
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:text="취소"
-        android:id="@+id/btnCanceld"
-        android:textSize="20dp"
-        android:onClick="onClickCancel"
-        android:background="@drawable/green_round_angle"
-        android:layout_alignTop="@+id/btnAddDiary"
-        android:layout_toRightOf="@+id/btnAddDiary"
-        android:layout_toEndOf="@+id/btnAddDiary"
-        android:layout_marginLeft="20dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="성별"
-        android:id="@+id/textView56"
-        android:textSize="22dp"
-        android:layout_marginTop="27dp"
-        android:layout_below="@+id/txtRdbirth"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <RadioGroup
-        android:layout_width="150dp"
-        android:layout_height="70dp"
-        android:baselineAligned="false"
-        android:id="@+id/rgroup"
-        android:layout_alignTop="@+id/textView56"
-        android:layout_alignLeft="@+id/txtRdbirth"
-        android:layout_alignStart="@+id/txtRdbirth">
-
-        <RadioButton
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="수컷"
-            android:id="@+id/maleButton"
-            android:checked="false"
-            android:enabled="true"
-            android:textSize="18dp"
-             />
+            android:text="사진"
+            android:id="@+id/textView67"
+            android:textSize="22dp"
+            android:layout_above="@+id/btnPickPicture"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center_vertical" />
 
-        <RadioButton
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:id="@+id/imgRdimage"
+            android:background="#d7d6d6"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/btnPickPicture"
+            android:layout_toStartOf="@+id/btnPickPicture"
+            android:layout_marginLeft="10dp" />
+
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="암컷"
-            android:id="@+id/femaleButton"
-            android:layout_toRightOf="@+id/maleButton"
+            android:text="사진 선택"
+            android:id="@+id/btnPickPicture"
+            android:textSize="15dp"
 
-            android:checked="false"
-            android:enabled="true"
-            android:textSize="18dp" />
 
-    </RadioGroup>
+            android:background="@drawable/green_round_angle"
+            android:layout_above="@+id/textView14"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="bottom" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -147,7 +58,111 @@
         android:layout_below="@+id/imgRdimage"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="22dp"/>
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="20dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이름"
+            android:id="@+id/textView12"
+            android:textSize="22dp"
+            android:layout_below="@+id/textView14"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:id="@+id/txtRdname"
+            android:background="@drawable/round_angle"
+            android:layout_alignTop="@+id/textView12"
+            android:layout_alignLeft="@+id/imgRdimage"
+            android:layout_alignStart="@+id/imgRdimage"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="생일"
+            android:id="@+id/textView13"
+            android:textSize="22dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtRdname" />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:id="@+id/txtRdbirth"
+            android:background="@drawable/round_angle"
+            android:layout_alignTop="@+id/textView13"
+            android:layout_alignLeft="@+id/txtRdname"
+            android:layout_alignStart="@+id/txtRdname"
+            android:layout_marginLeft="10dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="성별"
+            android:id="@+id/textView56"
+            android:textSize="22dp"
+            android:layout_below="@+id/txtRdbirth"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <RadioGroup
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:baselineAligned="false"
+            android:id="@+id/rgroup"
+            android:layout_alignTop="@+id/textView56"
+            android:layout_alignLeft="@+id/txtRdbirth"
+            android:layout_alignStart="@+id/txtRdbirth"
+            android:layout_marginLeft="10dp">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수컷"
+                android:id="@+id/maleButton"
+                android:checked="false"
+                android:enabled="true"
+                android:textSize="18dp"
+                 />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="암컷"
+                android:id="@+id/femaleButton"
+                android:layout_toRightOf="@+id/maleButton"
+
+                android:checked="false"
+                android:enabled="true"
+                android:textSize="18dp" />
+
+        </RadioGroup>
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -156,18 +171,44 @@
         android:background="#aac99f"
         android:layout_below="@+id/rgroup"
         android:layout_alignRight="@+id/btnPickPicture"
-        android:layout_alignEnd="@+id/btnPickPicture" />
+        android:layout_alignEnd="@+id/btnPickPicture"
+        android:layout_marginTop="10dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="사진"
-        android:id="@+id/textView67"
-        android:textSize="22dp"
-        android:layout_above="@+id/btnPickPicture"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="40dp" />
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal">
+
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnAddDiary"
+            android:textSize="20dp"
+            android:text="등록"
+            android:onClick="onClickRegisterMyDiary"
+            android:layout_below="@+id/textView66"
+            android:layout_toRightOf="@+id/textView56"
+            android:layout_toEndOf="@+id/textView56"
+            android:background="@drawable/green_round_angle"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp" />
+
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="취소"
+            android:id="@+id/btnCanceld"
+            android:textSize="20dp"
+            android:onClick="onClickCancel"
+            android:background="@drawable/green_round_angle"
+            android:layout_alignTop="@+id/btnAddDiary"
+            android:layout_toRightOf="@+id/btnAddDiary"
+            android:layout_toEndOf="@+id/btnAddDiary"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp" />
+    </LinearLayout>
 
 
-</RelativeLayout>
+</LinearLayout>

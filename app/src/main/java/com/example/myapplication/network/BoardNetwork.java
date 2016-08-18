@@ -1,8 +1,12 @@
 package com.example.myapplication.network;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ImageView;
 
+import com.example.myapplication.R;
 import com.example.myapplication.community.board.BoardFragmentAdapter;
 import com.example.myapplication.community.dto.Board;
 
@@ -37,7 +41,7 @@ public class BoardNetwork {
 
                     //요청 내용 본문에 작성
                     OutputStream os = conn.getOutputStream();
-                    String data = "mid="+board.getmId()+"&btitle="+board.getbTitle()+"&bcontent="+board.getbContent()+"&mimage=member01.jpg";
+                    String data = "mid="+board.getmId()+"&btitle="+board.getbTitle()+"&bcontent="+board.getbContent();
                     byte[] bytedata = data.getBytes();
                     os.write(bytedata);
                     os.flush();
@@ -120,6 +124,7 @@ public class BoardNetwork {
                         board.setbContent(jo.getString("bcontent"));
                         board.setbDate(jo.getString("bdate"));
                         board.setbImage(jo.getString("mimage"));
+                        Log.i("mylog", "getBoard메소드 실행중 board객체에 저장된 image는 : " + jo.getString("mimage"));
 
                         boardFragmentAdapter.addItem(board);
                     }
@@ -130,4 +135,47 @@ public class BoardNetwork {
         };
         asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl+"board/list?pageNo=" + pageNo);
     }
+
+    public void getMemberImage(String mid, final ImageView boardImage) {
+
+        AsyncTask<String, Void, Bitmap> asyncTask = new AsyncTask<String, Void, Bitmap>() {
+            @Override
+            protected Bitmap doInBackground(String... params) {
+                Bitmap bitmap=null;
+                try {
+                    URL url = new URL(params[0]);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    conn.connect();
+
+                    Log.i("mylog", ""+ conn.getResponseCode());
+                    if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        InputStream is = conn.getInputStream();
+                        bitmap = BitmapFactory.decodeStream(is);
+                        is.close();
+                    }
+
+                    conn.disconnect();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+                return bitmap;
+            }
+
+            @Override
+            protected void onPostExecute(Bitmap bitmap) {
+                if(bitmap != null) {
+                    boardImage.setImageBitmap(bitmap);
+                } else {
+                    boardImage.setImageResource(R.drawable.human);
+                }
+
+
+            }
+        };
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl+"board/memberId?mid=" + mid);
+
+    }
+
+
+
 }

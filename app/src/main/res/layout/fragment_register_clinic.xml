@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,11 +7,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.myapplication.clinic.fragment.RegisterClinicFragment">
+    tools:context="com.example.myapplication.clinic.fragment.RegisterClinicFragment"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
         android:id="@+id/scrollView" >
 
         <LinearLayout
@@ -155,7 +157,8 @@
                     android:layout_alignTop="@+id/textView3"
                     android:layout_alignLeft="@+id/editText1"
                     android:layout_alignStart="@+id/editText1"
-                    android:layout_marginTop="0dp" />
+                    android:layout_marginTop="0dp"
+                    android:textAlignment="gravity" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -165,10 +168,7 @@
                     android:layout_alignTop="@+id/spinner1"
                     android:layout_toRightOf="@+id/spinner1"
                     android:layout_toEndOf="@+id/spinner1"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="30dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="0dp" />
+                    android:textSize="30dp" />
 
                 <Spinner
                     android:layout_width="100dp"
@@ -177,7 +177,8 @@
                     android:layout_alignBottom="@+id/spinner1"
                     android:layout_toRightOf="@+id/textView26"
                     android:layout_toEndOf="@+id/textView26"
-                    android:layout_marginTop="0dp" />
+                    android:layout_marginTop="0dp"
+                    android:textAlignment="textStart" />
             </LinearLayout>
 
             <LinearLayout
@@ -196,7 +197,8 @@
                 <Spinner
                     android:layout_width="100dp"
                     android:layout_height="30dp"
-                    android:id="@+id/spinner3" />
+                    android:id="@+id/spinner3"
+                    android:textAlignment="textEnd" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -206,15 +208,13 @@
                     android:layout_alignTop="@+id/spinner1"
                     android:layout_toRightOf="@+id/spinner1"
                     android:layout_toEndOf="@+id/spinner1"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="30dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="0dp" />
+                    android:textSize="30dp" />
 
                 <Spinner
                     android:layout_width="100dp"
                     android:layout_height="30dp"
-                    android:id="@+id/spinner4" />
+                    android:id="@+id/spinner4"
+                    android:textAlignment="inherit" />
             </LinearLayout>
 
             <LinearLayout
@@ -342,26 +342,8 @@
                     android:id="@+id/btnRegister"
                     android:layout_weight="1" />
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="취소"
-                    android:id="@+id/btnCancel"
-                    android:layout_weight="1" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <RadioButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New RadioButton"
-        android:id="@+id/radioButton4"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="362dp"
-        android:layout_marginStart="362dp"
-        android:layout_marginTop="76dp" />
-
-</RelativeLayout>
+</LinearLayout>

@@ -1,5 +1,7 @@
 package com.example.myapplication.network;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -27,6 +29,8 @@ import java.util.List;
  * Created by Administrator on 2016-07-25.
  */
 public class DiaryNetwork {
+
+
 
     private static String baseUrl = NetworkSetting.baseUrl2;
     public static void getDiaryData(final DiaryAdapter diaryAdapter, String loginid) {
@@ -113,8 +117,22 @@ public class DiaryNetwork {
         asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, baseUrl + "diary/image?dimage=" + imageName);
     }
 
-    public static void sendDiary(final Diary diary, final Bitmap bitmap) {
+    public static void sendDiary(final Diary diary, final Bitmap bitmap, final Context context) {
         AsyncTask<String, Void, String> asyncTask = new AsyncTask<String, Void, String>() {
+            ProgressDialog asyncDialog = new ProgressDialog(context);
+
+            @Override
+            protected void onPreExecute() {
+
+                asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                asyncDialog.setMessage("다이어리 정보를 등록하고 있습니다");
+
+                // show dialog
+                asyncDialog.show();
+                super.onPreExecute();
+            }
+
+
             @Override
             protected String doInBackground(String... params) {
                 String result = "fail";
@@ -204,8 +222,7 @@ public class DiaryNetwork {
 
             @Override
             protected void onPostExecute(String result) {
-
-
+                asyncDialog.dismiss();
             }
         };
 

@@ -49,7 +49,6 @@ public class VaccinationFragment extends Fragment {
                         getSupportFragmentManager().
                         beginTransaction().
                         replace(R.id.fragmentSubContainer, new VaccinationFragment1())
-                        .addToBackStack(null)
                         .commit();
             }
         });
@@ -63,7 +62,6 @@ public class VaccinationFragment extends Fragment {
                         getSupportFragmentManager().
                         beginTransaction().
                         replace(R.id.fragmentSubContainer, new VaccinationFragment2())
-                        .addToBackStack(null)
                         .commit();
             }
         });

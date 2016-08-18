@@ -27,9 +27,11 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:id="@+id/imageButton"
-            android:src="@drawable/searchimg"
-            android:layout_marginTop="5dp"
-            android:scaleType="fitXY" />
+            android:src="@android:drawable/ic_menu_search"
+            android:layout_marginTop="9dp"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="2dp"
+            android:background="#FFFFFF" />
     </LinearLayout>
 
     <fragment
@@ -37,7 +39,7 @@
         android:layout_height="205dp"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:id="@+id/mapFragment"
-        android:layout_weight="0.55" />
+        android:layout_weight="0.72" />
 
     <LinearLayout
         android:orientation="horizontal"

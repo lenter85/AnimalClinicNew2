@@ -1,8 +1,10 @@
 package com.example.myapplication;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -13,21 +15,27 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.myapplication.network.HomeNetwork;
+import com.example.myapplication.network.MemberNetwork;
 import com.example.myapplication.reservation.util.Util;
 
 import java.io.File;
 import java.io.IOException;
 
 public class HomeActivity extends AppCompatActivity {
-    private ImageView homePetImg;
-    private Bitmap bitmap;
-    private Bitmap circlebitmap;
+    public static ImageView homePetImg;
+    public static Bitmap bitmap;
+    public static Bitmap circlebitmap;
     private String imageName;
     public static String loginId;
+    public static boolean circle = false;
+    public static Bitmap homeBitmap;
+    public static String loginType;
 
     /*ImageView mImageView;
     int mDegree = -30;*/
@@ -44,10 +52,40 @@ public class HomeActivity extends AppCompatActivity {
         homePetImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog();
+                if(loginId!=null){
+                    if(loginType.equals("NORMAL")) {
+                        dialog();
+                    }
+
+                    if(loginType.equals("CLINIC")) {
+                        Toast.makeText(HomeActivity.this, "일반 회원만 이용 가능합니다", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(HomeActivity.this, "로그인 후 이용 가능합니다", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
+        /*if(loginId != null) {
+            MemberNetwork memberNetwork = new MemberNetwork();
+            memberNetwork.getUserImage(loginId);
+            *//*try {
+                while(!circle) {
+                    Thread.sleep(100);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }*//*
+
+            circlebitmap = getCircleBitmap(homeBitmap, 550);
+            homePetImg.setImageBitmap(circlebitmap);
+
+
+        } else {
+            homePetImg.setImageResource(R.drawable.add_your_pet);
+            circle = false;
+        }*/
 
 
 
@@ -71,6 +109,8 @@ public class HomeActivity extends AppCompatActivity {
         return Bitmap.createBitmap(src, 0, 0, src.getWidth(),
                 src.getHeight(), matrix, true);
     }*/
+
+
 
     private void dialog() {
 
@@ -98,32 +138,45 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == 1) {
-            bitmap = (Bitmap) data.getExtras().get("data");
-            circlebitmap = getCircleBitmap(bitmap, 550);
-            homePetImg.setImageBitmap(circlebitmap);
+        Log.i("mylog", "homeActivity의 onActivityiResult 실행타이밍");
+        if (resultCode == Activity.RESULT_OK) {
+            Log.i("mylog", "홈화면 이미지 등록버튼후 사진셋팅 시작");
+            if (requestCode == 1) {
+                try {
 
-            Uri uri = data.getData();
-            String realPath = getAbsolutePathFromUri(this, uri);
-            File file = new File(realPath);
-            imageName = file.getName();
-            HomeNetwork.sendImage(MainActivity.loginId, bitmap);
+                    homeBitmap = (Bitmap) data.getExtras().get("data");
+                    circlebitmap = getCircleBitmap(homeBitmap, 550);
+                    homePetImg.setImageBitmap(circlebitmap);
 
-        } else if(requestCode == 2) {
-            try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
-                circlebitmap = getCircleBitmap(bitmap, 550);
-                homePetImg.setImageBitmap(circlebitmap);
-                Uri uri = data.getData();
-                String realPath = getAbsolutePathFromUri(this, uri);
-                File file = new File(realPath);
-                imageName = file.getName();
-                HomeNetwork.sendImage(MainActivity.loginId, bitmap);
+                    Uri uri = data.getData();
+                    String realPath = getAbsolutePathFromUri(this, uri);
+                    File file = new File(realPath);
+                    imageName = file.getName();
+                    HomeNetwork.sendImage(loginId, homeBitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-            } catch (IOException e) {
-                e.printStackTrace();
+            } else if (requestCode == 2) {
+                try {
+
+                    homeBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), data.getData());
+                    Uri uri = data.getData();
+                    //String bitmap1Path = uri.getPath();
+                    String realPath = getAbsolutePathFromUri(this, uri);
+                    //Log.i("mylog", "bitmap1 경로 : " + bitmap1Path);
+                    Log.i("mylog", "home화면 등록 이미지 절대경로 : " + realPath);
+
+                    circlebitmap = getCircleBitmap(homeBitmap, 550);
+                    homePetImg.setImageBitmap(circlebitmap);
+
+                    HomeNetwork.sendImage(loginId, homeBitmap);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
-
         }
     }
 
@@ -189,4 +242,16 @@ public class HomeActivity extends AppCompatActivity {
         return targetBitmap;
     }
 
+
+    @Override
+    protected void onPostResume() {
+        Log.i("mylog", "homeActivity의 onPostResume 실행타이밍");
+        super.onPostResume();
+        if(loginId != null) {
+            if(homeBitmap != null) {
+                circlebitmap = getCircleBitmap(homeBitmap, 550);
+                homePetImg.setImageBitmap(circlebitmap);
+            }
+        }
+    }
 }

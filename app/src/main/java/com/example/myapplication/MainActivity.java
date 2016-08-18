@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.clinic.dto.RegisterLocation;
 import com.example.myapplication.clinic.fragment.ClinicDetailInformationFragment;
+import com.example.myapplication.clinic.fragment.ClinicInformationTabFragment;
 import com.example.myapplication.clinic.fragment.ClinicList_Fragment;
 import com.example.myapplication.clinic.fragment.MenuFragment;
 import com.example.myapplication.clinic.fragment.RegisterClinicFragment;
@@ -116,8 +117,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     fragmentManager.popBackStack();
                 }
 
-                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                startActivity(intent);
+                onBackPressed();
+               /* Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                startActivity(intent);*/
             }
         });
 
@@ -134,18 +136,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //********************************************** 왼쪽 슬라이딩 메뉴 설정코드
+        //********************************************** 왼쪽 슬라이딩 로그인 메뉴 설정코드
         miLogin = navigationView.getMenu().findItem(R.id.nav_manage);
         miLogin.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
 
                 if(MainActivity.loginStatus == false) {
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragmentContainer, new LogInFragment())
-                            .addToBackStack(null)
-                            .commit();
+                    //현재 보여지는 프레그먼트 확인
+                    if(getVisibleFragment()instanceof ClinicDetailInformationFragment) {
+
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentContainer, new LogInFragment())
+                                .commit();
+                    } else {
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentContainer, new LogInFragment())
+                                .addToBackStack(null)
+                                .commit();
+                    }
+
+
 
 
 
@@ -153,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     MainActivity.loginId = null;
                     MainActivity.loginStatus = false;
                     HomeActivity.loginId=null;
+                    HomeActivity.loginType=null;
                     miLogin.setTitle("로그인");
 
                     Intent intent = new Intent(MainActivity.this, HomeActivity.class);
@@ -240,23 +254,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-    @Override
+   /* @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } /*else if(getVisibleFragment() instanceof RegisterVaccinationFragment) {
+        } *//*else if(getVisibleFragment() instanceof RegisterVaccinationFragment) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragmentContainer, new VaccinationFragment())
                     .commit();
-        }*/
+        }*//*
 
         else {
             super.onBackPressed();
         }
 
-        /*if(getVisibleFragment() instanceof RegisterVaccinationFragment) {
+        *//*if(getVisibleFragment() instanceof RegisterVaccinationFragment) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragmentContainer, new VaccinationFragment())
@@ -282,9 +296,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-        }*/
+        }*//*
     }
-
+*/
     public Fragment getVisibleFragment(){
         FragmentManager fragmentManager = MainActivity.this.getSupportFragmentManager();
         List<Fragment> fragments = fragmentManager.getFragments();
@@ -342,6 +356,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.fragmentContainer, new DiaryFragment())
+                            .addToBackStack(null)
                             .commit();
                 } else {
                     Util.showToast(getApplicationContext(),"로그인 후 이용해주세요.");
@@ -462,4 +477,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String path = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA));
         return path;
     }
+
+
+    /*public Fragment getVisibleFragment() {
+        for (Fragment fragment: getSupportFragmentManager().getFragments()) {
+            if (fragment.isVisible()) {
+                return (fragment);
+            }
+        }
+        return null;
+    }*/
+
 }

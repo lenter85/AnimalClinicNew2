@@ -31,7 +31,9 @@ public class ReservationListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().setTitle("나의 예약목록");
+
+        //toolbar(툴바) 제목 바꾸기
+        //getActivity().setTitle("나의 예약목록");
         View view = inflater.inflate(R.layout.fragment_reservation_list, container, false);
 
         myReserveListView = (ListView)view.findViewById(R.id.myReserveListView);
@@ -41,7 +43,9 @@ public class ReservationListFragment extends Fragment {
 
         Network.getMyReserveList(MyDiaryFragment.my.getDname(), MainActivity.loginId, myReserveViewAdapter);
 
-        myReserveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        //예약목록 클릭이벤트 처리 주석
+        /*myReserveListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -54,7 +58,7 @@ public class ReservationListFragment extends Fragment {
                         .replace(R.id.fragmentContainer, new ReserveResultFragment())
                         .commit();
             }
-        });
+        });*/
 
         return view;
     }

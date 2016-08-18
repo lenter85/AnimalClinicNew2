@@ -40,7 +40,7 @@ public class CommunityFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
 
         tabLayout.getTabAt(0).setIcon(android.R.drawable.ic_menu_my_calendar);
-        tabLayout.getTabAt(1).setIcon(android.R.drawable.ic_menu_mylocation);
+        tabLayout.getTabAt(1).setIcon(android.R.drawable.stat_notify_chat);
 
 
         return view;

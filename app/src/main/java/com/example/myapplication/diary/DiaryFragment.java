@@ -2,6 +2,7 @@ package com.example.myapplication.diary;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ public class DiaryFragment extends Fragment {
     private ListView listViewDiary;
     private DiaryAdapter diaryAdapter;
     private ImageView dimage;
+    private FloatingActionButton fab;
     public static Diary myDiary;
 
 
@@ -52,7 +54,8 @@ public class DiaryFragment extends Fragment {
 
 
         imgAddDiary = (ImageView) view.findViewById(R.id.imgAddDiary);
-        imgAddDiary.setOnClickListener(new View.OnClickListener() {
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity()
@@ -63,6 +66,20 @@ public class DiaryFragment extends Fragment {
                         .commit();
             }
         });
+
+
+        //기존 이미지 버튼 주석처리
+        /*imgAddDiary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, new RegisterMyDiaryFragment())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });*/
 
         return view;
     }

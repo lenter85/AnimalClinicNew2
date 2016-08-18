@@ -2,6 +2,7 @@ package com.example.myapplication.clinic.fragment;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,9 +31,10 @@ public class ClinicReviewFragment extends Fragment {
     private ReviewListViewAdapter reviewListViewAdapter;
     private List<Review> list = new ArrayList<>();
 
-    private Button button;
+    //private Button button;
     private boolean lastItem;
     private int pageNo = 1;
+    private FloatingActionButton fab;
 
 
     public ClinicReviewFragment() {
@@ -47,9 +49,26 @@ public class ClinicReviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_clinic_review, container, false);
-        button = (Button) view.findViewById(R.id.button);
+        //button = (Button) view.findViewById(R.id.button);
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MainActivity.loginId!=null) {
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.fragmentContainer, new WriteReviewFragment())
+                            .commit();
+                } else {
+                    Toast.makeText(getActivity(),"로그인 후 이용해주세요.",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+       /* button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(MainActivity.loginId!=null) {
@@ -62,7 +81,7 @@ public class ClinicReviewFragment extends Fragment {
                     Toast.makeText(getActivity(),"로그인 후 이용해주세요.",Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });*/
 
         //list.add(new Review());
         //list.add(new Review());

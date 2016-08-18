@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.community.dto.Board;
+import com.example.myapplication.network.BoardNetwork;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +69,8 @@ public class BoardFragmentAdapter extends BaseAdapter{
         //boardImage.setImageResource(board.getbImage());
         boardTitle.setText(board.getbTitle());
         boardDate.setText(board.getbDate());
+        BoardNetwork boardNetwork = new BoardNetwork();
+        boardNetwork.getMemberImage(board.getmId(), boardImage);
 
         //아이템 뷰 리턴
         return convertView;

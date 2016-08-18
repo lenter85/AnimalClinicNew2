@@ -1,9 +1,16 @@
 package com.example.myapplication.network;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Path;
+import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ImageView;
 
+import com.example.myapplication.HomeActivity;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.member.dto.Member;
 
@@ -97,8 +104,10 @@ public class MemberNetwork {
                             if(member.getMtype().equals("NOMAL")){
 
                                 MainActivity.LoginType = "NOMAL";
+                                HomeActivity.loginType = "NORMAL";
                             }else{
                                 MainActivity.LoginType = "CLINIC";
+                                HomeActivity.loginType = "CLINIC";
                             }
                         }
 
@@ -137,7 +146,7 @@ public class MemberNetwork {
 
                     //요청 내용 본문에 작성
                     OutputStream os = conn.getOutputStream();
-                    String data = "mid="+member.getMid()+"&mpassword="+member.getMpassword()+"&mname="+member.getMname()+"&mphone="+member.getMphone()+"&mtype="+member.getMtype()+"&mimage=null";
+                    String data = "mid="+member.getMid()+"&mpassword="+member.getMpassword()+"&mname="+member.getMname()+"&mphone="+member.getMphone()+"&mtype="+member.getMtype();
                     byte[] bytedata = data.getBytes();
                     os.write(bytedata);
                     os.flush();
@@ -245,4 +254,42 @@ public class MemberNetwork {
         }
         return chkUserId;
     }
+
+    public static void getUserImage(String loginId) {
+        AsyncTask<String, Void, Bitmap> asyncTask = new AsyncTask<String, Void, Bitmap>() {
+            @Override
+            protected Bitmap doInBackground(String... params) {
+                Bitmap bitmap=null;
+                try {
+                    URL url = new URL(params[0]);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                    conn.connect();
+
+                    Log.i("mylog", ""+ conn.getResponseCode());
+                    if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                        InputStream is = conn.getInputStream();
+                        bitmap = BitmapFactory.decodeStream(is);
+                        is.close();
+                    }
+
+                    conn.disconnect();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+                return bitmap;
+            }
+
+            @Override
+            protected void onPostExecute(Bitmap bitmap) {
+                HomeActivity.homeBitmap =bitmap;
+
+            }
+        };
+        asyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, NetworkSetting.baseUrl+"member/getMemberImage?mid=" + loginId);
+
+    }
+
+
+
+
 }

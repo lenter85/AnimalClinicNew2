@@ -34,7 +34,7 @@ public class HomeNetwork {
                     String delimiter = "\r\n--" + boundary + "\r\n";    //규약
 
                     // 커넥션 생성 및 설정
-                    URL url = new URL(NetworkSetting.baseUrl2 + "registerhomeimg");
+                    URL url = new URL(NetworkSetting.baseUrl2 + "member/registerMemberImage");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setDoInput(true);
                     conn.setDoOutput(true);
@@ -61,7 +61,7 @@ public class HomeNetwork {
                     postDataBuilder.append(delimiter);
                     postDataBuilder.append(setValue("mid", mid));
                     postDataBuilder.append(delimiter);
-                    postDataBuilder.append(setFile("memberImage", "filename.png"));
+                    postDataBuilder.append(setFile("memberImage", mid + ".png"));
                     out.write(postDataBuilder.toString().getBytes()); //첫번째 전송
 
                     ByteArrayOutputStream bos = new ByteArrayOutputStream();

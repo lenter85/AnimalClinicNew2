@@ -52,8 +52,8 @@ public class LogInFragment extends Fragment {
         email = (EditText)view.findViewById(R.id.login_email);
         password = (EditText)view.findViewById(R.id.login_password);
 
-        email.setText("nomal@naver.com");
-        password.setText("1234");
+        //email.setText("nomal@naver.com");
+        //password.setText("1234");
 
 
         //btnLogin.setEnabled(false);
@@ -83,6 +83,10 @@ public class LogInFragment extends Fragment {
                         MainActivity.miLogin.setTitle("로그아웃");
                         HomeActivity.loginId = email.getText().toString();
 
+                        //home화면 이미지 변경
+                        MemberNetwork.getUserImage(email.getText().toString());
+
+                        //back버튼 효과
                         getActivity().onBackPressed();
                     }
                 }

@@ -165,5 +165,8 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/reserveListView" />
+        android:id="@+id/reserveListView"
+        android:background="@color/material_grey_300"
+        android:divider="#ffffff"
+        android:dividerHeight="2dp" />
 </LinearLayout>

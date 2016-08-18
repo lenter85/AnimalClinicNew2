@@ -81,7 +81,7 @@ public class RegisterClinicFragment extends Fragment {
     private String imageName2=null;
     private String imageName3=null;
     private String imageName4=null;
-    private Boolean beauty;
+    private Boolean beauty=null;
     private int workingDay=1;
 
     public static Double latitude;
@@ -113,7 +113,7 @@ public class RegisterClinicFragment extends Fragment {
         textView = (TextView) view.findViewById(R.id.textViewContent);
         textView.setText(MainActivity.clinicLocation);
         btnRegister = (Button) view.findViewById(R.id.btnRegister);
-        btnCancel = (Button) view.findViewById(R.id.btnCancel);
+        //btnCancel = (Button) view.findViewById(R.id.btnCancel);
 
         checkBox = (CheckBox) view.findViewById(R.id.checkBox);
         spinner1 = (Spinner) view.findViewById(R.id.spinner1);
@@ -132,30 +132,30 @@ public class RegisterClinicFragment extends Fragment {
         //오픈,마감시간 셋팅
         final ArrayList<String> arraylist = new ArrayList<String>();
 
-        arraylist.add("00:00");
-        arraylist.add("01:00");
-        arraylist.add("02:00");
-        arraylist.add("03:00");
-        arraylist.add("04:00");
-        arraylist.add("05:00");
-        arraylist.add("06:00");
-        arraylist.add("07:00");
-        arraylist.add("08:00");
-        arraylist.add("09:00");
-        arraylist.add("10:00");
-        arraylist.add("11:00");
-        arraylist.add("12:00");
-        arraylist.add("13:00");
-        arraylist.add("14:00");
-        arraylist.add("15:00");
-        arraylist.add("16:00");
-        arraylist.add("17:00");
-        arraylist.add("18:00");
-        arraylist.add("19:00");
-        arraylist.add("20:00");
-        arraylist.add("21:00");
-        arraylist.add("22:00");
-        arraylist.add("23:00");
+        arraylist.add("00");
+        arraylist.add("01");
+        arraylist.add("02");
+        arraylist.add("03");
+        arraylist.add("04");
+        arraylist.add("05");
+        arraylist.add("06");
+        arraylist.add("07");
+        arraylist.add("08");
+        arraylist.add("09");
+        arraylist.add("10");
+        arraylist.add("11");
+        arraylist.add("12");
+        arraylist.add("13");
+        arraylist.add("14");
+        arraylist.add("15");
+        arraylist.add("16");
+        arraylist.add("17");
+        arraylist.add("18");
+        arraylist.add("19");
+        arraylist.add("20");
+        arraylist.add("21");
+        arraylist.add("22");
+        arraylist.add("23");
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, arraylist);
@@ -198,11 +198,11 @@ public class RegisterClinicFragment extends Fragment {
         final ArrayList<String> arraylist2 = new ArrayList<String>();
 
 
-        arraylist2.add("10:00");
-        arraylist2.add("11:00");
-        arraylist2.add("12:00");
-        arraylist2.add("13:00");
-        arraylist2.add("14:00");
+        arraylist2.add("10");
+        arraylist2.add("11");
+        arraylist2.add("12");
+        arraylist2.add("13");
+        arraylist2.add("14");
 
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, arraylist2);
@@ -324,19 +324,19 @@ public class RegisterClinicFragment extends Fragment {
 
             ClinicNetwork clinicNetwork = new ClinicNetwork();
             if(bitmap1 != null) {
-                bitmap1 = RegisterAlbumFragment.getResizedBitmap(bitmap1, 100);
+                bitmap1 = RegisterAlbumFragment.getResizedBitmap(bitmap1, 300);
             }
 
             if(bitmap2 != null) {
-                bitmap2 = RegisterAlbumFragment.getResizedBitmap(bitmap2, 100);
+                bitmap2 = RegisterAlbumFragment.getResizedBitmap(bitmap2, 300);
             }
 
             if(bitmap3 != null) {
-                bitmap3 = RegisterAlbumFragment.getResizedBitmap(bitmap3, 100);
+                bitmap3 = RegisterAlbumFragment.getResizedBitmap(bitmap3, 300);
             }
 
             if(bitmap4 != null) {
-                bitmap4 = RegisterAlbumFragment.getResizedBitmap(bitmap4, 100);
+                bitmap4 = RegisterAlbumFragment.getResizedBitmap(bitmap4, 300);
             }
 
             clinicNetwork.clinicRegister(clinicRegister, bitmap1, bitmap2, bitmap3, bitmap4, getContext());

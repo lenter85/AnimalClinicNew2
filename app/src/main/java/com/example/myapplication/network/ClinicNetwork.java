@@ -448,8 +448,12 @@ public class ClinicNetwork {
                 RegisterLocation registerLocation = MainActivity.list.get(0);
                 RegisterClinicFragment.latitude = Double.parseDouble(registerLocation.getLatitude());
                 RegisterClinicFragment.longitude = Double.parseDouble(registerLocation.getLongitude());
+                latitude = registerLocation.getLatitude();
+                longitude = registerLocation.getLongitude();
+
 
                 showCurrentLocation(Double.parseDouble(registerLocation.getLatitude()),Double.parseDouble(registerLocation.getLongitude()));
+                showMarker();
 
             }
         };
@@ -493,7 +497,7 @@ public class ClinicNetwork {
             protected void onPreExecute() {
 
                 asyncDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                asyncDialog.setMessage("예약 가능한 시간을 불러오고 있습니다..");
+                asyncDialog.setMessage("병원 정보를 등록하고 있습니다");
 
                 // show dialog
                 asyncDialog.show();
@@ -688,6 +692,8 @@ public class ClinicNetwork {
             protected void onPostExecute(String result) {
                 asyncDialog.dismiss();
 
+
+
                 if (result.equals("success")) {
                     Log.i("mylog", "성공");
 
@@ -766,12 +772,13 @@ public class ClinicNetwork {
                         review.setRscore(jsonObject.getInt("rscore"));
                         review.setRuserid(jsonObject.getString("ruserid"));
 
-                        list.add(review);
+                        reviewListViewAdapter.addItem(review);
+                        //list.add(review);
 
                         //galleryFragmentAdapter.addItem(gallery);
                     }
 
-                    reviewListViewAdapter.setList(list);
+                    //reviewListViewAdapter.setList(list);
 
 
                 } catch (JSONException e) {

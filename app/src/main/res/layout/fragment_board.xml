@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +10,10 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/boardListView" />
+        android:id="@+id/boardListView"
+        android:background="@color/material_grey_300"
+        android:divider="#ffffff"
+        android:dividerHeight="2dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="56dp"
@@ -18,5 +22,6 @@
         android:layout_gravity="bottom|right"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_add_entry" />
+        android:src="@drawable/ic_add_entry"
+        app:backgroundTint="#53f219" />
 </FrameLayout>

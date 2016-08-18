@@ -1,4 +1,5 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,12 +12,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:background="@color/material_grey_300"
+        android:divider="#ffffff"
+        android:dividerHeight="2dp" />
 
-    <Button
+    <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="후기 작성"
-        android:id="@+id/button"
-        android:layout_gravity="center_horizontal" />
-</LinearLayout>
+        android:id="@+id/fab"
+        android:layout_gravity="bottom|right"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        app:backgroundTint="#53f219"
+        android:src="@drawable/ic_add_entry" />
+</FrameLayout>

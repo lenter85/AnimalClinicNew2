@@ -90,18 +90,19 @@ public class RegisterMyDiaryFragment extends Fragment {
                 diary.setDname(txtRdname.getText().toString());
                 diary.setDbirth(txtRdbirth.getText().toString());
                 diary.setMid(MainActivity.loginId);
-                DiaryNetwork.sendDiary(diary, bitmap);
+                DiaryNetwork.sendDiary(diary, bitmap, getActivity());
 
-                getActivity()
+                /*getActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, new DiaryFragment())
-                        .commit();
+                        .addToBackStack(null)
+                        .commit();*/
             }
         });
 
         btnCanceld = (Button) view.findViewById(R.id.btnCanceld);
-        btnCanceld.setOnClickListener(new View.OnClickListener() {
+        /*btnCanceld.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity()
@@ -111,7 +112,7 @@ public class RegisterMyDiaryFragment extends Fragment {
                         .addToBackStack(null)
                         .commit();
             }
-        });
+        });*/
 
         btnPickPicture = (Button) view.findViewById(R.id.btnPickPicture);
         btnPickPicture.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +134,7 @@ public class RegisterMyDiaryFragment extends Fragment {
             if(requestCode == 1) {
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                    bitmap = RegisterAlbumFragment.getResizedBitmap(bitmap, 300);
                     Uri uri = data.getData();
                     filePath = getAbsolutePathFromUri(getActivity(), uri);
                     File file = new File(filePath);

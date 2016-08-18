@@ -60,7 +60,6 @@ public class VaccinationFragment1 extends Fragment {
                         .getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, new RegisterVaccinationFragment())
-                        .addToBackStack(null)
                         .commit();
 
             }

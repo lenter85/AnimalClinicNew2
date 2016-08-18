@@ -9,9 +9,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.network.BoardNetwork;
+import com.example.myapplication.network.MainNetwork;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +29,7 @@ public class BoardDetailFragment extends Fragment {
     private TextView boardContent;
     private TextView boardDate;
     private TextView mid;
+    private ImageView boardImage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,12 +41,15 @@ public class BoardDetailFragment extends Fragment {
         boardContent = (TextView)view.findViewById(R.id.boardContent);
         boardDate = (TextView)view.findViewById(R.id.boardDate);
         mid = (TextView)view.findViewById(R.id.mid);
+        boardImage = (ImageView) view.findViewById(R.id.boardImage);
 
         boardTitle.setText(BoardFragment.selectedBoard.getbTitle());
         boardContent.setText(BoardFragment.selectedBoard.getbContent());
         boardDate.setText(BoardFragment.selectedBoard.getbDate());
         mid.setText(BoardFragment.selectedBoard.getmId());
 
+        BoardNetwork boardNetwork = new BoardNetwork();
+        boardNetwork.getMemberImage(BoardFragment.selectedBoard.getmId(), boardImage);
 
         setHasOptionsMenu(true);
         return view;

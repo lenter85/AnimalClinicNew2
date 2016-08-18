@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.myapplication.clinic.fragment.ClinicFacilitiesFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#f7f4f4">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -17,14 +18,16 @@
             android:layout_height="150dp"
             android:id="@+id/imageView1"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:scaleType="fitXY" />
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:id="@+id/imageView2"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:scaleType="fitXY" />
     </LinearLayout>
 
     <LinearLayout
@@ -37,13 +40,15 @@
             android:layout_height="150dp"
             android:id="@+id/imageView3"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:scaleType="fitXY" />
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:id="@+id/imageView4"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:scaleType="fitXY" />
     </LinearLayout>
 </LinearLayout>

@@ -72,16 +72,17 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#f7f4f4">
 
         <ImageView
             android:layout_width="350dp"
             android:layout_height="320dp"
             android:id="@+id/imageView7"
-            android:src="@drawable/round_review"
             android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp" />
+            android:layout_margin="10dp"
+            android:background="#f7f4f4" />
 
         <EditText
             android:layout_width="320dp"
@@ -102,7 +103,7 @@
             android:layout_height="wrap_content"
             android:text="등록"
             android:id="@+id/btnRegister"
-            android:background="@drawable/round_green"
+            android:background="@drawable/green_round_angle"
             android:layout_marginRight="20dp" />
 
     </LinearLayout>

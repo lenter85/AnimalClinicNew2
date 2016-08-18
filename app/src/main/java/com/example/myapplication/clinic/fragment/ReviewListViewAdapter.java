@@ -87,6 +87,7 @@ public class ReviewListViewAdapter extends BaseAdapter {
         ratingBar.setRating(review.getRscore());
         textView.setText(review.getRuserid());
         textView2.setText(review.getRcontent());
+        this.notifyDataSetChanged();
 
         Log.i("mylog", "review어댑터, list에서 get으로 review객체를 뽑아온후 Ruserid를 보면? : " + review.getRuserid());
         ClinicNetwork clinicNetwork = new ClinicNetwork();
@@ -97,5 +98,10 @@ public class ReviewListViewAdapter extends BaseAdapter {
         //ItemView 리턴
         return convertView;
 
+    }
+
+    public void addItem(Review review) {
+        list.add(review);
+        this.notifyDataSetChanged();
     }
 }

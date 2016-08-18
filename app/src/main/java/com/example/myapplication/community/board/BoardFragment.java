@@ -91,6 +91,7 @@ public class BoardFragment extends Fragment {
                         .getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer,new BoardDetailFragment())
+                        .addToBackStack(null)
                         .commit();
             }
         });

@@ -18,6 +18,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.diary.dto.Diary;
 import com.example.myapplication.diary.dto.Vaccination;
 import com.example.myapplication.network.DiaryNetwork;
+import com.example.myapplication.reservation.util.Util;
 import com.google.android.gms.vision.text.Text;
 
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class MyDiaryFragment extends Fragment {
         });
 
         Bitmap albumbitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.albumimg);
-        albumbitmap = getCircleBitmap(albumbitmap, 400);
+        albumbitmap = getCircleBitmap(albumbitmap, 200);
         album.setImageBitmap(albumbitmap);
 
 
@@ -96,7 +97,7 @@ public class MyDiaryFragment extends Fragment {
         });
 
         Bitmap rbitmap = BitmapFactory.decodeResource(getResources(), R.drawable.reservation);
-        rbitmap = getCircleBitmap(rbitmap, 400);
+        rbitmap = getCircleBitmap(rbitmap, 200);
         reservationList.setImageBitmap(rbitmap);
 
         vaccination = (ImageView) view.findViewById(R.id.vaccination);
@@ -112,7 +113,7 @@ public class MyDiaryFragment extends Fragment {
         });
 
         Bitmap vbitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.vacci);
-        vbitmap = getCircleBitmap(vbitmap, 400);
+        vbitmap = getCircleBitmap(vbitmap, 200);
         vaccination.setImageBitmap(vbitmap);
 
 
@@ -120,16 +121,19 @@ public class MyDiaryFragment extends Fragment {
         weight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager()
+
+                Util.showToast(getActivity().getApplicationContext(),"서비스 준비중 입니다");
+
+                /*getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, new WeightFragment())
                         .addToBackStack(null)
-                        .commit();
+                        .commit();*/
             }
         });
 
         Bitmap wbitmap = BitmapFactory.decodeResource(getResources(), R.drawable.weightimg);
-        wbitmap = getCircleBitmap(wbitmap, 400);
+        wbitmap = getCircleBitmap(wbitmap, 200);
         weight.setImageBitmap(wbitmap);
 
         return view;

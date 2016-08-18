@@ -606,11 +606,13 @@ public class Network {
                 Log.i("test", "예약 조회결과 :" + num);
                 if (num <= 0) {
                     Log.i("test", "예약 0건 배경 하얀색");
-                    itemView.setBackgroundColor(Color.parseColor("#F6FFCC"));
+                    //itemView.setBackgroundColor(Color.parseColor("#F6FFCC"));
+                    itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
                     itemView.setTextSize(13);
                 } else {
                     Log.i("test", "예약 1건 이상 배경 노란색");
-                    itemView.setBackgroundColor(Color.parseColor("#FF5A5A"));
+                    //itemView.setBackgroundColor(Color.parseColor("#FF5A5A"));
+                    itemView.setBackgroundColor(Color.parseColor("#53f219"));
 
                     itemView.append("\n\n\n예약 내역\n "+num+"건");
                     itemView.setTextSize(13);

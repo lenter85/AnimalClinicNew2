@@ -90,8 +90,11 @@ public class ClinicInformationTabFragment extends Fragment {
         return view;
     }
 
-
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapFragment = null;
+    }
 
     //현재 내 위치 얻는 메소드
     private void startLocationService() {
@@ -180,7 +183,7 @@ public class ClinicInformationTabFragment extends Fragment {
         //showAbbBankItems(latitude, longitude);
     }
 
-    @Override
+    /*@Override
     public void onDestroy() {
         super.onDestroy();
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -188,7 +191,7 @@ public class ClinicInformationTabFragment extends Fragment {
             return;
         }
         locationManager.removeUpdates(gpsListener);
-    }
+    }*/
 
     private void showAbbBankItems (Double latitude, Double longitude) {
         MarkerOptions marker = new MarkerOptions();

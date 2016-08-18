@@ -67,10 +67,10 @@ public class NewAccountFragment extends Fragment {
         phone = (EditText)view.findViewById(R.id.phone);
         password = (EditText)view.findViewById(R.id.login_password);
 
-        name.setText("박민규");
+        /*name.setText("박민규");
         email.setText("park9831@naver.com");
         phone.setText("01012345678");
-        password.setText("12345");
+        password.setText("12345");*/
 
         btnSend.setEnabled(false);
         checkBox();
@@ -161,6 +161,8 @@ public class NewAccountFragment extends Fragment {
                     checkBox2.setChecked(false);
                     checkBox3.setChecked(false);
                     btnSend.setBackgroundColor(Color.LTGRAY);
+                    btnSend.setEnabled(false);
+
                 }
             }
         });
@@ -172,6 +174,7 @@ public class NewAccountFragment extends Fragment {
                     btnSend.setBackgroundColor(Color.GREEN);
                     btnSend.setEnabled(true);
                 }else{ btnSend.setBackgroundColor(Color.LTGRAY);
+                    btnSend.setEnabled(false);
                 }
             }
         });
@@ -183,6 +186,7 @@ public class NewAccountFragment extends Fragment {
                     btnSend.setBackgroundColor(Color.GREEN);
                     btnSend.setEnabled(true);
                 }else{ btnSend.setBackgroundColor(Color.LTGRAY);
+                    btnSend.setEnabled(false);
                 }
             }
         });

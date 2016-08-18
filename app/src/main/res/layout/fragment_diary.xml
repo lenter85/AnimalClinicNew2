@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,9 +14,21 @@
             android:id="@+id/listViewDiary"
             android:layout_alignRight="@+id/imgAddDiary"
             android:layout_alignEnd="@+id/imgAddDiary"
-            android:layout_marginTop="20dp" />
+            android:background="@color/material_grey_300"
+            android:dividerHeight="2dp"
+            android:divider="#ffffff" />
 
-        <ImageView
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fab"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="#53f219"
+        android:src="@drawable/ic_add_entry" />
+
+    <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:id="@+id/imgAddDiary"
@@ -26,6 +39,7 @@
             android:layout_alignParentEnd="true"
             android:onClick="onClickToRegisterMyDiary"
             android:src="@drawable/ic_add_entry"
-            android:layout_gravity="right|bottom" />
+            android:layout_gravity="right|bottom"
+        android:visibility="invisible" />
 
 </FrameLayout>

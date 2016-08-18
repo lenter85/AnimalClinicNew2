@@ -232,7 +232,7 @@ public class CalendarMonthAdapter extends BaseAdapter {
                 itemView.setClickable(false);
 
             }else {
-                itemView.setBackgroundColor(Color.parseColor("#F6FFCC"));
+                itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
             }
 
         } else {

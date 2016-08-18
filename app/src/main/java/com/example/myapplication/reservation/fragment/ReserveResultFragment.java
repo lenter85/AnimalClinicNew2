@@ -117,7 +117,7 @@ public class ReserveResultFragment extends Fragment {
 
 
                         // 병원 정보 화면으로 돌아간다.
-                        android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        /*android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         int back = fragmentManager.getBackStackEntryCount();
 
                         for(int i=0; i<back; i++){
@@ -130,7 +130,7 @@ public class ReserveResultFragment extends Fragment {
                                 .getSupportFragmentManager()
                                 .beginTransaction()
                                 .replace(R.id.fragmentContainer, new ClinicList_Fragment())
-                                .commit();
+                                .commit();*/
 
                         return;
                     }

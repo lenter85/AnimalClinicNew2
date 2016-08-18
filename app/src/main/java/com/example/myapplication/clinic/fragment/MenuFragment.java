@@ -43,7 +43,26 @@ public class MenuFragment extends Fragment {
         textView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, MainActivity.registerClinicFragment).commit();
+                if(MainActivity.loginStatus == true){
+                    if(MainActivity.LoginType.equals("CLINIC")){
+                        getActivity()
+                                .getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.fragmentContainer, MainActivity.registerClinicFragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }else{
+
+                        Util.showToast(getContext(),  "병원 관리자 기능입니다.");
+                    }
+                }else{
+
+                    Util.showToast(getContext(), "로그인 후 이용하실 수 있습니다.");
+                }
+
+
+
+                //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, MainActivity.registerClinicFragment).commit();
             }
         });
 

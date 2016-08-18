@@ -134,6 +134,7 @@ public class ReserveSearchFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
         //Toast.makeText(getContext(), "onResume 호출됨", Toast.LENGTH_LONG).show();
     }
 
@@ -151,6 +152,7 @@ public class ReserveSearchFragment extends Fragment {
         Spinner sp = (Spinner) view.findViewById(R.id.spinner1);
         sp.setPrompt("애완동물을 선택해주세요"); // 스피너 제목
         sp.setAdapter(adapter);
+
         sp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override

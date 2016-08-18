@@ -61,10 +61,10 @@ public class ClinicDetailInformationFragment extends Fragment {
 
                 ReserveSearchFragment reserveSearchFragment = new ReserveSearchFragment();
 
+                //backstack 안쓰기
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, reserveSearchFragment)
-                        .addToBackStack(null)
                         .commit();
             }
         });
