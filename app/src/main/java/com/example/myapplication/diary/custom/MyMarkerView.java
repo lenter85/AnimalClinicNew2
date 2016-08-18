@@ -35,11 +35,12 @@ public class MyMarkerView extends MarkerView {
         if (e instanceof CandleEntry) {
 
             CandleEntry ce = (CandleEntry) e;
+            tvContent.setSingleLine(false);
+            tvContent.setText("" + Utils.formatNumber(ce.getHigh(), 0, true) + "kg\n" + e.getData());
 
-            tvContent.setText("" + Utils.formatNumber(ce.getHigh(), 0, true));
         } else {
-
-            tvContent.setText("" + Utils.formatNumber(e.getY(), 0, true));
+            tvContent.setSingleLine(false);
+            tvContent.setText("" + Utils.formatNumber(e.getY(), 0, true) + "kg\n" + e.getData());
         }
     }
 
@@ -47,11 +48,22 @@ public class MyMarkerView extends MarkerView {
     public int getXOffset(float xpos) {
         // this will center the marker-view horizontally
         return -(getWidth() / 2);
+        /*if(xpos <-(getWidth() / 2)) {
+            return (int)  -(getWidth() / 2);
+        } else {
+            return (int) -(getWidth() / 2) - 30;
+        }*/
     }
 
     @Override
     public int getYOffset(float ypos) {
         // this will cause the marker-view to be above the selected value
         return -getHeight();
+        /*if(ypos > getHeight()-5) {
+            return -getHeight()+getHeight()/2;
+        } else {
+            return -getHeight();
+        }*/
+
     }
 }

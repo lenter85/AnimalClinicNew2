@@ -11,22 +11,19 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.diary.custom.DayAxisValueFormatter;
 import com.example.myapplication.diary.custom.MyMarkerView;
 import com.example.myapplication.diary.dto.Weight;
 import com.example.myapplication.network.NetworkSetting;
+import com.example.myapplication.reservation.util.Util;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -35,12 +32,8 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.AxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.ChartTouchListener;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.renderer.XAxisRenderer;
 import com.github.mikephil.charting.utils.Utils;
-import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,10 +44,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +58,8 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
     private TextView currentWeight;
 
     private LineChart mChart;
-
+    private int valCount=0;
+    private TextView tvContent;
     private TextView tvX,
             tvY;
 
@@ -141,7 +133,7 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
         // create a custom MarkerView (extend MarkerView) and specify the layout
         // to use for it
         MyMarkerView mv = new MyMarkerView(getActivity(), R.layout.custom_marker_view);
-
+        tvContent = (TextView) view.findViewById(R.id.tvContent);
         // set the marker to the chart
         mChart.setMarkerView(mv);
 
@@ -161,10 +153,10 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
 
         mChart.setScaleEnabled(false);
 
-        mChart.setScaleX(1f);
-        mChart.setX(1f);
-        Log.i("mylog", String.valueOf(mChart.getScaleX()));
-        xAxis.setXOffset(1f);
+        //mChart.setScaleX(1f);
+        //mChart.setX(1f);
+        //Log.i("mylog", String.valueOf(mChart.getScaleX()));
+        //xAxis.setXOffset(1f);
 
 
 
@@ -172,8 +164,9 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
 
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
+                valCount++;
                 Log.i("value", String.valueOf(value));
-
+                Log.i("value", String.valueOf(valCount));
                 String month = mMonths[(int) value % mMonths.length];
                 return month;
                /* String month = String.valueOf((int) value % mMonths.length);
@@ -213,11 +206,11 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
         // add data
         //setData(10, 10); //----------------------------------------------------------------------------------데이터 세팅
         getWeightList();
-//        mChart.setVisibleXRange(20);
+//        mChart.setVisibleXRange(5, 10);
 //        mChart.setVisibleYRange(20f, AxisDependency.LEFT);
 //        mChart.centerViewTo(20, 50, AxisDependency.LEFT);
 
-        //mChart.animateX(2500);
+        mChart.animateX(0);
         //mChart.invalidate();
 
         // get the legend (only possible after setting data) ------------------------------------------------legend
@@ -401,9 +394,10 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
             weight = (Weight) list.get(i);
             float val = weight.getFdate();
             float w = weight.getWeight();
-
+            String date = weight.getWdate();
+            date = date.substring(0, 10);
             Log.i("float_weight", String.valueOf(w));
-            values.add(new Entry(val, w));
+            values.add(new Entry(val, w, date));
         }
 
 
@@ -417,7 +411,7 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
             mChart.notifyDataSetChanged();
         } else {
             // create a dataset and give it a type
-            set1 = new LineDataSet(values, "DataSet 1");
+            set1 = new LineDataSet(values, "몸무게");
 
             // set the line to be drawn like this "- - - - - -"
             //set1.enableDashedLine(10f, 5f, 0f);
@@ -534,8 +528,12 @@ public class WeightFragment extends Fragment implements  OnChartValueSelectedLis
 
                     if(list.size()>0) {
                         currentWeight.setText(list.get(list.size() - 1).getWeight() + " kg");
+                        setData(list);
                     }
-                    setData(list);
+                    else {
+                        Util.showToast(getContext(),"새 몸무게 데이터를 추가해주세요.");
+                    }
+
                     //setData(10,10);
 
 

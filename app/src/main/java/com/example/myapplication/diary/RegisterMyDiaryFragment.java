@@ -40,6 +40,7 @@ public class RegisterMyDiaryFragment extends Fragment {
     private EditText txtRdbirth;
     private Bitmap bitmap;
 
+
     private RadioButton maleButton;
     private RadioButton femaleButton;
     private String filePath;
@@ -140,6 +141,7 @@ public class RegisterMyDiaryFragment extends Fragment {
                     File file = new File(filePath);
                     diary.setDimage(file.getName());
 
+                    bitmap = MainActivity.getResizedBitmap(bitmap, 200);
                     imgRdimage.setImageBitmap(bitmap);
                     imgRdimage.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 } catch (IOException e) {

@@ -1,117 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
 
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.myapplication.diary.RegisterWeightFragment">
+    tools:context="com.example.myapplication.diary.RegisterWeightFragment"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="몸무게"
-        android:id="@+id/textView21"
-        android:textSize="20dp"
-        android:layout_below="@+id/textView52"
-        android:layout_alignLeft="@+id/textView44"
-        android:layout_alignStart="@+id/textView44"
-        android:layout_marginTop="35dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="일   자"
-        android:id="@+id/textView22"
-        android:textSize="20dp"
-        android:layout_alignTop="@+id/txtWeightDate"
-        android:layout_alignLeft="@+id/textView21"
-        android:layout_alignStart="@+id/textView21" />
-
-    <EditText
-        android:layout_width="150dp"
-        android:layout_height="35dp"
-        android:id="@+id/txtWeight"
-        android:background="@drawable/round_angle"
-        android:layout_alignTop="@+id/textView21"
-        android:layout_toRightOf="@+id/textView44"
-        android:layout_toEndOf="@+id/textView44" />
-
-    <EditText
-        android:layout_width="150dp"
-        android:layout_height="35dp"
-        android:id="@+id/txtWeightDate"
-        android:background="@drawable/round_angle"
-        android:layout_below="@+id/txtWeight"
-        android:layout_alignLeft="@+id/txtWeight"
-        android:layout_alignStart="@+id/txtWeight"
-        android:layout_marginTop="20dp"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="추가"
-        android:id="@+id/btnAddWeight"
-        android:textSize="20dp"
-        android:onClick="onClickRegisterWeight"
-        android:layout_alignTop="@+id/btnCancelw"
-        android:layout_toRightOf="@+id/imageViewArrow"
-
-     />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="취소"
-        android:id="@+id/btnCancelw"
-        android:textSize="20dp"
-        android:onClick="onClickCancel"
-        android:layout_marginRight="49dp"
-        android:layout_marginEnd="49dp"
-        android:layout_marginBottom="84dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/textView52"
-        android:layout_alignEnd="@+id/textView52" />
-
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:id="@+id/imageViewArrow"
-        android:src="@android:drawable/arrow_down_float"
-        android:layout_above="@+id/textView52"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="20dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="몸무게 입력"
-        android:id="@+id/textView44"
-        android:textSize="15dp"
-
-        android:layout_below="@+id/imageView5"
-        android:layout_alignRight="@+id/btnAddWeight"
-        android:layout_alignEnd="@+id/btnAddWeight"
-        android:layout_marginTop="25dp"/>
-
-    <TextView
-        android:layout_width="320dp"
-        android:layout_height="3dp"
-        android:id="@+id/textView52"
-        android:background="#aac99f"
-        android:layout_below="@+id/textView44"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"/>
-
-    <ImageView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView5"
-        android:src="@drawable/wrbackimg"
-        android:layout_alignParentTop="true"
+        android:layout_height="match_parent">
 
-         />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView5"
+            android:src="@drawable/wrbackimg"
+            android:layout_alignParentTop="true"
+
+             />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/imageViewArrow"
+                        android:src="@android:drawable/arrow_down_float"
+                        android:layout_above="@+id/textView52"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="20dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="몸무게 입력"
+                        android:id="@+id/textView44"
+                        android:textSize="15dp"
+
+                        android:layout_below="@+id/imageView5"
+                        android:layout_alignRight="@+id/btnAddWeight"
+                        android:layout_alignEnd="@+id/btnAddWeight"
+                        android:layout_marginLeft="10dp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:id="@+id/textView29"
+                    android:background="#aac99f"
+                    android:layout_below="@+id/textView44"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="몸무게"
+                    android:id="@+id/textView21"
+                    android:textSize="20dp"
+                    android:layout_below="@+id/textView52"
+                    android:layout_alignLeft="@+id/textView44"
+                    android:layout_alignStart="@+id/textView44"
+                    android:layout_marginLeft="30dp" />
+
+                <EditText
+                    android:layout_width="160dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/txtWeight"
+                    android:background="@drawable/round_angle"
+                    android:layout_alignTop="@+id/textView21"
+                    android:layout_toRightOf="@+id/textView44"
+                    android:layout_toEndOf="@+id/textView44"
+                    android:layout_marginLeft="50dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="일   자"
+                    android:id="@+id/textView22"
+                    android:textSize="20dp"
+                    android:layout_alignTop="@+id/txtWeightDate"
+                    android:layout_alignLeft="@+id/textView21"
+                    android:layout_alignStart="@+id/textView21"
+                    android:layout_marginLeft="30dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="53dp">
+
+                    <EditText
+                        android:layout_width="160dp"
+                        android:layout_height="35dp"
+                        android:id="@+id/txtWeightDate"
+                        android:background="@drawable/round_angle"
+                        android:layout_below="@+id/txtWeight"
+                        android:layout_alignLeft="@+id/txtWeight"
+                        android:layout_alignStart="@+id/txtWeight" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ex) 2016.01.01"
+                        android:id="@+id/textView51"
+                        android:layout_marginTop="11dp"
+                        android:layout_marginLeft="5dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="20dp">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="추가"
+                    android:id="@+id/btnAddWeight"
+                    android:textSize="20dp"
+                    android:onClick="onClickRegisterWeight"
+                    android:layout_alignTop="@+id/btnCancelw"
+                    android:layout_toRightOf="@+id/imageViewArrow"
+
+                    android:layout_marginRight="50dp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="취소"
+                    android:id="@+id/btnCancelw"
+                    android:textSize="20dp"
+                    android:onClick="onClickCancel"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignRight="@+id/textView52"
+                    android:layout_alignEnd="@+id/textView52" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+
+</LinearLayout>
